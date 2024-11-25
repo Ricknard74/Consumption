@@ -1,0 +1,101 @@
+spriteTypes = {
+	spriteType = {
+	name = "GFX_trait_digesting"
+	texturefile = "gfx/traits/digesting.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+        spriteType = {
+	name = "GFX_trait_full_stomach"
+	texturefile = "gfx/traits/full_stomach.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+        spriteType = {
+	name = "GFX_trait_full_bowels"
+	texturefile = "gfx/traits/full_bowels.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+        spriteType = {
+	name = "GFX_trait_full_womb"
+	texturefile = "gfx/traits/full_womb.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+        spriteType = {
+	name = "GFX_trait_full_testicals"
+	texturefile = "gfx/traits/full_testicals.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+        spriteType = {
+	name = "GFX_trait_predator"
+	texturefile = "gfx/traits/predator.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+        spriteType = {
+	name = "GFX_trait_alpha_predator"
+	texturefile = "gfx/traits/alpha_predator.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+        spriteType = {
+	name = "GFX_trait_apex_predator"
+	texturefile = "gfx/traits/apex_predator.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+        spriteType = {
+	name = "GFX_trait_preyish"
+	texturefile = "gfx/traits/preyish.dds" 
+	noOfFrames = 1
+	norefcount = yes
+	effectFile = "gfx/FX/buttonstate.lua"
+	}
+	spriteType = {
+		name = "GFX_vore"
+		texturefile = "gfx\\interface\\vore.dds"
+	}
+}

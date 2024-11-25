@@ -1,0 +1,2277 @@
+
+spriteTypes = {
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping02"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping02.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping03"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping03.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping04"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping04.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping05"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping05.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping06"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping06.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping07"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping07.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping08"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping08.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping09"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping09.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping10"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping10.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping11"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping11.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping12"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping12.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping13"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping13.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping14"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping14.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping15"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping15.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping16"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping16.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping17"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping17.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping18"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping18.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping19"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping19.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping20"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping20.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping21"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping21.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping22"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping22.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping23"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping23.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping24"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping24.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+	spriteType = {
+		name = "GFX_portrait_remedy_portrait_swapping25"
+		texturefile = "gfx/static_portraits/remedy_portrait_swapping25.dds"
+		noOfFrames = 27
+		norefcount = yes
+		can_be_lowres = yes
+	}
+    portraitType = {
+        name = "PORTRAIT_static_1"
+		effectFile = "gfx/FX/portrait.lua"
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait1
+					portrait_has_trait = portrait2
+					portrait_has_trait = portrait3
+					portrait_has_trait = portrait4
+					portrait_has_trait = portrait5
+					portrait_has_trait = portrait6
+					portrait_has_trait = portrait7
+					portrait_has_trait = portrait8
+					portrait_has_trait = portrait9
+					portrait_has_trait = portrait10
+					portrait_has_trait = portrait11
+					portrait_has_trait = portrait12
+					portrait_has_trait = portrait13
+					portrait_has_trait = portrait14
+					portrait_has_trait = portrait15
+					portrait_has_trait = portrait16
+					portrait_has_trait = portrait17
+					portrait_has_trait = portrait18
+					portrait_has_trait = portrait19
+					portrait_has_trait = portrait20
+					portrait_has_trait = portrait21
+					portrait_has_trait = portrait22
+					portrait_has_trait = portrait23
+					portrait_has_trait = portrait24
+					portrait_has_trait = portrait25
+					portrait_has_trait = portrait26
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait1 }
+				2 = { portrait_has_trait = portrait2 }
+				3 = { portrait_has_trait = portrait3 }
+				4 = { portrait_has_trait = portrait4 }
+				5 = { portrait_has_trait = portrait5 }
+				6 = { portrait_has_trait = portrait6 }
+				7 = { portrait_has_trait = portrait7 }
+				8 = { portrait_has_trait = portrait8 }
+				9 = { portrait_has_trait = portrait9 }
+				10 = { portrait_has_trait = portrait10 }
+				11 = { portrait_has_trait = portrait11 }
+				12 = { portrait_has_trait = portrait12 }
+				13 = { portrait_has_trait = portrait13 }
+				14 = { portrait_has_trait = portrait14 }
+				15 = { portrait_has_trait = portrait15 }
+				16 = { portrait_has_trait = portrait16 }
+				17 = { portrait_has_trait = portrait17 }
+				18 = { portrait_has_trait = portrait18 }
+				19 = { portrait_has_trait = portrait19 }
+				20 = { portrait_has_trait = portrait20 }
+				21 = { portrait_has_trait = portrait21 }
+				22 = { portrait_has_trait = portrait22 }
+				23 = { portrait_has_trait = portrait23 }
+				24 = { portrait_has_trait = portrait24 }
+				25 = { portrait_has_trait = portrait25 }
+				26 = { portrait_has_trait = portrait26 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_2"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait27
+					portrait_has_trait = portrait28
+					portrait_has_trait = portrait29
+					portrait_has_trait = portrait30
+					portrait_has_trait = portrait31
+					portrait_has_trait = portrait32
+					portrait_has_trait = portrait33
+					portrait_has_trait = portrait34
+					portrait_has_trait = portrait35
+					portrait_has_trait = portrait36
+					portrait_has_trait = portrait37
+					portrait_has_trait = portrait38
+					portrait_has_trait = portrait39
+					portrait_has_trait = portrait40
+					portrait_has_trait = portrait41
+					portrait_has_trait = portrait42
+					portrait_has_trait = portrait43
+					portrait_has_trait = portrait44
+					portrait_has_trait = portrait45
+					portrait_has_trait = portrait46
+					portrait_has_trait = portrait47
+					portrait_has_trait = portrait48
+					portrait_has_trait = portrait49
+					portrait_has_trait = portrait50
+					portrait_has_trait = portrait51
+					portrait_has_trait = portrait52
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping02:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait27 }
+				2 = { portrait_has_trait = portrait28 }
+				3 = { portrait_has_trait = portrait29 }
+				4 = { portrait_has_trait = portrait30 }
+				5 = { portrait_has_trait = portrait31 }
+				6 = { portrait_has_trait = portrait32 }
+				7 = { portrait_has_trait = portrait33 }
+				8 = { portrait_has_trait = portrait34 }
+				9 = { portrait_has_trait = portrait35 }
+				10 = { portrait_has_trait = portrait36 }
+				11 = { portrait_has_trait = portrait37 }
+				12 = { portrait_has_trait = portrait38 }
+				13 = { portrait_has_trait = portrait39 }
+				14 = { portrait_has_trait = portrait40 }
+				15 = { portrait_has_trait = portrait41 }
+				16 = { portrait_has_trait = portrait42 }
+				17 = { portrait_has_trait = portrait43 }
+				18 = { portrait_has_trait = portrait44 }
+				19 = { portrait_has_trait = portrait45 }
+				20 = { portrait_has_trait = portrait46 }
+				21 = { portrait_has_trait = portrait47 }
+				22 = { portrait_has_trait = portrait48 }
+				23 = { portrait_has_trait = portrait49 }
+				24 = { portrait_has_trait = portrait50 }
+				25 = { portrait_has_trait = portrait51 }
+				26 = { portrait_has_trait = portrait52 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_3"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait53
+					portrait_has_trait = portrait54
+					portrait_has_trait = portrait55
+					portrait_has_trait = portrait56
+					portrait_has_trait = portrait57
+					portrait_has_trait = portrait58
+					portrait_has_trait = portrait59
+					portrait_has_trait = portrait60
+					portrait_has_trait = portrait61
+					portrait_has_trait = portrait62
+					portrait_has_trait = portrait63
+					portrait_has_trait = portrait64
+					portrait_has_trait = portrait65
+					portrait_has_trait = portrait66
+					portrait_has_trait = portrait67
+					portrait_has_trait = portrait68
+					portrait_has_trait = portrait69
+					portrait_has_trait = portrait70
+					portrait_has_trait = portrait71
+					portrait_has_trait = portrait72
+					portrait_has_trait = portrait73
+					portrait_has_trait = portrait74
+					portrait_has_trait = portrait75
+					portrait_has_trait = portrait76
+					portrait_has_trait = portrait77
+					portrait_has_trait = portrait78
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping03:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait53 }
+				2 = { portrait_has_trait = portrait54 }
+				3 = { portrait_has_trait = portrait55 }
+				4 = { portrait_has_trait = portrait56 }
+				5 = { portrait_has_trait = portrait57 }
+				6 = { portrait_has_trait = portrait58 }
+				7 = { portrait_has_trait = portrait59 }
+				8 = { portrait_has_trait = portrait60 }
+				9 = { portrait_has_trait = portrait61 }
+				10 = { portrait_has_trait = portrait62 }
+				11 = { portrait_has_trait = portrait63 }
+				12 = { portrait_has_trait = portrait64 }
+				13 = { portrait_has_trait = portrait65 }
+				14 = { portrait_has_trait = portrait66 }
+				15 = { portrait_has_trait = portrait67 }
+				16 = { portrait_has_trait = portrait68 }
+				17 = { portrait_has_trait = portrait69 }
+				18 = { portrait_has_trait = portrait70 }
+				19 = { portrait_has_trait = portrait71 }
+				20 = { portrait_has_trait = portrait72 }
+				21 = { portrait_has_trait = portrait73 }
+				22 = { portrait_has_trait = portrait74 }
+				23 = { portrait_has_trait = portrait75 }
+				24 = { portrait_has_trait = portrait76 }
+				25 = { portrait_has_trait = portrait77 }
+				26 = { portrait_has_trait = portrait78 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_4"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait79
+					portrait_has_trait = portrait80
+					portrait_has_trait = portrait81
+					portrait_has_trait = portrait82
+					portrait_has_trait = portrait83
+					portrait_has_trait = portrait84
+					portrait_has_trait = portrait85
+					portrait_has_trait = portrait86
+					portrait_has_trait = portrait87
+					portrait_has_trait = portrait88
+					portrait_has_trait = portrait89
+					portrait_has_trait = portrait90
+					portrait_has_trait = portrait91
+					portrait_has_trait = portrait92
+					portrait_has_trait = portrait93
+					portrait_has_trait = portrait94
+					portrait_has_trait = portrait95
+					portrait_has_trait = portrait96
+					portrait_has_trait = portrait97
+					portrait_has_trait = portrait98
+					portrait_has_trait = portrait99
+					portrait_has_trait = portrait100
+					portrait_has_trait = portrait101
+					portrait_has_trait = portrait102
+					portrait_has_trait = portrait103
+					portrait_has_trait = portrait104
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping04:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait79 }
+				2 = { portrait_has_trait = portrait80 }
+				3 = { portrait_has_trait = portrait81 }
+				4 = { portrait_has_trait = portrait82 }
+				5 = { portrait_has_trait = portrait83 }
+				6 = { portrait_has_trait = portrait84 }
+				7 = { portrait_has_trait = portrait85 }
+				8 = { portrait_has_trait = portrait86 }
+				9 = { portrait_has_trait = portrait87 }
+				10 = { portrait_has_trait = portrait88 }
+				11 = { portrait_has_trait = portrait89 }
+				12 = { portrait_has_trait = portrait90 }
+				13 = { portrait_has_trait = portrait91 }
+				14 = { portrait_has_trait = portrait92 }
+				15 = { portrait_has_trait = portrait93 }
+				16 = { portrait_has_trait = portrait94 }
+				17 = { portrait_has_trait = portrait95 }
+				18 = { portrait_has_trait = portrait96 }
+				19 = { portrait_has_trait = portrait97 }
+				20 = { portrait_has_trait = portrait98 }
+				21 = { portrait_has_trait = portrait99 }
+				22 = { portrait_has_trait = portrait100 }
+				23 = { portrait_has_trait = portrait101 }
+				24 = { portrait_has_trait = portrait102 }
+				25 = { portrait_has_trait = portrait103 }
+				26 = { portrait_has_trait = portrait104 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_5"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait105
+					portrait_has_trait = portrait106
+					portrait_has_trait = portrait107
+					portrait_has_trait = portrait108
+					portrait_has_trait = portrait109
+					portrait_has_trait = portrait110
+					portrait_has_trait = portrait111
+					portrait_has_trait = portrait112
+					portrait_has_trait = portrait113
+					portrait_has_trait = portrait114
+					portrait_has_trait = portrait115
+					portrait_has_trait = portrait116
+					portrait_has_trait = portrait117
+					portrait_has_trait = portrait118
+					portrait_has_trait = portrait119
+					portrait_has_trait = portrait120
+					portrait_has_trait = portrait121
+					portrait_has_trait = portrait122
+					portrait_has_trait = portrait123
+					portrait_has_trait = portrait124
+					portrait_has_trait = portrait125
+					portrait_has_trait = portrait126
+					portrait_has_trait = portrait127
+					portrait_has_trait = portrait128
+					portrait_has_trait = portrait129
+					portrait_has_trait = portrait130
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping05:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait105 }
+				2 = { portrait_has_trait = portrait106 }
+				3 = { portrait_has_trait = portrait107 }
+				4 = { portrait_has_trait = portrait108 }
+				5 = { portrait_has_trait = portrait109 }
+				6 = { portrait_has_trait = portrait110 }
+				7 = { portrait_has_trait = portrait111 }
+				8 = { portrait_has_trait = portrait112 }
+				9 = { portrait_has_trait = portrait113 }
+				10 = { portrait_has_trait = portrait114 }
+				11 = { portrait_has_trait = portrait115 }
+				12 = { portrait_has_trait = portrait116 }
+				13 = { portrait_has_trait = portrait117 }
+				14 = { portrait_has_trait = portrait118 }
+				15 = { portrait_has_trait = portrait119 }
+				16 = { portrait_has_trait = portrait120 }
+				17 = { portrait_has_trait = portrait121 }
+				18 = { portrait_has_trait = portrait122 }
+				19 = { portrait_has_trait = portrait123 }
+				20 = { portrait_has_trait = portrait124 }
+				21 = { portrait_has_trait = portrait125 }
+				22 = { portrait_has_trait = portrait126 }
+				23 = { portrait_has_trait = portrait127 }
+				24 = { portrait_has_trait = portrait128 }
+				25 = { portrait_has_trait = portrait129 }
+				26 = { portrait_has_trait = portrait130 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_6"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait131
+					portrait_has_trait = portrait132
+					portrait_has_trait = portrait133
+					portrait_has_trait = portrait134
+					portrait_has_trait = portrait135
+					portrait_has_trait = portrait136
+					portrait_has_trait = portrait137
+					portrait_has_trait = portrait138
+					portrait_has_trait = portrait139
+					portrait_has_trait = portrait140
+					portrait_has_trait = portrait141
+					portrait_has_trait = portrait142
+					portrait_has_trait = portrait143
+					portrait_has_trait = portrait144
+					portrait_has_trait = portrait145
+					portrait_has_trait = portrait146
+					portrait_has_trait = portrait147
+					portrait_has_trait = portrait148
+					portrait_has_trait = portrait149
+					portrait_has_trait = portrait150
+					portrait_has_trait = portrait151
+					portrait_has_trait = portrait152
+					portrait_has_trait = portrait153
+					portrait_has_trait = portrait154
+					portrait_has_trait = portrait155
+					portrait_has_trait = portrait156
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping06:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait131 }
+				2 = { portrait_has_trait = portrait132 }
+				3 = { portrait_has_trait = portrait133 }
+				4 = { portrait_has_trait = portrait134 }
+				5 = { portrait_has_trait = portrait135 }
+				6 = { portrait_has_trait = portrait136 }
+				7 = { portrait_has_trait = portrait137 }
+				8 = { portrait_has_trait = portrait138 }
+				9 = { portrait_has_trait = portrait139 }
+				10 = { portrait_has_trait = portrait140 }
+				11 = { portrait_has_trait = portrait141 }
+				12 = { portrait_has_trait = portrait142 }
+				13 = { portrait_has_trait = portrait143 }
+				14 = { portrait_has_trait = portrait144 }
+				15 = { portrait_has_trait = portrait145 }
+				16 = { portrait_has_trait = portrait146 }
+				17 = { portrait_has_trait = portrait147 }
+				18 = { portrait_has_trait = portrait148 }
+				19 = { portrait_has_trait = portrait149 }
+				20 = { portrait_has_trait = portrait150 }
+				21 = { portrait_has_trait = portrait151 }
+				22 = { portrait_has_trait = portrait152 }
+				23 = { portrait_has_trait = portrait153 }
+				24 = { portrait_has_trait = portrait154 }
+				25 = { portrait_has_trait = portrait155 }
+				26 = { portrait_has_trait = portrait156 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_7"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait157
+					portrait_has_trait = portrait158
+					portrait_has_trait = portrait159
+					portrait_has_trait = portrait160
+					portrait_has_trait = portrait161
+					portrait_has_trait = portrait162
+					portrait_has_trait = portrait163
+					portrait_has_trait = portrait164
+					portrait_has_trait = portrait165
+					portrait_has_trait = portrait166
+					portrait_has_trait = portrait167
+					portrait_has_trait = portrait168
+					portrait_has_trait = portrait169
+					portrait_has_trait = portrait170
+					portrait_has_trait = portrait171
+					portrait_has_trait = portrait172
+					portrait_has_trait = portrait173
+					portrait_has_trait = portrait174
+					portrait_has_trait = portrait175
+					portrait_has_trait = portrait176
+					portrait_has_trait = portrait177
+					portrait_has_trait = portrait178
+					portrait_has_trait = portrait179
+					portrait_has_trait = portrait180
+					portrait_has_trait = portrait181
+					portrait_has_trait = portrait182
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping07:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait157 }
+				2 = { portrait_has_trait = portrait158 }
+				3 = { portrait_has_trait = portrait159 }
+				4 = { portrait_has_trait = portrait160 }
+				5 = { portrait_has_trait = portrait161 }
+				6 = { portrait_has_trait = portrait162 }
+				7 = { portrait_has_trait = portrait163 }
+				8 = { portrait_has_trait = portrait164 }
+				9 = { portrait_has_trait = portrait165 }
+				10 = { portrait_has_trait = portrait166 }
+				11 = { portrait_has_trait = portrait167 }
+				12 = { portrait_has_trait = portrait168 }
+				13 = { portrait_has_trait = portrait169 }
+				14 = { portrait_has_trait = portrait170 }
+				15 = { portrait_has_trait = portrait171 }
+				16 = { portrait_has_trait = portrait172 }
+				17 = { portrait_has_trait = portrait173 }
+				18 = { portrait_has_trait = portrait174 }
+				19 = { portrait_has_trait = portrait175 }
+				20 = { portrait_has_trait = portrait176 }
+				21 = { portrait_has_trait = portrait177 }
+				22 = { portrait_has_trait = portrait178 }
+				23 = { portrait_has_trait = portrait179 }
+				24 = { portrait_has_trait = portrait180 }
+				25 = { portrait_has_trait = portrait181 }
+				26 = { portrait_has_trait = portrait182 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_8"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait183
+					portrait_has_trait = portrait184
+					portrait_has_trait = portrait185
+					portrait_has_trait = portrait186
+					portrait_has_trait = portrait187
+					portrait_has_trait = portrait188
+					portrait_has_trait = portrait189
+					portrait_has_trait = portrait190
+					portrait_has_trait = portrait191
+					portrait_has_trait = portrait192
+					portrait_has_trait = portrait193
+					portrait_has_trait = portrait194
+					portrait_has_trait = portrait195
+					portrait_has_trait = portrait196
+					portrait_has_trait = portrait197
+					portrait_has_trait = portrait198
+					portrait_has_trait = portrait199
+					portrait_has_trait = portrait200
+					portrait_has_trait = portrait201
+					portrait_has_trait = portrait202
+					portrait_has_trait = portrait203
+					portrait_has_trait = portrait204
+					portrait_has_trait = portrait205
+					portrait_has_trait = portrait206
+					portrait_has_trait = portrait207
+					portrait_has_trait = portrait208
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping08:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait183 }
+				2 = { portrait_has_trait = portrait184 }
+				3 = { portrait_has_trait = portrait185 }
+				4 = { portrait_has_trait = portrait186 }
+				5 = { portrait_has_trait = portrait187 }
+				6 = { portrait_has_trait = portrait188 }
+				7 = { portrait_has_trait = portrait189 }
+				8 = { portrait_has_trait = portrait190 }
+				9 = { portrait_has_trait = portrait191 }
+				10 = { portrait_has_trait = portrait192 }
+				11 = { portrait_has_trait = portrait193 }
+				12 = { portrait_has_trait = portrait194 }
+				13 = { portrait_has_trait = portrait195 }
+				14 = { portrait_has_trait = portrait196 }
+				15 = { portrait_has_trait = portrait197 }
+				16 = { portrait_has_trait = portrait198 }
+				17 = { portrait_has_trait = portrait199 }
+				18 = { portrait_has_trait = portrait200 }
+				19 = { portrait_has_trait = portrait201 }
+				20 = { portrait_has_trait = portrait202 }
+				21 = { portrait_has_trait = portrait203 }
+				22 = { portrait_has_trait = portrait204 }
+				23 = { portrait_has_trait = portrait205 }
+				24 = { portrait_has_trait = portrait206 }
+				25 = { portrait_has_trait = portrait207 }
+				26 = { portrait_has_trait = portrait208 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_9"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait209
+					portrait_has_trait = portrait210
+					portrait_has_trait = portrait211
+					portrait_has_trait = portrait212
+					portrait_has_trait = portrait213
+					portrait_has_trait = portrait214
+					portrait_has_trait = portrait215
+					portrait_has_trait = portrait216
+					portrait_has_trait = portrait217
+					portrait_has_trait = portrait218
+					portrait_has_trait = portrait219
+					portrait_has_trait = portrait220
+					portrait_has_trait = portrait221
+					portrait_has_trait = portrait222
+					portrait_has_trait = portrait223
+					portrait_has_trait = portrait224
+					portrait_has_trait = portrait225
+					portrait_has_trait = portrait226
+					portrait_has_trait = portrait227
+					portrait_has_trait = portrait228
+					portrait_has_trait = portrait229
+					portrait_has_trait = portrait230
+					portrait_has_trait = portrait231
+					portrait_has_trait = portrait232
+					portrait_has_trait = portrait233
+					portrait_has_trait = portrait234
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping09:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait209 }
+				2 = { portrait_has_trait = portrait210 }
+				3 = { portrait_has_trait = portrait211 }
+				4 = { portrait_has_trait = portrait212 }
+				5 = { portrait_has_trait = portrait213 }
+				6 = { portrait_has_trait = portrait214 }
+				7 = { portrait_has_trait = portrait215 }
+				8 = { portrait_has_trait = portrait216 }
+				9 = { portrait_has_trait = portrait217 }
+				10 = { portrait_has_trait = portrait218 }
+				11 = { portrait_has_trait = portrait219 }
+				12 = { portrait_has_trait = portrait220 }
+				13 = { portrait_has_trait = portrait221 }
+				14 = { portrait_has_trait = portrait222 }
+				15 = { portrait_has_trait = portrait223 }
+				16 = { portrait_has_trait = portrait224 }
+				17 = { portrait_has_trait = portrait225 }
+				18 = { portrait_has_trait = portrait226 }
+				19 = { portrait_has_trait = portrait227 }
+				20 = { portrait_has_trait = portrait228 }
+				21 = { portrait_has_trait = portrait229 }
+				22 = { portrait_has_trait = portrait230 }
+				23 = { portrait_has_trait = portrait231 }
+				24 = { portrait_has_trait = portrait232 }
+				25 = { portrait_has_trait = portrait233 }
+				26 = { portrait_has_trait = portrait234 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_10"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait235
+					portrait_has_trait = portrait236
+					portrait_has_trait = portrait237
+					portrait_has_trait = portrait238
+					portrait_has_trait = portrait239
+					portrait_has_trait = portrait240
+					portrait_has_trait = portrait241
+					portrait_has_trait = portrait242
+					portrait_has_trait = portrait243
+					portrait_has_trait = portrait244
+					portrait_has_trait = portrait245
+					portrait_has_trait = portrait246
+					portrait_has_trait = portrait247
+					portrait_has_trait = portrait248
+					portrait_has_trait = portrait249
+					portrait_has_trait = portrait250
+					portrait_has_trait = portrait251
+					portrait_has_trait = portrait252
+					portrait_has_trait = portrait253
+					portrait_has_trait = portrait254
+					portrait_has_trait = portrait255
+					portrait_has_trait = portrait256
+					portrait_has_trait = portrait257
+					portrait_has_trait = portrait258
+					portrait_has_trait = portrait259
+					portrait_has_trait = portrait260
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping10:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait235 }
+				2 = { portrait_has_trait = portrait236 }
+				3 = { portrait_has_trait = portrait237 }
+				4 = { portrait_has_trait = portrait238 }
+				5 = { portrait_has_trait = portrait239 }
+				6 = { portrait_has_trait = portrait240 }
+				7 = { portrait_has_trait = portrait241 }
+				8 = { portrait_has_trait = portrait242 }
+				9 = { portrait_has_trait = portrait243 }
+				10 = { portrait_has_trait = portrait244 }
+				11 = { portrait_has_trait = portrait245 }
+				12 = { portrait_has_trait = portrait246 }
+				13 = { portrait_has_trait = portrait247 }
+				14 = { portrait_has_trait = portrait248 }
+				15 = { portrait_has_trait = portrait249 }
+				16 = { portrait_has_trait = portrait250 }
+				17 = { portrait_has_trait = portrait251 }
+				18 = { portrait_has_trait = portrait252 }
+				19 = { portrait_has_trait = portrait253 }
+				20 = { portrait_has_trait = portrait254 }
+				21 = { portrait_has_trait = portrait255 }
+				22 = { portrait_has_trait = portrait256 }
+				23 = { portrait_has_trait = portrait257 }
+				24 = { portrait_has_trait = portrait258 }
+				25 = { portrait_has_trait = portrait259 }
+				26 = { portrait_has_trait = portrait260 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_11"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait261
+					portrait_has_trait = portrait262
+					portrait_has_trait = portrait263
+					portrait_has_trait = portrait264
+					portrait_has_trait = portrait265
+					portrait_has_trait = portrait266
+					portrait_has_trait = portrait267
+					portrait_has_trait = portrait268
+					portrait_has_trait = portrait269
+					portrait_has_trait = portrait270
+					portrait_has_trait = portrait271
+					portrait_has_trait = portrait272
+					portrait_has_trait = portrait273
+					portrait_has_trait = portrait274
+					portrait_has_trait = portrait275
+					portrait_has_trait = portrait276
+					portrait_has_trait = portrait277
+					portrait_has_trait = portrait278
+					portrait_has_trait = portrait279
+					portrait_has_trait = portrait280
+					portrait_has_trait = portrait281
+					portrait_has_trait = portrait282
+					portrait_has_trait = portrait283
+					portrait_has_trait = portrait284
+					portrait_has_trait = portrait285
+					portrait_has_trait = portrait286
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping11:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait261 }
+				2 = { portrait_has_trait = portrait262 }
+				3 = { portrait_has_trait = portrait263 }
+				4 = { portrait_has_trait = portrait264 }
+				5 = { portrait_has_trait = portrait265 }
+				6 = { portrait_has_trait = portrait266 }
+				7 = { portrait_has_trait = portrait267 }
+				8 = { portrait_has_trait = portrait268 }
+				9 = { portrait_has_trait = portrait269 }
+				10 = { portrait_has_trait = portrait270 }
+				11 = { portrait_has_trait = portrait271 }
+				12 = { portrait_has_trait = portrait272 }
+				13 = { portrait_has_trait = portrait273 }
+				14 = { portrait_has_trait = portrait274 }
+				15 = { portrait_has_trait = portrait275 }
+				16 = { portrait_has_trait = portrait276 }
+				17 = { portrait_has_trait = portrait277 }
+				18 = { portrait_has_trait = portrait278 }
+				19 = { portrait_has_trait = portrait279 }
+				20 = { portrait_has_trait = portrait280 }
+				21 = { portrait_has_trait = portrait281 }
+				22 = { portrait_has_trait = portrait282 }
+				23 = { portrait_has_trait = portrait283 }
+				24 = { portrait_has_trait = portrait284 }
+				25 = { portrait_has_trait = portrait285 }
+				26 = { portrait_has_trait = portrait286 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_12"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait287
+					portrait_has_trait = portrait288
+					portrait_has_trait = portrait289
+					portrait_has_trait = portrait290
+					portrait_has_trait = portrait291
+					portrait_has_trait = portrait292
+					portrait_has_trait = portrait293
+					portrait_has_trait = portrait294
+					portrait_has_trait = portrait295
+					portrait_has_trait = portrait296
+					portrait_has_trait = portrait297
+					portrait_has_trait = portrait298
+					portrait_has_trait = portrait299
+					portrait_has_trait = portrait300
+					portrait_has_trait = portrait301
+					portrait_has_trait = portrait302
+					portrait_has_trait = portrait303
+					portrait_has_trait = portrait304
+					portrait_has_trait = portrait305
+					portrait_has_trait = portrait306
+					portrait_has_trait = portrait307
+					portrait_has_trait = portrait308
+					portrait_has_trait = portrait309
+					portrait_has_trait = portrait310
+					portrait_has_trait = portrait311
+					portrait_has_trait = portrait312
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping12:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait287 }
+				2 = { portrait_has_trait = portrait288 }
+				3 = { portrait_has_trait = portrait289 }
+				4 = { portrait_has_trait = portrait290 }
+				5 = { portrait_has_trait = portrait291 }
+				6 = { portrait_has_trait = portrait292 }
+				7 = { portrait_has_trait = portrait293 }
+				8 = { portrait_has_trait = portrait294 }
+				9 = { portrait_has_trait = portrait295 }
+				10 = { portrait_has_trait = portrait296 }
+				11 = { portrait_has_trait = portrait297 }
+				12 = { portrait_has_trait = portrait298 }
+				13 = { portrait_has_trait = portrait299 }
+				14 = { portrait_has_trait = portrait300 }
+				15 = { portrait_has_trait = portrait301 }
+				16 = { portrait_has_trait = portrait302 }
+				17 = { portrait_has_trait = portrait303 }
+				18 = { portrait_has_trait = portrait304 }
+				19 = { portrait_has_trait = portrait305 }
+				20 = { portrait_has_trait = portrait306 }
+				21 = { portrait_has_trait = portrait307 }
+				22 = { portrait_has_trait = portrait308 }
+				23 = { portrait_has_trait = portrait309 }
+				24 = { portrait_has_trait = portrait310 }
+				25 = { portrait_has_trait = portrait311 }
+				26 = { portrait_has_trait = portrait312 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_13"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait313
+					portrait_has_trait = portrait314
+					portrait_has_trait = portrait315
+					portrait_has_trait = portrait316
+					portrait_has_trait = portrait317
+					portrait_has_trait = portrait318
+					portrait_has_trait = portrait319
+					portrait_has_trait = portrait320
+					portrait_has_trait = portrait321
+					portrait_has_trait = portrait322
+					portrait_has_trait = portrait323
+					portrait_has_trait = portrait324
+					portrait_has_trait = portrait325
+					portrait_has_trait = portrait326
+					portrait_has_trait = portrait327
+					portrait_has_trait = portrait328
+					portrait_has_trait = portrait329
+					portrait_has_trait = portrait330
+					portrait_has_trait = portrait331
+					portrait_has_trait = portrait332
+					portrait_has_trait = portrait333
+					portrait_has_trait = portrait334
+					portrait_has_trait = portrait335
+					portrait_has_trait = portrait336
+					portrait_has_trait = portrait337
+					portrait_has_trait = portrait338
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping13:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait313 }
+				2 = { portrait_has_trait = portrait314 }
+				3 = { portrait_has_trait = portrait315 }
+				4 = { portrait_has_trait = portrait316 }
+				5 = { portrait_has_trait = portrait317 }
+				6 = { portrait_has_trait = portrait318 }
+				7 = { portrait_has_trait = portrait319 }
+				8 = { portrait_has_trait = portrait320 }
+				9 = { portrait_has_trait = portrait321 }
+				10 = { portrait_has_trait = portrait322 }
+				11 = { portrait_has_trait = portrait323 }
+				12 = { portrait_has_trait = portrait324 }
+				13 = { portrait_has_trait = portrait325 }
+				14 = { portrait_has_trait = portrait326 }
+				15 = { portrait_has_trait = portrait327 }
+				16 = { portrait_has_trait = portrait328 }
+				17 = { portrait_has_trait = portrait329 }
+				18 = { portrait_has_trait = portrait330 }
+				19 = { portrait_has_trait = portrait331 }
+				20 = { portrait_has_trait = portrait332 }
+				21 = { portrait_has_trait = portrait333 }
+				22 = { portrait_has_trait = portrait334 }
+				23 = { portrait_has_trait = portrait335 }
+				24 = { portrait_has_trait = portrait336 }
+				25 = { portrait_has_trait = portrait337 }
+				26 = { portrait_has_trait = portrait338 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_14"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait339
+					portrait_has_trait = portrait340
+					portrait_has_trait = portrait341
+					portrait_has_trait = portrait342
+					portrait_has_trait = portrait343
+					portrait_has_trait = portrait344
+					portrait_has_trait = portrait345
+					portrait_has_trait = portrait346
+					portrait_has_trait = portrait347
+					portrait_has_trait = portrait348
+					portrait_has_trait = portrait349
+					portrait_has_trait = portrait350
+					portrait_has_trait = portrait351
+					portrait_has_trait = portrait352
+					portrait_has_trait = portrait353
+					portrait_has_trait = portrait354
+					portrait_has_trait = portrait355
+					portrait_has_trait = portrait356
+					portrait_has_trait = portrait357
+					portrait_has_trait = portrait358
+					portrait_has_trait = portrait359
+					portrait_has_trait = portrait360
+					portrait_has_trait = portrait361
+					portrait_has_trait = portrait362
+					portrait_has_trait = portrait363
+					portrait_has_trait = portrait364
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping14:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait339 }
+				2 = { portrait_has_trait = portrait340 }
+				3 = { portrait_has_trait = portrait341 }
+				4 = { portrait_has_trait = portrait342 }
+				5 = { portrait_has_trait = portrait343 }
+				6 = { portrait_has_trait = portrait344 }
+				7 = { portrait_has_trait = portrait345 }
+				8 = { portrait_has_trait = portrait346 }
+				9 = { portrait_has_trait = portrait347 }
+				10 = { portrait_has_trait = portrait348 }
+				11 = { portrait_has_trait = portrait349 }
+				12 = { portrait_has_trait = portrait350 }
+				13 = { portrait_has_trait = portrait351 }
+				14 = { portrait_has_trait = portrait352 }
+				15 = { portrait_has_trait = portrait353 }
+				16 = { portrait_has_trait = portrait354 }
+				17 = { portrait_has_trait = portrait355 }
+				18 = { portrait_has_trait = portrait356 }
+				19 = { portrait_has_trait = portrait357 }
+				20 = { portrait_has_trait = portrait358 }
+				21 = { portrait_has_trait = portrait359 }
+				22 = { portrait_has_trait = portrait360 }
+				23 = { portrait_has_trait = portrait361 }
+				24 = { portrait_has_trait = portrait362 }
+				25 = { portrait_has_trait = portrait363 }
+				26 = { portrait_has_trait = portrait364 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_15"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait365
+					portrait_has_trait = portrait366
+					portrait_has_trait = portrait367
+					portrait_has_trait = portrait368
+					portrait_has_trait = portrait369
+					portrait_has_trait = portrait370
+					portrait_has_trait = portrait371
+					portrait_has_trait = portrait372
+					portrait_has_trait = portrait373
+					portrait_has_trait = portrait374
+					portrait_has_trait = portrait375
+					portrait_has_trait = portrait376
+					portrait_has_trait = portrait377
+					portrait_has_trait = portrait378
+					portrait_has_trait = portrait379
+					portrait_has_trait = portrait380
+					portrait_has_trait = portrait381
+					portrait_has_trait = portrait382
+					portrait_has_trait = portrait383
+					portrait_has_trait = portrait384
+					portrait_has_trait = portrait385
+					portrait_has_trait = portrait386
+					portrait_has_trait = portrait387
+					portrait_has_trait = portrait388
+					portrait_has_trait = portrait389
+					portrait_has_trait = portrait390
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping15:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait365 }
+				2 = { portrait_has_trait = portrait366 }
+				3 = { portrait_has_trait = portrait367 }
+				4 = { portrait_has_trait = portrait368 }
+				5 = { portrait_has_trait = portrait369 }
+				6 = { portrait_has_trait = portrait370 }
+				7 = { portrait_has_trait = portrait371 }
+				8 = { portrait_has_trait = portrait372 }
+				9 = { portrait_has_trait = portrait373 }
+				10 = { portrait_has_trait = portrait374 }
+				11 = { portrait_has_trait = portrait375 }
+				12 = { portrait_has_trait = portrait376 }
+				13 = { portrait_has_trait = portrait377 }
+				14 = { portrait_has_trait = portrait378 }
+				15 = { portrait_has_trait = portrait379 }
+				16 = { portrait_has_trait = portrait380 }
+				17 = { portrait_has_trait = portrait381 }
+				18 = { portrait_has_trait = portrait382 }
+				19 = { portrait_has_trait = portrait383 }
+				20 = { portrait_has_trait = portrait384 }
+				21 = { portrait_has_trait = portrait385 }
+				22 = { portrait_has_trait = portrait386 }
+				23 = { portrait_has_trait = portrait387 }
+				24 = { portrait_has_trait = portrait388 }
+				25 = { portrait_has_trait = portrait389 }
+				26 = { portrait_has_trait = portrait390 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_16"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait391
+					portrait_has_trait = portrait392
+					portrait_has_trait = portrait393
+					portrait_has_trait = portrait394
+					portrait_has_trait = portrait395
+					portrait_has_trait = portrait396
+					portrait_has_trait = portrait397
+					portrait_has_trait = portrait398
+					portrait_has_trait = portrait399
+					portrait_has_trait = portrait400
+					portrait_has_trait = portrait401
+					portrait_has_trait = portrait402
+					portrait_has_trait = portrait403
+					portrait_has_trait = portrait404
+					portrait_has_trait = portrait405
+					portrait_has_trait = portrait406
+					portrait_has_trait = portrait407
+					portrait_has_trait = portrait408
+					portrait_has_trait = portrait409
+					portrait_has_trait = portrait410
+					portrait_has_trait = portrait411
+					portrait_has_trait = portrait412
+					portrait_has_trait = portrait413
+					portrait_has_trait = portrait414
+					portrait_has_trait = portrait415
+					portrait_has_trait = portrait416
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping16:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait391 }
+				2 = { portrait_has_trait = portrait392 }
+				3 = { portrait_has_trait = portrait393 }
+				4 = { portrait_has_trait = portrait394 }
+				5 = { portrait_has_trait = portrait395 }
+				6 = { portrait_has_trait = portrait396 }
+				7 = { portrait_has_trait = portrait397 }
+				8 = { portrait_has_trait = portrait398 }
+				9 = { portrait_has_trait = portrait399 }
+				10 = { portrait_has_trait = portrait400 }
+				11 = { portrait_has_trait = portrait401 }
+				12 = { portrait_has_trait = portrait402 }
+				13 = { portrait_has_trait = portrait403 }
+				14 = { portrait_has_trait = portrait404 }
+				15 = { portrait_has_trait = portrait405 }
+				16 = { portrait_has_trait = portrait406 }
+				17 = { portrait_has_trait = portrait407 }
+				18 = { portrait_has_trait = portrait408 }
+				19 = { portrait_has_trait = portrait409 }
+				20 = { portrait_has_trait = portrait410 }
+				21 = { portrait_has_trait = portrait411 }
+				22 = { portrait_has_trait = portrait412 }
+				23 = { portrait_has_trait = portrait413 }
+				24 = { portrait_has_trait = portrait414 }
+				25 = { portrait_has_trait = portrait415 }
+				26 = { portrait_has_trait = portrait416 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_17"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait417
+					portrait_has_trait = portrait418
+					portrait_has_trait = portrait419
+					portrait_has_trait = portrait420
+					portrait_has_trait = portrait421
+					portrait_has_trait = portrait422
+					portrait_has_trait = portrait423
+					portrait_has_trait = portrait424
+					portrait_has_trait = portrait425
+					portrait_has_trait = portrait426
+					portrait_has_trait = portrait427
+					portrait_has_trait = portrait428
+					portrait_has_trait = portrait429
+					portrait_has_trait = portrait430
+					portrait_has_trait = portrait431
+					portrait_has_trait = portrait432
+					portrait_has_trait = portrait433
+					portrait_has_trait = portrait434
+					portrait_has_trait = portrait435
+					portrait_has_trait = portrait436
+					portrait_has_trait = portrait437
+					portrait_has_trait = portrait438
+					portrait_has_trait = portrait439
+					portrait_has_trait = portrait440
+					portrait_has_trait = portrait441
+					portrait_has_trait = portrait442
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping17:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait417 }
+				2 = { portrait_has_trait = portrait418 }
+				3 = { portrait_has_trait = portrait419 }
+				4 = { portrait_has_trait = portrait420 }
+				5 = { portrait_has_trait = portrait421 }
+				6 = { portrait_has_trait = portrait422 }
+				7 = { portrait_has_trait = portrait423 }
+				8 = { portrait_has_trait = portrait424 }
+				9 = { portrait_has_trait = portrait425 }
+				10 = { portrait_has_trait = portrait426 }
+				11 = { portrait_has_trait = portrait427 }
+				12 = { portrait_has_trait = portrait428 }
+				13 = { portrait_has_trait = portrait429 }
+				14 = { portrait_has_trait = portrait430 }
+				15 = { portrait_has_trait = portrait431 }
+				16 = { portrait_has_trait = portrait432 }
+				17 = { portrait_has_trait = portrait433 }
+				18 = { portrait_has_trait = portrait434 }
+				19 = { portrait_has_trait = portrait435 }
+				20 = { portrait_has_trait = portrait436 }
+				21 = { portrait_has_trait = portrait437 }
+				22 = { portrait_has_trait = portrait438 }
+				23 = { portrait_has_trait = portrait439 }
+				24 = { portrait_has_trait = portrait440 }
+				25 = { portrait_has_trait = portrait441 }
+				26 = { portrait_has_trait = portrait442 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_18"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait443
+					portrait_has_trait = portrait444
+					portrait_has_trait = portrait445
+					portrait_has_trait = portrait446
+					portrait_has_trait = portrait447
+					portrait_has_trait = portrait448
+					portrait_has_trait = portrait449
+					portrait_has_trait = portrait450
+					portrait_has_trait = portrait451
+					portrait_has_trait = portrait452
+					portrait_has_trait = portrait453
+					portrait_has_trait = portrait454
+					portrait_has_trait = portrait455
+					portrait_has_trait = portrait456
+					portrait_has_trait = portrait457
+					portrait_has_trait = portrait458
+					portrait_has_trait = portrait459
+					portrait_has_trait = portrait460
+					portrait_has_trait = portrait461
+					portrait_has_trait = portrait462
+					portrait_has_trait = portrait463
+					portrait_has_trait = portrait464
+					portrait_has_trait = portrait465
+					portrait_has_trait = portrait466
+					portrait_has_trait = portrait467
+					portrait_has_trait = portrait468
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping18:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait443 }
+				2 = { portrait_has_trait = portrait444 }
+				3 = { portrait_has_trait = portrait445 }
+				4 = { portrait_has_trait = portrait446 }
+				5 = { portrait_has_trait = portrait447 }
+				6 = { portrait_has_trait = portrait448 }
+				7 = { portrait_has_trait = portrait449 }
+				8 = { portrait_has_trait = portrait450 }
+				9 = { portrait_has_trait = portrait451 }
+				10 = { portrait_has_trait = portrait452 }
+				11 = { portrait_has_trait = portrait453 }
+				12 = { portrait_has_trait = portrait454 }
+				13 = { portrait_has_trait = portrait455 }
+				14 = { portrait_has_trait = portrait456 }
+				15 = { portrait_has_trait = portrait457 }
+				16 = { portrait_has_trait = portrait458 }
+				17 = { portrait_has_trait = portrait459 }
+				18 = { portrait_has_trait = portrait460 }
+				19 = { portrait_has_trait = portrait461 }
+				20 = { portrait_has_trait = portrait462 }
+				21 = { portrait_has_trait = portrait463 }
+				22 = { portrait_has_trait = portrait464 }
+				23 = { portrait_has_trait = portrait465 }
+				24 = { portrait_has_trait = portrait466 }
+				25 = { portrait_has_trait = portrait467 }
+				26 = { portrait_has_trait = portrait468 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_19"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait469
+					portrait_has_trait = portrait470
+					portrait_has_trait = portrait471
+					portrait_has_trait = portrait472
+					portrait_has_trait = portrait473
+					portrait_has_trait = portrait474
+					portrait_has_trait = portrait475
+					portrait_has_trait = portrait476
+					portrait_has_trait = portrait477
+					portrait_has_trait = portrait478
+					portrait_has_trait = portrait479
+					portrait_has_trait = portrait480
+					portrait_has_trait = portrait481
+					portrait_has_trait = portrait482
+					portrait_has_trait = portrait483
+					portrait_has_trait = portrait484
+					portrait_has_trait = portrait485
+					portrait_has_trait = portrait486
+					portrait_has_trait = portrait487
+					portrait_has_trait = portrait488
+					portrait_has_trait = portrait489
+					portrait_has_trait = portrait490
+					portrait_has_trait = portrait491
+					portrait_has_trait = portrait492
+					portrait_has_trait = portrait493
+					portrait_has_trait = portrait494
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping19:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait469 }
+				2 = { portrait_has_trait = portrait470 }
+				3 = { portrait_has_trait = portrait471 }
+				4 = { portrait_has_trait = portrait472 }
+				5 = { portrait_has_trait = portrait473 }
+				6 = { portrait_has_trait = portrait474 }
+				7 = { portrait_has_trait = portrait475 }
+				8 = { portrait_has_trait = portrait476 }
+				9 = { portrait_has_trait = portrait477 }
+				10 = { portrait_has_trait = portrait478 }
+				11 = { portrait_has_trait = portrait479 }
+				12 = { portrait_has_trait = portrait480 }
+				13 = { portrait_has_trait = portrait481 }
+				14 = { portrait_has_trait = portrait482 }
+				15 = { portrait_has_trait = portrait483 }
+				16 = { portrait_has_trait = portrait484 }
+				17 = { portrait_has_trait = portrait485 }
+				18 = { portrait_has_trait = portrait486 }
+				19 = { portrait_has_trait = portrait487 }
+				20 = { portrait_has_trait = portrait488 }
+				21 = { portrait_has_trait = portrait489 }
+				22 = { portrait_has_trait = portrait490 }
+				23 = { portrait_has_trait = portrait491 }
+				24 = { portrait_has_trait = portrait492 }
+				25 = { portrait_has_trait = portrait493 }
+				26 = { portrait_has_trait = portrait494 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_20"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait495
+					portrait_has_trait = portrait496
+					portrait_has_trait = portrait497
+					portrait_has_trait = portrait498
+					portrait_has_trait = portrait499
+					portrait_has_trait = portrait500
+					portrait_has_trait = portrait501
+					portrait_has_trait = portrait502
+					portrait_has_trait = portrait503
+					portrait_has_trait = portrait504
+					portrait_has_trait = portrait505
+					portrait_has_trait = portrait506
+					portrait_has_trait = portrait507
+					portrait_has_trait = portrait508
+					portrait_has_trait = portrait509
+					portrait_has_trait = portrait510
+					portrait_has_trait = portrait511
+					portrait_has_trait = portrait512
+					portrait_has_trait = portrait513
+					portrait_has_trait = portrait514
+					portrait_has_trait = portrait515
+					portrait_has_trait = portrait516
+					portrait_has_trait = portrait517
+					portrait_has_trait = portrait518
+					portrait_has_trait = portrait519
+					portrait_has_trait = portrait520
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping20:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait495 }
+				2 = { portrait_has_trait = portrait496 }
+				3 = { portrait_has_trait = portrait497 }
+				4 = { portrait_has_trait = portrait498 }
+				5 = { portrait_has_trait = portrait499 }
+				6 = { portrait_has_trait = portrait500 }
+				7 = { portrait_has_trait = portrait501 }
+				8 = { portrait_has_trait = portrait502 }
+				9 = { portrait_has_trait = portrait503 }
+				10 = { portrait_has_trait = portrait504 }
+				11 = { portrait_has_trait = portrait505 }
+				12 = { portrait_has_trait = portrait506 }
+				13 = { portrait_has_trait = portrait507 }
+				14 = { portrait_has_trait = portrait508 }
+				15 = { portrait_has_trait = portrait509 }
+				16 = { portrait_has_trait = portrait510 }
+				17 = { portrait_has_trait = portrait511 }
+				18 = { portrait_has_trait = portrait512 }
+				19 = { portrait_has_trait = portrait513 }
+				20 = { portrait_has_trait = portrait514 }
+				21 = { portrait_has_trait = portrait515 }
+				22 = { portrait_has_trait = portrait516 }
+				23 = { portrait_has_trait = portrait517 }
+				24 = { portrait_has_trait = portrait518 }
+				25 = { portrait_has_trait = portrait519 }
+				26 = { portrait_has_trait = portrait520 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_21"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait521
+					portrait_has_trait = portrait522
+					portrait_has_trait = portrait523
+					portrait_has_trait = portrait524
+					portrait_has_trait = portrait525
+					portrait_has_trait = portrait526
+					portrait_has_trait = portrait527
+					portrait_has_trait = portrait528
+					portrait_has_trait = portrait529
+					portrait_has_trait = portrait530
+					portrait_has_trait = portrait531
+					portrait_has_trait = portrait532
+					portrait_has_trait = portrait533
+					portrait_has_trait = portrait534
+					portrait_has_trait = portrait535
+					portrait_has_trait = portrait536
+					portrait_has_trait = portrait537
+					portrait_has_trait = portrait538
+					portrait_has_trait = portrait539
+					portrait_has_trait = portrait540
+					portrait_has_trait = portrait541
+					portrait_has_trait = portrait542
+					portrait_has_trait = portrait543
+					portrait_has_trait = portrait544
+					portrait_has_trait = portrait545
+					portrait_has_trait = portrait546
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping21:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait521 }
+				2 = { portrait_has_trait = portrait522 }
+				3 = { portrait_has_trait = portrait523 }
+				4 = { portrait_has_trait = portrait524 }
+				5 = { portrait_has_trait = portrait525 }
+				6 = { portrait_has_trait = portrait526 }
+				7 = { portrait_has_trait = portrait527 }
+				8 = { portrait_has_trait = portrait528 }
+				9 = { portrait_has_trait = portrait529 }
+				10 = { portrait_has_trait = portrait530 }
+				11 = { portrait_has_trait = portrait531 }
+				12 = { portrait_has_trait = portrait532 }
+				13 = { portrait_has_trait = portrait533 }
+				14 = { portrait_has_trait = portrait534 }
+				15 = { portrait_has_trait = portrait535 }
+				16 = { portrait_has_trait = portrait536 }
+				17 = { portrait_has_trait = portrait537 }
+				18 = { portrait_has_trait = portrait538 }
+				19 = { portrait_has_trait = portrait539 }
+				20 = { portrait_has_trait = portrait540 }
+				21 = { portrait_has_trait = portrait541 }
+				22 = { portrait_has_trait = portrait542 }
+				23 = { portrait_has_trait = portrait543 }
+				24 = { portrait_has_trait = portrait544 }
+				25 = { portrait_has_trait = portrait545 }
+				26 = { portrait_has_trait = portrait546 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_22"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait547
+					portrait_has_trait = portrait548
+					portrait_has_trait = portrait549
+					portrait_has_trait = portrait550
+					portrait_has_trait = portrait551
+					portrait_has_trait = portrait552
+					portrait_has_trait = portrait553
+					portrait_has_trait = portrait554
+					portrait_has_trait = portrait555
+					portrait_has_trait = portrait556
+					portrait_has_trait = portrait557
+					portrait_has_trait = portrait558
+					portrait_has_trait = portrait559
+					portrait_has_trait = portrait560
+					portrait_has_trait = portrait561
+					portrait_has_trait = portrait562
+					portrait_has_trait = portrait563
+					portrait_has_trait = portrait564
+					portrait_has_trait = portrait565
+					portrait_has_trait = portrait566
+					portrait_has_trait = portrait567
+					portrait_has_trait = portrait568
+					portrait_has_trait = portrait569
+					portrait_has_trait = portrait570
+					portrait_has_trait = portrait571
+					portrait_has_trait = portrait572
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping22:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait547 }
+				2 = { portrait_has_trait = portrait548 }
+				3 = { portrait_has_trait = portrait549 }
+				4 = { portrait_has_trait = portrait550 }
+				5 = { portrait_has_trait = portrait551 }
+				6 = { portrait_has_trait = portrait552 }
+				7 = { portrait_has_trait = portrait553 }
+				8 = { portrait_has_trait = portrait554 }
+				9 = { portrait_has_trait = portrait555 }
+				10 = { portrait_has_trait = portrait556 }
+				11 = { portrait_has_trait = portrait557 }
+				12 = { portrait_has_trait = portrait558 }
+				13 = { portrait_has_trait = portrait559 }
+				14 = { portrait_has_trait = portrait560 }
+				15 = { portrait_has_trait = portrait561 }
+				16 = { portrait_has_trait = portrait562 }
+				17 = { portrait_has_trait = portrait563 }
+				18 = { portrait_has_trait = portrait564 }
+				19 = { portrait_has_trait = portrait565 }
+				20 = { portrait_has_trait = portrait566 }
+				21 = { portrait_has_trait = portrait567 }
+				22 = { portrait_has_trait = portrait568 }
+				23 = { portrait_has_trait = portrait569 }
+				24 = { portrait_has_trait = portrait570 }
+				25 = { portrait_has_trait = portrait571 }
+				26 = { portrait_has_trait = portrait572 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_23"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait573
+					portrait_has_trait = portrait574
+					portrait_has_trait = portrait575
+					portrait_has_trait = portrait576
+					portrait_has_trait = portrait577
+					portrait_has_trait = portrait578
+					portrait_has_trait = portrait579
+					portrait_has_trait = portrait580
+					portrait_has_trait = portrait581
+					portrait_has_trait = portrait582
+					portrait_has_trait = portrait583
+					portrait_has_trait = portrait584
+					portrait_has_trait = portrait585
+					portrait_has_trait = portrait586
+					portrait_has_trait = portrait587
+					portrait_has_trait = portrait588
+					portrait_has_trait = portrait589
+					portrait_has_trait = portrait590
+					portrait_has_trait = portrait591
+					portrait_has_trait = portrait592
+					portrait_has_trait = portrait593
+					portrait_has_trait = portrait594
+					portrait_has_trait = portrait595
+					portrait_has_trait = portrait596
+					portrait_has_trait = portrait597
+					portrait_has_trait = portrait598
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping23:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait573 }
+				2 = { portrait_has_trait = portrait574 }
+				3 = { portrait_has_trait = portrait575 }
+				4 = { portrait_has_trait = portrait576 }
+				5 = { portrait_has_trait = portrait577 }
+				6 = { portrait_has_trait = portrait578 }
+				7 = { portrait_has_trait = portrait579 }
+				8 = { portrait_has_trait = portrait580 }
+				9 = { portrait_has_trait = portrait581 }
+				10 = { portrait_has_trait = portrait582 }
+				11 = { portrait_has_trait = portrait583 }
+				12 = { portrait_has_trait = portrait584 }
+				13 = { portrait_has_trait = portrait585 }
+				14 = { portrait_has_trait = portrait586 }
+				15 = { portrait_has_trait = portrait587 }
+				16 = { portrait_has_trait = portrait588 }
+				17 = { portrait_has_trait = portrait589 }
+				18 = { portrait_has_trait = portrait590 }
+				19 = { portrait_has_trait = portrait591 }
+				20 = { portrait_has_trait = portrait592 }
+				21 = { portrait_has_trait = portrait593 }
+				22 = { portrait_has_trait = portrait594 }
+				23 = { portrait_has_trait = portrait595 }
+				24 = { portrait_has_trait = portrait596 }
+				25 = { portrait_has_trait = portrait597 }
+				26 = { portrait_has_trait = portrait598 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_24"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait599
+					portrait_has_trait = portrait600
+					portrait_has_trait = portrait601
+					portrait_has_trait = portrait602
+					portrait_has_trait = portrait603
+					portrait_has_trait = portrait604
+					portrait_has_trait = portrait605
+					portrait_has_trait = portrait606
+					portrait_has_trait = portrait607
+					portrait_has_trait = portrait608
+					portrait_has_trait = portrait609
+					portrait_has_trait = portrait610
+					portrait_has_trait = portrait611
+					portrait_has_trait = portrait612
+					portrait_has_trait = portrait613
+					portrait_has_trait = portrait614
+					portrait_has_trait = portrait615
+					portrait_has_trait = portrait616
+					portrait_has_trait = portrait617
+					portrait_has_trait = portrait618
+					portrait_has_trait = portrait619
+					portrait_has_trait = portrait620
+					portrait_has_trait = portrait621
+					portrait_has_trait = portrait622
+					portrait_has_trait = portrait623
+					portrait_has_trait = portrait624
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping24:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait599 }
+				2 = { portrait_has_trait = portrait600 }
+				3 = { portrait_has_trait = portrait601 }
+				4 = { portrait_has_trait = portrait602 }
+				5 = { portrait_has_trait = portrait603 }
+				6 = { portrait_has_trait = portrait604 }
+				7 = { portrait_has_trait = portrait605 }
+				8 = { portrait_has_trait = portrait606 }
+				9 = { portrait_has_trait = portrait607 }
+				10 = { portrait_has_trait = portrait608 }
+				11 = { portrait_has_trait = portrait609 }
+				12 = { portrait_has_trait = portrait610 }
+				13 = { portrait_has_trait = portrait611 }
+				14 = { portrait_has_trait = portrait612 }
+				15 = { portrait_has_trait = portrait613 }
+				16 = { portrait_has_trait = portrait614 }
+				17 = { portrait_has_trait = portrait615 }
+				18 = { portrait_has_trait = portrait616 }
+				19 = { portrait_has_trait = portrait617 }
+				20 = { portrait_has_trait = portrait618 }
+				21 = { portrait_has_trait = portrait619 }
+				22 = { portrait_has_trait = portrait620 }
+				23 = { portrait_has_trait = portrait621 }
+				24 = { portrait_has_trait = portrait622 }
+				25 = { portrait_has_trait = portrait623 }
+				26 = { portrait_has_trait = portrait624 }
+			}
+		}
+	}
+    portraitType = {
+        name = "PORTRAIT_static_25"
+		effectFile = "gfx/FX/portrait.lua"
+
+        weight = {
+            additive_modifier = {
+                value = 1000000
+                portrait_clothing = yes
+				OR = {
+					portrait_has_trait = portrait625
+					portrait_has_trait = portrait626
+					portrait_has_trait = portrait627
+					portrait_has_trait = portrait628
+					portrait_has_trait = portrait629
+					portrait_has_trait = portrait630
+					portrait_has_trait = portrait631
+					portrait_has_trait = portrait632
+					portrait_has_trait = portrait633
+					portrait_has_trait = portrait634
+					portrait_has_trait = portrait635
+					portrait_has_trait = portrait636
+					portrait_has_trait = portrait637
+					portrait_has_trait = portrait638
+					portrait_has_trait = portrait639
+					portrait_has_trait = portrait640
+					portrait_has_trait = portrait641
+					portrait_has_trait = portrait642
+					portrait_has_trait = portrait643
+					portrait_has_trait = portrait644
+					portrait_has_trait = portrait645
+					portrait_has_trait = portrait646
+					portrait_has_trait = portrait647
+					portrait_has_trait = portrait648
+					portrait_has_trait = portrait649
+					portrait_has_trait = portrait650
+				}
+	 		}
+        }
+
+        layer = {
+            "GFX_empty:c0"
+            "GFX_empty:c2"
+            "GFX_empty:c3"
+            "GFX_empty:c1"
+            "GFX_empty:c4"
+            "GFX_empty:p1:h:y"
+            "GFX_portrait_remedy_portrait_swapping25:c5"
+        }
+
+        allow_property_values = {
+            1 = {
+                0 = { always = yes }
+            }
+            5 = {
+				0 = { always = no }
+				1 = { portrait_has_trait = portrait625 }
+				2 = { portrait_has_trait = portrait626 }
+				3 = { portrait_has_trait = portrait627 }
+				4 = { portrait_has_trait = portrait628 }
+				5 = { portrait_has_trait = portrait629 }
+				6 = { portrait_has_trait = portrait630 }
+				7 = { portrait_has_trait = portrait631 }
+				8 = { portrait_has_trait = portrait632 }
+				9 = { portrait_has_trait = portrait633 }
+				10 = { portrait_has_trait = portrait634 }
+				11 = { portrait_has_trait = portrait635 }
+				12 = { portrait_has_trait = portrait636 }
+				13 = { portrait_has_trait = portrait637 }
+				14 = { portrait_has_trait = portrait638 }
+				15 = { portrait_has_trait = portrait639 }
+				16 = { portrait_has_trait = portrait640 }
+				17 = { portrait_has_trait = portrait641 }
+				18 = { portrait_has_trait = portrait642 }
+				19 = { portrait_has_trait = portrait643 }
+				20 = { portrait_has_trait = portrait644 }
+				21 = { portrait_has_trait = portrait645 }
+				22 = { portrait_has_trait = portrait646 }
+				23 = { portrait_has_trait = portrait647 }
+				24 = { portrait_has_trait = portrait648 }
+				25 = { portrait_has_trait = portrait649 }
+				26 = { portrait_has_trait = portrait650 }
+			}
+		}
+	}
+}

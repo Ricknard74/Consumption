@@ -1,0 +1,313 @@
+﻿namespace = prison_vore
+
+#Prison Vore Choices
+prison_vore.0001 = {
+        title = prison_voreTitle.0001
+	type = character_event
+	desc = prison_voreDesc.0001
+        theme = dungeon
+        
+        immediate = {
+                scope:actor = {
+                        save_scope_as = predator
+                        scope:predator = {
+                                set_variable = { name = exit_vore_check value = no }
+                        }
+                }
+                scope:recipient = {
+                        save_scope_as = prey
+                }       
+        }
+
+        left_portrait = {
+                character = scope:predator
+                animation = flirtation
+        }
+        right_portrait = {
+                character = scope:prey
+                animation = fear
+        }
+    
+        #Oral
+        option = {
+                name = prison_voreOpt.0001a
+                trigger = { 
+                        global_var:oral_banned = no 
+                }
+                trigger_event = prison_vore.0002 
+        }            
+ 
+        #Anal
+        option = {
+                name = prison_voreOpt.0001b
+                trigger = {
+                        global_var:anal_banned = no
+		}
+                trigger_event = prison_vore.0003 
+        }
+
+        #Unbirth
+        option = {
+                name = prison_voreOpt.0001c
+                trigger = {
+                        AND = {
+                                is_female = yes
+                                NOT = { has_trait = pregnant }
+                                global_var:unbirth_banned = no       
+                        }
+                }
+                trigger_event = prison_vore.0004 
+        }
+
+        #Cock
+        option = {
+                name = prison_voreOpt.0001d
+                trigger = {
+                        AND = {
+                                is_female = no
+                                global_var:cock_banned = no
+                        }
+                }
+                trigger_event = prison_vore.0005
+        }
+            
+        #Exit
+        option = {
+            name = prison_voreOpt.0001e
+            hidden_effect = {
+                scope:predator = {
+                        set_variable = { name = exit_vore_check value = yes }
+                        clear_saved_scope = predator
+                }
+                scope:prey = {
+                        clear_saved_scope = prey       
+                }
+            }
+        }
+        after = {
+                exit_clean_up_effect = yes
+        }
+}
+
+#Oral Vore
+prison_vore.0002 = {
+        title = prison_voreTitle.0002
+	type = character_event
+	desc = prison_voreDesc.0002
+        theme = dungeon
+
+        immediate = {
+                scope:predator = {
+                        add_character_flag = vore_predator 
+                        add_character_flag = portrait_belly 
+                }
+        }
+
+       left_portrait = {
+                character = scope:predator
+                animation = lunatic
+        }
+
+        #Fatal
+        option = {
+                name = prison_voreOpt.0002a
+                trigger = {
+                        AND = {
+                                global_var:digestion_banned = no
+                        }
+                }
+                lethal_vore_effect = {
+                        type = oral
+                }
+        }
+        
+
+        #Non-fatal
+        option = {
+                name = prison_voreOpt.0002b
+                safe_vore_effect = {
+                        type = oral
+                        prison_type = vore_dungeon
+                }
+        }
+
+        after = {
+                clean_up_effect = yes
+        }
+}
+
+#Anal Vore
+prison_vore.0003 = {
+        title = prison_voreTitle.0003
+	type = character_event
+	desc = prison_voreDesc.0003
+	theme = dungeon
+
+        # trigger = {
+        #         scope:predator = {
+        #                 has_character_flag = vore_check
+        #         }
+        # }
+
+        immediate = {
+                scope:predator = {
+                        add_character_flag = portrait_belly
+                        add_character_flag = vore_predator   
+                }
+        }
+
+        #Fatal
+        option = {
+                name = prison_voreOpt.0003a
+                trigger = {
+                        global_var:digestion_banned = no
+                }
+                scope:predator = {
+                        add_trait = digesting
+                        trigger_event = { id = vore.0002 months = { 2 3 } }
+                }
+                scope:prey = {
+                        death = { killer = scope:predator death_reason = death_execution_anal }
+                }
+        }
+
+        #Non-fatal
+        option = {
+                name = prison_voreOpt.0003b
+                safe_vore_effect = {
+                        type = anal
+                        prison_type = vore_dungeon
+                }
+        }
+        after = {
+                clean_up_effect = yes
+        }
+}
+
+#Unbirth
+prison_vore.0004 = {
+        title = prison_voreTitle.0004
+	type = character_event
+	desc = prison_voreDesc.0004
+	theme = dungeon
+
+        # trigger = {
+        #         scope:predator = {
+        #                 has_character_flag = vore_check
+        #         }
+        # }
+
+
+        immediate = {
+                scope:predator = {
+                        add_character_flag = portrait_belly
+                        add_character_flag = vore_predator   
+                }
+        }
+
+        #Fatal Digestion
+        option = {
+                name = prison_voreOpt.0004a
+                trigger = {
+                        AND = {
+                                global_var:digestion_banned = no
+                        }
+                }
+                scope:predator = {
+                        add_character_modifier = {
+                                modifier = fertility_boost
+                        }
+                        trigger_event = { id = vore.0002 months = { 2 3 } }
+                }        
+                scope:prey = {
+                        death = { killer = scope:predator death_reason = death_execution_unbirth }
+                }        
+        }
+
+        #Rebirth/Transformation
+        # option = {
+        #         name = prison_voreOpt.0004b
+        #         trigger = {
+        #                 AND = {
+        #                         global_var:transformation_banned = no
+        #                         can_have_children = yes
+        #                 } 
+        #         }    
+        #         scope:predator = {
+        #                 add_trait = unbirth_predator
+        #                 make_pregnant = {
+        #                         father = scope:prey
+        #                         number_of_children = 1
+        #                 }
+        #         }
+        #         scope:prey = {
+        #                 add_trait = transforming
+        #                 add_character_modifier = { modifier = transforming_1 months = 9 }
+        #         }
+        #         trigger_event = { vore.0014 months = 9 }
+        # }
+
+        #Non-fatal
+        option = {
+                name = prison_voreOpt.0004c
+                safe_vore_effect = {
+                        type = unbirth
+                        prison_type = vore_dungeon
+                }
+        }
+        after = {
+                clean_up_effect = yes
+        }
+}
+
+#Cock Vore
+prison_vore.0005 = {
+        title = prison_voreTitle.0005
+	type = character_event
+	desc = prison_voreDesc.0005
+        theme = dungeon
+
+        # trigger = {
+        #         scope:predator = {
+        #                 has_character_flag = vore_check
+        #         }
+        # }
+
+
+        immediate = {
+                scope:predator = {
+#                        add_character_flag = genital_vore_predator 
+                        add_character_flag = vore_predator   
+                }
+        }
+	
+        #Fatal
+        option = {
+                name = prison_voreOpt.0005a
+                trigger = {
+                        global_var:digestion_banned = no
+                }
+                scope:predator = {
+                        add_character_modifier = { modifier = fertility_boost } 
+                        trigger_event = { id = vore.0002 months = { 2 3 } }
+                        clear_saved_scope = predator      
+                }
+                scope:prey = {
+                        death = { death_reason = death_execution_cock killer = scope:predator }
+                        clear_saved_scope = prey       
+                }
+        }
+
+        #Non-fatal
+        option = {
+                name =  prison_voreOpt.0005a
+                safe_vore_effect = {
+                        type = cock
+                        prison_type = vore_dungeon
+                }
+        }
+        after = {
+                clean_up_effect = yes
+        }
+
+}

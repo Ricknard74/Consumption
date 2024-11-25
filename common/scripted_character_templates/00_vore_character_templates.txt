@@ -1,0 +1,291 @@
+﻿
+
+#Notes
+#Random Traits List contains relevant lifestyle traits and all personality traits exist in 1 template
+#Template-specific skill min/max regulated through scripted values
+#Template-specific education trait is weighted
+
+prey_character_template = {
+	age = { 18 45 }
+	random_traits = yes
+#	created should have traits sinful to religion, not diseased
+	gender_female_chance = root_soldier_female_chance
+	learning = {
+		min_guest_template_skill max_guest_template_skill
+	}
+	
+	stewardship = {
+		min_guest_template_skill max_guest_template_skill
+	}
+	
+	diplomacy = {
+		min_guest_template_skill max_guest_template_skill
+	}
+
+	martial = {
+		min_guest_template_skill max_guest_template_skill
+	}
+
+	intrigue = {
+		min_guest_template_skill max_guest_template_skill 
+	}
+
+	prowess = {
+		min_guest_template_skill max_guest_template_skill
+	}
+
+	random_culture = {
+		culture:ashkenazi = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_europe
+						geographical_region = world_asia_minor
+					}
+					NOT = {
+						geographical_region = world_europe_west_iberia
+					}
+				}
+			}
+		}
+		culture:sephardi = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_europe_west_iberia
+				}
+			}
+		}
+		culture:radhanite = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_steppe
+						geographical_region = world_india
+					}
+				}
+			}
+		}
+		culture:kochinim = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_india
+				}
+			}
+		}
+		culture:bavlim = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_middle_east
+						geographical_region = world_middle_east_persia
+						geographical_region = world_africa_north
+					}
+				}
+			}
+		}
+		culture:kurdish = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_middle_east_persia
+				}
+			}
+		}
+		culture:rajput = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_india
+				}
+			}
+		}
+		culture:hindustani = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_india_rajastan
+				}
+			}
+		}
+		culture:gujarati = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_india_rajastan
+				}
+			}
+		}
+		culture:marathi = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_india_rajastan
+						geographical_region = world_india_deccan
+					}
+				}
+			}
+		}
+		culture:tamil = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_india_deccan
+				}
+			}
+		}
+		culture:telugu = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_india_deccan
+				}
+			}
+		}
+		culture:kannada = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_india_deccan
+				}
+			}
+		}
+		culture:bengali = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_india_bengal
+						geographical_region = world_burma
+					}
+				}
+			}
+		}
+		culture:burmese = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_india_bengal
+						geographical_region = world_burma
+					}
+				}
+			}
+		}
+		culture:butr = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_africa
+				}
+			}
+		}
+		culture:zaghawa = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_africa
+				}
+			}
+		}
+		culture:bolghar = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_steppe_west
+				}
+			}
+		}
+		culture:assyrian = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_steppe_east
+						geographical_region = world_steppe_tarim
+					}
+				}
+			}
+		}
+		culture:khitan = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_steppe_east
+						geographical_region = world_steppe_tarim
+						geographical_region = world_tibet
+					}
+				}
+			}
+		}
+		culture:han = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_steppe_east
+						geographical_region = world_steppe_tarim
+						geographical_region = world_tibet
+						geographical_region = world_burma
+					}
+				}
+			}
+		}
+		culture:cuman = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_steppe_west
+				}
+			}
+		}
+		culture:bodpa = {
+			trigger = {
+				root.capital_province = {
+					geographical_region = world_tibet
+				}
+			}
+		}
+		culture:somali = {
+			trigger = {
+				root.capital_province = {
+					OR = {
+						geographical_region = world_middle_east
+						geographical_region = world_middle_east_persia
+						geographical_region = world_africa_north_east
+						AND = {
+							geographical_region = world_india
+							county.holder.faith = {
+								religion_tag = islam_religion
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	faith = { NOT = { faith.savior } }
+	random_traits_list = {
+		count = { 0 1 }
+		education_martial_1 = { weight = { base = 35 } }
+		education_martial_2 = { weight = { base = 35 } }
+		education_martial_3 = { weight = { base = 20 } }
+		education_martial_4 = { weight = { base = 10 } }
+	}
+	# random_traits_list = {
+	# 	count = { 0 1 }
+	# 	lifestyle_blademaster = {}
+	# 	gallant = {}
+	# 	predator_1 = {}
+	# 	brave = {}
+	# 	gluttonous = {}
+	# 	strong = {}
+	# 	athletic = {}
+	# }
+	dynasty = none
+	after_creation = {
+		# random = {
+		# 	chance = 15
+		# 	modifier = {
+		# 		add = 5
+		# 		has_religion = religion:fatal_vore_religion
+		# 	}
+		# }
+		set_interesting_traits_and_modifiers_effect = yes
+		add_random_tiered_trait_xp_effect = {
+			TRAIT = lifestyle_blademaster
+			LEVEL_1 = yes
+			LEVEL_3 = yes
+		}
+		add_random_tiered_trait_track_xp_effect = {
+			TRAIT = lifestyle_hunter
+			TRACK = hunter
+			LEVEL_1 = yes
+			LEVEL_3 = no
+		}
+	}
+}

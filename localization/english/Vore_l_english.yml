@@ -1,0 +1,366 @@
+﻿#CODE;ENGLISH
+l_english:
+
+#Game Concepts
+game_concept_vore_dungeon:0 "Don't know what should go here"
+game_concept_vore_willing:0 "Don't Know what this is"
+game_concept_vore_religious_unwilling:0 "No idea what is supposed to be written"
+
+game_concept_vore_dungeon_desc:0 "Imprisoned inside of a person"
+game_concept_vore_willing_desc:0 "Willingly inside of someone"
+game_concept_vore_religious_unwilling_desc:0 "Vored unwillingly for religious reasons"
+
+##Vore Toggles##
+#Basics
+vore_menu:0 "Vore Control Panel"
+vore_menu_desc:0 "Change the aspects of the world to allow or disallow certain types of vore and kinks at will."
+vore_menu_tooltip:0 "Change Vore Settings"
+vore_menu_confirm:0 "Vore Settings"
+vore_controlTitle.0003:0 "Vore Preference Toggles"
+vore_controlDesc.0003:0 "Here you can toggle preferences, enabling or disabling certain features."
+vore_controlOpt.0003a:0 "Vore Location Toggles"
+vore_controlOpt.0003b:0 "Vore Aspect Toggles (Disposal is Enabled/Disabled here)"
+vore_controlOpt.0003c:0 "Predator Toggles"
+vore_controlOpt.0003d:0 "Exit Menu"
+
+vore_locsTitle.0004:0 "Vore Location Toggles Title"
+vore_locsDesc.0004:0 "Choose which vore types you would wish to allow/ban"
+vore_locsOpt.0004a:0 "Ban/Unban Oral Vore"
+vore_locsOpt.0004b:0 "Ban/Unban Unbirth"
+vore_locsOpt.0004c:0 "Ban/Unban Anal Vore"
+vore_locsOpt.0004d:0 "Ban/Unban Cock Vore"
+vore_locsOpt.0004e:0 "Go Back"
+vore_aspectTitle.0005:0 "Vore Kinks Title"
+vore_aspectDesc.0005:0 "Ban/Unban Vore Kinks"
+vore_aspectOpt.0005a:0 "Ban/Unban Disposal"
+vore_aspectOpt.0005b:0 "Ban/Unban Digestion"
+vore_aspectOpt.0005c:0 "Ban/Unban Transformation (not implemented)"
+vore_aspectOpt.0005d:0 "Exit"
+
+#Vore Type Toggles
+voretitleOV.1000:0 "Oral Vore Toggles"
+voredescOV.1000a:0 "Oral Vore is Allowed"
+voredescOV.1000b:0 "Oral Vore is Banned"
+voreoptOV.1000a:0 "Allow Oral Vore"
+voreoptOV.1000b:0 "Ban Oral Vore"
+voretitleAV.1001:0 "Anal Vore Toggle"
+voredescAV.1001a:0 "Anal Vore is Allowed"
+voredescAV.1001b:0 "Anal Vore is Banned"
+voreoptAV.1001a:0 "Allow Anal Vore"
+voreoptAV.1001b:0 "Ban Anal Vore"
+voretitleUB.1002:0 "Unbirth Toggle"
+voredescUB.1002a:0 "Unbirth is Allowed"
+voredescUB.1002b:0 "Unbirth is Banned"
+voreoptUB.1002a:0 "Allow Unbirth"
+voreoptUB.1002b:0 "Ban Unbirth"
+voretitleCV.1003:0 "Cock Vore Toggle"
+voredescCV.1003a:0 "Cock Vore is Allowed"
+voredescCV.1003b:0 "Cock Vore is Banned"
+voreoptCV.1003a:0 "Allow Cock Vore"
+voreoptCV.1003b:0 "Ban Cock Vore"
+
+#Vore Kinks Toggles
+voretitleSC.1004:0 "Disposal Toggle"
+voredescSC.1004a:0 "Disposal is Described"
+voredescSC.1004b:0 "Digestion Leads to Absorption"
+voreoptSC.1004a:0 "Describe Disposal"
+voreoptSC.1004b:0 "Describe Absorption"
+voretitleDG.1005:0 "Digestion Toggle"
+voredescDG.1005a:0 "Digestion is Allowed"
+voredescDG.1005b:0 "Digestion is Banned"
+voreoptDG.1005a:0 "Allow Digestion"
+voreoptDG.1005b:0 "Ban Digestion"
+voretitleTF.1006:0 "Transformation Toggle"
+voredescTF.1006a:0 "Unbirthed Prey Can Be Reborn as the Predator's Child"
+voredescTF.1006b:0 "Rebirth is Banned"
+voreoptTF.1006a:0 "Allow Transformation"
+voreoptTF.1006b:0 "Ban Transformation"
+
+#Pred Toggles
+voretitleWHO.1007:0 "Sexes and Commonality"
+voredescWHO.1007:0 "What Sexes Can be Predators, and How Common Predators Are"
+voreoptWHO.1007a:0 "What Sexes Can be Predators"
+voreoptWHO.1007b:0 "How Common Predators Are"
+voretitleGC.1008:0 "Sex Toggles"
+voredescGC.1008a:0 "Currently Only Females Can Be Predators"
+voredescGC.1008b:0 "Currently Only Males Can Be Predators"
+voredescGC.1008c:0 "Both Sexes Can Be Predators"
+voreoptGC.1008a:0 "Only Females"
+voreoptGC.1008b:0 "Only Males"
+voreoptGC.1008c:0 "Both"
+voretitleCapable.1009:0 "How Common Are Predators"
+voredescCapable.1009a:0 "Currently All Adults Are Predators, Barring Other Toggles"
+voredescCapable.1009b:0 "Currently 75% of Adults Are Predators"
+voredescCapable.1009c:0 "Currently 25% of Adults Are Predators"
+voredescCapable.1009d:0 "Currently Only the Player is a Predator"
+voreoptCapable.1009a:0 "Everyone is Capable of Vore"
+voreoptCapable.1009b:0 "Predators Are Common"
+voreoptCapable.1009c:0 "Predators Are Rare"
+voreoptCapable.1009d:0 "Only the Player is a Predator"
+
+########################################
+######### Release/Digest Prey ##########
+########################################
+
+#Release Prey
+
+release_prey_interaction:0 "Release Prey"
+release_prey_interaction_desc:0 "Choose to release your current prey"
+release_prey_tooltip:0 "Release Prey"
+release_prey_confirm:0 "Release Prey"
+
+vore_releaseTitle.0001:0 "Releasing Your Prey"
+vore_releaseDesc.0001a:0 "Dirty Full Tour Description"
+vore_releaseDesc.0001b:0 "Regurgitation Description"
+vore_releaseDesc.0001c:0 "Dirty Anal Vore Release"
+vore_releaseDesc.0001d:0 "Clean Reverse Full Tour or Clean Anal Release"
+vore_releaseDesc.0001e:0 "Dirty Unbirth Release"
+vore_releaseDesc.0001f:0 "Clean Unbirth Release"
+vore_releaseDesc.0001g:0 "Dirty Cock Vore Release"
+vore_releaseDesc.0001h:0 "Clean Cock Vore Release"
+
+vore_releaseOpt.0001a:0 "It's time to let [prey.GetHerHim] out the natural way"
+vore_releaseOpt.0001b:0 "I desire to look upon [prey.GetHerHim] once again, I should regurgitate [prey.GetHerHim]"
+vore_releaseOpt.0001c:0 "Dirty Anal Release"
+vore_releaseOpt.0001d:0 "Clean Anal Release"
+vore_releaseOpt.0001e:0 "Dirty Genitilia Release"
+vore_releaseOpt.0001f:0 "Clean Genitilia Release"
+vore_releaseOpt.0001g:0 "Dirty Cock Release"
+vore_releaseOpt.0001h:0 "Clean Cock Release"
+vore_releaseOpt.0001i:0 "On second thought, [prey.GetSheHe] is too satisfying to let out. [prey.GetSheHe]'s going back in."
+
+#Digestion
+vore_digestTitle.0002:0 "Finishing Your Prey"
+
+#Fatal Disposal
+vore_digestDesc.0002a:0 "Stomach Digestion Scat Desc"
+vore_digestDesc.0002c:0 "Unbirth Digestion Dirty Desc"
+vore_digestDesc.0002e:0 "Cock Digestion Dirty Desc"
+
+vore_digestOpt.0002a:0 "Stomach Digestion Scat Option"
+vore_digestOpt.0002c:0 "Unbirth Digestion Dirty Option"
+vore_digestOpt.0002e:0 "Cock Digestion Dirty Option"
+
+#Fatal Clean
+vore_digestDesc.0002b:0 "Stomach Absorption Desc"
+vore_digestDesc.0002d:0 "Unbirth Absorption Desc"
+vore_digestDesc.0002f:0 "Cock Absorption Desc"
+
+vore_digestOpt.0002b:0 "Stomach Absorption Option"
+vore_digestOpt.0002d:0 "Unbirth Absorption Option"
+vore_digestOpt.0002f:0 "Cock Absorption Option"
+
+#Prey Death
+death_execution_oral:0 "was eaten"
+death_execution_oral_killer:0 "Eaten by [TARGET_CHARACTER.GetUIName]"
+
+########################################
+################Traits##################
+########################################
+
+#Predator Traits
+trait_digesting:0 "Digesting"
+trait_digesting_desc:0 "Someone is currently being digested..."
+trait_genital_digesting:0 "Someone is being digested in their reproductive system"
+trait_genital_digesting_desc:0 "Someone is helping fertilize this predator"
+trait_oral_predator:0 "Full Stomach"
+trait_oral_predator_desc:0 "Someone is currently inside this stomach"
+trait_anal_predator:0 "Full Bowels"
+trait_anal_predator_desc:0 "Someone is currently squirming deep in these bowels."
+trait_unbirth_predator:0 "Full Womb"
+trait_unbirth_predator_desc:0 "The belly of this woman is extended out as if they were pregnant with quintuplets"
+trait_cock_predator:0 "Full Balls"
+trait_cock_predator_desc:0 "These full balls look as if they house someone inside."
+
+#Prey Traits
+trait_oral_vored:0 "In Stomach"
+trait_oral_vored_desc:0 "This person is currently inside a belly"
+trait_anal_vored:0 "In Bowels"
+trait_anal_vored_desc:0 "This person is winding their way through another's bowels"
+trait_unbirth_vored:0 "In Womb"
+trait_unbirth_vored_desc:0 "This person is currently inside a womb"
+trait_cock_vored:0 "In Balls"
+trait_cock_vored_desc:0 "This person is currently inside a pair of testes"
+
+#Personality Traits
+trait_predator:0 "Predatorial"
+trait_predator_desc:0 "This person seeks to vore others"
+trait_predator_1:0 "Predator"
+trait_predator_1_desc:0 "This character is a dangerous predator"
+trait_predator_2:0 "Alpha Predator"
+trait_predator_2_desc:0 "This character has certainly eaten more than their fair share of prey, or even a predator or two."
+trait_predator_3:0 "Apex Predator"
+trait_predator_3_desc:0 "This character is infamous for their ability to swallow down countless prey and rumors say even predators fear them!"
+trait_preyish:0 "Preyish"
+trait_preyish_desc:0 "This character is naturally nervous and submissive around predators, often desiring to be devoured."
+
+########################################
+################Events##################
+########################################
+
+#Vore Your Prisoner
+vore_prisoner_interaction:0 "Eat the Prisoner"
+vore_prisoner_interaction_desc:0 "This Prisoner Looks Filling!"
+# vore_prisoner_interaction_tooltip:0 "You really are hungry, you look to your prison for an easy meal"
+vore_prisoner_interaction_tooltip:0 "Vore [recipient.GetFirstName]"
+prison_voreTitle.0001:0 "Prison Vore Title"
+prison_voreDesc.0001:0 "They look quite tasty in their little cage... nobody would notice if they just...disappeared."
+prison_voreOpt.0001a:0 "(Oral Vore) I'm feeling quite hungry."
+prison_voreOpt.0001b:0 "(Anal Vore) It's time to give my rear some proper treatment."
+prison_voreOpt.0001c:0 "(Unbirth) My womb is empty and it hungers."
+prison_voreOpt.0001d:0 "(Cock Vore) I feel a warm stiffness coming from my cock, this will be fun."
+prison_voreOpt.0001e:0 "(Exit) I'm not sure if I should risk my figure."
+
+prison_voreTitle.0002:0 "Oral Vore"
+prison_voreDesc.0002:0 "Your stomach growls with anticipation for its next meal as you peer at [prey.GetFirstNameNoTooltipRegnal] with increasing hunger in your eyes and fear in [prey.GetHersHis]. "Why are you looking at me like th-?" Before [prey.GetSheHe] can even finish you open [prey.GetHerHis] cell door and lunge at [prey.GetHerHim]! You choke down and gorge on [prey.GetHerHis] squirming form until the last of [prey.GetHerHis] body slides down your throat whole. With an extended belly and a smile, you walk out of the now empty cell."
+prison_voreOpt.0002a:0 "I think they will make quite a nice meal!"
+prison_voreOpt.0002b:0 "I think my belly will make for a far better cell!"
+
+prison_voreTitle.0003:0 "Anal Vore"
+prison_voreDesc.0003:0 "Anal Vore Description"
+prison_voreOpt.0003a:0 "Fatal Anal Vore"
+prison_voreOpt.0003b:0 "Safe Anal Vore"
+
+prison_voreTitle.0004:0 "Unbirth"
+prison_voreDesc.0004:0 "Unbirth Description"
+prison_voreOpt.0004a:0 "Fatal Unbirth"
+#prison_voreOpt.0004b:0 "Rebirth"
+prison_voreOpt.0004c:0 "Safe Unbirth"
+
+prison_voreTitle.0005:0 "Cock Vore"
+prison_voreDesc.0005:0 "Cock Vore Description"
+prison_voreOpt.0005a:0 "Fatal Cock Vore"
+prison_voreOpt.0005b:0 "Safe Cock Vore"
+
+#Lover Vore
+lover_vore_interaction:0 "Vore Your Lover"
+lover_vore_interaction_Desc:0 "Vore your Lover"
+
+lover_voreTitle.0001:0 "Commit vore with your lover"
+lover_voreDesc.0001:0 "You to be the most intimate you can be with your lover"
+lover_voreOpt.0001a:0 "I would like to be the predator this time"
+lover_voreOpt.0001b:0 "I would like to be safe inside of my lover"
+lover_voreOpt.0001c:0 "Perhaps it would be better to do a less intimate act"
+
+lover_voreTitle.0002:0 "Vore Your Lover"
+lover_voreDesc.0002:0 "You look at your lover, and they agree that they would like to be inside you, though you should decide how"
+lover_voreOpt.0002a:0 "I would like to taste them (Oral)"
+lover_voreOpt.0002b:0 "I would like something more kinky (Anal)"
+lover_voreOpt.0002c:0 "I would like to be the most intimate I can be (Unbirth)"
+lover_voreOpt.0002d:0 "I would like to enhance our sex life (Cock)"
+lover_voreOpt.0002e:0 "On second thought, maybe I shouldn't weigh myself down (Exit)"
+
+lover_voreTitle.0003:0 "Oral Vore your Lover"
+lover_voreDesc.0003:0 "You with to get a good taste of your lover"
+lover_voreOpt.0003a:0 "[prey.GetSheHe] has no greater purpose than to become a part of me"
+lover_voreOpt.0003b:0 "I would love to have [prey.GetHerHim] inside of my belly"
+
+lover_voreTitle.0004:0 "Anal Vore your Lover"
+lover_voreDesc.0004:0 "You seek to kinkly vore your lover"
+lover_voreOpt.0004a:0 "[prey.GetSheHe] shall be forever a part of my ass"
+lover_voreOpt.0004b:0 "Hopefully [prey.GetSheHe] struggles a little (Non-Fatal)"
+
+lover_voreTitle.0005:0 "Unbirth your Lover"
+lover_voreDesc.0005:0 "You spread your legs as your lover puts themselves inside of you"
+lover_voreOpt.0005a:0 "[prey.GetSheHe] shall contribute greatly to my seed"
+lover_voreOpt.0005b:0 "Rebirth"
+lover_voreOpt.0005c:0 "[prey.GetSheHe] shall be safe within my womb"
+
+lover_voreTitle.0006:0 "Cock vore your lover"
+lover_voreDesc.0006:0 "Cock Vore description"
+lover_voreOpt.0006a:0 "Fatal Cock Vore"
+lover_voreOpt.0006b:0 "Non Fatal Cock Vore"
+
+#Pred Invitation
+pred_invitation_interaction:0 "Invite to vore you"
+pred_invitation_interaction_desc:0 "Would like to invite [recipient.GetHerHim] to vore you?"
+
+invite_voreTitle.0014:0 "Pred Invite"
+invite_voreDesc.0014:0 "Invited so and so to be a pred"
+invite_voreOpt.0014a:0 "Invite the Predator"
+invite_voreOpt.0014b:0 "Maybe I shouldn't risk it"
+
+invite_voreTitle.0001:0 "You wanna prey?"
+invite_voreOpening.0001:0 "Vore Invite"
+invite_voreDesc.0001:0 "Wanna vore?"
+invite_voreOpt.0001a:0 "I good hold no higher purpose than becoming a part of you"
+invite_voreOpt.0001b:0 "You seem like a comfortable person to be in"
+
+
+##Religion##
+
+#Doctrines
+voraphillic_hostiliy_doctrine_name:0 "Not tolerant"
+voraphillic_hostility_doctrine_desc:0 "More Tolerant than some"
+savior_voraphillic_hostility_doctrine_name:0 "Tolerance"
+savior_voraphillic_hostility_doctrine_desc:0 "Even More tolerant than most"
+
+#Safe Vore Religion
+safe_vore_religion:0 "Safe Voraphillia"
+safe_vore_religion_adj:0 "Safe Voraphillic"
+safe_vore_religion_desc:0 "Religion devoted to safely voring others"
+
+#Savior Faith
+savior:0 "Vore Saviors"
+savior_adj:0 "Savoirian"
+savior_adherent:0 "Savior"
+savior_adherent_plural:0 "Saviors"
+savior_desc:0 "Saviors seek to purify the evil within the bodies of the righteous, and for those who cannot be redeemed, forever contain the sinful within the bodies of the pure"
+
+religious_vore_feast:0 "Voracious Feast of the Gods"
+religious_vore_feast_desc:0 "Hold a great religious feast with an abundance of living human prey, which will attract voracious courtiers"
+religious_vore_feast_tooltip:0 "Hold a great feast"
+religious_vore_feast_confirm:0 "Are you sure?"
+
+religious_voreTitle.0001:0 "Vore Feast Non-Fatal Title"
+religious_voreDesc.0001:0 "Vore Feast Non-Fatal Desc"
+religious_voreOpt.0001a:0 "Partake in Vore Feast With Current Prey"
+religious_voreOpt.0001b:0 "Search for Another Prey"
+religious_voreOpt.0001c:0 "Watch the Feast"
+
+religious_voreTitle.0002:0 "Voring a Prisoner"
+religious_voreDesc.0002:0 "As the Unrepentent Prisoner looks on in fear, you decide how you would like to vore [prey.GetHerHim]"
+religious_voreOpt.0002a:0 "Oral Vore"
+religious_voreOpt.0002b:0 "Anal Vore"
+religious_voreOpt.0002c:0 "Unbirth"
+religious_voreOpt.0002d:0 "Cock Vore"
+religious_voreOpt.0002e:0 "On second thought, I have better things to do"
+
+religious_voreTitle.0003:0 "Watching the Feast"
+religious_voreDesc.0003:0 "You watch all of the predators find and devour their unwilling and sometimes willing prey"
+religious_voreOpt.0003a:0 "Watch to the End of the Feast"
+religious_voreOpt.0003b:0 "Leave the Feast Early"
+
+religious_voreTitle.0004:0 "Oral Vore Prey"
+religious_voreDesc.0004:0 "You swallow the sinful prey"
+religious_voreOpt.0004:0 "Here You Shall Remain until you accept the right way"
+
+religious_voreTitle.0005:0 "Anal Vore"
+religious_voreDesc.0005:0 "Describe Unwilling Anal Vore"
+religious_voreOpt.0005:0 "You are mine until you are saved"
+
+religious_voreTitle.0006:0 "Unbirth"
+religious_voreDesc.0006:0 "Unbirth Description"
+#religious_voreOpt.0006a:0 "May you be reborn in my womb"
+religious_voreOpt.0006b:0 "May you be cleansed in my womb"
+
+religious_voreTitle.0007:0 "Cock Vore"
+religious_voreDesc.0007:0 "CV Description"
+religious_voreOpt.0007:0 "CV response"
+
+religious_voreTitle.0008:0 "End of Feast"
+religious_voreDesc.0008:0 "You see most of the guests leave whilte the servants begin to clean the floors, with a few full-bellied stragglers struggling to keep their prey down"
+religious_voreOpt.0008:0 "This was a success"
+
+religious_voreTitle.0009:0 "Prey Converted"
+religious_voreDesc.0009:0 "Converted prey conversation"
+religious_voreOpt.0009:0 "You Are Cleansed!"
+
+religious_voreTitle.0010:0 "Prey Converted"
+religious_voreDesc.0010:0 "This prey took a while, but they eventually repented and converted"
+religious_voreOpt.0010:0 "Thank goodness that is over"
+
+#Fatal Vore Religion
+fatal_vore_religion:0 "Fatal Voraphillia"
+fatal_vore_religion_adj:0 "Fatal Voraphillic"
+fatal_vore_religion_desc:0 "Adherents to this religion are devoted to devouring others to strengthen themselves"

@@ -1,0 +1,53 @@
+﻿vore_menu = {
+      picture = "gfx/interface/illustrations/decisions/decision_activity.dds"
+      desc = vore_menu_desc
+      ai_check_interval = 0
+
+        #Access Control Panel
+	#vore_menu = {
+	#  potential = {
+                     #Player is NOT AI
+               #      ai = no
+             #       }
+	   # allow = {
+              #    ai = no
+              #    }
+                            #Event for Initial Control Panel
+                           
+	    effect = {
+              trigger_event = vore.0003         
+      }
+}
+
+religious_vore_feast = {
+  desc = religious_vore_feast_desc
+  picture = "gfx/interface/illustrations/decisions/decision_activity.dds"
+  ai_check_interval = 5
+  ai_potential = {
+    always = yes
+  }
+  is_shown = {
+    root.religion = {
+      is_in_family = rf_voraphillic
+    }
+  }
+  cost = { gold = 70 }
+  cooldown = { days = 365 }
+  sort_order = 7
+
+  effect = {
+    if = {
+      limit = { has_faith = faith:savior }
+      ROOT = {
+        trigger_event = religious_vore.0001
+      }
+     }
+    # else_if = {
+    #   limit = { has_faith = faith:vore_traditionalist }
+    #   trigger_event = vore.020
+    # }
+  }
+}
+
+        
+

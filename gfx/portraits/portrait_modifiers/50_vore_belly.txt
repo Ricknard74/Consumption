@@ -1,0 +1,48 @@
+﻿vore_belly = {
+
+   usage = game
+
+   belly = {
+      ignore_outfit_tags = yes
+      dna_modifiers = {
+         morph = {
+            mode = add
+            gene = gene_bs_belly
+            template = belly
+            # value = {
+            #    value = 1
+            # #   multiply = {
+            # #      add = digestion_modifier
+            # #      divide = 10
+            # #   }
+            # }
+            value = {
+               value = 1
+               # multiply = {
+               #    add = 10 #vore_days
+               #    divide = 10
+               #    round = yes
+               #    multiply = 5
+               #    max = 50
+               # }
+            }
+         }
+      }
+      weight = {
+         base = 0
+         modifier = {
+            add = 1
+            OR = {     
+               portrait_has_trait_trigger = { TRAIT = oral_predator }
+               portrait_has_trait_trigger = { TRAIT = digesting }
+               portrait_has_trait_trigger = { TRAIT = anal_predator }
+               portrait_has_trait_trigger = { TRAIT = unbirth_predator }
+               has_character_flag = portrait_belly
+            }
+         }
+         # modifier = {
+         #    multiply = root.var:num_prey
+         # }         
+      }
+   }
+}

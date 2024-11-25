@@ -1,0 +1,473 @@
+﻿namespace = invite_vore
+
+#Prey Invites Pred for Vore
+invite_vore.0014 = {
+        title = invite_voreTitle.0014
+	type = character_event
+	desc = invite_voreDesc.0014
+        theme = realm
+
+        immediate = {
+                scope:actor = {
+                        save_scope_as = potential_prey
+                }
+                scope:recipient = {
+                        save_scope_as = potential_predator
+                }       
+        }
+
+        left_portrait = {
+                character = scope:potential_predator
+                animation = thinking
+        }
+
+        #Invite The Predator
+        option = {
+                name = invite_voreOpt.0014a
+                trigger_event = invite_vore.0001
+                # if = {
+                #         scope:actor = {
+                #                 has_trait = cordyceps
+                #         }
+                #         set_player_character = scope:recipient
+                # }
+        }            
+
+        #Cancel Letter
+        option = {
+                name = invite_voreOpt.0014b
+                hidden_effect = {
+                        scope:potential_prey = { 
+                                clear_saved_scope = potential_prey  
+                                remove_character_flag = potential_prey 
+                        }
+                        scope:potential_predator = { 
+                                clear_saved_scope = potential_predator
+                                remove_character_flag = potential_predator 
+                        }
+                }
+        }
+}
+
+#Letter Inventation
+invite_vore.0001 = {
+        title = invite_voreTitle.0001
+        type = letter_event
+        sender = scope:potential_prey
+        opening = invite_voreOpening.0001
+        desc = invite_voreDesc.0001
+        #Create new descriptions depending on the senders highest stats
+        #prey's highest PERSONALITY is intrigue or diplomacy to convince predator subtly
+        #prey's highest PERSONALITY is prowess or marital to intimidate predator
+        #prey's highest PERSONALITY is learning or stewardship to be curious about being a prey
+
+        #Send Letter
+        option = {
+                name = invite_voreOpt.0001a #Travel to friend/family/foe
+                ai_chance = {
+                        base = 1
+        
+                        modifier = {
+                                scope:potential_predator = {
+                                      opinion = {
+                                        target = scope:potential_prey
+                                        value <= -15
+                                      }  
+                                }
+                                add = -10
+                        }
+        
+                        modifier = {
+                                scope:potential_predator = {
+                                        is_close_family_of = scope:potential_prey
+                                }
+                                add = -10
+                        }
+        
+                        modifier = {
+                                scope:potential_predator = {
+                                        has_relation_friend = scope:potential_prey
+                                }
+                                add = 10
+                        }                      
+                        modifier = {
+                                scope:potential_predator = {
+                                        OR = {
+                                                has_relation_rival = scope:potential_prey
+                                                has_relation_nemesis = scope:potential_prey
+                                        }
+                                }
+                                add = 2
+                        }
+                }
+
+                trigger_event = invite_vore.0003
+        }
+        #Cancel Letter
+        option = {
+                name = invite_voreOpt.0001b
+                ai_chance = {
+                        base = 1
+                        modifier = {
+                                scope:potential_predator = {
+                                        opinion = {
+                                                target = scope:potential_prey
+                                                value <= -60
+                                        }
+                                }
+                                add = 2
+                        }
+                        modifier  = {
+                                scope:potential_predator = {
+                                        opinion = {
+                                                target = scope:potential_prey
+                                                value <= -80
+                                        }
+                                }
+                                add = 2
+                        }
+                }
+                remove_character_flag = potential_prey
+                remove_character_flag = potential_predator
+                scope:potential_predator = {
+                        clear_saved_scope = potential_predator                       
+                }
+                scope:potential_prey = {
+                        clear_saved_scope = potential_prey
+                }
+                scope:potential_prey = {
+                        trigger_event = {
+                                id = invite_vore.0002
+                                days = 1
+                        }
+                }
+        }
+}
+
+#They Refused!
+invite_vore.0002 = {
+        title = invite_voreTitle.0002
+	type = letter_event
+        desc = invite_voreDesc.0002
+        opening = invite_voreOpening.0002
+        sender = scope:potential_predator
+        
+        option = {
+                name = invite_voreOpt.0002a
+                scope:potential_predator = {
+#                        add_opinion = { modifier = seduce_gentle_start_modifier target = scope:potential_predator years = 2  }       
+                }
+        }
+}
+
+#They Arrive
+invite_vore.0003 = {
+        title = invite_voreTitle.0004
+        type = character_event
+        desc = invite_voreDesc.0004
+        theme = crown
+
+        immediate = {
+                scope:potential_predator = {
+                        save_scope_as = predator
+                        scope:predator = {
+                                set_variable = { name = exit_vore_check value = no }
+                        }
+                }
+                scope:potential_prey = {
+                        save_scope_as = prey
+                }       
+        }
+
+        left_portrait = {
+                character = scope:predator
+                animation = flirtation
+        }
+        right_portrait = {
+                character = scope:prey
+                animation = flirtation_left
+        }
+    
+        #Oral
+        option = {
+                name = invite_voreOpt.0003a
+                trigger = { 
+                        global_var:oral_banned = no 
+                }
+                trigger_event = invite_vore.0004
+        }            
+ 
+        #Anal
+        option = {
+                name = invite_voreOpt.0003b
+                trigger = {
+                        global_var:anal_banned = no
+		}
+                trigger_event = invite_vore.0005
+        }
+
+        #Unbirth
+        option = {
+                name = invite_voreOpt.0003c
+                trigger = {
+                        AND = {
+                                is_female = yes
+                                NOT = { has_trait = pregnant }
+                                global_var:unbirth_banned = no       
+                        }
+                }
+                trigger_event = invite_vore.0006 
+        }
+
+        #Cock
+        option = {
+                name = invite_voreOpt.0003d
+                trigger = {
+                        AND = {
+                                is_female = no
+                                global_var:cock_banned = no
+                        }
+                }
+                trigger_event = invite_vore.0007
+        }
+            
+        # #Attempt to cancel
+        # option = {
+        #     name = invite_vore.0003e
+        #     hidden_effect = {
+        #         scope:predator = {
+        #                 set_variable = { name = exit_vore_check value = yes }
+        #                 clear_saved_scope = predator
+        #         }
+        #         scope:prey = {
+        #                 clear_saved_scope = prey       
+        #         }
+        #     }
+        # }
+        after = {
+                exit_clean_up_effect = yes
+        }
+}
+
+#Oral Vore
+invite_vore.0004 = {
+        title = invite_voreTitle.0004
+	type = character_event
+	desc = invite_voreDesc.0004
+        theme = default
+
+        immediate = {
+                scope:predator = {
+                        add_character_flag = vore_predator 
+                        add_character_flag = portrait_belly 
+                }
+        }
+
+       left_portrait = {
+                character = scope:predator
+                animation = lunatic
+        }
+
+        #Fatal
+        option = {
+                name = invite_voreOpt.0004a
+                trigger = {
+                        AND = {
+                                global_var:digestion_banned = no
+                        }
+                }
+                lethal_vore_effect = {
+                        type = oral
+                }
+        }
+        
+
+        #Non-fatal
+        option = {
+                name = invite_voreOpt.0004b
+                safe_vore_effect = {
+                        type = oral
+                        prison_type = vore_dungeon
+                }
+        }
+
+        after = {
+                clean_up_effect = yes
+        }
+}
+
+#Anal Vore
+invite_vore.0005 = {
+        title = invite_voreTitle.0005
+	type = character_event
+	desc = invite_voreDesc.0005
+	theme = dungeon
+
+        # trigger = {
+        #         scope:predator = {
+        #                 has_character_flag = vore_check
+        #         }
+        # }
+
+        immediate = {
+                scope:predator = {
+                        add_character_flag = portrait_belly
+                        add_character_flag = vore_predator   
+                }
+        }
+
+        #Fatal
+        option = {
+                name = invite_voreOpt.0005a
+                trigger = {
+                        global_var:digestion_banned = no
+                }
+                scope:predator = {
+                        add_trait = digesting
+                        trigger_event = { id = vore.0002 months = { 2 3 } }
+                }
+                scope:prey = {
+                        death = { killer = scope:predator death_reason = death_execution_anal }
+                }
+        }
+
+        #Non-fatal
+        option = {
+                name = invite_voreOpt.0005b
+                safe_vore_effect = {
+                        type = anal
+                        prison_type = vore_dungeon
+                }
+        }
+        after = {
+                clean_up_effect = yes
+        }
+}
+
+#Unbirth
+invite_vore.0006 = {
+        title = invite_voreTitle.0006
+	type = character_event
+	desc = invite_voreDesc.0006
+	theme = dungeon
+
+        # trigger = {
+        #         scope:predator = {
+        #                 has_character_flag = vore_check
+        #         }
+        # }
+
+
+        immediate = {
+                scope:predator = {
+                        add_character_flag = portrait_belly
+                        add_character_flag = vore_predator   
+                }
+        }
+
+        #Fatal Digestion
+        option = {
+                name = invite_voreOpt.0006a
+                trigger = {
+                        AND = {
+                                global_var:digestion_banned = no
+                        }
+                }
+                scope:predator = {
+                        add_character_modifier = {
+                                modifier = fertility_boost
+                        }
+                        trigger_event = { id = vore.0002 months = { 2 3 } }
+                }        
+                scope:prey = {
+                        death = { killer = scope:predator death_reason = death_execution_unbirth }
+                }        
+        }
+
+        #Rebirth/Transformation
+        # option = {
+        #         name = invite_voreOpt.0006b
+        #         trigger = {
+        #                 AND = {
+        #                         global_var:transformation_banned = no
+        #                         can_have_children = yes
+        #                 } 
+        #         }    
+        #         scope:predator = {
+        #                 add_trait = unbirth_predator
+        #                 make_pregnant = {
+        #                         father = scope:prey
+        #                         number_of_children = 1
+        #                 }
+        #         }
+        #         scope:prey = {
+        #                 add_trait = transforming
+        #                 add_character_modifier = { modifier = transforming_1 months = 9 }
+        #         }
+        #         trigger_event = { vore.0014 months = 9 }
+        # }
+
+        #Non-fatal
+        option = {
+                name = invite_voreOpt.0006c
+                safe_vore_effect = {
+                        type = unbirth
+                        prison_type = vore_dungeon
+                }
+        }
+        after = {
+                clean_up_effect = yes
+        }
+}
+
+#Cock Vore
+invite_vore.0007 = {
+        title = invite_voreTitle.0007
+	type = character_event
+	desc = invite_voreDesc.0007
+        theme = dungeon
+
+        # trigger = {
+        #         scope:predator = {
+        #                 has_character_flag = vore_check
+        #         }
+        # }
+
+
+        immediate = {
+                scope:predator = {
+#                        add_character_flag = genital_vore_predator 
+                        add_character_flag = vore_predator   
+                }
+        }
+	
+        #Fatal
+        option = {
+                name = invite_voreOpt.0007a
+                trigger = {
+                        global_var:digestion_banned = no
+                }
+                scope:predator = {
+                        add_character_modifier = { modifier = fertility_boost } 
+                        trigger_event = { id = vore.0002 months = { 2 3 } }
+                        clear_saved_scope = predator      
+                }
+                scope:prey = {
+                        death = { death_reason = death_execution_cock killer = scope:predator }
+                        clear_saved_scope = prey       
+                }
+        }
+
+        #Non-fatal
+        option = {
+                name =  invite_voreOpt.0007b
+                safe_vore_effect = {
+                        type = cock
+                        prison_type = vore_dungeon
+                }
+        }
+        after = {
+                clean_up_effect = yes
+        }
+
+}

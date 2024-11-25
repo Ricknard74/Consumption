@@ -1,0 +1,322 @@
+﻿#Non-lethal Vore
+safe_vore_effect = {
+	scope:predator = {
+			add_trait = $type$_predator
+			add_character_flag = $type$_predator
+			set_relation_prey = scope:prey
+			change_variable = { name = num_prey add = 1}
+	}
+	scope:prey = {
+		IF = {
+			LIMIT = { 
+				OR = {
+					is_in_prison_type = dungeon
+					is_in_prison_type = house_arrest
+				}
+			}
+			change_prison_type = $prison_type$	
+		}
+		ELSE = {
+			scope:predator = {
+				imprison = {
+					target = scope:prey
+					type = $prison_type$
+				}
+			}
+		}
+		add_character_modifier = { modifier = $type$_vored }
+		add_character_flag = vored
+		add_trait = $type$_vored
+		add_relation_flag = {
+				flag = $type$
+				target = scope:prey
+				relation = prey
+		}
+	}
+}
+
+#Lethal Vore
+lethal_vore_effect = {
+	scope:predator = {
+		add_trait = digesting
+		trigger_event = { id = vore.0002 months = { 2 3 } }
+	}
+	scope:prey = {
+			death = { 
+					death_reason = death_execution_$type$
+					killer = scope:predator
+			}
+	}
+	hidden_effect = {
+			scope:predator= {
+					if = {
+							limit = { scope:predator.religion = religion:safe_vore_religion }
+							show_as_tooltip = {
+									sacrifice_prisoner_effect = {
+											VICTIM = scope:prey
+											EXECUTIONER = scope:predator
+									}       
+							}
+					}
+					else = {
+							show_as_tooltip = {
+									execute_prisoner_effect = {
+											VICTIM = scope:prey
+											EXECUTIONER = scope:predator
+									}       
+							}
+					}
+			}       
+	}
+}
+
+#Used to properly release prey
+release_prey_effect = {
+	scope:predator = {
+		change_variable = {
+			name = num_prey
+			add = -1
+		}
+		IF = {
+			LIMIT = {
+				scope:predator.var:num_prey = 0
+			}
+			remove_character_flag = vore_predator
+			remove_character_flag = $type$_predator
+			remove_trait = $type$_predator
+			add_character_modifier = {
+				modifier = satisifed
+				years = 1
+			}
+		}
+		remove_relation_prey = scope:prey
+		clear_saved_scope = predator   
+	}
+	scope:prey = {
+		remove_character_flag = vored
+		remove_character_modifier = $type$_vored
+		remove_trait = $type$_vored
+		IF = {
+			limit = { has_character_flag = vored_from_dungeon }
+			change_prison_type = dungeon
+			remove_character_flag = vored_from_dungeon   
+		}
+		ELSE_IF= {
+			limit = { has_character_flag = vored_from_house_arrest }
+			change_prison_type = house_arrest
+			remove_character_flag = vored_from_house_arrest
+		}
+		ELSE = {
+			release_from_prison = yes
+		}
+		clear_saved_scope = prey
+	}
+
+	# if = {
+	# 	limit = { scope:predator = { has_trait = unbirth_predator } }
+	# 	scope:predator = {
+	# 		remove_character_flag = unbirth_predator
+	# 		remove_trait = unbirth_predator
+	# 		clear_saved_scope = predator
+	# 	}
+	# 	scope:prey = {
+	# 		remove_character_modifier = unbirth_vored
+	# 		remove_trait = unbirth_vored
+	# 		# release_from_prison = yes
+	# 		clear_saved_scope = prey
+	# 	}
+	# }
+	# if = {
+	# 	limit = { scope:predator = { has_trait = cock_predator } }
+	# 	scope:predator = {
+	# 		remove_character_flag = cock_predator
+	# 		remove_trait = cock_predator
+	# 		clear_saved_scope = predator
+	# 	}
+	# 	scope:prey = {
+	# 		remove_character_modifier = cock_vored
+	# 		remove_trait = cock_vored
+	# 		clear_saved_scope = prey
+	# 	}
+	# }
+}
+
+#Check for all locations of vore for release
+release_prey_location_check_effect = {
+	if = {
+		limit = { has_trait = oral_predator }
+		release_prey_effect = {
+				type = oral
+		}
+	}
+	if = {
+		limit = { has_trait = anal_predator }
+		release_prey_effect = {
+				type = anal
+		}
+	}
+	if = {
+		limit = { has_trait = unbirth_predator }
+		release_prey_effect = {
+				type = unbirth
+		}
+	}
+	if = {
+		limit = { has_trait = cock_predator } 
+		release_prey_effect = {
+				type = cock
+		}
+	}
+}
+
+#Used when finishing digestion
+finish_digesting_effect = {
+	if = { 
+		limit = { 
+				has_trait_rank = { trait = predator rank < 1 }
+		}         
+		add_trait = predator_1
+	}
+	else_if = { 
+		limit = {
+				has_trait_rank = { trait = predator rank = 1 } 
+		}
+		change_trait_rank = { trait = predator rank = 2 }
+	}
+	else_if = { 
+		limit = { 
+				has_trait_rank = { trait = predator rank >= 2 } 
+		}
+		change_trait_rank = { trait = predator rank = 3 }
+	}        
+	
+	if = {
+		limit = { has_trait = digesting }
+		remove_trait = digesting
+	}
+	if = {
+		limit = { has_trait = genital_digesting }
+		remove_trait = genital_digesting
+	}
+
+	random_list = {
+		50 = {
+		add_prowess_skill = 1
+		}
+		50 = {
+		add_diplomacy_skill = 1   
+		}  
+	}
+	add_character_modifier = {
+		modifier = satisifed years = 2
+	}
+	change_current_weight = 30
+	remove_character_flag = vore_predator
+	# remove_character_flag = $type$_predator
+}	
+
+#Removes Unnecessary Info
+clean_up_effect = {
+	scope:predator = {
+		remove_character_flag = portrait_belly
+		# clear_saved_scope = predator
+	}
+	scope:prey = {
+		# clear_saved_scope = prey
+	}
+}
+
+#Removes Unneccessary Info in Events With Exit Options
+exit_clean_up_effect = {
+	scope:predator = {
+		if = {
+			limit = { scope:predator.var:exit_vore_check = yes }
+			set_variable = { name = exit_vore_check value = no }
+			scope:predator = {
+				clear_saved_scope = predator
+			}
+			scope:prey = {
+				clear_saved_scope = prey       
+			}
+		}
+	}
+}
+
+vore_imprison_character_effect = {
+
+	scope:predator = {
+		imprison = {
+			target = scope:new_target
+			type = house_arrest
+		}
+	}
+
+	imprison_hostage_tooltip_effect = { WHO = scope:prey }
+
+}
+
+# escape_from_stomach_effect = {
+# 	play_music_cue = "mx_cue_sacredrite"
+# 	scope:imprisoner = {
+# 		if = {
+# 			limit = {
+# 				exists = capital_province
+# 			}
+# 			capital_province = {
+# 				save_scope_as = background_wilderness_scope
+# 			}
+# 		}
+# 		else = {
+# 			location = {
+# 				save_scope_as = background_wilderness_scope
+# 			}
+# 		}
+# 		if = {
+# 			limit = {
+# 				OR = {
+# 					has_revoke_title_reason = root
+# 					has_banish_reason = root
+# 					has_execute_reason = root
+# 				}
+# 			}
+# 			add_opinion = {
+# 				target = root
+# 				modifier = escaped_from_prison_crime
+# 			}
+# 		}
+# 		else = {
+# 			add_opinion = {
+# 				target = root
+# 				modifier = escaped_from_prison_opinion
+# 			}
+# 		}
+# 	}
+# 	create_character_memory = {
+# 		type = escaped_from_prison_memory
+		
+# 		participants = {
+# 			imprisoner = scope:imprisoner
+# 		}
+# 	}
+# 	add_character_flag = {
+# 		flag = escaped_from_prison_flag
+# 		days = 1
+# 	}
+# 	add_character_flag = { #To make sure you don't get spammed about the release
+# 		flag = block_for_prison_release_notification
+# 		days = 1
+# 	}
+# 	release_from_prison = yes
+# 	random_dummy_gender_soldier_effect = { SCOPE_NAME = dummy_gender }
+# 	hidden_effect = {
+# 		remove_decision_cooldown = escape_from_prison_decision
+# 	}
+# 	if = {
+# 		limit = { has_character_modifier = allowed_to_go_outside }
+# 		remove_character_modifier = allowed_to_go_outside
+# 	}
+# 	if = {
+# 		limit = { has_character_modifier = moldy_gruel_diet }
+# 		remove_character_modifier = moldy_gruel_diet
+# 	}
+# }

@@ -1,0 +1,19 @@
+﻿death_execution_oral = {
+	public_knowledge = yes
+	icon = "death_murder.dds"
+}
+
+death_execution_anal = {
+	public_knowledge = yes
+	icon = "death_murder.dds"
+}
+
+death_execution_unbirth = {
+	public_knowledge = yes
+	icon = "death_murder.dds"
+}
+
+death_execution_cock = {
+	public_knowledge = yes
+	icon = "death_murder.dds"
+}

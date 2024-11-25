@@ -1,0 +1,223 @@
+﻿oral_vored = {
+	shown_in_ruler_designer = no
+	physical = yes
+	genetic = no
+	incapacitating = yes
+	birth = 0
+	general_opinion = -15	
+}
+anal_vored = {
+	shown_in_ruler_designer = no
+	physical = yes
+	genetic = no
+	incapacitating = yes
+	birth = 0
+	general_opinion = -15	
+}
+unbirth_vored = {
+	physical = yes
+	shown_in_ruler_designer = no
+	genetic = no
+	birth = 0
+	general_opinion = -15
+	incapacitating = yes
+}
+cock_vored = {
+	physical = yes
+	shown_in_ruler_designer = no
+	genetic = no
+	birth = 0
+	general_opinion = -15
+	incapacitating = yes
+}
+
+digesting = {
+	physical = yes
+	genetic = no
+	shown_in_ruler_designer = no
+	birth = 0
+	inherit_chance = 0
+	health = 2 
+	general_opinion = -15
+}
+genital_digesting = {
+	physical = yes
+	genetic = no
+	shown_in_ruler_designer = no
+	birth = 0
+	inherit_chance = 0
+	health = 2 
+	general_opinion = -15
+}
+
+oral_predator = {
+	genetic = no
+	physical = yes
+	shown_in_ruler_designer = no
+	birth = 0
+	health = 1
+	general_opinion = 15
+	inherit_chance = 0
+}
+anal_predator = {
+	shown_in_ruler_designer = no
+	physical = yes
+	genetic = no
+	health = 1
+	general_opinion = -5
+}
+unbirth_predator = {
+	shown_in_ruler_designer = no
+	genetic = no
+	physical = yes
+	health = 1
+	fertility = -1
+	attraction_opinion = 15
+	spouse_opinion = 15
+}
+cock_predator = {
+	shown_in_ruler_designer = no
+	genetic = no
+	physical = yes
+	health = 1
+	fertility = -1
+	attraction_opinion = 15
+	spouse_opinion = 15
+}
+
+predator_1 = {
+	category = fame
+	group = predator
+	opposites = {
+		preyish
+	}
+	potential = {
+		can_vore = yes
+	}
+    opposite_opinion = -20
+	shown_in_ruler_designer = yes
+	ruler_designer_cost = 50
+	inherit_chance = 0
+	birth = 0.04
+	health = 1
+	genetic = no
+#	random_creation = 0.04
+	prowess = 1
+	martial = 2
+	attraction_opinion = 10
+	fertility = 0.25
+	level = 1
+}
+predator_2 = {
+	category = fame
+	group = predator
+	opposites = {
+		preyish
+	}
+	potential = {
+		can_vore = yes
+	}
+    opposite_opinion = -20
+	minimum_age = 22
+#	random_creation = 0.02
+	shown_in_ruler_designer = no
+	prowess = 2
+	inherit_chance = 0
+	health = 2
+	martial = 4
+	intrigue = 2
+	stewardship = 2
+	level = 2
+}
+predator_3 = {
+	category = fame
+	group = predator
+	opposites = {
+		preyish
+	}
+	potential = {
+		can_vore = yes
+	}
+	opposite_opinion = -20
+	minimum_age = 26
+#	random_creation = 0.01
+	genetic = no
+	shown_in_ruler_designer = no
+	prowess = 4
+	inherit_chance = 0
+	health = 3
+	martial = 6
+	intrigue = 3
+	stewardship = 3
+	level = 3
+}
+preyish = {
+	category = personality
+	birth = 0.05
+ 	opposites = {
+  	    predator_1
+     	predator_2
+     	predator_3
+    }
+	minimum_age = 18
+	ruler_designer_cost = 60
+  	opposite_opinion = 20
+	shown_in_ruler_designer = yes
+	inherit_chance = 0
+#	random_creation = 0.04
+	health = 2
+	martial = -3
+	learning = 4
+	intrigue = 3
+	diplomacy = 4
+	stewardship = 3
+}
+
+# preyish_2 = {
+# 	localization = lustful prey
+# 	category = personality
+# 	birth = 0.05
+#  	opposites = {
+#   	    predator_1
+#      	predator_2
+#      	predator_3
+#     }
+# 	level = 2
+# 	minimum_age = 18
+# 	ruler_designer_cost = 60
+#   	opposite_opinion = 20
+# 	shown_in_ruler_designer = yes
+# 	inherit_chance = 0
+# #	random_creation = 0.04
+# 	health = 2
+# 	martial = -3
+# 	learning = 4
+# 	intrigue = 3
+# 	diplomacy = 4
+# 	stewardship = 3
+# }
+
+# iron_stomach = { #Can eat ill prey
+# 	physical = yes
+# 	prowess = 2
+# }
+
+# voracious = {
+# 	category = personality
+# 	birth = 1
+# 	minimum_age = 18
+# 	# voracious modifer more likely to commit vore, and gets greater piety from vore
+# }
+
+# transforming = {
+# 	shown_in_ruler_designer = no
+# 	physical = yes
+# 	inherit_chance = 0
+# 	incapacitating = yes
+# 	set_mother = scope:UB_predator
+# }
+# reborn = {
+# 	physical = yes
+# 	set_age = 0
+	
+# }

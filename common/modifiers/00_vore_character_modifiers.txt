@@ -1,0 +1,58 @@
+﻿# transforming_1 = {
+#   health = 2
+#   icon = 10
+# }
+
+# transforming_2 = {
+#   health = 4
+#   icon = 10
+# }
+
+# transforming_3 = {
+#   health = 10
+#   icon = 10
+# }
+
+oral_vored = {
+  fertility = -2.0
+  attraction_opinion = -20
+  health = 2
+  icon = 10
+}
+
+anal_vored = {
+  fertility = -2.0
+  attraction_opinion  = -20
+  health = 2
+  icon = 10
+}
+
+unbirth_vored = {
+  fertility = -2.0
+  attraction_opinion = -20
+  health = 2
+  icon = 10
+}
+
+cock_vored = {
+  fertility = -2.0
+  attraction_opinion = -20
+  health = 2
+  icon = 10
+}
+
+fertility_boost = {
+  fertility = 2.0
+  health = 0.5
+  icon = 10
+}
+
+satisifed = {
+  martial = 1
+  diplomacy = 1
+  intrigue = 1
+  stewardship = 1
+  learning = 1
+  health = 0.5
+  icon = 10
+}

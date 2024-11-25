@@ -1,0 +1,3 @@
+﻿vored_me_unwilling_opinion = {
+	opinion = -25
+}

@@ -1,0 +1,22 @@
+﻿#These special genes will not be part of a character's DNA.
+#The game can have hardcoded references to them and might use each of them differently
+special_genes = {
+    morph_genes = {
+        gene_bs_belly = {
+            belly = {
+                index = 0
+                female = {
+                    setting = { 
+                        attribute = "bs_body_belly_1" 
+                        value = { min = 0.0 max = 5.0 }
+                        # curve = {
+                        #     0.0 2.0
+                        #     0.0 2.0
+                        #     0.0 2.0
+                        # }
+                    }
+                }
+            }
+        }   
+   }
+}

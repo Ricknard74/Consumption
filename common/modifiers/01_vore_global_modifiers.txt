@@ -1,0 +1,27 @@
+﻿vore_dungeon = {
+	diplomacy = -5
+	health = -1
+	stress_gain_mult = 0.5
+	dread_baseline_add = -30
+	dread_loss_mult = 1
+	monthly_lifestyle_xp_gain_mult = -1.5
+	icon = prison_negative
+}
+
+vore_willing = {
+	diplomacy = -5
+	prowess = -5
+	health = 2
+	stress_loss_mult = 0.5
+	icon = prison_positive
+}
+
+vore_religious_unwilling = {
+	diplomacy = -5
+	health = -1
+	stress_gain_mult = 0.5
+	dread_baseline_add = -30
+	dread_loss_mult = 1
+	monthly_lifestyle_xp_gain_mult = -1.5
+	icon = prison_negative
+}	

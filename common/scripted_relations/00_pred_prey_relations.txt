@@ -1,0 +1,21 @@
+﻿prey = {
+	corresponding = predator
+
+	flags = {
+		oral
+		anal
+		unbirth
+		cock
+	}
+}
+
+predator = {
+	corresponding = prey
+
+	flags = {
+		oral
+		anal
+		unbirth
+		cock
+	}
+}
