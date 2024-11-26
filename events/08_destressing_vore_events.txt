@@ -1,4 +1,4 @@
-namespace = stress_vore
+﻿namespace = stress_vore
 
 stress_vore.0001 = {
 	title = stress_voreTitle.0001
