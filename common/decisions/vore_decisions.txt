@@ -1,27 +1,29 @@
 ﻿vore_menu = {
-  picture = "gfx/interface/illustrations/decisions/decision_activity.dds"
+  title = vore_menu_title
+  picture = {
+    reference = "gfx/interface/illustrations/decisions/decision_activity.dds"
+  }
   desc = vore_menu_desc
   ai_check_interval = 0
 
         #Access Control Panel
-	#vore_menu = {
-	#  potential = {
+	ai_potential = {
                      #Player is NOT AI
-               #      ai = no
-             #       }
-	   # allow = {
-              #    ai = no
-              #    }
-                            #Event for Initial Control Panel
+    always = no
+  }
+    #Event for Initial Control Panel
                            
   effect = {
-          trigger_event = vore.0003         
+      trigger_event = vore.0003         
   }
 }
 
-religious_vore_feast = {
+religious_vore_feast_decision = {
+  title = religious_vore_feast_title
   desc = religious_vore_feast_desc
-  picture = "gfx/interface/illustrations/decisions/decision_activity.dds"
+  picture = {
+    reference = "gfx/interface/illustrations/decisions/decision_activity.dds"
+  }
   ai_check_interval = 5
   ai_potential = {
     always = yes

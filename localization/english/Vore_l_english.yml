@@ -12,7 +12,7 @@ game_concept_vore_religious_unwilling_desc:0 "Vored unwillingly for religious re
 
 ##Vore Toggles##
 #Basics
-vore_menu:0 "Vore Control Panel"
+vore_menu_title:0 "Vore Control Panel"
 vore_menu_desc:0 "Change the aspects of the world to allow or disallow certain types of vore and kinks at will."
 vore_menu_tooltip:0 "Change Vore Settings"
 vore_menu_confirm:0 "Vore Settings"
@@ -305,7 +305,7 @@ savior:0 "Vore Saviors"
 savior_adj:0 "Savoirian"
 savior_adherent:0 "Savior"
 savior_adherent_plural:0 "Saviors"
-savior_desc:0 "Saviors seek to purify the evil within the bodies of the righteous, and for those who cannot be redeemed, forever contain the sinful within the bodies of the pure"
+savior_desc:0 "Saviors seek to purify the sinner within the body of the righteous, and for those who cannot be redeemed, forever contain the sinful within the bodies of the pure"
 
 religious_vore_feast:0 "Voracious Feast of the Gods"
 religious_vore_feast_desc:0 "Hold a great religious feast with an abundance of living human prey, which will attract voracious courtiers"
