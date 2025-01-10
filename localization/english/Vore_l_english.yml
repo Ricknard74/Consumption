@@ -286,8 +286,9 @@ invite_voreDesc.0001:0 "Wanna vore?"
 invite_voreOpt.0001a:0 "I good hold no higher purpose than becoming a part of you"
 invite_voreOpt.0001b:0 "You seem like a comfortable person to be in"
 
-
-##Religion##
+########################################
+##############Religion##################
+########################################
 
 #Doctrines
 voraphillic_hostiliy_doctrine_name:0 "Not tolerant"
@@ -307,10 +308,10 @@ savior_adherent:0 "Savior"
 savior_adherent_plural:0 "Saviors"
 savior_desc:0 "Saviors seek to purify the sinner within the body of the righteous, and for those who cannot be redeemed, forever contain the sinful within the bodies of the pure"
 
-religious_vore_feast:0 "Voracious Feast of the Gods"
-religious_vore_feast_desc:0 "Hold a great religious feast with an abundance of living human prey, which will attract voracious courtiers"
-religious_vore_feast_tooltip:0 "Hold a great feast"
-religious_vore_feast_confirm:0 "Are you sure?"
+religious_vore_feast_decision:0 "Voracious Feast of the Gods"
+religious_vore_feast_decision_desc:0 "Hold a great religious feast with an abundance of living human prey, which will attract voracious courtiers"
+religious_vore_feast_decision_tooltip:0 "Hold a great feast"
+religious_vore_feast_decision_confirm:0 "Are you sure?"
 
 religious_voreTitle.0001:0 "Vore Feast Non-Fatal Title"
 religious_voreDesc.0001:0 "Vore Feast Non-Fatal Desc"
