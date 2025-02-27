@@ -40,8 +40,11 @@
 
 #Vore Prisoner
 vore_prisoner_interaction = {	
+	interface_priority = 30
+	common_interaction = no
+	icon = prison
+
 	category = interaction_category_prison
-	interface_priority = 30 
 	desc = vore_prisoner_interaction_desc
 	ai_targets = {
 		ai_recipients = prisoners
@@ -69,7 +72,7 @@ vore_prisoner_interaction = {
 				}
 				IF = {
 					limit = { scope:recipient = { has_trait = preyish } }	 
-					value = 50
+					value = 40
 				}
 			}	
 		}

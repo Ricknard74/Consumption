@@ -23,7 +23,7 @@ vore.0003 = {
                 trigger_event = vore.0004 
         }            
     
-        #Vore Kinks
+        #Vore Aspects
         option = {
                 name = vore_controlOpt.0003b
                 trigger_event = vore.0005  
@@ -354,6 +354,12 @@ vore.1007 = {
                 name = voreoptWHO.1007b
                 trigger_event = vore.1009
         }
+
+        #Go Back
+        option = {
+                name = voreoptWHO.1007c
+                trigger_event = vore.0003
+        }
 }
 
 #Gender Choice 
@@ -396,7 +402,7 @@ vore.1008 = {
                                 add_doctrine = doctrine_clerical_gender_female_only   
                         }     
                 }
-                trigger_event = vore.0005
+                trigger_event = vore.1007
         }
         #Males Only
         option = {
@@ -415,7 +421,7 @@ vore.1008 = {
                                 add_doctrine = doctrine_clerical_gender_male_only   
                         }     
                 }
-                trigger_event = vore.0005
+                trigger_event = vore.1007
         }
         #Both
         option = {
@@ -434,7 +440,7 @@ vore.1008 = {
                                 add_doctrine = doctrine_clerical_gender_either  
                         }     
                 }
-                trigger_event = vore.0005
+                trigger_event = vore.1007
         }
 }
 
@@ -487,7 +493,7 @@ vore.1009 = {
                         limit = { age >= 18 }
                         add_character_flag = vore_capable
                 }
-                trigger_event = vore.0005
+                trigger_event = vore.1007
         }
 
         #Predators Are Common
@@ -508,7 +514,7 @@ vore.1009 = {
                         limit = { age >= 18 }
                         add_character_flag = vore_capable
                 }
-                trigger_event = vore.0005
+                trigger_event = vore.1007
         }
 
         #Predators Are Rare
@@ -529,7 +535,7 @@ vore.1009 = {
                         limit = { age >= 18 }
                         add_character_flag = vore_capable
                 }
-                trigger_event = vore.0005
+                trigger_event = vore.1007
         }
 
         #Only Player
@@ -543,7 +549,7 @@ vore.1009 = {
                         limit = { age >= 18 }
                         add_character_flag = vore_capable
                 }
-                trigger_event = vore.0003
+                trigger_event = vore.1007
         }
 }
 #Mark Prey Release
