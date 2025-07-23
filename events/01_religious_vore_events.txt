@@ -84,7 +84,6 @@ religious_vore.0002 = {
 
         immediate = {
                 scope:predator = {
-                        set_variable = { name = exit_vore_check value = no }
                         add_visiting_courtier = scope:prey
                 }
         }
@@ -92,6 +91,14 @@ religious_vore.0002 = {
 	#Oral
 	option = {
                 name = religious_voreOpt.0002a
+                weight = {
+                        base = 15 
+                        voraciousness_modifier = {
+                                predator = scope:predator
+                                prey = scope:prey
+                        }
+                        # modifier = { multiply = 10 by savior fervor }
+                }    
                 trigger = { 
                         global_var:oral_banned = no 
                 }
@@ -200,8 +207,7 @@ religious_vore.0004 = {
         immediate = {
                 scope:predator = {
                         add_character_flag = vore_predator 
-                        add_character_flag = portrait_belly 
-                        remove_character_flag = vore_check  
+                        add_character_flag = portrait_belly  
                 }
         }    
 
@@ -401,9 +407,18 @@ religious_vore.0008 = {
 	theme = feast_activity
 	desc = religious_voreDesc.0008
 
-        # actor.court = {
-        #         random full stomachs
-        # }
+        immediate = {
+                create_character = {
+                        location = root.capital_province
+                        template = prey_character_template
+                        gender_female_chance = 95
+                        save_scope_as = prey
+                }
+                root = {
+                        save_scope_as = predator
+                        add_character_flag = religious_vore_predator 
+                }
+        }
 
 	#End of Feast
 	option = {
@@ -412,21 +427,22 @@ religious_vore.0008 = {
                 #         change_fervor = { value = 10 }
                 # }
                 scope:predator = {
-                        random_courtier_or_guest = {
-                                limit = { has_faith = faith:savior }
-                                weight = {
-                                        base = 15 
-                                        voraciousness_modifier = {
-                                                predator = scope:predator
-                                                prey = scope:prey
-                                        }
-                                        # modifier = { multiply = 10 by savior fervor }
-                                }        
-                                add_trait = oral_predator
-                        }    
-                }
-                scope:predator = {
-                        add_piety = 250
+                        every_courtier = {
+                                limit = {
+                                        has_faith = scope:predator.faith
+                                        can_vore = yes
+                                        NOT = { has_character_flag = religious_vore_participant }
+                                }
+                                random_percent = {
+                                        percent = 60
+                                        trigger_event = vore.0002
+                                }
+                                random_percent = {
+                                        percent = 40
+                                        trigger_event = vore.0003  # Or your "watch" event
+                                }
+                        }  
+                        add_piety = 25
                 }
 	}
 }

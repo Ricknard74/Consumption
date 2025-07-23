@@ -10,9 +10,6 @@ prison_vore.0001 = {
         immediate = {
                 scope:actor = {
                         save_scope_as = predator
-                        scope:predator = {
-                                set_variable = { name = exit_vore_check value = no }
-                        }
                 }
                 scope:recipient = {
                         save_scope_as = prey
@@ -76,7 +73,6 @@ prison_vore.0001 = {
             name = prison_voreOpt.0001e
             hidden_effect = {
                 scope:predator = {
-                        set_variable = { name = exit_vore_check value = yes }
                         clear_saved_scope = predator
                 }
                 scope:prey = {
@@ -143,12 +139,6 @@ prison_vore.0003 = {
 	desc = prison_voreDesc.0003
 	theme = dungeon
 
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
         immediate = {
                 scope:predator = {
                         add_character_flag = portrait_belly
@@ -190,13 +180,6 @@ prison_vore.0004 = {
 	type = character_event
 	desc = prison_voreDesc.0004
 	theme = dungeon
-
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
 
         immediate = {
                 scope:predator = {
@@ -267,13 +250,6 @@ prison_vore.0005 = {
 	desc = prison_voreDesc.0005
         theme = dungeon
 
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
-
         immediate = {
                 scope:predator = {
 #                        add_character_flag = genital_vore_predator 
@@ -300,7 +276,7 @@ prison_vore.0005 = {
 
         #Non-fatal
         option = {
-                name =  prison_voreOpt.0005a
+                name =  prison_voreOpt.0005b
                 safe_vore_effect = {
                         type = cock
                         prison_type = vore_dungeon

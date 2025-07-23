@@ -381,7 +381,18 @@ vore.1008 = {
                                 }
                                 desc = voredescGC.1008b
                         }
-                        desc = voredescGC.1008c
+                        triggered_desc = {
+                                trigger = {
+                                        global_var:gender_allowed = 2
+                                }
+                                desc = voredescGC.1008c
+                        }
+                        triggered_desc = {
+                                trigger = {
+                                        always = yes
+                                }
+                                desc = "Something has gone wrong"
+                        }
                 }
         }
 
@@ -478,7 +489,6 @@ vore.1009 = {
                         }
                 }
         }
-#        voredescCapable.1009a
 
         #Everyone is a Predator
         option = {
@@ -502,7 +512,7 @@ vore.1009 = {
                 set_global_variable = { name = pred_frequency value = 75}
                 every_living_character = {
                         limit = { age >= 18 }
-                        hidden_effect = {
+                        hidden_effect = { #Might have multiplayer desync problems, try scripted list
                                 remove_character_flag = vore_capable
                                 random = {
                                         chance = 75
@@ -566,7 +576,9 @@ vore.0001 = {
         #after increasing pred skill, change_var = {name = max_prey add = 1}, never above 5
         #set_global_variable = {name = at_capacity value = no} will check if pred is vore capable
         #compare if var:num_prey is >= max_prey
-        #select the prey that the actor wants to interact with from the relationship screen
+        #Num prey needs to be per-location
+        #Add memories like "Ate someone important" or "Escaped stomach""
+        #select the prey that the actor wants to interact with from the relationship screen, use bigui ll mod for reference
         #Non lethal and lethal vore events,
         #Where vore religious counties have issues with predators, causing buffs and debuffs to the county
         #Vore Conversion for court members that depends on their conversion chance for how long it will take\
@@ -574,7 +586,7 @@ vore.0001 = {
         #Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
         #Make the vore chance global variable to replace vore capability
         #Hunt activity with vore
-        #Change voreDesc.xxxx to vore_oralDesc so it can be prsion_vore_%TYPE%Desc
+        #Change voreDesc.xxxx to vore_oralDesc so it can be prsion_vore_Desc.0001
         immediate = {
                 scope:actor = {
                         save_scope_as = predator
@@ -663,13 +675,13 @@ vore.0001 = {
 
         #Oral Disposal/Describe Full Tour
         option = {
-                name = vore_releaseOpt.0001a
+                name = vore_releaseOpt.0001a #Maybe replace with vore_release_oralDesc, or even vore_release_$type$Desc
                 trigger = {
                         AND = {
                                 global_var:scat_banned = no
                                 has_trait = oral_predator
                         }
-                }
+                }#Maybe try scoping for specific prey in case of multiple prey
                 release_prey_effect = {
                         type = oral
                 }
@@ -753,7 +765,7 @@ vore.0001 = {
                 name = vore_releaseOpt.0001g
                 trigger = {
                         AND = {
-                                global_var:scat_banned = yes
+                                global_var:scat_banned = no
                                 has_trait = cock_predator
                         }
                 }
@@ -856,10 +868,7 @@ vore.0002 = {
                         has_trait = genital_digesting
                 }
         }       
-        
-        immediate = {
-                finish_digesting_effect = yes
-        }        
+          
         
         #Digestive System Scat
         option = {

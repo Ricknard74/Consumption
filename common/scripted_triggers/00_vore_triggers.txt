@@ -1,7 +1,7 @@
 ﻿can_vore = {
-    trigger_IF = {
-        limit = { NOT = { exists = global_var:gender_allowed } }
-    }
+    # trigger_IF = {
+    #     limit = { NOT = { exists = global_var:gender_allowed } }
+    # }
     #Females Only
     trigger_IF = {
         limit = { global_var:gender_allowed = 0 }
@@ -34,13 +34,15 @@
     }
 }
 
-can_be_prey = {   
-    NOT = {
-        OR = {
-            has_character_flag = vored 
-            has_trait = ill
-            has_character_flag = vore_predator
+can_be_prey = {
+    AND = {  
+        NOT = {
+            OR = {
+                has_character_flag = vored 
+                has_trait = ill
+                has_character_flag = vore_predator
+            }
         }
+        age >= 18
     }
-    age >= 18
 }

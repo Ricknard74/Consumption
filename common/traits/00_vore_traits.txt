@@ -50,6 +50,13 @@ genital_digesting = {
 	general_opinion = -15
 }
 
+vore_satiated_predator = {
+    icon = prowess
+    prowess = 2
+    attraction_opinion = 10
+    same_trait_opinion = 10
+}
+
 oral_predator = {
 	genetic = no
 	physical = yes
@@ -108,6 +115,46 @@ predator_1 = {
 	fertility = 0.25
 	level = 1
 }
+#chatgpt ideas
+# voraphile = { Likes vore-capable characters
+#	"This character takes great pleasure in the experience of vore."
+# 	opinion_ of other voraphile = 20
+# 	piety opinion if in vore religion = 0.2
+# 	ai_vore_interest = 50
+# }
+
+# voraphobe can be gained through trauma
+
+# Insatiable
+#     "No number of prey can satisfy this gluttonous predator."
+#     Max num_prey: +2
+#     Stress Reduction: −10% on successful vore
+#     Risk: Slight chance of prey escaping due to overeating
+
+#Gentle Predator
+# "This predator treats their prey with unexpected care."
+# Opinion Bonus: Prey loses less opinion
+# Release Bonus: Prey gains prestige on escape
+# Faith Bonus: More accepted in faiths where vore is tolerated
+
+# Fatalist Prey
+# "They no longer fear being consumed — in fact, they may welcome it."
+# Opinion: +40 with predators
+# Stress Loss: Huge reduction when vored
+# Behavior: May choose to sacrifice self
+
+#Reforming Predator
+# "This predator has vowed to never consume prey again."
+# Blocks: All vore interactions
+# Faith Bonus: Piety gain in non-voraphilic faiths
+# Events: May be tempted to break vow
+
+# Preyborn
+# "This character was reborn through unbirth or digestion."
+# Bonus: +2 fertility, +5 attraction opinion
+# Mystical Flavor: Good fit for religions with transformation themes
+# Backstory: Maybe acquired via a unique scripted birth
+
 predator_2 = {
 	category = fame
 	group = predator

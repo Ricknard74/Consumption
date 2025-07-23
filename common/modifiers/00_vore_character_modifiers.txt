@@ -47,7 +47,7 @@ fertility_boost = {
   icon = 10
 }
 
-satisifed = {
+satisfied = {
   martial = 1
   diplomacy = 1
   intrigue = 1

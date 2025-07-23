@@ -1,19 +1,4 @@
-﻿prison = {
-	alias = { imprisons imprison imprisoned prisons imprisoning imprisonment prisoner prisoners jailor }
-	texture = "gfx/interface/icons/event_types/type_prison.dds"
-}
-
-dungeon = {
-	parent = prison
-	texture = "gfx/interface/icons/event_types/type_prison.dds"
-}
-
-house_arrest = {
-	parent = prison
-	texture = "gfx/interface/icons/event_types/type_prison.dds"
-}
-
-vore_dungeon = {
+﻿vore_dungeon = {
 	parent = prison
 	texture = "gfx/interface/icons/event_types/type_prison.dds"
 }

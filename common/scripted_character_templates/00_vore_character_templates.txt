@@ -248,7 +248,6 @@ prey_character_template = {
 			}
 		}
 	}
-	faith = { NOT = { faith.savior } }
 	random_traits_list = {
 		count = { 0 1 }
 		education_martial_1 = { weight = { base = 35 } }
@@ -275,6 +274,15 @@ prey_character_template = {
 		# 		has_religion = religion:fatal_vore_religion
 		# 	}
 		# }
+		random_neighboring_province = {
+			limit = {
+				exists = county.holder
+				county.holder = {
+					NOT = { has_faith = root }
+				}
+			}
+			set_character_faith = county.holder.faith
+		}
 		set_interesting_traits_and_modifiers_effect = yes
 		add_random_tiered_trait_xp_effect = {
 			TRAIT = lifestyle_blademaster

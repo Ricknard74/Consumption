@@ -5,6 +5,22 @@ on_game_start_after_lobby = {
 	}
 }
 
+#In case of game start failure
+five_year_playable_pulse = {
+	on_actions = {
+		on_vore_defensive_check
+	}
+}
+
+on_vore_defensive_check = {
+	trigger = {
+		NOT = { has_global_variable = oral_banned }
+	}
+	on_actions = {
+		on_add_vore_toggles
+	}
+}
+
 on_add_vore_toggles = {
 	effect = {
 		set_global_variable = { name = oral_banned value = no }
@@ -18,9 +34,11 @@ on_add_vore_toggles = {
 		set_global_variable = { name = pred_frequency value = 100}
 		set_global_variable = { name = global_voraciousness value = 50 }
 		every_player = {
-			limit = { age >= 18 }
-			add_character_flag = vore_capable
-			set_variable = { name = num_prey value = 0 }
+			if = {
+				limit = { age >= 18 }
+				add_character_flag = vore_capable
+				set_variable = { name = num_prey value = 0 }
+			}
 			save_scope_as = plyr
 			if = {
 				limit = { 
@@ -29,21 +47,24 @@ on_add_vore_toggles = {
 					}
 				}
 				every_courtier = {
-					set_character_faith_with_conversion = scope:plyr.faith
+					limit = { NOT = { faith = scope:plyr.faith} }
+					set_character_faith = scope:plyr.faith
 				}
 				every_vassal_or_below = {
-					set_character_faith_with_conversion = scope:plyr.faith
+					limit = { NOT = { faith = scope:plyr.faith} }
+					set_character_faith = scope:plyr.faith
 				}
 				every_courtier_or_guest = {
 					limit = {
 						NOT = { is_foreign_court_guest = yes }
+						NOT = { faith = scope:plyr.faith }
 					}
 					random_list = {
 						25 = {
 							add_piety = 1
 						}
 						75 = {
-							set_character_faith_with_conversion = scope:plyr.faith
+							set_character_faith = scope:plyr.faith
 						}
 					}
 				}	
@@ -65,14 +86,19 @@ on_add_vore_toggles = {
 			save_scope_as = char
 			set_variable = { name = voraciousness value = { 45 70 } }
 			set_variable = { name = num_prey value = 0 }
+			set_variable = { name = lethal_vore_tendency value = { 10 90 } }
+			set_variable = { name = non_lethal_vore_tendency value = { 10 90 } } 
+		}
 			if = {
 				limit = {
 					scope:char.religion = { is_in_family = rf_voraphillic}
 				}
 				every_courtier = {
-					set_character_faith_with_conversion = scope:char.faith
+					limit = { NOT = { faith = scope:char.faith} }
+					set_character_faith = scope:char.faith
 				}
 				random_courtier_or_guest = {
+					limit = { NOT = { faith = scope:char.faith} }
 					set_character_faith_with_conversion = scope:char.faith
 				}
 			}
@@ -91,6 +117,8 @@ on_birthday = {
 on_vore_18th_birthday_gift = {
 	trigger = { age = 18 }
 	effect = {
+		set_variable = { name = voraciousness value = { 45 70 } }
+		set_variable = { name = num_prey value = 0 }
 		add_character_flag = vore_capable
 	}
 }
@@ -98,15 +126,22 @@ on_vore_18th_birthday_gift = {
 #Death of predator
 on_death_relation_prey = {
 	on_actions = {
-		on_death_empty_prey
+		on_death_prey_escape
 	}
 }
 
-on_death_empty_prey = {
+on_death_prey_escape = {
 	effect = {
 		save_scope_as = predator
 		scope:target = {
 			save_scope_as = prey
+			if = {
+                limit = {
+                    is_in_prison_type = vore_dungeon
+                }
+                escape_from_prison_effect = yes
+				#Trigger Flavor event of prey escaping
+            }
 		}
 		release_prey_location_check_effect = yes
 	}
@@ -115,13 +150,12 @@ on_death_empty_prey = {
 #Death of prey (Ignore naming of on_death_prey_escape)
 on_death_relation_predator = {
 	on_actions = {
-		on_death_prey_escape
+		on_death_of_prey
 	}
 }
 
-on_death_prey_escape = {
+on_death_of_prey = {
 	effect = {
-		add_trait = strong
 		save_scope_as = prey
 		scope:target = {
 			save_scope_as = predator
@@ -137,13 +171,20 @@ on_release_from_prison = {
 }
 
 on_release_prey_from_prison = {
-	trigger = {
-		has_character_flag = vored
-	}
-	#Fix this
+	trigger = { has_character_flag = vored }
 	effect = {
-		release_prey_effect = {
-			type = oral
+		# Use stored vore type for correct release
+		if = {
+			limit = { has_variable = vore_type }
+			release_prey_effect = {
+				type = scope:THIS.vore_type
+			}
+		}
+		# Fallback to oral if type not stored
+		else = {
+			release_prey_effect = {
+				type = oral
+			}
 		}
 	}
 }
