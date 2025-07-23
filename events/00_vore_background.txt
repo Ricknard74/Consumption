@@ -574,7 +574,7 @@ vore.0001 = {
         #Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
         #Make the vore chance global variable to replace vore capability
         #Hunt activity with vore
-
+        #Change voreDesc.xxxx to vore_oralDesc so it can be prsion_vore_%TYPE%Desc
         immediate = {
                 scope:actor = {
                         save_scope_as = predator
@@ -908,21 +908,21 @@ vore.0002 = {
         }
 }
 
-#Empty Prey Upon Pred's Death
-vore.0015 = {
-        type = character_event
-        hidden = yes
+#Empty Prey Upon Pred's Death (Defunct)
+# vore.0015 = {
+#         type = character_event
+#         hidden = yes
 
-        immediate = {
-                release_prey_location_check_effect = yes  
-                if = {
-                        limit = {
-                                is_in_prison_type = vore_dungeon
-                        }
-                        escape_from_prison_effect = yes
-                }
-        }
-}
+#         immediate = {
+#                 release_prey_location_check_effect = yes  
+#                 if = {
+#                         limit = {
+#                                 is_in_prison_type = vore_dungeon
+#                         }
+#                         escape_from_prison_effect = yes
+#                 }
+#         }
+# }
 
 #Transformation Finish
 # vore.0014 = {

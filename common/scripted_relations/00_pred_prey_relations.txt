@@ -1,5 +1,8 @@
 ﻿prey = {
 	corresponding = predator
+	opposites = {
+		predator
+	}
 
 	flags = {
 		oral
@@ -11,7 +14,10 @@
 
 predator = {
 	corresponding = prey
-
+	opposites = {
+		prey
+	}
+	
 	flags = {
 		oral
 		anal

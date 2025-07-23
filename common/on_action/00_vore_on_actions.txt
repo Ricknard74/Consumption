@@ -87,6 +87,7 @@ on_birthday = {
 	}
 }
 
+#Might be buggy, allowing diseased characters to vore
 on_vore_18th_birthday_gift = {
 	trigger = { age = 18 }
 	effect = {
@@ -94,6 +95,7 @@ on_vore_18th_birthday_gift = {
 	}
 }
 
+#Death of predator
 on_death_relation_prey = {
 	on_actions = {
 		on_death_empty_prey
@@ -102,10 +104,15 @@ on_death_relation_prey = {
 
 on_death_empty_prey = {
 	effect = {
+		save_scope_as = predator
+		scope:target = {
+			save_scope_as = prey
+		}
 		release_prey_location_check_effect = yes
 	}
 }
 
+#Death of prey (Ignore naming of on_death_prey_escape)
 on_death_relation_predator = {
 	on_actions = {
 		on_death_prey_escape
@@ -114,7 +121,12 @@ on_death_relation_predator = {
 
 on_death_prey_escape = {
 	effect = {
-		release_prey_location_check_effect = yes
+		add_trait = strong
+		save_scope_as = prey
+		scope:target = {
+			save_scope_as = predator
+			release_prey_location_check_effect = yes
+		}
 	}
 }
 
@@ -128,6 +140,7 @@ on_release_prey_from_prison = {
 	trigger = {
 		has_character_flag = vored
 	}
+	#Fix this
 	effect = {
 		release_prey_effect = {
 			type = oral

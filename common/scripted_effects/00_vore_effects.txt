@@ -24,6 +24,7 @@ safe_vore_effect = {
 				}
 			}
 		}
+		set_relation_predator = scope:predator
 		add_character_modifier = { modifier = $type$_vored }
 		add_character_flag = vored
 		add_trait = $type$_vored
@@ -70,17 +71,41 @@ lethal_vore_effect = {
 	}
 }
 
+#Check for all locations of vore for release
+release_prey_location_check_effect = {
+	if = {
+		limit = { has_trait = oral_predator }
+		release_prey_effect = {
+				type = oral
+		}
+	}
+	ELSE_IF = {
+		limit = { has_trait = anal_predator }
+		release_prey_effect = {
+				type = anal
+		}
+	}
+	ELSE_IF = {
+		limit = { has_trait = unbirth_predator }
+		release_prey_effect = {
+				type = unbirth
+		}
+	}
+	ELSE_if = {
+		limit = { has_trait = cock_predator } 
+		release_prey_effect = {
+				type = cock
+		}
+	}
+}
+
 #Used to properly release prey
 release_prey_effect = {
 	scope:predator = {
-		change_variable = {
-			name = num_prey
-			add = -1
-		}
-		IF = {
-			LIMIT = {
-				scope:predator.var:num_prey = 0
-			}
+		# IF = {
+			# LIMIT = {
+			# 	scope:predator.var:num_prey <= 0
+			# }
 			remove_character_flag = vore_predator
 			remove_character_flag = $type$_predator
 			remove_trait = $type$_predator
@@ -88,8 +113,12 @@ release_prey_effect = {
 				modifier = satisifed
 				years = 1
 			}
-		}
+		# }
 		remove_relation_prey = scope:prey
+		change_variable = {
+			name = num_prey
+			add = -1
+		}
 		clear_saved_scope = predator   
 	}
 	scope:prey = {
@@ -141,33 +170,6 @@ release_prey_effect = {
 	# }
 }
 
-#Check for all locations of vore for release
-release_prey_location_check_effect = {
-	if = {
-		limit = { has_trait = oral_predator }
-		release_prey_effect = {
-				type = oral
-		}
-	}
-	if = {
-		limit = { has_trait = anal_predator }
-		release_prey_effect = {
-				type = anal
-		}
-	}
-	if = {
-		limit = { has_trait = unbirth_predator }
-		release_prey_effect = {
-				type = unbirth
-		}
-	}
-	if = {
-		limit = { has_trait = cock_predator } 
-		release_prey_effect = {
-				type = cock
-		}
-	}
-}
 
 #Used when finishing digestion
 finish_digesting_effect = {

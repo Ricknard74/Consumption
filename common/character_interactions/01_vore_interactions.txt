@@ -194,7 +194,6 @@ pred_invitation_interaction = {
 		}
 		scope:recipient = {
 			add_character_flag = potential_predator
-			#trigger_event = invite_vore.0014
 		}
 #		custom_tooltip = pred_invitation_tooltip
 	}
@@ -226,8 +225,5 @@ release_prey_interaction = {
 		scope:actor = {
 			trigger_event = vore.0001	
 		}
-		# scope:recipient = {
-		# 	trigger_event = vore.0001
-		# }
 	}
 }
