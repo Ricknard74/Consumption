@@ -1,10 +1,10 @@
 ﻿namespace = invite_vore
 
 #Prey Invites Pred for Vore
-invite_vore.0014 = {
-        title = invite_voreTitle.0014
+invite_vore_prey.0001 = {
+        title = invite_vore_preyTitle.0001
 	type = character_event
-	desc = invite_voreDesc.0014
+	desc = invite_vore_preyDesc.0001
         theme = realm
 
         immediate = {
@@ -23,7 +23,7 @@ invite_vore.0014 = {
 
         #Invite The Predator
         option = {
-                name = invite_voreOpt.0014a
+                name = invite_vore_preyOpt.0014a
                 trigger_event = invite_vore.0001
                 # if = {
                 #         scope:actor = {
@@ -50,12 +50,12 @@ invite_vore.0014 = {
 }
 
 #Letter Inventation
-invite_vore.0001 = {
-        title = invite_voreTitle.0001
+invite_vore_prey.0002 = {
+        title = invite_vore_preyTitle.0002
         type = letter_event
         sender = scope:potential_prey
-        opening = invite_voreOpening.0001
-        desc = invite_voreDesc.0001
+        opening = invite_vore_preyOpening.0002
+        desc = invite_vore_preyDesc.0002
         #Create new descriptions depending on the senders highest stats
         #prey's highest PERSONALITY is intrigue or diplomacy to convince predator subtly
         #prey's highest PERSONALITY is prowess or marital to intimidate predator

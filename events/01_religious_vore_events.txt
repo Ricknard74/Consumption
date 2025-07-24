@@ -427,19 +427,14 @@ religious_vore.0008 = {
                 #         change_fervor = { value = 10 }
                 # }
                 scope:predator = {
-                        every_courtier = {
+                        every_courtier_or_guest = {
                                 limit = {
                                         has_faith = scope:predator.faith
                                         can_vore = yes
-                                        NOT = { has_character_flag = religious_vore_participant }
                                 }
-                                random_percent = {
-                                        percent = 60
-                                        trigger_event = vore.0002
-                                }
-                                random_percent = {
-                                        percent = 40
-                                        trigger_event = vore.0003  # Or your "watch" event
+                                random_list = {
+                                        60 = { trigger_event = vore.0002 }  # 60% chance to vore
+                                        40 = { trigger_event = vore.0003 }  # 40% chance to watch
                                 }
                         }  
                         add_piety = 25

@@ -251,7 +251,7 @@ lover_voreOpt.0002d:0 "I would like to enhance our sex life (Cock)"
 lover_voreOpt.0002e:0 "On second thought, maybe I shouldn't weigh myself down (Exit)"
 
 lover_voreTitle.0003:0 "Oral Vore your Lover"
-lover_voreDesc.0003:0 "You with to get a good taste of your lover"
+lover_voreDesc.0003:0 "You wish to get a good taste of your lover"
 lover_voreOpt.0003a:0 "[prey.GetSheHe] has no greater purpose than to become a part of me"
 lover_voreOpt.0003b:0 "I would love to have [prey.GetHerHim] inside of my belly"
 
@@ -270,6 +270,29 @@ lover_voreTitle.0006:0 "Cock vore your lover"
 lover_voreDesc.0006:0 "Cock Vore description"
 lover_voreOpt.0006a:0 "Fatal Cock Vore"
 lover_voreOpt.0006b:0 "Non Fatal Cock Vore"
+
+lover_vore_preyTitle.0007:0 ""
+
+lover_vore_prey_oralTitle.0008:0 "The Devouring Kiss"
+lover_vore_prey_oralDesc.0008:0 "You close your eyes and lean into your lover's embrace, fully aware of what is about to happen. A warm, inviting mouth opens before you. Will you surrender completely?"
+lover_vore_prey_oralOpt.0008a:0 "Let them devour me completely"
+lover_vore_prey_oralOpt.0008b:0 "Be swallowed but not digested"
+
+lover_vore_prey_analTitle.0009:0 "The Intimate Ascent"
+lover_vore_prey_analDesc.0009:0 "There is a strange allure in your lover’s whispered invitation. The path offered is unconventional, but strangely tempting. Will you go all the way?"
+lover_vore_prey_analOpt.0009a:0 "Give myself to them—fully"
+lover_vore_prey_analOpt.0009b:0 "Let them keep me—safely inside"
+
+lover_vore_prey_unbirthTitle.0010:0 "Return to the Womb"
+lover_vore_prey_unbirthDesc.0010:0 "Their body offers a comforting warmth, a place of rest and reunion. You feel a primal pull toward their womb. Will you become part of them again?"
+lover_vore_prey_unbirthOpt.0010a:0 "Be reborn in death"
+lover_vore_prey_unbirthOpt.0010b:0 "Let them carry me within"
+
+lover_vore_prey_cockTitle.0011:0 "Consumed in Pleasure"
+lover_vore_prey_cockDesc.0011:0 "The hunger in their eyes is matched only by your desire to surrender. You tremble as they draw you in through the most intimate of means. Will you let them take you entirely?"
+lover_vore_prey_cockOpt.0011a:0 "Give [predator.GetHerHim] everything—body and soul"
+lover_vore_prey_cockOpt.0011b:0 "Let me fill him—but let me live"
+
 
 #Pred Invitation
 pred_invitation_interaction:0 "Invite to vore you"
