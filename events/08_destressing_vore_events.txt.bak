@@ -1,0 +1,266 @@
+﻿namespace = destress_vore
+
+destress_vore.0001 = {
+	title = stress_voreTitle.0001
+	type = character_event
+	desc = stress_voreDesc.0001
+	theme = mental_break
+
+	#Fatal Pred vore, starts serial killer line
+	option = {
+		name = stress_voreOpt.0001a
+		trigger = {
+			OR = {
+				has_trait = sadistic
+				has_trait = cannibal
+			}
+			global_var:digestion_banned = no
+		}
+		add_stress = -40
+		#add_trait = serial_pred # (optional trait you define)
+		trigger_event = destress_vore.0003
+		#add_character_flag = seriel_killer
+	}
+
+	#Fatal gluttony, eat for food
+	option = {
+		name = destress_voreOpt.0001b
+		trigger = {
+			has_trait = gluttonous
+		}
+		lethal_vore_effect = {
+			type = oral
+		}
+	}
+
+	#Non-fatal prey vore, go to special brothel
+	option = {
+		name = stress_voreOpt.0001c
+		trigger = {
+			OR = {
+				has_trait = gluttonous
+				has_trait = lustful
+			}
+		}
+		safe_vore_effect = {
+			type = cock # or anal, etc
+			prison_type = vore_willing
+		}
+		add_stress = -30
+		add_prestige = -25 # minor shame hit
+	}
+
+	#Resist
+	option = {
+		name = stress_voreOpt.0001c
+		add_stress = -15
+		add_piety = 25
+	}
+}
+
+# During any mental break
+
+# If stress > 75
+
+# Monthly pulse event for characters with vore_predator trait and gluttonous/sadistic
+
+# Hook into on_character_stress_change to maybe randomly trigger it
+
+#AI generated, be wary
+
+destress_vore.0002 = {
+    title = destress_voreTitle.0002
+    type = character_event
+	desc = stress_voreDesc.0002
+    theme = mental_break
+
+	option = {
+		name = "Devour another. No regrets."
+		lethal_vore_effect = {
+			type = oral
+		}
+		add_stress = -50
+		#add_trait = serial_pred
+	}
+	option = {
+		name = "Try a non-lethal outlet."
+		safe_vore_effect = {
+			type = unbirth
+			prison_type = vore_willing
+		}
+		add_stress = -25
+	}
+	option = {
+		name = "Suppress the craving."
+		add_stress = 20
+		# add_character_modifier = {
+		# 	name = suppressed_vore_urge
+		# 	duration = { months = 3 }
+		# }
+	}
+}
+
+#Killer event
+destress_vore.0003 = {
+    desc = destress_voreDesc.0003
+    theme = mental_break
+
+    option = {
+        name = "blank"
+    }
+
+}
+
+# stress_voreTitle.0002:0 "A Comforting Embrace"
+# stress_voreDesc.0002:0 "Overwhelmed by the mounting stress, you find yourself drawn to a trusted companion. Seeking refuge, you allow yourself to be swallowed whole, finding a strange solace within their protective embrace."
+
+# stress_voreOpt.0002a:0 "Surrender to comfort in their warm embrace"
+# stress_voreOpt.0002b:0 "Resist the urge and seek peace through meditation"
+
+# Comfort Feeding
+destress_vore.0010 = {
+    title = destress_voreTitle.0010
+    type = character_event
+    desc = destress_voreDesc.0010
+    theme = realm
+
+    immediate = {
+        scope:actor = {
+            save_scope_as = prey
+        }
+        scope:recipient = {
+            save_scope_as = predator
+        }
+    }
+
+    left_portrait = {
+        character = scope:prey
+        animation = flirtation
+    }
+    right_portrait = {
+        character = scope:predator
+        animation = flirtation
+    }
+
+    option = {
+        name = destress_voreOpt.0010a
+        trigger = {
+            scope:prey = {
+                opinion = {
+                    target = scope:predator
+                    value >= 10
+                }
+            }
+        }
+        safe_vore_effect = {
+            type = oral
+            prison_type = vore_willing
+        }
+        scope:prey = {
+            add_stress = -40
+            add_opinion = {
+				modifier = opinion_hunt_brave_hunter
+                years = 2
+                target = scope:predator
+            }
+        }
+    }
+
+    option = {
+        name = destress_voreOpt.0010b
+        add_stress = -10
+        name = "Decline comfort feeding, but find solace elsewhere."
+    }
+}
+
+# Vore Festival
+destress_vore.0011 = {
+    title = destress_voreTitle.0011
+    type = character_event
+    desc = destress_voreDesc.0011
+    theme = celebration
+
+    immediate = {
+        scope:actor = {
+            save_scope_as = festival_attendee
+        }
+    }
+
+    left_portrait = {
+        character = scope:festival_attendee
+        animation = happy
+    }
+
+    option = {
+        name = destress_voreOpt.0011a
+        add_stress = -30
+        add_prestige = 10
+        # add_opinion = {
+        #     target = scope:festival_attendee
+        #     value = 5
+        #     years = 1
+        # }
+        # # Optional: Add a mood or happiness boost trait for a duration
+        # add_modifier = {
+        #     trait = joyful
+        #     duration = 180 # 6 months, example duration
+        # }
+    }
+
+    option = {
+        name = destress_voreOpt.0011b
+        add_stress = -10
+        name = "Skip the festivities, but enjoy a quiet evening."
+    }
+}
+
+#Lust destress
+destress_vore.0023 = {
+    title = destress_voreTitle.0023
+    type = character_event
+    desc = destress_voreDesc.0023
+    theme = romance
+
+    trigger = {
+        has_trait = lustful
+        stress >= 40
+    }
+
+	#Oral Vore
+    option = {
+		name = destress_vore_oralOpt.0023a
+        trigger = { global_var:oral_banned = no }
+        trigger_event = destress_vore.0024
+    }
+	
+	#Anal Vore
+	option = {
+		name = destress_vore_analOpt.0023b
+		trigger = { global_var:anal_banned = no }
+		trigger_event = destress_vore.0025
+	}
+
+	#Unbirth
+	option = {
+		name = destress_vore_unbirthOpt.0023c
+		trigger = {	
+			global_var:unbirth_banned = no 
+			is_female = yes
+			NOT = { has_trait = pregnant }
+		}
+		trigger_event = destress_vore.0026
+	}
+
+	#Cock Vore
+    option = {
+        name = destress_vore_cockOpt.0023d
+        trigger = { global_var:cock_banned = no }
+        trigger_event = destress_vore.0027
+    }
+
+	#Resist
+    option = {
+        name = destress_vore_exitOpt.0023e
+        add_stress = -10
+    }
+}

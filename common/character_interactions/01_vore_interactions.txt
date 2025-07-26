@@ -190,7 +190,7 @@ pred_invitation_interaction = {
 	on_accept = {
 		scope:actor = {
 			add_character_flag = potential_prey
-			trigger_event = invite_vore.0014	
+			trigger_event = invite_vore_prey.0001	
 		}
 		scope:recipient = {
 			add_character_flag = potential_predator

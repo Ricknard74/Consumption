@@ -54,7 +54,6 @@ vore_satiated_predator = {
     icon = prowess
     prowess = 2
     attraction_opinion = 10
-    same_trait_opinion = 10
 }
 
 oral_predator = {

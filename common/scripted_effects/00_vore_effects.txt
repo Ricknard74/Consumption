@@ -5,7 +5,6 @@ safe_vore_effect = {
 			add_character_flag = $type$_predator
 			set_relation_prey = scope:prey
 			change_variable = { name = num_prey add = 1}
-			set_variable = { name = vore_type value = $type$ }
 	}
 	scope:prey = {
 		IF = {
@@ -26,7 +25,7 @@ safe_vore_effect = {
 			}
 		}
 		set_relation_predator = scope:predator
-		set_variable = { name = vore_type value = flag:$type$ }
+		#set_variable = { name = vore_type value = flag:$type$ }
 		add_character_modifier = { modifier = $type$_vored }
 		add_character_flag = vored
 		add_trait = $type$_vored
@@ -42,13 +41,14 @@ safe_vore_effect = {
 lethal_vore_effect = {
 	scope:predator = {
 		add_trait = digesting
+		add_character_flag = vore_predator
 		trigger_event = { id = vore.0002 months = { 2 3 } }
 	}
 	scope:prey = {
 		remove_character_flag = vored
 		remove_character_modifier = $type$_vored
 		remove_trait = $type$_vored
-		remove_variable = vore_type 
+		#remove_variable = vore_type 
 			death = { 
 					death_reason = death_execution_$type$
 					killer = scope:predator
@@ -83,57 +83,46 @@ lethal_vore_effect = {
 
 #Check for all locations of vore for release
 release_prey_location_check_effect = {
-switch = {
-	trigger = { has_variable = vore_type }
-	oral = {
-		release_prey_effect = { type = oral }
-	}
-	anal = {
-		release_prey_effect = { type = anal }
-	}
-	unbirth = {
-		release_prey_effect = { type = unbirth}
-	}
-	cock = {
-		release_prey_effect = { type = cock }
-	}
-	fallback = {
-		release_prey_effect = {
-			log = "Fallback to oral"
-			type = oral
+	switch = {
+		trigger = has_trait
+		oral_predator = {
+			release_prey_effect = {
+					type = oral
+			}
+		}
+		anal_predator = {
+			release_prey_effect = {
+					type = anal
+			}
+		}
+		unbirth_predator = {
+			release_prey_effect = {
+					type = unbirth
+			}
+		}
+		cock_predator = {
+			release_prey_effect = {
+					type = cock
+			}
+		}
+		fallback = {
+			release_prey_effect = {
+				#log = "Fallback to oral"
+				type = oral
+			}
 		}
 	}
-}
+	#Figure out how to use a variable with flags
 	# if = {
-	# 	limit = { has_trait = oral_predator }
+	# 	limit = { has_variable = vore_type }
+	# 	release_prey_effect = { type = scope:prey.var:flag:vore_type }
+	# }
+	# else = {
 	# 	release_prey_effect = {
-	# 			type = oral
+	# 		#log = "Fallback to oral"
+	# 		type = oral
 	# 	}
 	# }
-	# ELSE_IF = {
-	# 	limit = { has_trait = anal_predator }
-	# 	release_prey_effect = {
-	# 			type = anal
-	# 	}
-	# }
-	# ELSE_IF = {
-	# 	limit = { has_trait = unbirth_predator }
-	# 	release_prey_effect = {
-	# 			type = unbirth
-	# 	}
-	# }
-	# ELSE_if = {
-	# 	limit = { has_trait = cock_predator } 
-	# 	release_prey_effect = {
-	# 			type = cock
-	# 	}
-	# }
-	ELSE = {
-		release_prey_effect = {
-			log = "WARNING: No valid type passed. Defaulting to oral."
-			type = oral
-		}
-	}
 }
 
 #Used to properly release prey
@@ -147,7 +136,6 @@ release_prey_effect = {
 			remove_character_flag = vore_predator
 			remove_character_flag = $type$_predator
 			remove_trait = $type$_predator
-			remove_variable = vore_type
 			add_character_modifier = {
 				modifier = satisfied
 				years = 1
@@ -161,14 +149,9 @@ release_prey_effect = {
 		clear_saved_scope = predator   
 	}
 	scope:prey = {
-		if = {
-			limit = { NOT = { has_variable = vore_type } }
-			set_variable = { name = vore_type value = flag:oral}
-		}
 		remove_character_flag = vored
 		remove_character_modifier = $type$_vored
 		remove_trait = $type$_vored
-		remove_variable = vore_type
 		IF = {
 			limit = { has_character_flag = vored_from_dungeon }
 			change_prison_type = dungeon
@@ -230,13 +213,16 @@ finish_digesting_effect = {
 	}
 	change_current_weight = 30
 	remove_character_flag = vore_predator
-	remove_character_flag = $type$_predator
 }	
 
 #Removes Unnecessary Info
 clean_up_effect = {
 	scope:predator = {
-		remove_character_flag = portrait_belly
+		if = {
+			limit = { has_character_flag = portrait_belly }
+			remove_character_flag = portrait_belly
+			#remove_character_flag = portrait_genitals
+		}
 		clear_saved_scope = predator
 	}
 	scope:prey = {
@@ -244,7 +230,7 @@ clean_up_effect = {
 	}
 }
 
-#Removes Unneccessary Info in Events With Exit Options
+#Removes Unneccessary Info in Events With Exit Options (Defunct)
 exit_clean_up_effect = {
 	scope:predator = {
 		clear_saved_scope = predator

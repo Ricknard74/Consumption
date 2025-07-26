@@ -94,7 +94,6 @@ lover_vore.0002 = {
                 name = lover_voreOpt.0002e
                 hidden_effect = {
                         scope:predator = {
-                                set_variable = { name = exit_vore_check value = yes }
                                 clear_saved_scope = predator
                         }
                         scope:prey = {
@@ -342,7 +341,7 @@ lover_vore.0006 = {
 }
 
 #Actor is prey
-lover_vore_prey.0007 = {
+lover_vore.0007 = {
         title = lover_vore_preyTitle.0007
         type = character_event
         desc = lover_vore_preyDesc.0007
@@ -372,7 +371,7 @@ lover_vore_prey.0007 = {
                 trigger = { 
                         global_var:oral_banned = no 
                 }
-                trigger_event = lover_vore_prey_oral.0008
+                trigger_event = lover_vore.0008
         }            
         #Anal
         option = {
@@ -380,7 +379,7 @@ lover_vore_prey.0007 = {
                 trigger = {
                         global_var:anal_banned = no
 		}
-                trigger_event = lover_vore_prey_anal.0009 
+                trigger_event = lover_vore.0009 
         }
 
         #Unbirth
@@ -393,7 +392,7 @@ lover_vore_prey.0007 = {
                                 global_var:unbirth_banned = no       
                         }
                 }
-                trigger_event = lover_vore_prey_unbirth.0010
+                trigger_event = lover_vore.0010
         }
 
         #Cock
@@ -405,7 +404,7 @@ lover_vore_prey.0007 = {
                                 global_var:cock_banned = no
                         }
                 }
-                trigger_event = lover_vore_prey_cock.0011
+                trigger_event = lover_vore.0011
         }
             
         #Exit
@@ -427,7 +426,7 @@ lover_vore_prey.0007 = {
 }
 
 #Prey Oral vore
-lover_vore_prey_oral.0008 = {
+lover_vore.0008 = {
     title = lover_vore_prey_oralTitle.0008
     type = character_event
     desc = lover_vore_prey_oralDesc.0008
@@ -475,7 +474,7 @@ lover_vore_prey_oral.0008 = {
 }
 
 #Anal player prey
-lover_vore_prey_anal.0009 = {
+lover_vore.0009 = {
     title = lover_vore_prey_analTitle.0009
     type = character_event
     desc = lover_vore_prey_analDesc.0009
@@ -524,7 +523,7 @@ lover_vore_prey_anal.0009 = {
     }
 }
 
-lover_vore_prey_unbirth.0010 = {
+lover_vore.0010 = {
     title = lover_vore_prey_unbirthTitle.0010
     type = character_event
     desc = lover_vore_prey_unbirthDesc.0010
@@ -573,7 +572,7 @@ lover_vore_prey_unbirth.0010 = {
     }
 }
 
-lover_vore_prey_cock.0011 = {
+lover_vore.0011 = {
     title = lover_vore_prey_cockTitle.0011
     type = character_event
     desc = lover_vore_prey_cockDesc.0011

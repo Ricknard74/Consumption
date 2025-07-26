@@ -16,8 +16,17 @@ on_vore_defensive_check = {
 	trigger = {
 		NOT = { has_global_variable = oral_banned }
 	}
-	on_actions = {
-		on_add_vore_toggles
+	effect = {
+		set_global_variable = { name = oral_banned value = no }
+		set_global_variable = { name = unbirth_banned value = no }
+		set_global_variable = { name = anal_banned value = no }
+		set_global_variable = { name = cock_banned value = no }
+		set_global_variable = { name = scat_banned value = yes }
+		set_global_variable = { name = digestion_banned value = no }
+		set_global_variable = { name = transformation_banned value = no }
+		set_global_variable = { name = gender_allowed value = 0 }
+		set_global_variable = { name = pred_frequency value = 100}
+		set_global_variable = { name = global_voraciousness value = 50 }
 	}
 }
 
@@ -74,7 +83,7 @@ on_add_vore_toggles = {
 			limit = { 
 				OR = {
 					county_controller.religion = { is_in_family = rf_voraphillic }
-					de_facto_liege.religion = { is_in_family = rf_voraphillic }
+					#de_facto_liege.religion = { is_in_family = rf_voraphillic } Throws errors
 				}
 			}	
 			set_county_faith = scope:plyr.faith
@@ -86,9 +95,17 @@ on_add_vore_toggles = {
 			save_scope_as = char
 			set_variable = { name = voraciousness value = { 45 70 } }
 			set_variable = { name = num_prey value = 0 }
-			set_variable = { name = lethal_vore_tendency value = { 10 90 } }
-			set_variable = { name = non_lethal_vore_tendency value = { 10 90 } } 
-		}
+			# set_variable = { name = lethal_vore_tendency value = { 10 90 } }
+			# set_variable = { name = non_lethal_vore_tendency value = { 10 90 } } 
+			# set_variable = { name = oral_vore_tendency value = { 50 90 } }
+			# set_variable = { name = anal_vore_tendecny value = {10 50 } }
+			# if = {
+			# 	limit = { is_female = yes }
+			# 	set_variable = { name = unbirth_vore_tendency value = { 10 40 } }
+			# } 
+			# else = {
+			# 	set_variable = { name = cock_vore_tendency value = { 10 40 } }
+			# }
 			if = {
 				limit = {
 					scope:char.religion = { is_in_family = rf_voraphillic}
@@ -174,17 +191,6 @@ on_release_prey_from_prison = {
 	trigger = { has_character_flag = vored }
 	effect = {
 		# Use stored vore type for correct release
-		if = {
-			limit = { has_variable = vore_type }
-			release_prey_effect = {
-				type = scope:THIS.vore_type
-			}
-		}
-		# Fallback to oral if type not stored
-		else = {
-			release_prey_effect = {
-				type = oral
-			}
-		}
+		release_prey_location_check_effect = yes
 	}
 }

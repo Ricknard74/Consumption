@@ -13,7 +13,7 @@ vore.0003 = {
                     limit = {
                         NOT = { exists = global_var:oral_banned }
                     }
-                    trigger_event = { on_action = on_add_vore_toggles }
+                    trigger_event = { on_action = on_vore_defensive_check}
                 }
         }
         

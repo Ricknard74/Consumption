@@ -262,6 +262,8 @@ entity = {
         }
     }
 
+	attribute = { name = "bs_body_belly_1"											blend_shape = "female_bs_body_belly_1" }
+
 	attribute = { name = "body_height" 												additive_animation = "body_height" default = 0.5 }
 	attribute = { name = "body_infant_proportions" 									additive_animation = "body_infant_proportions" default = 0.5 }
 	attribute = { name = "body_no_left_arm"											additive_animation = "body_no_left_arm" default = 0.5 }
@@ -312,9 +314,6 @@ entity = {
 	attribute = { name = "bs_body_breast_shape_2"									blend_shape = "female_bs_body_breast_shape_2" }
 	attribute = { name = "bs_body_breast_shape_3"									blend_shape = "female_bs_body_breast_shape_3" }
 	attribute = { name = "bs_body_breast_shape_4"									blend_shape = "female_bs_body_breast_shape_4" }
-
-	####Vore####
-	attribute = { name = "bs_body_belly_1"											blend_shape = "female_bs_body_belly_1" }
 
 	default_state = "none"
 	state = {	name = "none"														animation = "body_idle_1" }

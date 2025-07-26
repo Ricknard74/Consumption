@@ -72,16 +72,8 @@ prison_vore.0001 = {
         option = {
             name = prison_voreOpt.0001e
             hidden_effect = {
-                scope:predator = {
-                        clear_saved_scope = predator
-                }
-                scope:prey = {
-                        clear_saved_scope = prey       
-                }
-            }
-        }
-        after = {
                 exit_clean_up_effect = yes
+            }
         }
 }
 

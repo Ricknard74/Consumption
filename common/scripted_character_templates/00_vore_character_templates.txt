@@ -274,14 +274,16 @@ prey_character_template = {
 		# 		has_religion = religion:fatal_vore_religion
 		# 	}
 		# }
-		random_neighboring_province = {
-			limit = {
-				exists = county.holder
-				county.holder = {
-					NOT = { has_faith = root }
+		root.capital_province = {
+			random_neighboring_province = {
+				limit = {
+					exists = county.holder
+					county.holder = {
+						NOT = { has_faith = root }
+					}
 				}
+				set_character_faith = county.holder.faith
 			}
-			set_character_faith = county.holder.faith
 		}
 		set_interesting_traits_and_modifiers_effect = yes
 		add_random_tiered_trait_xp_effect = {

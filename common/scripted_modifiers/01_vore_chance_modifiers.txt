@@ -97,7 +97,7 @@ lethal_vore_modifier = {
 		add = { value = 10 }
 	}
 	modifier = {
-		trigger = { $predator$ = { is_rival = $prey$ } }
+		trigger = { $predator$ = { has_relation_rival = $prey$ } }
 		add = { value = 20 }
 	}
 	modifier = {

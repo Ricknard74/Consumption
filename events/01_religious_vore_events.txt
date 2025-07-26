@@ -36,12 +36,18 @@ religious_vore.0001 = {
 		trigger = {
                         can_vore = yes
 		}
+                ai_chance = {
+                        base = 60
+                }
                 hidden_effect = {
                         trigger_event = religious_vore.0002       
                 }
 	}
         #Different Prey 
         option = {
+                trigger = {
+                        is_ai = no
+                }
                 name = religious_voreOpt.0001b
                 hidden_effect = {
                         scope:prey = { silent_disappearance_effect = yes }
@@ -51,6 +57,9 @@ religious_vore.0001 = {
 	#Watch
 	option = {
 		name = religious_voreOpt.0001c
+                ai_chance = {
+                        base = 40
+                }
                 hidden_effect = {
                         scope:prey = { silent_disappearance_effect = yes }
                         scope:predator = {
@@ -91,7 +100,7 @@ religious_vore.0002 = {
 	#Oral
 	option = {
                 name = religious_voreOpt.0002a
-                weight = {
+                ai_chance = {
                         base = 15 
                         voraciousness_modifier = {
                                 predator = scope:predator
@@ -152,7 +161,6 @@ religious_vore.0002 = {
 		name = religious_voreOpt.0002e
                 hidden_effect = {
                         scope:predator = {
-                                set_variable = { name = exit_vore_check value = yes }
                                 clear_saved_scope = predator
                         }
                 }
@@ -334,6 +342,7 @@ religious_vore.0006 = {
                                 type = unbirth
                                 prison_type = vore_religious_unwilling
                         }
+                        trigger_event = religious_vore.0008
                         random_list = {
                                 75 = {
                                         trigger_event = { id = religious_vore.0009 years = 1 }
@@ -382,6 +391,7 @@ religious_vore.0007 = {
                                 type = cock
                                 prison_type = vore_religious_unwilling
                         }
+                        trigger_event = religious_vore.0008
                         random_list = {
                                 75 = {
                                         trigger_event = { id = religious_vore.0009 years = 1 }
@@ -427,15 +437,18 @@ religious_vore.0008 = {
                 #         change_fervor = { value = 10 }
                 # }
                 scope:predator = {
+                        clear_saved_scope = predator
                         every_courtier_or_guest = {
                                 limit = {
-                                        has_faith = scope:predator.faith
+                                        has_faith = court_owner.faith
                                         can_vore = yes
                                 }
-                                random_list = {
-                                        60 = { trigger_event = vore.0002 }  # 60% chance to vore
-                                        40 = { trigger_event = vore.0003 }  # 40% chance to watch
-                                }
+                                save_scope_as = predator
+                                trigger_event = religious_vore.0003
+                                # random_list = {
+                                #         60 = { safe_vore_effect = { type = oral prison_type = vore_religious_unwilling } } #trigger_event = vore.0002 }  # 60% chance to vore
+                                #         40 = { trigger_event = religious_vore.0003 }  # 40% chance to watch
+                                # }
                         }  
                         add_piety = 25
                 }
