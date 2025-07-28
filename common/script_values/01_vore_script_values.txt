@@ -1,3 +1,0 @@
-﻿global_voraciousness = {
-	global_var:global_voraciousness
-}

@@ -1,40 +1,42 @@
 ﻿#Non-lethal Vore
 safe_vore_effect = {
-	scope:predator = {
-			add_trait = $type$_predator
-			add_character_flag = $type$_predator
-			set_relation_prey = scope:prey
-			change_variable = { name = num_prey add = 1}
-	}
-	scope:prey = {
-		IF = {
-			LIMIT = { 
-				OR = {
-					is_in_prison_type = dungeon
-					is_in_prison_type = house_arrest
-				}
-			}
-			change_prison_type = $prison_type$	
-		}
-		ELSE = {
-			scope:predator = {
-				imprison = {
-					target = scope:prey
-					type = $prison_type$
-				}
-			}
-		}
-		set_relation_predator = scope:predator
-		#set_variable = { name = vore_type value = flag:$type$ }
-		add_character_modifier = { modifier = $type$_vored }
-		add_character_flag = vored
-		add_trait = $type$_vored
-		add_relation_flag = {
-				flag = $type$
-				target = scope:prey
-				relation = prey
-		}
-	}
+    scope:predator = {
+        add_trait = $type$_predator
+        add_character_flag = $type$_predator
+        set_relation_prey = scope:prey
+        change_variable = { name = num_prey add = 1}
+    }
+    if = {
+        limit = {
+            scope:prey = {
+                OR = {
+                    is_in_prison_type = dungeon
+                    is_in_prison_type = house_arrest
+                }
+            }
+        }
+        scope:prey = { change_prison_type = $prison_type$ }
+    }
+    else = {
+        scope:predator = {
+            imprison = {
+                target = scope:prey
+                type = $prison_type$
+            }
+        }
+    }
+    
+    scope:prey = {
+        set_relation_predator = scope:predator
+        add_character_modifier = { modifier = $type$_vored }
+        add_character_flag = vored
+        add_trait = $type$_vored
+        add_relation_flag = {
+            flag = $type$
+            target = scope:prey
+            relation = prey
+        }
+    }
 }
 
 #Lethal Vore

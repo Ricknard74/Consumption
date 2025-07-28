@@ -1,0 +1,158 @@
+template sm_slaves_button
+{
+	button_tab = {
+		name = "family_button"
+		datacontext = "[CharacterWindow.GetCharacter]"
+		layoutpolicy_horizontal = expanding
+
+		onclick = "[CharacterWindow.SetTab('family')]"
+		down = "[CharacterWindow.IsTabShown('family')]"
+
+		using = tooltip_above
+
+		hbox = {
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				align = center
+				text = "CV_TAB_FAMILY"
+				default_format = "#low"
+			}
+
+			text_single = {
+				align = center
+				text = "[CharacterWindow.GetTabItemsCount('family')]"
+				default_format = "#low"
+				margin_right = 15
+				min_width = 30
+
+				using = Animation_Character_Window_Refresh
+			}
+		}
+	}
+
+	button_tab = {
+		name = "relations_button"
+		datacontext = "[CharacterWindow.GetCharacter]"
+		layoutpolicy_horizontal = expanding
+
+		onclick = "[CharacterWindow.SetTab('relations')]"
+		onclick = "[GetVariableSystem.Set( 'character_window_tab', 'relations' )]"
+		down = "[And(CharacterWindow.IsTabShown('relations'), GetVariableSystem.HasValue( 'character_window_tab', 'relations' ))]"
+
+		using = tooltip_above
+
+		hbox = {
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				align = center
+				text = "CV_TAB_RELATIONS"
+				default_format = "#low"
+			}
+
+			text_single = {
+				align = center
+				text = "[Subtract_int32(Subtract_int32(Subtract_int32(Subtract_int32(Subtract_int32(Subtract_int32(Subtract_int32(Subtract_int32(CharacterWindow.GetTabItemsCount('relations'), GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'slave_prostitute' ) ) ) ), GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'labour_slave' ) ) ) ), GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'military_slave' ) ) ) ), GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'slave_recruit' ) ) ) ), GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'slave_soldier' ) ) ) ), GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'slave_commander' ) ) ) ), GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'sex_slave' ) ) ) ), GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'court_slave' ) ) ) )]"
+				default_format = "#low"
+				margin_right = 15
+				min_width = 30
+
+				using = Animation_Character_Window_Refresh
+			}
+		}
+	}
+	
+	button_tab = {
+		name = "vore_button"
+		visible = "[Or(Or(GreaterThan_int32( GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'prey' ) )), '(int32)0' ), GreaterThan_int32( GetDataModelSize(CharacterWindow.GetRelationsOfType( GetRelation( 'predator' ) )), '(int32)0' )))]"
+		datacontext = "[CharacterWindow.GetCharacter]"
+		layoutpolicy_horizontal = expanding
+
+		onclick = "[CharacterWindow.SetTab('relations')]"
+		onclick = "[GetVariableSystem.Set( 'character_window_tab', 'vore_tab' )]"
+		down = "[And(CharacterWindow.IsTabShown('relations'), GetVariableSystem.HasValue( 'character_window_tab', 'vore_tab' ))]"
+
+		using = tooltip_above
+
+		hbox = {
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				align = center
+				text = "game_concept_vore"
+				default_format = "#low"
+			}
+
+			text_single = {
+				align = center
+				text = "SLAVES_TAB_NUMBER"
+				default_format = "#low"
+				margin_right = 15
+				min_width = 30
+
+				using = Animation_Character_Window_Refresh
+			}
+		}
+	}
+
+	button_tab = {
+		name = "court_button"
+		datacontext = "[CharacterWindow.GetCharacter]"
+		#	visible = "[Not(Character.IsPlayer)]"
+		layoutpolicy_horizontal = expanding
+
+		onclick = "[CharacterWindow.SetTab('court')]"
+		down = "[CharacterWindow.IsTabShown('court')]"
+
+		using = tooltip_above
+
+		hbox = {
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				align = center
+				text = "CV_TAB_COURT"
+				default_format = "#low"
+			}
+
+			text_single = {
+				align = center
+				text = "[CharacterWindow.GetTabItemsCount('court')]"
+				default_format = "#low"
+				margin_right = 15
+				min_width = 30
+
+				using = Animation_Character_Window_Refresh
+			}
+		}
+	}
+
+	button_tab = {
+		name = "vassals_button"
+		datacontext = "[CharacterWindow.GetCharacter]"
+		visible = "[And( Character.IsRuler, Not( IsLandlessAdventurer( Character ) ) )]"
+
+		layoutpolicy_horizontal = expanding
+
+		onclick = "[CharacterWindow.SetTab('subjects')]"
+		down = "[CharacterWindow.IsTabShown('subjects')]"
+
+		using = tooltip_above
+
+		hbox = {
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				align = center
+				text = "CV_TAB_SUBJECTS"
+				default_format = "#low"
+			}
+
+			text_single = {
+				align = center
+				text = "[CharacterWindow.GetTabItemsCount('subjects')]"
+				default_format = "#low"
+				margin_right = 15
+				min_width = 30
+
+				using = Animation_Character_Window_Refresh
+			}
+		}
+	}
+}

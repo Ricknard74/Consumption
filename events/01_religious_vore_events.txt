@@ -101,13 +101,16 @@ religious_vore.0002 = {
 	option = {
                 name = religious_voreOpt.0002a
                 ai_chance = {
-                        base = 15 
-                        voraciousness_modifier = {
-                                predator = scope:predator
-                                prey = scope:prey
+                        base = 15
+                        
+                        modifier = {
+                                add = {
+                                        value = voraciousness_modifier
+                                        predator = scope:predator
+                                        prey = scope:prey
+                                }
                         }
-                        # modifier = { multiply = 10 by savior fervor }
-                }    
+                } 
                 trigger = { 
                         global_var:oral_banned = no 
                 }

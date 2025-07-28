@@ -1,6 +1,15 @@
 ﻿#CODE;ENGLISH
 l_english:
 
+#GUI
+PREDATOR_PREY_TAB:0 "Predator & Prey"
+PREDATOR_PREY_BUTTON_TOOLTIP:0 "View predator and prey relationships"
+PREDATOR_PREY_WINDOW_TITLE:0 "Predator & Prey Relationships"
+PREDATORS_LABEL:0 "Predators"
+PREY_LABEL:0 "Prey"
+NO_PREDATORS_MESSAGE:0 "No predator relationships"
+NO_PREY_MESSAGE:0 "No prey relationships"
+
 #Game Concepts
 game_concept_vore_dungeon:0 "Don't know what should go here"
 game_concept_vore_willing:0 "Don't Know what this is"

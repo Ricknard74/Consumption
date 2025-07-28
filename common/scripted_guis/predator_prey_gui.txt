@@ -1,0 +1,15 @@
+﻿predator_prey_window = {
+    scope = character
+    
+    is_shown = {
+        always = yes
+    }
+    
+    is_valid = {
+        always = yes
+    }
+    
+    effect = {
+        open_window = predator_prey_window
+    }
+}

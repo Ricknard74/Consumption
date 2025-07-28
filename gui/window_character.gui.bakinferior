@@ -1562,6 +1562,36 @@ window = {
 					}
 				}
 			}
+
+			#Vore button
+			button_tab = {
+				name = "predator_prey_button"
+				datacontext = "[CharacterWindow.GetCharacter]"
+				layoutpolicy_horizontal = expanding
+
+				onclick = "[GetScriptedGui('predator_prey_window').Execute(GuiScope.SetRoot(Character.MakeScope).End)]"
+				enabled = "[GetScriptedGui('predator_prey_window').IsValid(GuiScope.SetRoot(Character.MakeScope).End)]"
+
+				using = tooltip_above
+				tooltip = "PREDATOR_PREY_BUTTON_TOOLTIP"
+
+				hbox = {
+					text_single = {
+						layoutpolicy_horizontal = expanding
+						align = center
+						text = "PREDATOR_PREY_TAB"
+						default_format = "#low"
+					}
+
+					text_single = {
+						align = center
+						text = "[Add_int32(GetDataModelSize(Character.GetRelationsOfType(GetRelation('predator'))), GetDataModelSize(Character.GetRelationsOfType(GetRelation('prey'))))]"
+						default_format = "#low"
+						margin_right = 15
+						min_width = 30
+					}
+				}
+			}
 		}
 
 		spacer = { size = { 0 2 } }

@@ -1,0 +1,204 @@
+﻿global_voraciousness = {
+	global_var:global_voraciousness
+}
+
+voraciousness_modifier = {
+	modifier = { #Traits will modify how likely this will happen
+		trigger = {
+			$predator$ = { has_trait = predator_1 }
+		}
+		add = { value = 25 multiply = 1 }
+	}
+	modifier = {
+		trigger = {
+			$predator$ = { has_trait = predator_2 }
+		}
+		add = { value = 33 multiply = 1}
+	}
+	modifier = {
+		trigger = {
+			$predator$ = { has_trait = predator_3 }
+		}
+		add = { value = 50 multiply = 1 }
+	}
+	modifier = {
+		trigger = {
+			$predator$ = { has_trait = preyish }
+		}
+		add = { value = -20 multiply = 1 }
+	}
+	modifier = {
+		trigger = {
+			$prey$ = { has_trait = preyish }
+		}
+		add = { value = 33 multiply = 1 }
+	}
+
+	modifier = {
+		trigger = { $predator$ = { has_trait = gluttonous } }
+		add = { value = 10 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_trait = lustful } }
+		add = { value = 10 }
+	}
+
+	modifier = {
+		trigger = {
+			$predator$.religion = { is_in_family = rf_voraphillic }
+		}
+		add = { value = 20 multiply = 1 }
+	}
+	modifier = {
+		trigger = {
+			$predator$ = { age = { 18 30 } }
+		}
+		add = { value = 10 multiply = 1 }
+	}
+	modifier = {
+		trigger = {
+			$predator$ = { age = { 31 40 } }
+		}
+		add = { value = 5 multiply = 1 }
+	}
+	modifier = { 
+		trigger = {
+			$predator$ = { age = { 41 50 } }
+		}
+		add = { value = -15 multiply = 1 }
+	}
+	modifier = {
+		trigger = {
+			$predator$ = { age > 50 }
+		}
+		add = { value = -30 multiply = 1 }
+	}
+	modifier = {
+		add = { value = global_var:global_voraciousness }
+	}
+	modifier = {
+		add = { value = $predator$.var:voraciousness multiply = 1 }
+	}
+}
+
+#Religious modifiers for religions tenets
+
+lethal_vore_modifier = {
+	modifier = {
+		trigger = { $predator$ = { has_trait = sadistic } }
+		add = { value = 30 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_trait = compassionate } }
+		add = { value = -50 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_trait = cannibal } }
+		add = { value = 20 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_trait = gluttonous } }
+		add = { value = 10 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_relation_rival = $prey$ } }
+		add = { value = 20 }
+	}
+	modifier = {
+		trigger = { global_var:digestion_banned = yes }
+		add = { value = -999 } # Fully blocks if banned
+	}
+	modifier = {
+		add = { value = $predator$.var:lethal_vore_tendency }
+	}
+}
+
+nonlethal_vore_modifier = {
+	modifier = {
+		trigger = { $predator$ = { has_trait = compassionate } }
+		add = { value = 30 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_trait = shy } }
+		add = { value = 10 }
+	}
+	modifier = {
+		trigger = { $prey$ = { has_trait = preyish } }
+		add = { value = 20 }
+	}
+	modifier = {
+		trigger = { global_var:digestion_banned = yes }
+		add = { value = 50 }
+	}
+	modifier = {
+		add = { value = $predator$.var:nonlethal_vore_tendency }
+	}
+}
+
+oral_vore_modifier = {
+	modifier = {
+		trigger = { $predator$ = { has_trait = gluttonous } }
+		add = { value = 20 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_trait = shy } }
+		add = { value = 10 }
+	}
+	modifier = {
+		add = { value = $predator$.var:oral_preference }
+	}
+}
+
+anal_vore_modifier = {
+	modifier = {
+		trigger = { $predator$ = { has_trait = sadistic } }
+		add = { value = 15 }
+	}
+	modifier = {
+		trigger = { $predator$ = { is_female = yes } }
+		add = { value = -5 }
+	}
+	modifier = {
+		add = { value = $predator$.var:anal_preference }
+	}
+}
+
+unbirth_vore_modifier = {
+	modifier = {
+		trigger = {
+			AND = {
+				$predator$ = { is_female = yes }
+				NOT = { has_trait = pregnant }
+			}
+		}
+		add = { value = 25 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_trait = compassionate } }
+		add = { value = 20 }
+	}
+	modifier = {
+		trigger = { $predator$ = { has_trait = craven } }
+	}
+	modifier = {
+		add = { value = $predator$.var:unbirth_preference }
+	}
+}
+
+cock_vore_modifier = {
+	modifier = {
+		trigger = {
+			AND = {
+				$predator$ = { is_female = no }
+				$predator$ = { has_trait = lustful }
+			}
+		}
+		add = { value = 30 }
+	}
+	modifier = {
+		add = { value = $predator$.var:cock_preference }
+	}
+}
+
+#Also add cultural and religious modifiers
+#Also add hidden traits that make a character prefer oral or safe vore
