@@ -248,6 +248,7 @@ prey_character_template = {
 			}
 		}
 	}
+	faith = faith:vore_savior
 	random_traits_list = {
 		count = { 0 1 }
 		education_martial_1 = { weight = { base = 35 } }
@@ -255,47 +256,150 @@ prey_character_template = {
 		education_martial_3 = { weight = { base = 20 } }
 		education_martial_4 = { weight = { base = 10 } }
 	}
-	# random_traits_list = {
-	# 	count = { 0 1 }
-	# 	lifestyle_blademaster = {}
-	# 	gallant = {}
-	# 	predator_1 = {}
-	# 	brave = {}
-	# 	gluttonous = {}
-	# 	strong = {}
-	# 	athletic = {}
-	# }
+	random_traits_list = {
+		count = { 0 1 }
+		lifestyle_blademaster = {}
+		gallant = {}
+		predator_1 = {}
+		brave = {}
+		gluttonous = {}
+		strong = {}
+		athletic = {}
+	}
 	dynasty = none
 	after_creation = {
-		# random = {
-		# 	chance = 15
-		# 	modifier = {
-		# 		add = 5
-		# 		has_religion = religion:fatal_vore_religion
-		# 	}
-		# }
-		root.capital_province = {
-			random_neighboring_province = {
-				limit = {
-					exists = county.holder
-					county.holder = {
-						NOT = { has_faith = root }
+		# Try different geographic scopes in order of preference
+		
+		# First try: Neighboring kingdoms
+		if = {
+			limit = {
+				root.capital_province.kingdom = {
+					any_neighboring_top_liege_realm = {
+						holder = {
+							NOT = { has_faith = root.faith }
+						}
 					}
 				}
-				set_character_faith = county.holder.faith
+			}
+			root.capital_province.kingdom = {
+				random_neighboring_top_liege_realm = {
+					weight = {
+						base = 1
+						modifier = {
+							add = 2
+							holder.faith.religion = {
+								NOT = { religion_tag = root.faith.religion.religion_tag }
+							}
+						}
+					}
+					limit = {
+						holder = {
+							NOT = { has_faith = root.faith }
+						}
+					}
+					holder = {
+						prev = {
+							set_character_faith = prev.faith
+						}
+					}
+				}
 			}
 		}
-		set_interesting_traits_and_modifiers_effect = yes
-		add_random_tiered_trait_xp_effect = {
-			TRAIT = lifestyle_blademaster
-			LEVEL_1 = yes
-			LEVEL_3 = yes
+		# Second try: Same empire, different kingdoms
+		else_if = {
+			limit = {
+				root.capital_province.empire = {
+					any_de_jure_kingdom = {
+						NOT = { this = root.capital_province.kingdom }
+						exists = holder
+						holder = {
+							NOT = { has_faith = root.faith }
+						}
+					}
+				}
+			}
+			root.capital_province.empire = {
+				random_de_jure_kingdom = {
+					limit = {
+						NOT = { this = root.capital_province.kingdom }
+						exists = holder
+						holder = {
+							NOT = { has_faith = root.faith }
+						}
+					}
+					weight = {
+						base = 1
+						modifier = {
+							add = 3
+							holder.faith.religion = {
+								NOT = { religion_tag = root.faith.religion.religion_tag }
+							}
+						}
+					}
+					holder = {
+						prev = {
+							set_character_faith = prev.faith
+						}
+					}
+				}
+			}
 		}
-		add_random_tiered_trait_track_xp_effect = {
-			TRAIT = lifestyle_hunter
-			TRACK = hunter
-			LEVEL_1 = yes
-			LEVEL_3 = no
+		# Third try: Any kingdom in same geographical region
+		else = {
+			random_kingdom = {
+				limit = {
+					capital_province = {
+						geographical_region = root.capital_province.geographical_region
+					}
+					exists = holder
+					holder = {
+						NOT = { has_faith = root.faith }
+					}
+				}
+				weight = {
+					base = 1
+					modifier = {
+						add = 2
+						holder.faith.religion = {
+							NOT = { religion_tag = root.faith.religion.religion_tag }
+						}
+					}
+				}
+				holder = {
+					prev = {
+						set_character_faith = prev.faith
+					}
+				}
+			}
 		}
+		
+		# Ultimate fallback
+		if = {
+			limit = {
+				has_faith = root.faith
+			}
+			random_list = {
+				20 = { set_character_faith = faith:catholic }
+				20 = { set_character_faith = faith:orthodox }
+				15 = { set_character_faith = faith:sunni }
+				15 = { set_character_faith = faith:shia }
+				10 = { set_character_faith = faith:norse_pagan }
+				10 = { set_character_faith = faith:buddhist }
+				10 = { set_character_faith = faith:hindu }
+			}
+		}
+    # Rest of your existing code...
+		# set_interesting_traits_and_modifiers_effect = yes
+		# add_random_tiered_trait_xp_effect = {
+		# 	TRAIT = lifestyle_blademaster
+		# 	LEVEL_1 = yes
+		# 	LEVEL_3 = yes
+		# }
+		# add_random_tiered_trait_track_xp_effect = {
+		# 	TRAIT = lifestyle_hunter
+		# 	TRACK = hunter
+		# 	LEVEL_1 = yes
+		# 	LEVEL_3 = no
+		# }
 	}
 }

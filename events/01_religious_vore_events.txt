@@ -15,14 +15,12 @@ religious_vore.0001 = {
                 create_character = {
                         location = root.capital_province
                         template = prey_character_template
-                        gender_female_chance = 95
+                        gender_female_chance = 50
                         save_scope_as = prey
                 }
-                root = {
-                        save_scope_as = predator
-                        add_character_flag = religious_vore_predator 
+                hidden_effect = {
+                        trigger_event = religious_vore.0013
                 }
-                trigger_event = religious_vore.0013
         }
 
         right_portrait = {
@@ -37,7 +35,11 @@ religious_vore.0001 = {
                         can_vore = yes
 		}
                 ai_chance = {
-                        base = 60
+                        base = 100
+                }
+                root = {
+                        save_scope_as = predator
+                        add_character_flag = religious_vore_predator
                 }
                 hidden_effect = {
                         trigger_event = religious_vore.0002       
@@ -62,10 +64,6 @@ religious_vore.0001 = {
                 }
                 hidden_effect = {
                         scope:prey = { silent_disappearance_effect = yes }
-                        scope:predator = {
-                                remove_character_flag = religious_vore_predator
-                                clear_saved_scope = predator
-                        }
                         trigger_event = religious_vore.0003       
                 }
 	}
@@ -101,14 +99,11 @@ religious_vore.0002 = {
 	option = {
                 name = religious_voreOpt.0002a
                 ai_chance = {
-                        base = 15
-                        
-                        modifier = {
-                                add = {
-                                        value = voraciousness_modifier
-                                        predator = scope:predator
-                                        prey = scope:prey
-                                }
+                        base = 100
+                        ai_value_modifier = {
+                                value = voraciousness_modifier
+                                predator = scope:predator
+                                prey = scope:prey
                         }
                 } 
                 trigger = { 
@@ -286,9 +281,6 @@ religious_vore.0005 = {
                 }
         }
         after = {
-                scope:prey = {
-                        save_scope_as = recipient
-                }
                 clean_up_effect = yes
         }
 }
@@ -358,9 +350,6 @@ religious_vore.0006 = {
                 }
         }
         after = {
-                scope:prey = {
-                        save_scope_as = recipient
-                }
                 clean_up_effect = yes
         }
 }
@@ -406,9 +395,6 @@ religious_vore.0007 = {
                 }
         }
         after = {
-                scope:prey = {
-                        save_scope_as = recipient
-                }
                 clean_up_effect = yes
         }
 }
@@ -420,18 +406,18 @@ religious_vore.0008 = {
 	theme = feast_activity
 	desc = religious_voreDesc.0008
 
-        immediate = {
-                create_character = {
-                        location = root.capital_province
-                        template = prey_character_template
-                        gender_female_chance = 95
-                        save_scope_as = prey
-                }
-                root = {
-                        save_scope_as = predator
-                        add_character_flag = religious_vore_predator 
-                }
-        }
+        # immediate = {
+        #         create_character = {
+        #                 location = root.capital_province
+        #                 template = prey_character_template
+        #                 gender_female_chance = 50
+        #                 save_scope_as = prey
+        #         }
+        #         root = {
+        #                 save_scope_as = predator
+        #                 add_character_flag = religious_vore_predator 
+        #         }
+        # }
 
 	#End of Feast
 	option = {
@@ -441,13 +427,17 @@ religious_vore.0008 = {
                 # }
                 scope:predator = {
                         clear_saved_scope = predator
-                        every_courtier_or_guest = {
-                                limit = {
-                                        has_faith = court_owner.faith
-                                        can_vore = yes
+                                hidden_effect = {
+                                every_courtier_or_guest = {
+                                        limit = {
+                                                has_faith = court_owner.faith
+                                                can_vore = yes
+                                        }
+                                        trigger_event = {
+                                                id = religious_vore.0003
+                                                days = { 1 3 }  # Add slight delay to avoid conflicts
+                                        }
                                 }
-                                save_scope_as = predator
-                                trigger_event = religious_vore.0003
                                 # random_list = {
                                 #         60 = { safe_vore_effect = { type = oral prison_type = vore_religious_unwilling } } #trigger_event = vore.0002 }  # 60% chance to vore
                                 #         40 = { trigger_event = religious_vore.0003 }  # 40% chance to watch
@@ -503,7 +493,7 @@ religious_vore.0010 = {
         desc = religious_voreDesc.0010
 
         immediate = {
-                scope:prey = {
+                scope:recipient = {
                         set_character_faith_with_conversion = faith:savior
                 }
         }
