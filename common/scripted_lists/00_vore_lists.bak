@@ -1,0 +1,8 @@
+﻿prey_list = {
+    every_character = {
+        limit = {
+            has_relation_prey = root
+        }
+    }
+}
+

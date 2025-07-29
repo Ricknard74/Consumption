@@ -143,28 +143,35 @@ on_vore_18th_birthday_gift = {
 #Death of predator
 on_death_relation_prey = {
 	on_actions = {
-		on_death_prey_escape
+		on_death_of_pred
 	}
 }
 
-on_death_prey_escape = {
-	effect = {
-		save_scope_as = predator
-		scope:target = {
-			save_scope_as = prey
-			if = {
-                limit = {
-                    is_in_prison_type = vore_dungeon
-                }
-                escape_from_prison_effect = yes
-				#Trigger Flavor event of prey escaping
-            }
+on_death_of_pred = {
+    effect = {
+		every_relation = {
+    		type = prey
+    # Do something with each prey
 		}
-		release_prey_location_check_effect = yes
-	}
+        save_scope_as = predator
+        scope:target = {
+            save_scope_as = prey
+            if = {
+                limit = { is_in_prison_type = vore_dungeon }
+                escape_from_prison_effect = yes
+            }
+        }
+        # Call effect while both scopes are still available
+        if = {
+            limit = { 
+                exists = scope:predator 
+                exists = scope:prey 
+            }
+            release_prey_location_check_effect = yes
+        }
+    }
 }
 
-#Death of prey (Ignore naming of on_death_prey_escape)
 on_death_relation_predator = {
 	on_actions = {
 		on_death_of_prey

@@ -1,40 +1,81 @@
 ﻿#Non-lethal Vore
 safe_vore_effect = {
-    scope:predator = {
-        add_trait = $type$_predator
-        add_character_flag = $type$_predator
-        set_relation_prey = scope:prey
-        change_variable = { name = num_prey add = 1}
-    }
+	if = {
+		limit = {
+			NOT = { exists = scope:predator }
+		}
+		scope:actor = {
+			save_scope_as = predator
+		}
+	}
+	if = {
+		limit = {
+			NOT = { exists = scope:prey }
+		}
+		scope:recipient = {
+			save_scope_as = prey
+		}
+	}
+	# Find and assign the lowest slot
+    assign_lowest_slot_effect = yes
+    
+    # Check if we found a slot
     if = {
         limit = {
-            scope:prey = {
-                OR = {
-                    is_in_prison_type = dungeon
-                    is_in_prison_type = house_arrest
-                }
-            }
+            scope:predator = { var:assigned_slot > 0 }
         }
-        scope:prey = { change_prison_type = $prison_type$ }
-    }
-    else = {
+
+		apply_slot_flags_effect = yes
+		scope:predator = {
+			add_trait = $type$_predator
+			add_character_flag = $type$_predator
+			add_character_flag = vore_predator
+			set_relation_prey = scope:prey
+			add_relation_flag = {
+				flag = $type$
+				target = scope:prey
+				relation = prey
+			}
+			change_variable = { name = num_prey add = 1}
+		}
+		if = {
+			limit = {
+				scope:prey = {
+					OR = {
+						is_in_prison_type = dungeon
+						is_in_prison_type = house_arrest
+					}
+				}
+			}
+			scope:prey = { change_prison_type = $prison_type$ }
+		}
+		else = {
+			scope:predator = {
+				imprison = {
+					target = scope:prey
+					type = $prison_type$
+				}
+			}
+		}
+		
+		scope:prey = {
+			set_relation_predator = scope:predator
+			add_character_modifier = { modifier = $type$_vored }
+			add_character_flag = vored
+			add_trait = $type$_vored
+			add_relation_flag = {
+				flag = $type$
+				target = scope:prey
+				relation = prey
+			}
+		}
+	}
+	else = {
+        # No slots available - handle this case
         scope:predator = {
-            imprison = {
-                target = scope:prey
-                type = $prison_type$
-            }
-        }
-    }
-    
-    scope:prey = {
-        set_relation_predator = scope:predator
-        add_character_modifier = { modifier = $type$_vored }
-        add_character_flag = vored
-        add_trait = $type$_vored
-        add_relation_flag = {
-            flag = $type$
-            target = scope:prey
-            relation = prey
+            # Maybe send an event saying "stomach is full"
+			#Maybe add a hidden option to the beginning of the events to indicate that the predator is full
+            #trigger_event = vore_stomach_full.0001
         }
     }
 }
@@ -127,28 +168,212 @@ release_prey_location_check_effect = {
 	# }
 }
 
+assign_lowest_slot_effect = {
+    # Call this effect and it will set a variable with the slot number
+    
+    scope:predator = {
+        # Check each slot in order
+        if = {
+            limit = {
+                NOT = {
+                    any_relation = {
+                        type = prey
+                        has_relation_flag = {
+                            flag = one
+                            target = prev
+                            relation = predator
+						}
+                    }
+                }
+            }
+            set_variable = { name = assigned_slot value = 1 }
+        }
+        else_if = {
+            limit = {
+                NOT = {
+                    any_relation = {
+                        type = prey
+                        has_relation_flag = {
+                            flag = two
+                            target = prev
+                            relation = predator
+                        }
+                    }
+                }
+            }
+            set_variable = { name = assigned_slot value = 2 }
+        }
+        else_if = {
+            limit = {
+                NOT = {
+                    any_relation = {
+                        type = prey
+                        has_relation_flag = {
+                            flag = three
+                            target = prev
+                            relation = predator
+                        }
+                    }
+                }
+            }
+            set_variable = { name = assigned_slot value = 3 }
+        }
+        else_if = {
+            limit = {
+                NOT = {
+                    any_relation = {
+                        type = prey
+                        has_relation_flag = {
+                            flag = four
+                            target = prev
+                            relation = predator
+                        }
+                    }
+                }
+            }
+            set_variable = { name = assigned_slot value = 4 }
+        }
+        else_if = {
+            limit = {
+                NOT = {
+                    any_relation = {
+                        type = prey
+                        has_relation_flag = {
+                            flag = five
+                            target = prev
+                            relation = predator
+                        }
+                    }
+                }
+            }
+            set_variable = { name = assigned_slot value = 5 }
+        }
+        else = {
+            # No slots available
+            set_variable = { name = assigned_slot value = 0 }
+        }
+    }
+}
+
+apply_slot_flags_effect = {
+    # Use the assigned_slot variable to apply the right flags
+    scope:predator = {
+        switch = {
+            trigger = var:assigned_slot
+            1 = {
+                add_relation_flag = {
+                    flag = one
+                    target = scope:prey
+                    relation = prey
+                }
+                scope:prey = {
+                    add_relation_flag = {
+                        flag = one
+                        target = scope:predator
+                        relation = predator
+                    }
+                }
+            }
+            2 = {
+                add_relation_flag = {
+                    flag = two
+                    target = scope:prey
+                    relation = prey
+                }
+                scope:prey = {
+                    add_relation_flag = {
+                        flag = two
+                        target = scope:predator
+                        relation = predator
+                    }
+                }
+            }
+            3 = {
+				add_relation_flag = {
+					flag = three
+					target = scope:predator
+					relation = predator
+				}
+			}
+			4 = {
+				add_relation_flag = {
+					flag = four
+					target = scope:predator
+					relation = predator
+				}
+			}
+			5 = {
+				add_relation_flag = {
+					flag = five
+					target = scope:predator	
+					relation = predator
+				}
+			}
+        }
+    }
+}
+
 #Used to properly release prey
 release_prey_effect = {
-	#Add a check to make sure there is always a scoped predator and prey
+	if = {
+		limit = {
+			NOT = { exists = scope:predator }
+		}
+		scope:actor = {
+			save_scope_as = predator
+		}
+	}
+	if = {
+		limit = {
+			NOT = { exists = scope:prey }
+		}
+		scope:recipient = {
+			save_scope_as = prey
+		}
+	}
 	scope:predator = {
-		# IF = {
-		# 	LIMIT = { # Make sure to check for different locations of prey. Maybe make satisfaction decrease over time
-		# 		scope:predator.var:num_prey <= 0
-		# 	}
-			remove_character_flag = vore_predator
-			remove_character_flag = $type$_predator
-			remove_trait = $type$_predator
-			add_character_modifier = {
-				modifier = satisfied
-				years = 1
+		 if = {
+			limit = {
+				has_relation_flag = {
+					flag = $type$
+					target = scope:prey
+					relation = prey
+				}
+				NOT = {
+					any_relation = {
+						type = prey
+						NOT = { this = scope:prey }
+						has_relation_flag = {
+							flag = $type$
+							target = prev
+							relation = predator
+						}
+					}
+				}
 			}
-		# }
-		remove_relation_prey = scope:prey
+			remove_trait = $type$_predator
+			remove_character_flag = $type$_predator
+		}
 		change_variable = {
 			name = num_prey
 			add = -1
 		}
-		clear_saved_scope = predator   
+		if = {
+			limit = {
+				var:num_prey <= 0
+			}
+			remove_character_flag = vore_predator
+		}
+		add_character_modifier = {
+			modifier = satisfied
+			years = 1
+		}
+		remove_relation_flag = {
+			flag = $type$
+			target = scope:prey
+			relation = prey
+		}
+		remove_relation_prey = scope:prey
 	}
 	scope:prey = {
 		remove_character_flag = vored
@@ -167,6 +392,12 @@ release_prey_effect = {
 		ELSE = {
 			release_from_prison = yes
 		}
+		remove_relation_flag = {
+			flag = $type$
+            target = scope:predator
+            relation = predator
+        }
+		clear_saved_scope = predator   
 		clear_saved_scope = prey
 	}
 }

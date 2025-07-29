@@ -35,15 +35,13 @@ religious_vore.0001 = {
                         can_vore = yes
 		}
                 ai_chance = {
-                        base = 100
+                        base = 60
                 }
                 root = {
                         save_scope_as = predator
                         add_character_flag = religious_vore_predator
                 }
-                hidden_effect = {
-                        trigger_event = religious_vore.0002       
-                }
+                trigger_event = religious_vore.0002       
 	}
         #Different Prey 
         option = {
@@ -98,14 +96,12 @@ religious_vore.0002 = {
 	#Oral
 	option = {
                 name = religious_voreOpt.0002a
-                ai_chance = {
-                        base = 100
-                        ai_value_modifier = {
-                                value = voraciousness_modifier
-                                predator = scope:predator
-                                prey = scope:prey
-                        }
-                } 
+                # ai_chance = {
+                #         base = 100
+                #         add = {
+                #             voraciousness_modifier = yes
+                #         }
+                # } 
                 trigger = { 
                         global_var:oral_banned = no 
                 }
@@ -426,6 +422,7 @@ religious_vore.0008 = {
                 #         change_fervor = { value = 10 }
                 # }
                 scope:predator = {
+                        add_piety = 25
                         clear_saved_scope = predator
                                 hidden_effect = {
                                 every_courtier_or_guest = {
@@ -442,8 +439,6 @@ religious_vore.0008 = {
                                 #         60 = { safe_vore_effect = { type = oral prison_type = vore_religious_unwilling } } #trigger_event = vore.0002 }  # 60% chance to vore
                                 #         40 = { trigger_event = religious_vore.0003 }  # 40% chance to watch
                                 # }
-                        }  
-                        add_piety = 25
                 }
 	}
 }

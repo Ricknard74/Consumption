@@ -5,79 +5,63 @@
 voraciousness_modifier = {
 	modifier = { #Traits will modify how likely this will happen
 		trigger = {
-			$predator$ = { has_trait = predator_1 }
+			has_trait = predator_1
 		}
 		add = { value = 25 multiply = 1 }
 	}
 	modifier = {
 		trigger = {
-			$predator$ = { has_trait = predator_2 }
+			has_trait = predator_2
 		}
 		add = { value = 33 multiply = 1}
 	}
 	modifier = {
-		trigger = {
-			$predator$ = { has_trait = predator_3 }
-		}
+		trigger = {	has_trait = predator_3 }
 		add = { value = 50 multiply = 1 }
 	}
 	modifier = {
-		trigger = {
-			$predator$ = { has_trait = preyish }
-		}
+		trigger = {	has_trait = preyish	}
 		add = { value = -20 multiply = 1 }
 	}
 	modifier = {
-		trigger = {
-			$prey$ = { has_trait = preyish }
-		}
+		trigger = {	root.has_trait = preyish }
 		add = { value = 33 multiply = 1 }
 	}
 
 	modifier = {
-		trigger = { $predator$ = { has_trait = gluttonous } }
+		trigger = { has_trait = gluttonous }
 		add = { value = 10 }
 	}
 	modifier = {
-		trigger = { $predator$ = { has_trait = lustful } }
+		trigger = { has_trait = lustful }
 		add = { value = 10 }
 	}
 
 	modifier = {
-		trigger = {
-			$predator$.religion = { is_in_family = rf_voraphillic }
-		}
+		trigger = { religion = { is_in_family = rf_voraphillic } }
 		add = { value = 20 multiply = 1 }
 	}
 	modifier = {
-		trigger = {
-			$predator$ = { age = { 18 30 } }
-		}
+		trigger = { age = { 18 30 } }
 		add = { value = 10 multiply = 1 }
 	}
 	modifier = {
-		trigger = {
-			$predator$ = { age = { 31 40 } }
-		}
+		trigger = { age = { 31 40 } }
 		add = { value = 5 multiply = 1 }
 	}
 	modifier = { 
-		trigger = {
-			$predator$ = { age = { 41 50 } }
-		}
+		trigger = { age = { 41 50 } }
 		add = { value = -15 multiply = 1 }
 	}
 	modifier = {
-		trigger = {
-			$predator$ = { age > 50 }
-		}
+		trigger = { age > 50 }
 		add = { value = -30 multiply = 1 }
 	}
 	modifier = {
 		add = { value = global_var:global_voraciousness }
 	}
 	modifier = {
-		add = { value = $predator$.var:voraciousness multiply = 1 }
+		add = { value = var:voraciousness multiply = 1 }
 	}
 }
 
@@ -188,15 +172,12 @@ unbirth_vore_modifier = {
 cock_vore_modifier = {
 	modifier = {
 		trigger = {
-			AND = {
-				$predator$ = { is_female = no }
-				$predator$ = { has_trait = lustful }
-			}
+			has_trait = lustful
 		}
 		add = { value = 30 }
 	}
 	modifier = {
-		add = { value = $predator$.var:cock_preference }
+		add = { value = var:cock_preference }
 	}
 }
 

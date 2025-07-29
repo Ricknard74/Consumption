@@ -9,6 +9,12 @@
 		anal
 		unbirth
 		cock
+		#Slots
+		one
+		two
+		three
+		four
+		five
 	}
 }
 
@@ -23,5 +29,11 @@ predator = {
 		anal
 		unbirth
 		cock
+		#Slots
+		one
+		two
+		three
+		four
+		five
 	}
 }

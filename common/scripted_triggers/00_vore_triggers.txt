@@ -19,15 +19,11 @@
             is_female = no
         }
     }
-    AND = { 
-        age >= 18
-        has_character_flag = vore_capable
-    }
+    age >= 18
+    has_character_flag = vore_capable  
     NOT = {
         OR = { 
             has_trait = incapable
-            has_character_flag = vored
-            # has_character_flag = vore_predator
             has_trait = digesting
             age < 18
         }
@@ -44,5 +40,23 @@ can_be_prey = {
             }
         }
         age >= 18
+    }
+}
+
+can_take_more_prey_trigger = {
+    trigger_if = {
+        limit = { has_trait = predator_1 }
+        var:num_prey < 1
+    }
+    trigger_else_if = {
+        limit = { has_trait = predator_2 }
+        var:num_prey < 2
+    }
+    trigger_else_if = {
+        limit = { has_trait = predator_3 }
+        var:num_prey < 3
+    }
+    trigger_else = {
+        always = no
     }
 }

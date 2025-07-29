@@ -248,7 +248,7 @@ prey_character_template = {
 			}
 		}
 	}
-	faith = faith:vore_savior
+	faith = root.faith
 	random_traits_list = {
 		count = { 0 1 }
 		education_martial_1 = { weight = { base = 35 } }
@@ -271,86 +271,69 @@ prey_character_template = {
 		# Try different geographic scopes in order of preference
 		
 		# First try: Neighboring kingdoms
-		if = {
-			limit = {
-				root.capital_province.kingdom = {
-					any_neighboring_top_liege_realm = {
-						holder = {
-							NOT = { has_faith = root.faith }
-						}
-					}
-				}
-			}
-			root.capital_province.kingdom = {
-				random_neighboring_top_liege_realm = {
-					weight = {
-						base = 1
-						modifier = {
-							add = 2
-							holder.faith.religion = {
-								NOT = { religion_tag = root.faith.religion.religion_tag }
-							}
-						}
-					}
-					limit = {
-						holder = {
-							NOT = { has_faith = root.faith }
-						}
-					}
-					holder = {
-						prev = {
-							set_character_faith = prev.faith
-						}
-					}
-				}
-			}
-		}
+		# random_neighboring_top_liege_realm_owner = {
+		# 	limit = {
+		# 		NOT = { has_faith = root.faith }
+		# 	}
+		# 	weight = {
+		# 		base = 1
+		# 		modifier = {
+		# 			add = 2
+		# 			faith = {
+		# 				NOT = { religion_tag = root.faith.religion.religion_tag }
+		# 			}
+		# 		}
+		# 	}
+		# 	prev = {
+		# 		set_character_faith = prev.faith
+		# 	}
+		# }
+
 		# Second try: Same empire, different kingdoms
-		else_if = {
-			limit = {
-				root.capital_province.empire = {
-					any_de_jure_kingdom = {
-						NOT = { this = root.capital_province.kingdom }
-						exists = holder
-						holder = {
-							NOT = { has_faith = root.faith }
-						}
-					}
-				}
-			}
-			root.capital_province.empire = {
-				random_de_jure_kingdom = {
-					limit = {
-						NOT = { this = root.capital_province.kingdom }
-						exists = holder
-						holder = {
-							NOT = { has_faith = root.faith }
-						}
-					}
-					weight = {
-						base = 1
-						modifier = {
-							add = 3
-							holder.faith.religion = {
-								NOT = { religion_tag = root.faith.religion.religion_tag }
-							}
-						}
-					}
-					holder = {
-						prev = {
-							set_character_faith = prev.faith
-						}
-					}
-				}
-			}
-		}
+		# if = {
+		# 	limit = {
+		# 		root.capital_province.empire = {
+		# 			any_kingdom = {
+		# 				NOT = { this = root.capital_province.kingdom }
+		# 				exists = holder
+		# 				holder = {
+		# 					NOT = { has_faith = root.faith }
+		# 				}
+		# 			}
+		# 		}
+		# 	}
+		# 	root.capital_province.empire = {
+		# 		random_kingdom = {
+		# 			limit = {
+		# 				NOT = { this = root.capital_province.kingdom }
+		# 				exists = holder
+		# 				holder = {
+		# 					NOT = { has_faith = root.faith }
+		# 				}
+		# 			}
+		# 			weight = {
+		# 				base = 1
+		# 				modifier = {
+		# 					add = 3
+		# 					holder.faith = {
+		# 						NOT = { religion_tag = root.faith.religion.religion_tag }
+		# 					}
+		# 				}
+		# 			}
+		# 			holder = {
+		# 				prev = {
+		# 					set_character_faith = prev.faith
+		# 				}
+		# 			}
+		# 		}
+		# 	}
+		# }
 		# Third try: Any kingdom in same geographical region
-		else = {
+		# else = {
 			random_kingdom = {
 				limit = {
-					capital_province = {
-						geographical_region = root.capital_province.geographical_region
-					}
+					geographical_region = root.capital_province.geographical_region
+					NOT = { THIS = root.capital_province.kingdom }
 					exists = holder
 					holder = {
 						NOT = { has_faith = root.faith }
@@ -360,8 +343,8 @@ prey_character_template = {
 					base = 1
 					modifier = {
 						add = 2
-						holder.faith.religion = {
-							NOT = { religion_tag = root.faith.religion.religion_tag }
+						holder.faith = {
+							NOT = { religion = root.faith.religion }
 						}
 					}
 				}
@@ -371,23 +354,23 @@ prey_character_template = {
 					}
 				}
 			}
-		}
+		# }
 		
 		# Ultimate fallback
-		if = {
-			limit = {
-				has_faith = root.faith
-			}
-			random_list = {
-				20 = { set_character_faith = faith:catholic }
-				20 = { set_character_faith = faith:orthodox }
-				15 = { set_character_faith = faith:sunni }
-				15 = { set_character_faith = faith:shia }
-				10 = { set_character_faith = faith:norse_pagan }
-				10 = { set_character_faith = faith:buddhist }
-				10 = { set_character_faith = faith:hindu }
-			}
-		}
+		# if = {
+		# 	limit = {
+		# 		has_faith = root.faith
+		# 	}
+		# 	random_list = {
+		# 		20 = { set_character_faith = faith:catholic }
+		# 		20 = { set_character_faith = faith:orthodox }
+		# 		15 = { set_character_faith = faith:sunni }
+		# 		15 = { set_character_faith = faith:shia }
+		# 		10 = { set_character_faith = faith:norse_pagan }
+		# 		10 = { set_character_faith = faith:buddhist }
+		# 		10 = { set_character_faith = faith:hindu }
+		# 	}
+		# }
     # Rest of your existing code...
 		# set_interesting_traits_and_modifiers_effect = yes
 		# add_random_tiered_trait_xp_effect = {
