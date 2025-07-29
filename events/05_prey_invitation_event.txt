@@ -1,0 +1,72 @@
+﻿############################################################################## VORE PREY CHAIN #########################################################################################################
+namespace = invite_vore_pred
+
+#Arrival
+invite_vore_pred.0001 = {
+title = invite_vore_predTitle.0001
+type = character_event
+desc = invite_vore_predDesc.0001
+theme = realm
+	
+	immediate = {
+			scope:actor = {
+					save_scope_as = predator
+			}
+			
+			scope:recipient = {
+					save_scope_as = prey
+			}       
+	}
+	#Ask them in private
+	option = {
+		name = invite_vore_predOpt.0001a
+		trigger_event = invite_vore_pred.0002
+	}
+
+	#Cancel
+	option = {
+		name = invite_vore_pred.0001b
+		clean_up_effect = yes
+	}
+}
+
+invite_vore_pred.0002 = {
+	title = invite_vore_predTitle.0002
+	type = letter_event
+	sender = scope:potential_prey
+	opening = invite_vore_predOpening.0002
+	desc = invite_vore_predDesc.0002
+	#Create new descriptions depending on the senders highest stats
+	#prey's highest PERSONALITY is intrigue or diplomacy to convince predator subtly
+	#prey's highest PERSONALITY is prowess or marital to intimidate predator
+	#prey's highest PERSONALITY is learning or stewardship to be curious about being a prey
+
+	#Send Letter
+	option = {
+			name = invite_vore_predOpt.0002a #Travel to friend/family/foe
+
+			trigger_event = invite_vore_pred.0003
+			#Not sure why this is here
+			# scope:potential_prey = {
+			#         trigger_event = {
+			#                 id = invite_vore_prey.0003
+			#                 days = 1
+			#         }
+			# }
+	}
+	#Cancel Letter
+	option = {
+		name = invite_vore_predOpt.0001b
+		remove_character_flag = potential_prey
+		remove_character_flag = potential_predator
+		scope:potential_predator = {
+				clear_saved_scope = potential_predator                       
+		}
+		scope:potential_prey = {
+				clear_saved_scope = potential_prey
+		}
+	}
+}
+
+
+

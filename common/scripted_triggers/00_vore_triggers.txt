@@ -23,6 +23,14 @@
     has_character_flag = vore_capable  
     NOT = {
         OR = { 
+            has_character_flag = vored
+            has_character_flag = potential_prey
+            trigger_if = {
+                limit = {
+                    var:num_prey >= 4
+                }
+                has_character_flag = potential_predator
+            }
             has_trait = incapable
             has_trait = digesting
             age < 18

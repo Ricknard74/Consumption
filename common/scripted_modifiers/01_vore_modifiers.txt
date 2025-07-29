@@ -43,7 +43,9 @@
 	#Prey modifiers
 	modifier = {
 		trigger = {
-			root.has_trait = preyish
+			$PREY$ = {
+				has_trait = preyish
+			}
 		}
 		add = 20
 	}
@@ -53,11 +55,12 @@
 		add = 20
 	}
 	#Religious modifiers for religions tenets
+	#Also add cultural and religious modifiers
 	
 	# Age modifiers
 	modifier = {
 		trigger = { age = { 18 30 } }
-		add = 10
+		add = 20
 	}
 	modifier = {
 		trigger = { age = { 31 40 } }
@@ -218,4 +221,3 @@ cock_vore_modifier = {
 	}
 }
 
-#Also add cultural and religious modifiers

@@ -15,12 +15,9 @@ religious_vore.0001 = {
                 create_character = {
                         location = root.capital_province
                         template = prey_character_template
-                        gender_female_chance = 50
                         save_scope_as = prey
                 }
-                hidden_effect = {
-                        trigger_event = religious_vore.0013
-                }
+                trigger_event = religious_vore.0013
         }
 
         right_portrait = {
@@ -424,7 +421,7 @@ religious_vore.0008 = {
                 scope:predator = {
                         add_piety = 25
                         clear_saved_scope = predator
-                                hidden_effect = {
+                        hidden_effect = {
                                 every_courtier_or_guest = {
                                         limit = {
                                                 has_faith = court_owner.faith
@@ -435,10 +432,7 @@ religious_vore.0008 = {
                                                 days = { 1 3 }  # Add slight delay to avoid conflicts
                                         }
                                 }
-                                # random_list = {
-                                #         60 = { safe_vore_effect = { type = oral prison_type = vore_religious_unwilling } } #trigger_event = vore.0002 }  # 60% chance to vore
-                                #         40 = { trigger_event = religious_vore.0003 }  # 40% chance to watch
-                                # }
+                        }
                 }
 	}
 }
