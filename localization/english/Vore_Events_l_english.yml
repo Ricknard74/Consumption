@@ -95,6 +95,8 @@ prison_voreDesc.0005:0 "Cock Vore Description"
 prison_voreOpt.0005a:0 "Fatal Cock Vore"
 prison_voreOpt.0005b:0 "Safe Cock Vore"
 
+prisontype_stomach:0 "Stomach"
+
 #Lover Vore
 lover_vore_interaction:0 "Vore Your Lover"
 lover_vore_interaction_Desc:0 "Vore your Lover"
@@ -171,3 +173,7 @@ invite_voreOpening.0001:0 "Vore Invite"
 invite_voreDesc.0001:0 "Wanna vore?"
 invite_voreOpt.0001a:0 "I good hold no higher purpose than becoming a part of you"
 invite_voreOpt.0001b:0 "You seem like a comfortable person to be in"
+
+#Prey 
+prey_invitation_interaction:0 "Invite to vore another"
+prey_invitation_interaction_desc:0 "Invite someone to vore"

@@ -28,6 +28,11 @@ prison_vore.0001 = {
         #Oral
         option = {
                 name = prison_voreOpt.0001a
+                ai_chance = {
+                        oral_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 trigger = { 
                         global_var:oral_banned = no 
                 }
@@ -37,6 +42,11 @@ prison_vore.0001 = {
         #Anal
         option = {
                 name = prison_voreOpt.0001b
+                ai_chance = {
+                        anal_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 trigger = {
                         global_var:anal_banned = no
 		}
@@ -46,6 +56,11 @@ prison_vore.0001 = {
         #Unbirth
         option = {
                 name = prison_voreOpt.0001c
+                ai_chance = {
+                        unbirth_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 trigger = {
                         AND = {
                                 is_female = yes
@@ -59,6 +74,11 @@ prison_vore.0001 = {
         #Cock
         option = {
                 name = prison_voreOpt.0001d
+                ai_chance = {
+                        cock_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 trigger = {
                         AND = {
                                 is_female = no
@@ -99,6 +119,11 @@ prison_vore.0002 = {
         #Fatal
         option = {
                 name = prison_voreOpt.0002a
+                ai_chance = {
+                        lethal_vore_modifier = { 
+                                        PREY = scope:prey
+                        }
+                }
                 trigger = {
                         AND = {
                                 global_var:digestion_banned = no
@@ -113,6 +138,11 @@ prison_vore.0002 = {
         #Non-fatal
         option = {
                 name = prison_voreOpt.0002b
+                ai_chance = {
+                        safe_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 safe_vore_effect = {
                         type = oral
                         prison_type = vore_dungeon
@@ -141,6 +171,11 @@ prison_vore.0003 = {
         #Fatal
         option = {
                 name = prison_voreOpt.0003a
+                ai_chance = {
+                        lethal_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 trigger = {
                         global_var:digestion_banned = no
                 }
@@ -156,6 +191,11 @@ prison_vore.0003 = {
         #Non-fatal
         option = {
                 name = prison_voreOpt.0003b
+                ai_chance = {
+                        safe_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 safe_vore_effect = {
                         type = anal
                         prison_type = vore_dungeon
@@ -187,6 +227,11 @@ prison_vore.0004 = {
                         AND = {
                                 global_var:digestion_banned = no
                         }
+                }
+                ai_chance = {
+                        lethal_vore_modifier = {
+			        PREY = scope:recipient
+		        }
                 }
                 scope:predator = {
                         add_character_modifier = {
@@ -225,6 +270,11 @@ prison_vore.0004 = {
         #Non-fatal
         option = {
                 name = prison_voreOpt.0004c
+                ai_chance = {
+                        safe_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 safe_vore_effect = {
                         type = unbirth
                         prison_type = vore_dungeon
@@ -255,6 +305,11 @@ prison_vore.0005 = {
                 trigger = {
                         global_var:digestion_banned = no
                 }
+                ai_chance = {
+                        lethal_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 scope:predator = {
                         add_character_modifier = { modifier = fertility_boost } 
                         trigger_event = { id = vore.0002 months = { 2 3 } }
@@ -269,6 +324,11 @@ prison_vore.0005 = {
         #Non-fatal
         option = {
                 name =  prison_voreOpt.0005b
+                ai_chance = {
+                        safe_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 safe_vore_effect = {
                         type = cock
                         prison_type = vore_dungeon

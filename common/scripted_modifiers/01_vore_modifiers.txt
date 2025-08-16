@@ -91,15 +91,19 @@
 lethal_vore_modifier = {
 	modifier = {
 		trigger = { has_trait = sadistic }
-		add = 30
+		add = 20
 	}
 	modifier = {
 		trigger = { has_trait = compassionate }
 		add = -50
 	}
 	modifier = {
+		trigger = { has_trait = generous }
+		add = -20
+	}
+	modifier = {
 		trigger = { has_trait = cannibal }
-		add = 20
+		add = 30
 	}
 	modifier = {
 		trigger = { has_trait = gluttonous }
@@ -108,20 +112,20 @@ lethal_vore_modifier = {
 
 	# Relation modifiers
 	modifier = {
-		trigger = { has_relation = rival }
+		trigger = { has_relation_rival = $PREY$ }
 		add = 20
 	}
 	modifier = {
-		trigger = { has_relation = nemesis }
+		trigger = { has_relation_nemesis = $PREY$ }
 		add = 50
 	}
 	modifier = {
-		trigger = { has_relation = friend }
+		trigger = { has_relation_friend = $PREY$ }
 		add = -20
 	}
 	modifier = {
-		trigger = { has_relation = lover }
-		add = -30
+		trigger = { has_relation_lover = $PREY$ }
+		add = -50
 	}
 
 	modifier = {
@@ -134,7 +138,24 @@ lethal_vore_modifier = {
 	}
 }
 
-nonlethal_vore_modifier = {
+safe_vore_modifier = {
+	modifier = {
+		trigger = { has_relation_rival = $PREY$ }
+		add = -20
+	}
+	modifier = {
+		trigger = { has_relation_nemesis = $PREY$ }
+		add = -50
+	}
+	modifier = {
+		trigger = { has_relation_friend = $PREY$ }
+		add = 20
+	}
+	modifier = {
+		trigger = { has_relation_lover = $PREY$ }
+		add = 50
+	}
+
 	modifier = {
 		trigger = { has_trait = compassionate }
 		add = 30
@@ -148,8 +169,8 @@ nonlethal_vore_modifier = {
 		add = 50
 	}
 	modifier = {
-		trigger = { exists = var:nonlethal_vore_tendency }
-		add = var:nonlethal_vore_tendency
+		trigger = { exists = var:non_lethal_vore_tendency }
+		add = var:non_lethal_vore_tendency
 	}
 }
 
@@ -163,12 +184,23 @@ oral_vore_modifier = {
 		add = 10
 	}
 	modifier = {
-		trigger = { exists = var:oral_preference }
-		add = var:oral_preference
+		$PREY$ = {
+			has_trait = preyish
+		}
+	}
+	modifier = {
+		trigger = { exists = var:oral_vore_tendency }
+		add = var:oral_vore_tendency
 	}
 }
 
 anal_vore_modifier = {
+	modifier = {
+		$PREY$ = {
+			has_trait = preyish
+		}
+		add = 20
+	}
 	modifier = {
 		trigger = { has_trait = sadistic }
 		add = 15
@@ -181,11 +213,11 @@ anal_vore_modifier = {
 	}
 	modifier = {
 		trigger = { is_female = yes }
-		add = -5
+		add = 5
 	}
 	modifier = {
-		trigger = { exists = var:anal_preference }
-		add = var:anal_preference
+		trigger = { exists = var:anal_vore_tendecny }
+		add = var:anal_vore_tendecny
 	}
 }
 
@@ -198,12 +230,26 @@ unbirth_vore_modifier = {
 		add = 25
 	}
 	modifier = {
+		$PREY$ = {
+			has_trait = preyish
+		}
+	}
+	modifier = {
+		trigger = {
+			OR = {
+				is_female = no
+				has_trait = pregnant
+			}
+		}
+		add = -999
+	}
+	modifier = {
 		trigger = { has_trait = compassionate }
 		add = 20
 	}
 	modifier = {
-		trigger = { exists = var:unbirth_preference }
-		add = var:unbirth_preference
+		trigger = { exists = var:unbirth_vore_tendency }
+		add = var:unbirth_vore_tendency
 	}
 }
 
@@ -216,8 +262,19 @@ cock_vore_modifier = {
 		add = 30
 	}
 	modifier = {
-		trigger = { exists = var:cock_preference }
-		add = var:cock_preference
+		$PREY$ = {
+			has_trait = preyish
+		}
+		add = 20
+	}
+	modifier = {
+		trigger = {
+			is_female = yes
+		}
+		add = -999
+	}
+	modifier = {
+		trigger = { exists = var:cock_vore_tendency }
+		add = var:cock_vore_tendency
 	}
 }
-

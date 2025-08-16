@@ -387,12 +387,6 @@ vore.1008 = {
                                 }
                                 desc = voredescGC.1008c
                         }
-                        triggered_desc = {
-                                trigger = {
-                                        always = yes
-                                }
-                                desc = "Something has gone wrong"
-                        }
                 }
         }
 
@@ -410,8 +404,8 @@ vore.1008 = {
                         every_faith = {
                                 limit = { has_doctrine = doctrine_clerical_gender_either }
                                 remove_doctrine = doctrine_clerical_gender_either
-                                add_doctrine = doctrine_clerical_gender_female_only   
-                        }     
+                                add_doctrine = doctrine_clerical_gender_female_only  
+                        }
                 }
                 trigger_event = vore.1007
         }
@@ -568,25 +562,29 @@ vore.0001 = {
         title = vore_releaseTitle.0001
         type = character_event
         theme = realm
-        #num_of_relation_prey can check if the pred is at max capacity
         #increase stomach size depending on number
         #every_relation = { limit = { has_relation_prey = yes} }
         #ordered_relation = { limit = { has_relation_prey = yes} }
         #var:max_prey = 1 until the pred has higher pred score
         #after increasing pred skill, change_var = {name = max_prey add = 1}, never above 5
-        #set_global_variable = {name = at_capacity value = no} will check if pred is vore capable
-        #compare if var:num_prey is >= max_prey
-        #Num prey needs to be per-location
         #Add memories like "Ate someone important" or "Escaped stomach""
+        # Make different faiths for different preferred genders
         #select the prey that the actor wants to interact with from the relationship screen, use bigui ll mod for reference
         #Non lethal and lethal vore events,
         #Where vore religious counties have issues with predators, causing buffs and debuffs to the county
         #Vore Conversion for court members that depends on their conversion chance for how long it will take\
         #populate_actor_list to get multiple prey
         #Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
-        #Make the vore chance global variable to replace vore capability
         #Hunt activity with vore
-        #Change voreDesc.xxxx to vore_oralDesc so it can be prsion_vore_Desc.0001
+        #Seduce scheme with vore
+        #Feast activity with vore
+        #County conversion events like "Vored wrong person" or "Vored gracefully" or "Digested evil criminal" and such
+        #Battle events for capturing or digesting other knights and commanders
+        #Vore sacrifice event
+        #Vore marriage events? Not sure where to implement this
+        #Change voreDesc.xxxx to vore_oralDesc so it can be prsion_vore_OralDesc.0001
+        #Name the savior god of fertility/food/main god the all mother, and the death god the great devourer
+        
         immediate = {
                 scope:actor = {
                         save_scope_as = predator

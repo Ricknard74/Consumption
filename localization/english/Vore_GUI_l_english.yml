@@ -1,0 +1,22 @@
+﻿#CODE;ENGLISH
+l_english:
+
+# Button and Window Titles
+OPEN_PREDATOR_PREY_LIST_TOOLTIP:0 "View Predator and Prey Relations"
+PREDATOR_PREY_RELATIONS_TITLE:0 "Predator and Prey Relations"
+
+# Section Headers
+CHARACTER_AS_PREDATOR_HEADER:0 "Hunted by this Character"
+CHARACTER_AS_PREY_HEADER:0 "Hunters of this Character"
+
+# Relation Indicators
+PREY_INDICATOR:0 "Prey"
+PREDATOR_INDICATOR:0 "Predator"
+RELATION_SINCE:0 "Since:"
+
+# Empty State
+NO_PREDATOR_PREY_RELATIONS:0 "This character has no predator or prey relations."
+
+# Optional: More descriptive headers
+CHARACTER_AS_PREDATOR_HEADER_ALT:0 "This character hunts:"
+CHARACTER_AS_PREY_HEADER_ALT:0 "This character is hunted by:"

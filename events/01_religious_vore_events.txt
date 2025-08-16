@@ -32,11 +32,14 @@ religious_vore.0001 = {
                         can_vore = yes
 		}
                 ai_chance = {
-                        base = 60
+                        base = 0
+                        base_voraciousness_modifier = {
+                                PREY = scope:prey
+                        }
                 }
                 root = {
+                        add_character_modifier = religious_vore_predator
                         save_scope_as = predator
-                        add_character_flag = religious_vore_predator
                 }
                 trigger_event = religious_vore.0002       
 	}
@@ -55,7 +58,7 @@ religious_vore.0001 = {
 	option = {
 		name = religious_voreOpt.0001c
                 ai_chance = {
-                        base = 40
+                        base = 50
                 }
                 hidden_effect = {
                         scope:prey = { silent_disappearance_effect = yes }
@@ -93,12 +96,12 @@ religious_vore.0002 = {
 	#Oral
 	option = {
                 name = religious_voreOpt.0002a
-                # ai_chance = {
-                #         base = 100
-                #         add = {
-                #             voraciousness_modifier = yes
-                #         }
-                # } 
+                ai_chance = {
+                        base = 0
+                        oral_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                } 
                 trigger = { 
                         global_var:oral_banned = no 
                 }
@@ -110,6 +113,12 @@ religious_vore.0002 = {
 	#Anal
 	option = {
                 name = religious_voreOpt.0002b
+                ai_chance = {
+                        base = 0
+                        anal_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 trigger = {
                         global_var:anal_banned = no
                 }
@@ -121,6 +130,12 @@ religious_vore.0002 = {
 	#Unbirth
 	option = {
                 name = religious_voreOpt.0002c
+                ai_chance = {
+                        base = 0
+                        unbirth_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 trigger = {
                         AND = {
                                 is_female = yes
@@ -136,6 +151,12 @@ religious_vore.0002 = {
 	#Cock
 	option = {
                 name = religious_voreOpt.0002d
+                ai_chance = {
+                        base = 0
+                        cock_vore_modifier = {
+                                PREY = scope:prey
+                        }
+                }
                 trigger = {
                         AND = {
                                 is_female = no
@@ -150,6 +171,9 @@ religious_vore.0002 = {
 	#Exit
 	option = {
 		name = religious_voreOpt.0002e
+                ai_chance = {
+                        base = 15
+                }
                 hidden_effect = {
                         scope:predator = {
                                 clear_saved_scope = predator
@@ -171,6 +195,9 @@ religious_vore.0003 = {
 
         #Watch the Feast Until the End
         option = {
+                ai_chance = {
+                        base = 150
+                }
                 name = religious_voreOpt.0003a
                 hidden_effect = {
                         trigger_event = religious_vore.0008
@@ -192,12 +219,6 @@ religious_vore.0004 = {
 	desc = religious_voreDesc.0004
         theme = feast_activity
 
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-        
         left_portrait = {
                 character = scope:predator
                 animation = flirtation
@@ -241,12 +262,6 @@ religious_vore.0005 = {
 	desc = religious_voreDesc.0005
 	theme = feast_activity
 
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
         immediate = {
                 scope:predator = {
                         add_character_flag = portrait_belly
@@ -284,13 +299,6 @@ religious_vore.0006 = {
 	type = character_event
 	desc = religious_voreDesc.0006
 	theme = feast_activity
-
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
 
         immediate = {
                 scope:predator = {

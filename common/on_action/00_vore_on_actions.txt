@@ -83,7 +83,6 @@ on_add_vore_toggles = {
 			limit = { 
 				OR = {
 					county_controller.religion = { is_in_family = rf_voraphillic }
-					#de_facto_liege.religion = { is_in_family = rf_voraphillic } Throws errors
 				}
 			}	
 			set_county_faith = scope:plyr.faith
@@ -93,19 +92,20 @@ on_add_vore_toggles = {
 			limit = { age >= 18}
 			add_character_flag = vore_capable
 			save_scope_as = char
-			set_variable = { name = voraciousness value = { 45 70 } }
 			set_variable = { name = num_prey value = 0 }
-			# set_variable = { name = lethal_vore_tendency value = { 10 90 } }
-			# set_variable = { name = non_lethal_vore_tendency value = { 10 90 } } 
-			# set_variable = { name = oral_vore_tendency value = { 50 90 } }
-			# set_variable = { name = anal_vore_tendecny value = {10 50 } }
-			# if = {
-			# 	limit = { is_female = yes }
-			# 	set_variable = { name = unbirth_vore_tendency value = { 10 40 } }
-			# } 
-			# else = {
-			# 	set_variable = { name = cock_vore_tendency value = { 10 40 } }
-			# }
+			set_variable = { name = assigned_slot value = 1 }
+			set_variable = { name = voraciousness value = { 45 70 } }
+			set_variable = { name = lethal_vore_tendency value = { 10 90 } }
+			set_variable = { name = non_lethal_vore_tendency value = { 10 90 } } 
+			set_variable = { name = oral_vore_tendency value = { 50 90 } }
+			set_variable = { name = anal_vore_tendecny value = {10 50 } }
+			if = {
+				limit = { is_female = yes }
+				set_variable = { name = unbirth_vore_tendency value = { 10 40 } }
+			} 
+			else = {
+				set_variable = { name = cock_vore_tendency value = { 10 40 } }
+			}
 			if = {
 				limit = {
 					scope:char.religion = { is_in_family = rf_voraphillic}
@@ -195,9 +195,19 @@ on_release_from_prison = {
 }
 
 on_release_prey_from_prison = {
-	trigger = { has_character_flag = vored }
-	effect = {
-		# Use stored vore type for correct release
-		release_prey_location_check_effect = yes
+    trigger = { has_character_flag = vored }
+    effect = {
+        root = {
+            save_scope_as = prey
+            
+            # Find the predator
+			any_relation = {
+				type = predator
+				save_scope_as = predator
+			}
+                
+                # Now call the effect with proper scopes
+                release_prey_location_check_effect = yes
+		}
 	}
 }

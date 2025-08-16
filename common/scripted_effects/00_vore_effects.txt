@@ -17,20 +17,20 @@ safe_vore_effect = {
 		}
 	}
 	# Find and assign the lowest slot
-    assign_lowest_slot_effect = yes
     
     # Check if we found a slot
     if = {
-        limit = {
-            scope:predator = { var:assigned_slot > 0 }
+		limit = {
+			scope:predator = { var:assigned_slot > 0 }
         }
-
+		
 		apply_slot_flags_effect = yes
 		scope:predator = {
 			add_trait = $type$_predator
 			add_character_flag = $type$_predator
 			add_character_flag = vore_predator
 			set_relation_prey = scope:prey
+			assign_lowest_slot_effect = yes
 			add_relation_flag = {
 				flag = $type$
 				target = scope:prey
@@ -59,7 +59,6 @@ safe_vore_effect = {
 		}
 		
 		scope:prey = {
-			set_relation_predator = scope:predator
 			add_character_modifier = { modifier = $type$_vored }
 			add_character_flag = vored
 			add_trait = $type$_vored
@@ -104,7 +103,7 @@ lethal_vore_effect = {
 	hidden_effect = {
 			scope:predator= {
 					if = {	#Should be in lethal_vore_religion
-							limit = { NOT = { scope:predator.religion = religion:safe_vore_religion } }
+							limit = { scope:predator = religion:fatal_vore_religion } 
 							show_as_tooltip = {
 									sacrifice_prisoner_effect = {
 											VICTIM = scope:prey
@@ -392,11 +391,12 @@ release_prey_effect = {
 		ELSE = {
 			release_from_prison = yes
 		}
-		remove_relation_flag = {
-			flag = $type$
-            target = scope:predator
-            relation = predator
-        }
+		# remove_relation_flag = {
+		# 	flag = $type$
+        #     target = scope:predator
+        #     relation = predator
+        # }
+		# remove_relation_predator = scope:predator
 		clear_saved_scope = predator   
 		clear_saved_scope = prey
 	}

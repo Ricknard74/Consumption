@@ -1,0 +1,81 @@
+﻿types PredatorPreyTypes
+{
+    type window_vore_list = window
+    {
+        name = "predator_prey_list"
+        
+        using = Window_Movable
+        using = Window_Background
+        using = Window_Decoration
+        using = Window_Size_CharacterList
+        
+        layer = middle
+        allow_outside = yes
+        position = { 600 90 }
+        size = { 650 440 }
+        
+        blockoverride "header_text" {
+            text = predator_prey_list_title
+        }
+        
+        blockoverride "button_close" {
+            onclick = "[ScriptedGui.CloseWindow]"
+        }
+        
+        vbox = {
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+            
+            block "predator_list" {
+                fixedgridbox = {
+                    addcolumn = 650
+                    addrow = 120
+                    
+                    name = "predators_grid"
+                    datamodel_reuse_widgets = yes
+                    datamodel = "[CharacterSelectionList.GetList]"
+                    visible = "[Not(CharacterSelectionList.IsBuildingList)]"
+                    
+                    item = {
+                        widget_character_list_item_finder = {
+                            size = { 650 122 }
+                            blockoverride "gridbox_items" {
+                                min_width = 260
+                                maxhorizontalslots = 9
+                                maxverticalslots = 2
+                            }
+                        }
+                    }
+                }
+            }
+            
+            container = {
+                size = { width = 100 height = 20 }
+                background = "gfx/interface/illustrations/gui_divider.dds"
+            }
+            
+            block "prey_list" {
+                fixedgridbox = {
+                    addcolumn = 650
+                    addrow = 120
+                    
+                    name = "prey_grid"
+                    datamodel_reuse_widgets = yes
+                    datamodel = "[CharacterSelectionList.GetList]"
+                    visible = "[Not(CharacterSelectionList.IsBuildingList)]"
+                    
+                    item = {
+                        widget_character_list_item_finder = {
+                            size = { 650 122 }
+                            blockoverride "gridbox_items" {
+                                min_width = 260
+                                maxhorizontalslots = 9
+                                maxverticalslots = 2
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

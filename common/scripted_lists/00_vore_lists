@@ -1,0 +1,26 @@
+﻿prey_list = {
+    every_character = {
+        limit = {
+            has_relation_prey = root
+        }
+    }
+}
+
+predator_list = {
+    every_character = {
+        limit = {
+            has_relation_predator
+        }
+    }
+}
+
+predator_prey_list = {
+    every_character = {
+        limit = {
+            OR = {
+                has_relation_prey = yes
+                has_relation_predator = yes
+            }
+        }
+    }
+}

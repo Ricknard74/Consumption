@@ -224,3 +224,33 @@ release_prey_interaction = {
 		}
 	}
 }
+
+#Negotiate Release
+# negotiate_prey_release_interaction = {
+# 	category = interaction_category_diplomatic
+# 	interface_priority = 30
+# 	desc = negotiate_prey_release_interaction_desc
+
+# 	ai_will_do = {
+# 		base = 50
+# 	}
+
+# 	is_shown = {
+# 		NOT = { scope:actor = scope:recipient }
+# 		scope:actor = {
+# 			has_character_flag = vore_predator
+# 		}
+# 		scope:recipient = {
+# 			is_imprisoned_by = scope:actor
+# 			has_character_flag = vored
+# 			can_be_released_by_negotiation = yes
+# 		}
+# 	}
+# 	auto_accept = yes
+
+# 	on_accept = {
+# 		scope:actor = {
+# 			trigger_event = negotiate_vore.0001	
+# 		}
+# 	}
+# }

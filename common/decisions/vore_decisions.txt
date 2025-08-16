@@ -26,7 +26,7 @@ religious_vore_feast_decision = {
   }
   ai_check_interval = 5
   ai_potential = {
-    always = yes
+    always = no
   }
   is_shown = {
     root.religion = {
