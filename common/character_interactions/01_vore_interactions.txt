@@ -203,7 +203,7 @@ release_prey_interaction = {
 	desc = release_prey_interaction_desc
 
 	ai_will_do = {
-		base = 100
+		base = 0
 	}
 
 	is_shown = {

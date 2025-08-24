@@ -563,11 +563,7 @@ vore.0001 = {
         type = character_event
         theme = realm
         #increase stomach size depending on number
-        #every_relation = { limit = { has_relation_prey = yes} }
-        #ordered_relation = { limit = { has_relation_prey = yes} }
-        #var:max_prey = 1 until the pred has higher pred score
-        #after increasing pred skill, change_var = {name = max_prey add = 1}, never above 5
-        #Add memories like "Ate someone important" or "Escaped stomach""
+        # Add memories like "Ate someone" or "Escaped stomach""
         # Make different faiths for different preferred genders
         #select the prey that the actor wants to interact with from the relationship screen, use bigui ll mod for reference
         #Non lethal and lethal vore events,
@@ -578,13 +574,16 @@ vore.0001 = {
         #Hunt activity with vore
         #Seduce scheme with vore
         #Feast activity with vore
+        # Make them use random orifices depending on settings
         #County conversion events like "Vored wrong person" or "Vored gracefully" or "Digested evil criminal" and such
         #Battle events for capturing or digesting other knights and commanders
         #Vore sacrifice event
         #Vore marriage events? Not sure where to implement this
         #Change voreDesc.xxxx to vore_oralDesc so it can be prsion_vore_OralDesc.0001
-        #Name the savior god of fertility/food/main god the all mother, and the death god the great devourer
-        
+        #Make so the player can choose to execute a prisoner by vore insteead of lethal and non-lethal interaction choices
+        # Add a jester vore event, and make it so the player can choose to make it lethal if they are sadistic. It might improve or hurt their opinion of the player depending on the jesters traits Also add a chance of failure to digest and make the prey wounded or disfigured
+        # Add some plague vore events, specifically for religions that worship vore gods
+
         immediate = {
                 scope:actor = {
                         save_scope_as = predator

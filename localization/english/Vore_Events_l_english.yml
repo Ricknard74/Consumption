@@ -61,7 +61,10 @@ death_execution_oral_killer:0 "Eaten by [TARGET_CHARACTER.GetUIName]"
 ################Events##################
 ########################################
 
-#Prisoner Vore
+# =========================
+# Prisoner Vore Events
+# =========================
+
 vore_prisoner_interaction:0 "Eat the Prisoner"
 vore_prisoner_interaction_desc:0 "This Prisoner Looks Filling!"
 # vore_prisoner_interaction_tooltip:0 "You really are hungry, you look to your prison for an easy meal"
@@ -97,7 +100,10 @@ prison_voreOpt.0005b:0 "Safe Cock Vore"
 
 prisontype_stomach:0 "Stomach"
 
-#Lover Vore
+# =========================
+# Lover Vore Events
+# =========================
+
 lover_vore_interaction:0 "Vore Your Lover"
 lover_vore_interaction_Desc:0 "Vore your Lover"
 
@@ -137,6 +143,12 @@ lover_voreOpt.0006a:0 "Fatal Cock Vore"
 lover_voreOpt.0006b:0 "Non Fatal Cock Vore"
 
 lover_vore_preyTitle.0007:0 ""
+lover_vore_preyDesc.0007:0 "Lover vore event description for 0007."
+lover_vore_preyOpt.0007a:0 "Option A"
+lover_vore_preyOpt.0007b:0 "Option B"
+lover_vore_preyOpt.0007c:0 "Option C"
+lover_vore_preyOpt.0007d:0 "Option D"
+lover_vore_preyOpt.0007e:0 "Option E"
 
 lover_vore_prey_oralTitle.0008:0 "The Devouring Kiss"
 lover_vore_prey_oralDesc.0008:0 "You close your eyes and lean into your lover's embrace, fully aware of what is about to happen. A warm, inviting mouth opens before you. Will you surrender completely?"
@@ -174,6 +186,60 @@ invite_voreDesc.0001:0 "Wanna vore?"
 invite_voreOpt.0001a:0 "I good hold no higher purpose than becoming a part of you"
 invite_voreOpt.0001b:0 "You seem like a comfortable person to be in"
 
-#Prey 
+# =========================
+# Invite Vore (Prey Events)
+# ========================= 
 prey_invitation_interaction:0 "Invite to vore another"
 prey_invitation_interaction_desc:0 "Invite someone to vore"
+
+invite_vore_preyTitle.0001:0 "Event Title 0001"
+invite_vore_preyDesc.0001:0 "Event description for 0001."
+invite_vore_preyOpt.0001a:0 "Option A"
+invite_vore_preyOpt.0001b:0 "Option B"
+
+invite_vore_preyTitle.0002:0 "Event Title 0002"
+invite_vore_preyOpening.0002:0 "Opening text for 0002."
+invite_vore_preyDesc.0002:0 "Event description for 0002."
+invite_vore_preyOpt.0002a:0 "Option A"
+
+invite_vore_preyTitle.0003:0 "Event Title 0003"
+invite_vore_preyDesc.0003:0 "Event description for 0003."
+
+invite_vore_preyOpt.0003a:0 "Option A"
+invite_vore_preyOpt.0003b:0 "Option B"
+invite_vore_preyOpt.0003c:0 "Option C"
+invite_vore_preyOpt.0003d:0 "Option D"
+
+invite_vore_preyTitle.0004:0 "Event Title 0004"
+invite_vore_preyDesc.0004:0 "Event description for 0004."
+invite_vore_preyOpt.0004a:0 "Option A"
+invite_vore_preyOpt.0004b:0 "Option B"
+
+invite_vore_preyTitle.0005:0 "Event Title 0005"
+invite_vore_preyDesc.0005:0 "Event description for 0005."
+invite_vore_preyOpt.0005a:0 "Option A"
+invite_vore_preyOpt.0005b:0 "Option B"
+
+invite_vore_preyTitle.0006:0 "Event Title 0006"
+invite_vore_preyDesc.0006:0 "Event description for 0006."
+invite_vore_preyOpt.0006a:0 "Option A"
+invite_vore_preyOpt.0006b:0 "Option B"
+
+invite_vore_preyTitle.0007:0 "Event Title 0007"
+invite_vore_preyDesc.0007:0 "Event description for 0007."
+invite_vore_preyOpt.0007a:0 "Option A"
+invite_vore_preyOpt.0007b:0 "Option B"
+
+
+# =========================
+# Invite Vore (Pred Events)
+# =========================
+invite_vore_predTitle.0001:0 "Pred Invitation Event 0001"
+invite_vore_predDesc.0001:0 "Event description for pred invitation 0001."
+invite_vore_predOpt.0001a:0 "Option A"
+invite_vore_predOpt.0001b:0 "Option B"
+
+invite_vore_predTitle.0002:0 "Pred Invitation Event 0002"
+invite_vore_predOpening.0002:0 "Opening text for pred invitation 0002."
+invite_vore_predDesc.0002:0 "Event description for pred invitation 0002."
+invite_vore_predOpt.0002a:0 "Option A"

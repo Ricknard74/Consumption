@@ -1,22 +1,23 @@
-﻿template vore_relation_list_button {
-    button_normal = {
-        name = "open_vore_list"
-        visible = "[Character.CanCustomizePortrait]"
+﻿# template vore_relation_list_button {
+#     button_normal = {
+#         name = "open_vore_list"
+#         visible = "[Character.CanCustomizePortrait]"
         
-        size = { 35 35 }
-        datacontext = "[CharacterWindow.AccessCharacter]"
-        tooltip = "CV_CUSTOMIZE_PORTRAIT"
-        using = tooltip_ne
+#         size = { 35 35 }
+#         datacontext = "[CharacterWindow.AccessCharacter]"
+#         tooltip = "CV_CUSTOMIZE_PORTRAIT"
+#         using = tooltip_ne
         
-        icon = {
-            texture = "gfx/interface/buttons/button_lifestyles_base.dds"
-            size = { 100% 100% }
-        }
+#         icon = {
+#             texture = "gfx/interface/buttons/button_lifestyles_base.dds"
+#             size = { 100% 100% }
+#         }
         
-        button_vore_list = {
-            onclick = "[Character.OnCustomizePortrait]"
-            size = { 25 25 }
-            parentanchor = center
-        }
-    }
-}
+#         button_vore_list = {
+#             onclick = "[Character.OnCustomizePortrait]"
+#             size = { 25 25 }
+#             parentanchor = center
+#         }
+#     }
+# }
+

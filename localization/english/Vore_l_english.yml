@@ -158,6 +158,59 @@ safe_vore_religion:0 "Safe Voraphillia"
 safe_vore_religion_adj:0 "Safe Voraphillic"
 safe_vore_religion_desc:0 "Religion devoted to safely voring others"
 
+# High God
+vore_high_god_name:0 "Satorphage"
+vore_high_god_name_2:0 "The All-Enveloping"
+vore_high_god_name_possessive:0 "Satorphage's"
+vore_high_god_name_alternate:0 "The Gentle Maw"
+vore_high_god_name_alternate_possessive:0 "The Gentle Maw's"
+vore_high_god_desc:0 "Satorphage, the All-Enveloping, is the supreme deity, who consumes and shelters all, remaking those who have passed their time."
+
+# Fertility God
+vore_fertility_god_name:0 "Nesthra"
+vore_fertility_god_name_possessive:0 "Nesthra's"
+vore_fertility_god_desc:0 "Nesthra, goddess of fertility, whose warm womb nurtures life and growth in all living things."
+
+# Wealth God
+vore_wealth_god_name:0 "Gulandra"
+vore_wealth_god_name_possessive:0 "Gulandra's"
+vore_wealth_god_desc:0 "Gulandra, devourer and distributor of riches, who swallows treasures only to grant them anew."
+
+# Household God
+vore_household_god_name:0 "Maari"
+vore_household_god_name_possessive:0 "Maari's"
+vore_household_god_desc:0 "Maari, protector of hearth and home, who welcomes all within her comforting embrace."
+
+# Fate God
+vore_fate_god_name:0 "Myatch"
+vore_fate_god_name_possessive:0 "Myatch's"
+vore_fate_god_desc:0 "Myatch, god of fate and knowledge, who sees all things that have happened and will happen."
+
+# Knowledge God
+vore_knowledge_god_name:0 "Myatch"
+vore_knowledge_god_name_possessive:0 "Myatch"
+vore_knowledge_god_desc:0 "Myatch, god of fate and knowledge, who sees all things that have happened and will happen."
+
+# War God
+vore_war_god_name:0 "Cymera"
+vore_war_god_name_possessive:0 "Cymera's"
+vore_war_god_desc:0 "Cymera, fierce yet merciful, who tests the courage of warriors without ending their lives."
+
+# Trickster God
+vore_trickster_god_name:0 "Abythora"
+vore_trickster_god_name_possessive:0 "Abythora's"
+vore_trickster_god_desc:0 "Abythora, the most cunning of gods, whose fickle nature often leaves her victims in bewilderment."
+
+# Night God
+vore_night_god_name:0 "Caelivora"
+vore_night_god_name_possessive:0 "Caelivora's"
+vore_night_god_desc:0 "Caelivora, ruler of twilight, who envelops the world each night in gentle darkness and restful dreams."
+
+# Water God
+vore_water_god_name:0 "Engulios"
+vore_water_god_name_possessive:0 "Engulios'"
+vore_water_god_desc:0 "Engulios, lord of rivers and seas, who swallows the waters only to pour life back upon the land."
+
 #Savior Faith
 savior:0 "Vore Saviors"
 savior_adj:0 "Savoirian"

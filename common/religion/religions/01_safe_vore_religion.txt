@@ -75,88 +75,88 @@
 
 	localization = {
 
-		HighGodName = bon_high_god_name
-		HighGodName2 = bon_high_god_name_2
-		HighGodNamePossessive = bon_high_god_name_possessive
-		HighGodNameSheHe = CHARACTER_SHEHE_HE
-		HighGodHerselfHimself = CHARACTER_HIMSELF
-		HighGodHerHis = CHARACTER_HERHIS_HIS
-		HighGodNameAlternate = bon_high_god_name_alternate
-		HighGodNameAlternatePossessive = bon_high_god_name_alternate_possessive
+		HighGodName = vore_high_god_name
+		HighGodName2 = vore_high_god_name_2
+		HighGodNamePossessive = vore_high_god_name_possessive
+		HighGodNameSheHe = CHARACTER_SHEHE_SHE
+		HighGodHerselfHimself = CHARACTER_HERSELF
+		HighGodHerHis = CHARACTER_HERHIS_HER
+		HighGodNameAlternate = vore_high_god_name_alternate
+		HighGodNameAlternatePossessive = vore_high_god_name_alternate_possessive
 
 		#Creator
-		CreatorName = bon_creator_god_name
-		CreatorNamePossessive = bon_creator_god_name_possessive
-		CreatorSheHe = CHARACTER_SHEHE_HE
-		CreatorHerHis = CHARACTER_HERHIS_HIS
-		CreatorHerHim = CHARACTER_HERHIM_HIM
+		CreatorName = vore_high_god_name
+		CreatorNamePossessive = vore_high_god_name_possessive
+		CreatorSheHe = CHARACTER_SHEHE_SHE
+		CreatorHerHis = CHARACTER_HERHIS_HER
+		CreatorHerHim = CHARACTER_HERHIM_HER
 
 		#HealthGod
-		HealthGodName = bon_health_god_name
-		HealthGodNamePossessive = bon_health_god_name_possessive
-		HealthGodSheHe = CHARACTER_SHEHE_HE
-		HealthGodHerHis = CHARACTER_HERHIS_HIS
-		HealthGodHerHim = CHARACTER_HERHIM_HIM
+		HealthGodName = vore_high_god_name
+		HealthGodNamePossessive = vore_high_god_name_possessive
+		HealthGodSheHe = CHARACTER_SHEHE_SHE
+		HealthGodHerHis = CHARACTER_HERHIS_HER
+		HealthGodHerHim = CHARACTER_HERHIM_HER
 		
 		#FertilityGod
-		FertilityGodName = bon_fertility_god_name
-		FertilityGodNamePossessive = bon_fertility_god_name_possessive
+		FertilityGodName = vore_fertility_god_name
+		FertilityGodNamePossessive = vore_fertility_god_name_possessive
 		FertilityGodSheHe = CHARACTER_SHEHE_SHE
 		FertilityGodHerHis = CHARACTER_HERHIS_HER
 		FertilityGodHerHim = CHARACTER_HERHIM_HER
 
 		#WealthGod
-		WealthGodName = bon_wealth_god_name
-		WealthGodNamePossessive = bon_wealth_god_name_possessive
+		WealthGodName = vore_wealth_god_name
+		WealthGodNamePossessive = vore_wealth_god_name_possessive
 		WealthGodSheHe = CHARACTER_SHEHE_HE
 		WealthGodHerHis = CHARACTER_HERHIS_HIS
 		WealthGodHerHim = CHARACTER_HERHIM_HIM
 
 		#HouseholdGod
-		HouseholdGodName = bon_household_god_name
-		HouseholdGodNamePossessive = bon_household_god_name_possessive
-		HouseholdGodSheHe = CHARACTER_SHEHE_HE
-		HouseholdGodHerHis = CHARACTER_HERHIS_HIS
-		HouseholdGodHerHim = CHARACTER_HERHIM_HIM
+		HouseholdGodName = vore_household_god_name
+		HouseholdGodNamePossessive = vore_household_god_name_possessive
+		HouseholdGodSheHe = CHARACTER_SHEHE_SHE
+		HouseholdGodHerHis = CHARACTER_HERHIS_HER
+		HouseholdGodHerHim = CHARACTER_HERHIM_HER
 
 		#FateGod
-		FateGodName = bon_fate_god_name
-		FateGodNamePossessive = bon_fate_god_name_possessive
-		FateGodSheHe = CHARACTER_SHEHE_IT
-		FateGodHerHis = CHARACTER_HERHIS_ITS
-		FateGodHerHim = CHARACTER_HERHIM_IT
+		FateGodName = vore_knowledge_god_name
+		FateGodNamePossessive = vore_knowledge_god_name_possessive
+		FateGodSheHe = CHARACTER_SHEHE_HE
+		FateGodHerHis = CHARACTER_HERHIS_HIS
+		FateGodHerHim = CHARACTER_HERHIM_HIM
 
 		#KnowledgeGod
-		KnowledgeGodName = bon_knowledge_god_name
-		KnowledgeGodNamePossessive = bon_knowledge_god_name_possessive
+		KnowledgeGodName = vore_knowledge_god_name
+		KnowledgeGodNamePossessive = vore_knowledge_god_name_possessive
 		KnowledgeGodSheHe = CHARACTER_SHEHE_HE
 		KnowledgeGodHerHis = CHARACTER_HERHIS_HIS
 		KnowledgeGodHerHim = CHARACTER_HERHIM_HIM
 
 		#WarGod
-		WarGodName = bon_war_god_name
-		WarGodNamePossessive = bon_war_god_name_possessive
+		WarGodName = vore_war_god_name
+		WarGodNamePossessive = vore_war_god_name_possessive
 		WarGodSheHe = CHARACTER_SHEHE_SHE
 		WarGodHerHis = CHARACTER_HERHIS_HER
 		WarGodHerHim = CHARACTER_HERHIM_HER
 
 		#TricksterGod
-		TricksterGodName = bon_trickster_god_name
-		TricksterGodNamePossessive = bon_trickster_god_name_possessive
-		TricksterGodSheHe = CHARACTER_SHEHE_HE
-		TricksterGodHerHis = CHARACTER_HERHIS_HIS
-		TricksterGodHerHim = CHARACTER_HERHIM_HIM
+		TricksterGodName = vore_trickster_god_name
+		TricksterGodNamePossessive = vore_trickster_god_name_possessive
+		TricksterGodSheHe = CHARACTER_SHEHE_SHE
+		TricksterGodHerHis = CHARACTER_HERHIS_HER
+		TricksterGodHerHim = CHARACTER_HERHIM_HER
 
 		#NightGod
-		NightGodName = bon_night_god_name
-		NightGodNamePossessive = bon_night_god_name_possessive
+		NightGodName = vore_night_god_name
+		NightGodNamePossessive = vore_night_god_name_possessive
 		NightGodSheHe = CHARACTER_SHEHE_SHE
 		NightGodHerHis = CHARACTER_HERHIS_HER
 		NightGodHerHim = CHARACTER_HERHIM_HER
 
 		#WaterGod
-		WaterGodName = bon_water_god_name
-		WaterGodNamePossessive = bon_water_god_name_possessive
+		WaterGodName = vore_water_god_name
+		WaterGodNamePossessive = vore_water_god_name_possessive
 		WaterGodSheHe = CHARACTER_SHEHE_HE
 		WaterGodHerHis = CHARACTER_HERHIS_HIS
 		WaterGodHerHim = CHARACTER_HERHIM_HIM
@@ -166,11 +166,11 @@
 		PantheonTerm3 = religion_the_gods_3
 		PantheonTermHasHave = pantheon_term_have
 		GoodGodNames = {
-			bon_creator_god_name
-			bon_health_god_name
-			bon_wealth_god_name
-			bon_knowledge_god_name
-			bon_war_god_name
+			vore_high_god_name
+			vore_creator_god_name
+			vore_health_god_name
+			vore_wealth_god_name
+			vore_knowledge_god_name
 		}
 		DevilName = bon_devil_name
 		DevilNamePossessive = bon_devil_name_possessive

@@ -103,7 +103,7 @@ lethal_vore_effect = {
 	hidden_effect = {
 			scope:predator= {
 					if = {	#Should be in lethal_vore_religion
-							limit = { scope:predator = religion:fatal_vore_religion } 
+							limit = { scope:predator.religion = religion:fatal_vore_religion } 
 							show_as_tooltip = {
 									sacrifice_prisoner_effect = {
 											VICTIM = scope:prey

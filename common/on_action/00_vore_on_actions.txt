@@ -132,7 +132,7 @@ on_birthday = {
 
 #Might be buggy, allowing diseased characters to vore
 on_vore_18th_birthday_gift = {
-	trigger = { age = 18 }
+	trigger = { age >= 18 }
 	effect = {
 		set_variable = { name = voraciousness value = { 45 70 } }
 		set_variable = { name = num_prey value = 0 }
@@ -201,7 +201,7 @@ on_release_prey_from_prison = {
             save_scope_as = prey
             
             # Find the predator
-			any_relation = {
+			random_relation = {
 				type = predator
 				save_scope_as = predator
 			}
