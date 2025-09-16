@@ -17,7 +17,7 @@ religious_vore.0001 = {
                         template = prey_character_template
                         save_scope_as = prey
                 }
-                trigger_event = religious_vore.0013
+                #trigger_event = religious_vore.0013
         }
 
         right_portrait = {
@@ -420,12 +420,33 @@ religious_vore.0008 = {
         #         }
         # }
 
+        #AI Option
+        option = {
+                name = religious_voreOpt.0008a
+                trigger = {
+                        is_ai = yes
+                }
+                scope:predator = {
+                        add_piety = 10
+                        clear_saved_scope = predator
+                        hidden_effect = {
+                                trigger_event = {
+                                        id = religious_vore.0003
+                                        days = { 1 3 }  # Add slight delay to avoid conflicts
+                                }
+                        }
+                }
+        }
+
 	#End of Feast
 	option = {
                 name = religious_voreOpt.0008
                 # scope:predator.faith = {
                 #         change_fervor = { value = 10 }
                 # }
+                trigger = {
+                        is_ai = no
+                }
                 scope:predator = {
                         add_piety = 25
                         clear_saved_scope = predator
@@ -490,6 +511,7 @@ religious_vore.0010 = {
         desc = religious_voreDesc.0010
 
         immediate = {
+                #Prey Converted
                 scope:recipient = {
                         set_character_faith_with_conversion = faith:savior
                 }
@@ -507,13 +529,13 @@ religious_vore.0010 = {
 }
 
 #Makes so some followers have bellies
-religious_vore.0013 = {
-        type = character_event
-        hidden = yes
+# religious_vore.0013 = {
+#         type = character_event
+#         hidden = yes
 
-        option = {
-                random_courtier_or_guest = {
-                    add_character_flag = portrait_belly    
-                }
-        }
-}
+#         option = {
+#                 random_courtier_or_guest = {
+#                     add_character_flag = portrait_belly    
+#                 }
+#         }
+# }

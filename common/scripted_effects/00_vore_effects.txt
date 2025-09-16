@@ -62,6 +62,7 @@ safe_vore_effect = {
 			add_character_modifier = { modifier = $type$_vored }
 			add_character_flag = vored
 			add_trait = $type$_vored
+			#add_trait = incapable Maybe modify it to be a little less harmful
 			add_relation_flag = {
 				flag = $type$
 				target = scope:prey

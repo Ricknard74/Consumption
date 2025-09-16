@@ -1,0 +1,37 @@
+namespace = courtier_vore
+
+coutier_vore.0001 = { # Jester Vore Event
+	type = character_event
+	title = courtier_voreTitle.0001
+	theme = court
+	desc = courtier_voreDesc.0001
+
+	immediate = {
+		scope:actor = {
+			save_scope_as = predator
+		}
+		random_courtier_or_guest = {
+			save_scope_as = prey
+		}
+	}
+
+
+	option = {
+		name = courtier_voreOpt.0001
+		safe_vore_effect = {
+			type = oral
+			prison_type = vore_unwilling
+		}
+	}
+
+	option = {
+		name = courtier_voreOpt.0002
+		add_trait = gluttonous
+		add_character_modifier = { modifier = satisfied }
+		add_opinion = {
+			who = ROOT
+			modifier = pleased
+			value = 10
+		}
+	}
+}

@@ -211,3 +211,21 @@ on_release_prey_from_prison = {
 		}
 	}
 }
+
+jester_ongoing = {
+	on_actions = {
+		on_jester_vore
+	}
+}
+
+on_jester_vore = {
+	trigger = {
+		has_character_flag = vore_capable
+		age >= 18
+	}
+	effect = {
+		trigger_event = {
+			id = jester_vore.0001
+		}
+	}
+}

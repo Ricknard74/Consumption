@@ -569,7 +569,7 @@ vore.0001 = {
         #Non lethal and lethal vore events,
         #Where vore religious counties have issues with predators, causing buffs and debuffs to the county
         #Vore Conversion for court members that depends on their conversion chance for how long it will take\
-        #populate_actor_list to get multiple prey
+        #Effect function so safe_vore_effect can have a random orifice generated
         #Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
         #Hunt activity with vore
         #Seduce scheme with vore
