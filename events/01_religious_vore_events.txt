@@ -12,6 +12,9 @@ religious_vore.0001 = {
 	}
 
         immediate = {
+                ROOT = {
+                        save_scope_as = predator
+                }
                 create_character = {
                         location = root.capital_province
                         template = prey_character_template
@@ -37,7 +40,7 @@ religious_vore.0001 = {
                                 PREY = scope:prey
                         }
                 }
-                root = {
+                scope:predator = {
                         add_character_modifier = religious_vore_predator
                         save_scope_as = predator
                 }
@@ -226,7 +229,6 @@ religious_vore.0004 = {
 
         immediate = {
                 scope:predator = {
-                        add_character_flag = vore_predator 
                         add_character_flag = portrait_belly  
                 }
         }    
@@ -242,10 +244,10 @@ religious_vore.0004 = {
                         trigger_event = religious_vore.0008
                         random_list = {
                                 100 = {
-                                        trigger_event = { id = religious_vore.0009 days = 1 }
+                                        trigger_event = { id = religious_vore.0009 days = 5 }
                                 }
                                 0 = {
-                                        trigger_event = { id = religious_vore.0010 days = 2 }
+                                        trigger_event = { id = religious_vore.0010 days = 10 }
                                 }
                         }       
                 }
@@ -444,9 +446,6 @@ religious_vore.0008 = {
                 # scope:predator.faith = {
                 #         change_fervor = { value = 10 }
                 # }
-                trigger = {
-                        is_ai = no
-                }
                 scope:predator = {
                         add_piety = 25
                         clear_saved_scope = predator
@@ -457,6 +456,7 @@ religious_vore.0008 = {
                                                 can_vore = yes
                                         }
                                         trigger_event = {
+                                                # Add event that just gives them vore traits to avoid massive court population increases
                                                 id = religious_vore.0003
                                                 days = { 1 3 }  # Add slight delay to avoid conflicts
                                         }

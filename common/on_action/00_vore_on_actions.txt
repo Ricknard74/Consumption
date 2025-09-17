@@ -205,9 +205,8 @@ on_release_prey_from_prison = {
 				type = predator
 				save_scope_as = predator
 			}
-                
-                # Now call the effect with proper scopes
-                release_prey_location_check_effect = yes
+			# Now call the effect with proper scopes
+			release_prey_location_check_effect = yes
 		}
 	}
 }
@@ -224,8 +223,11 @@ on_jester_vore = {
 		age >= 18
 	}
 	effect = {
+		scope:jester = {
+			save_scope_as = predator
+		}
 		trigger_event = {
-			id = jester_vore.0001
+			id = courtier_vore.0001
 		}
 	}
 }
