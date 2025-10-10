@@ -56,11 +56,11 @@ on_add_vore_toggles = {
 					}
 				}
 				every_courtier = {
-					limit = { NOT = { faith = scope:plyr.faith} }
+					limit = { NOT = { faith = scope:plyr.faith } }
 					set_character_faith = scope:plyr.faith
 				}
 				every_vassal_or_below = {
-					limit = { NOT = { faith = scope:plyr.faith} }
+					limit = { NOT = { faith = scope:plyr.faith } }
 					set_character_faith = scope:plyr.faith
 				}
 				every_courtier_or_guest = {
@@ -89,7 +89,7 @@ on_add_vore_toggles = {
 		}
 		clear_saved_scope = plyr
 		every_living_character = {
-			limit = { age >= 18}
+			limit = { age >= 18 }
 			add_character_flag = vore_capable
 			save_scope_as = char
 			set_variable = { name = num_prey value = 0 }
@@ -100,7 +100,7 @@ on_add_vore_toggles = {
 			set_variable = { name = oral_vore_tendency value = { 50 90 } }
 			set_variable = { name = anal_vore_tendecny value = {10 50 } }
 			if = {
-				limit = { is_female = yes }
+				limit = { scope.char = { is_female = yes } }
 				set_variable = { name = unbirth_vore_tendency value = { 10 40 } }
 			} 
 			else = {

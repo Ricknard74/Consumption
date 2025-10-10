@@ -21,10 +21,11 @@ safe_vore_effect = {
     # Check if we found a slot
     if = {
 		limit = {
-			scope:predator = { var:assigned_slot > 0 }
+			#scope:predator = { var:assigned_slot > 0 }
+			can_vore = yes
         }
 		
-		apply_slot_flags_effect = yes
+		#apply_slot_flags_effect = yes
 		scope:predator = {
 			add_trait = $type$_predator
 			add_character_flag = $type$_predator

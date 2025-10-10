@@ -20,7 +20,6 @@ religious_vore.0001 = {
                         template = prey_character_template
                         save_scope_as = prey
                 }
-                #trigger_event = religious_vore.0013
         }
 
         right_portrait = {
@@ -61,7 +60,7 @@ religious_vore.0001 = {
 	option = {
 		name = religious_voreOpt.0001c
                 ai_chance = {
-                        base = 50
+                        base = 20
                 }
                 hidden_effect = {
                         scope:prey = { silent_disappearance_effect = yes }
@@ -364,13 +363,6 @@ religious_vore.0007 = {
 	desc = religious_voreDesc.0007
         theme = feast_activity
 
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
-
         immediate = {
                 scope:predator = {
 #                        add_character_flag = genital_vore_predator 
@@ -422,24 +414,6 @@ religious_vore.0008 = {
         #         }
         # }
 
-        #AI Option
-        option = {
-                name = religious_voreOpt.0008a
-                trigger = {
-                        is_ai = yes
-                }
-                scope:predator = {
-                        add_piety = 10
-                        clear_saved_scope = predator
-                        hidden_effect = {
-                                trigger_event = {
-                                        id = religious_vore.0003
-                                        days = { 1 3 }  # Add slight delay to avoid conflicts
-                                }
-                        }
-                }
-        }
-
 	#End of Feast
 	option = {
                 name = religious_voreOpt.0008
@@ -454,12 +428,9 @@ religious_vore.0008 = {
                                         limit = {
                                                 has_faith = court_owner.faith
                                                 can_vore = yes
+                                                is_ai = yes
                                         }
-                                        trigger_event = {
-                                                # Add event that just gives them vore traits to avoid massive court population increases
-                                                id = religious_vore.0003
-                                                days = { 1 3 }  # Add slight delay to avoid conflicts
-                                        }
+                                        trigger_event = { id = religious_vore.0013 days = {0 7} }
                                 }
                         }
                 }
@@ -480,7 +451,6 @@ religious_vore.0009 = {
         #                 } 
         #                 triggered_desc = {
         #                         trigger = { days_of_conversion > 365 }
-        #                         }
         #                         desc = religious_voreDesc.0009b
         #                 }       
         #         }
@@ -529,13 +499,27 @@ religious_vore.0010 = {
 }
 
 #Makes so some followers have bellies
-# religious_vore.0013 = {
-#         type = character_event
-#         hidden = yes
+religious_vore.0013 = {
+        type = character_event
+        hidden = yes
 
-#         option = {
-#                 random_courtier_or_guest = {
-#                     add_character_flag = portrait_belly    
-#                 }
-#         }
-# }
+        immediate = {
+                scope:actor = {
+                        save_scope_as = predator
+                }
+                create_character = {
+                        location = root.capital_province
+                        template = prey_character_template
+                        save_scope_as = prey
+                }
+        }
+        
+        option = {
+                name = religious_voreOpt.0013
+                add_piety = 10
+                safe_vore_effect = {
+                        type = oral
+                        prison_type = vore_religious_unwilling
+                }
+        }
+}

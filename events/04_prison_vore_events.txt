@@ -121,7 +121,7 @@ prison_vore.0002 = {
                 name = prison_voreOpt.0002a
                 ai_chance = {
                         lethal_vore_modifier = { 
-                                        PREY = scope:prey
+                                PREY = scope:prey
                         }
                 }
                 trigger = {
