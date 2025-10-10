@@ -38,6 +38,8 @@ safe_vore_effect = {
 				relation = prey
 			}
 			change_variable = { name = num_prey add = 1}
+			add_courtier = scope:prey
+			create_character_memory = { type = pred_non_fatal_memory participants = { prey = scope:prey } }
 		}
 		if = {
 			limit = {

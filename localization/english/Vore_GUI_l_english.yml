@@ -20,3 +20,6 @@ NO_PREDATOR_PREY_RELATIONS:0 "This character has no predator or prey relations."
 # Optional: More descriptive headers
 CHARACTER_AS_PREDATOR_HEADER_ALT:0 "This character hunts:"
 CHARACTER_AS_PREY_HEADER_ALT:0 "This character is hunted by:"
+
+#Memories
+pred_non_fatal_memory:0 "I intook [prey.GetName]"
