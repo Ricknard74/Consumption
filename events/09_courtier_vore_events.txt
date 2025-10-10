@@ -1,4 +1,4 @@
-namespace = courtier_vore
+﻿namespace = courtier_vore
 
 courtier_vore.0001 = { # Jester Vore Event
 	type = character_event
@@ -11,6 +11,9 @@ courtier_vore.0001 = { # Jester Vore Event
 			save_scope_as = observer
 		}
 		random_courtier_or_guest = {
+			limit = {
+				can_be_prey = yes
+			}
 			save_scope_as = prey
 		}
 	}

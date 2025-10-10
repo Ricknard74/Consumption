@@ -1,7 +1,4 @@
 ﻿can_vore = {
-    # trigger_IF = {
-    #     limit = { NOT = { exists = global_var:gender_allowed } }
-    # }
     #Females Only
     trigger_IF = {
         limit = { global_var:gender_allowed = 0 }
@@ -11,13 +8,6 @@
     trigger_ELSE_IF = {
         limit = { global_var:gender_allowed = 1 }
         is_female = no
-    }
-    #Both Sexes
-    trigger_ELSE = {	
-        OR = {
-            is_female = yes
-            is_female = no
-        }
     }
     age >= 18
     has_character_flag = vore_capable  

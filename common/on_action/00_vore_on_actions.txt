@@ -32,16 +32,17 @@ on_vore_defensive_check = {
 
 on_add_vore_toggles = {
 	effect = {
-		set_global_variable = { name = oral_banned value = no }
-		set_global_variable = { name = unbirth_banned value = no }
-		set_global_variable = { name = anal_banned value = no }
-		set_global_variable = { name = cock_banned value = no }
-		set_global_variable = { name = scat_banned value = yes }
-		set_global_variable = { name = digestion_banned value = no }
-		set_global_variable = { name = transformation_banned value = no }
-		set_global_variable = { name = gender_allowed value = 0 }
-		set_global_variable = { name = pred_frequency value = 100}
-		set_global_variable = { name = global_voraciousness value = 50 }
+		trigger_event = { on_action = on_vore_defensive_check }
+		# set_global_variable = { name = oral_banned value = no }
+		# set_global_variable = { name = unbirth_banned value = no }
+		# set_global_variable = { name = anal_banned value = no }
+		# set_global_variable = { name = cock_banned value = no }
+		# set_global_variable = { name = scat_banned value = yes }
+		# set_global_variable = { name = digestion_banned value = no }
+		# set_global_variable = { name = transformation_banned value = no }
+		# set_global_variable = { name = gender_allowed value = 0 }
+		# set_global_variable = { name = pred_frequency value = 100}
+		# set_global_variable = { name = global_voraciousness value = 50 }
 		every_player = {
 			if = {
 				limit = { age >= 18 }
@@ -111,11 +112,11 @@ on_add_vore_toggles = {
 					scope:char.religion = { is_in_family = rf_voraphillic}
 				}
 				every_courtier = {
-					limit = { NOT = { faith = scope:char.faith} }
+					limit = { NOT = { faith = scope:char.faith } }
 					set_character_faith = scope:char.faith
 				}
 				random_courtier_or_guest = {
-					limit = { NOT = { faith = scope:char.faith} }
+					limit = { NOT = { faith = scope:char.faith } }
 					set_character_faith_with_conversion = scope:char.faith
 				}
 			}
@@ -219,7 +220,9 @@ jester_ongoing = {
 
 on_jester_vore = {
 	trigger = {
-		has_character_flag = vore_capable
+		scope:jester = {
+			can_vore = yes
+		}
 		age >= 18
 	}
 	effect = {

@@ -422,17 +422,17 @@ religious_vore.0008 = {
                 # }
                 scope:predator = {
                         add_piety = 25
-                        clear_saved_scope = predator
-                        hidden_effect = {
+                        #hidden_effect = {
                                 every_courtier_or_guest = {
                                         limit = {
                                                 has_faith = court_owner.faith
                                                 can_vore = yes
                                                 is_ai = yes
                                         }
-                                        trigger_event = { id = religious_vore.0013 days = {0 7} }
+                                        trigger_event = { id = religious_vore.0013 }
                                 }
-                        }
+                        #}
+                        clear_saved_scope = predator
                 }
 	}
 }
@@ -504,11 +504,11 @@ religious_vore.0013 = {
         hidden = yes
 
         immediate = {
-                scope:actor = {
+                ROOT = {
                         save_scope_as = predator
                 }
                 create_character = {
-                        location = root.capital_province
+                        location = ROOT.scope:predator.province
                         template = prey_character_template
                         save_scope_as = prey
                 }
