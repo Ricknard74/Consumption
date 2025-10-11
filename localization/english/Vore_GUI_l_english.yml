@@ -22,4 +22,5 @@ CHARACTER_AS_PREDATOR_HEADER_ALT:0 "This character hunts:"
 CHARACTER_AS_PREY_HEADER_ALT:0 "This character is hunted by:"
 
 #Memories
-pred_non_fatal_memory:0 "I intook [prey.GetName]"
+pred_oral_unwilling_non_fatal_memory_desc:0 "I forcefully swallowed [prey.GetName] into my stomach"
+prey_oral_unwilling_non_fatal_memory_desc:0 "I was forced down the throat of [predator.GetName]"

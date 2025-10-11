@@ -71,6 +71,7 @@ safe_vore_effect = {
 				target = scope:prey
 				relation = prey
 			}
+			create_character_memory = { type = prey_non_fatal_memory participants = { predator = scope:predator } }
 		}
 	}
 	else = {

@@ -521,5 +521,6 @@ religious_vore.0013 = {
                         type = oral
                         prison_type = vore_religious_unwilling
                 }
+                trigger_event = { id = vore.0001 years = { 1 2 }}
         }
 }
