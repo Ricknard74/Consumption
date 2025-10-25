@@ -1,28 +1,28 @@
-﻿calmed_the_crowd_memory = {
-	categories = { minor positive }
-	icon = "activity_tournament.dds"
-	description = {
-		first_valid = {
-			desc = calmed_the_crowd_memory_desc
-		}
-	}
+﻿# calmed_the_crowd_memory = {
+# 	categories = { minor positive }
+# 	icon = "activity_tournament.dds"
+# 	description = {
+# 		first_valid = {
+# 			desc = calmed_the_crowd_memory_desc
+# 		}
+# 	}
 
-	second_perspective_description = {
-		first_valid = {
-			desc = calmed_the_crowd_memory_desc_second_perspective
-		}
-	}
+# 	second_perspective_description = {
+# 		first_valid = {
+# 			desc = calmed_the_crowd_memory_desc_second_perspective
+# 		}
+# 	}
 
-	third_perspective_description = {
-		first_valid = {
-			desc = calmed_the_crowd_memory_desc_third_perspective
-		}
-	}
+# 	third_perspective_description = {
+# 		first_valid = {
+# 			desc = calmed_the_crowd_memory_desc_third_perspective
+# 		}
+# 	}
 
-	duration = {
-		years = memory_default_duration
-	}
-}
+# 	duration = {
+# 		years = memory_default_duration
+# 	}
+# }
 
 pred_non_fatal_memory = {
 	categories = { minor positive }

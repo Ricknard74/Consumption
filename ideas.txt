@@ -1,0 +1,38 @@
+increase stomach size depending on number of prey
+
+Add memories like "Ate someone" or "Escaped stomach"
+
+select the prey that the actor wants to interact with from the relationship screen, use bigui ll mod for reference
+
+Vore event for conversion of court members
+
+Vore Conversion flavor for convert county
+Vore themed priest council role
+
+New effect function so safe_vore_effect and lethal vore effect can have a random orifice generated
+
+Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
+
+Hunt activity with vore events
+Seduce scheme with vore events
+Feast activity with vore events
+
+County vore modifiers like "Vored wrong person" or "Vored gracefully" or "Digested evil criminal" and such
+
+Battle events for capturing or digesting other knights and commanders
+
+Vore sacrifice event
+
+Change voreDesc.xxxx to vore_oralDesc so it can be prision_vore_OralDesc.0001
+
+Make so the player can choose to execute a prisoner by vore in addition to lethal and non-lethal interaction choices
+
+Add a jester vore event, and make it so the player can choose to make it lethal if they are sadistic. It might improve or hurt their opinion of the player depending on the jesters traits Also add a chance of failure to digest and make the prey wounded or disfigured
+
+Add some plague vore events, specifically for religions that worship vore gods
+
+Implement a new imprison system so lowborn can do proper vore
+
+Add new vore themed men at arms
+
+Add new vore themed faiths to current religions, like norse, bon or papuan
