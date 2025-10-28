@@ -470,12 +470,12 @@ clean_up_effect = {
 
 #Removes Unneccessary Info in Events With Exit Options (Defunct)
 exit_clean_up_effect = {
-	scope:predator = {
-		clear_saved_scope = predator
-		scope:prey = {
-			clear_saved_scope = prey       
-		}
-	}
+	# scope:predator = {
+	# 	clear_saved_scope = predator
+	# 	scope:prey = {
+	# 		clear_saved_scope = prey       
+	# 	}
+	# }
 }
 
 vore_imprison_character_effect = {

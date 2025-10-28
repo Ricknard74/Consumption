@@ -12,7 +12,9 @@ anal_vored = {
 	genetic = no
 	incapacitating = yes
 	birth = 0
-	general_opinion = -15	
+	general_opinion = -15
+	dread = -10	
+	health = -1
 }
 unbirth_vored = {
 	physical = yes
@@ -104,10 +106,8 @@ predator_1 = {
 	shown_in_ruler_designer = yes
 	ruler_designer_cost = 50
 	inherit_chance = 0
-	birth = 0.04
-	health = 1
 	genetic = no
-#	random_creation = 0.04
+	random_creation = 0.01
 	prowess = 1
 	martial = 2
 	attraction_opinion = 10
@@ -186,7 +186,7 @@ predator_3 = {
 	}
 	opposite_opinion = -20
 	minimum_age = 26
-#	random_creation = 0.01
+	#	random_creation = 0.01
 	genetic = no
 	shown_in_ruler_designer = no
 	prowess = 4
@@ -200,28 +200,41 @@ predator_3 = {
 preyish = {
 	category = personality
 	birth = 0.05
- 	opposites = {
-  	    predator_1
-     	predator_2
-     	predator_3
+	opposites = {
+		predator_1
+		predator_2
+		predator_3
     }
 	minimum_age = 18
 	ruler_designer_cost = 60
-  	opposite_opinion = 20
+	opposite_opinion = 20
 	shown_in_ruler_designer = yes
 	inherit_chance = 0
-#	random_creation = 0.04
-	health = 2
-	martial = -3
-	learning = 4
-	intrigue = 3
+	#	random_creation = 0.04
+	martial = -2
+	intrigue = -2
 	diplomacy = 4
-	stewardship = 3
+	dread_gain = -5
 }
 
-# preyish_2 = {
-# 	localization = lustful prey
-# 	category = personality
+voracious = {
+	category = personality
+	birth = 1
+	minimum_age = 18
+	random_creation = 0.04
+	shown_in_ruler_designer = yes
+	ruler_designer_cost = 60
+	inherit_chance = 0
+	martial = 2
+	intrigue = 2
+	diplomacy = -1
+	stewardship = -1
+	dread_gain = 5
+}
+
+# experienced_prey_2 = {
+	# 	localization = lustful prey
+	# 	category = personality
 # 	birth = 0.05
 #  	opposites = {
 #   	    predator_1
@@ -248,12 +261,6 @@ preyish = {
 # 	prowess = 2
 # }
 
-# voracious = {
-# 	category = personality
-# 	birth = 1
-# 	minimum_age = 18
-# 	# voracious modifer more likely to commit vore, and gets greater piety from vore
-# }
 
 # transforming = {
 # 	shown_in_ruler_designer = no

@@ -6,9 +6,18 @@ courtier_vore.0001 = { # Jester Vore Event
 	theme = court
 	desc = courtier_voreDesc.0001
 
+	trigger = {
+		scope:jester = {
+			can_vore = yes
+		}
+	}
+
 	immediate = {
 		scope:root = {
 			save_scope_as = observer
+		}
+		scope:jester = {
+			save_scope_as = predator
 		}
 		random_courtier_or_guest = {
 			limit = {
