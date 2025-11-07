@@ -39,7 +39,7 @@ digesting = {
 	shown_in_ruler_designer = no
 	birth = 0
 	inherit_chance = 0
-	health = 2 
+	health = 1 
 	general_opinion = -15
 }
 genital_digesting = {
@@ -48,7 +48,7 @@ genital_digesting = {
 	shown_in_ruler_designer = no
 	birth = 0
 	inherit_chance = 0
-	health = 2 
+	health = 1 
 	general_opinion = -15
 }
 
@@ -63,7 +63,7 @@ oral_predator = {
 	physical = yes
 	shown_in_ruler_designer = no
 	birth = 0
-	health = 1
+	health = 0.5
 	general_opinion = 15
 	inherit_chance = 0
 }
@@ -71,15 +71,15 @@ anal_predator = {
 	shown_in_ruler_designer = no
 	physical = yes
 	genetic = no
-	health = 1
+	health = 0.5
 	general_opinion = -5
 }
 unbirth_predator = {
 	shown_in_ruler_designer = no
 	genetic = no
 	physical = yes
-	health = 1
-	fertility = -1
+	health = 0.5
+	fertility = -0.1
 	attraction_opinion = 15
 	spouse_opinion = 15
 }
@@ -87,7 +87,7 @@ cock_predator = {
 	shown_in_ruler_designer = no
 	genetic = no
 	physical = yes
-	health = 1
+	health = 0.5
 	fertility = -1
 	attraction_opinion = 15
 	spouse_opinion = 15

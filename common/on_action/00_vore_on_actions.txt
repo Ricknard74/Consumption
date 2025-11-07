@@ -213,13 +213,7 @@ on_release_prey_from_prison = {
 }
 
 jester_ongoing = {
-	on_actions = {
-		on_jester_vore
-	}
-}
-
-on_jester_vore = {
 	random_events = {
-			2000 = courtier_vore.0001
+		2000 = courtier_vore.0001
 	}
 }
