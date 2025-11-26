@@ -13,13 +13,29 @@ New effect function so safe_vore_effect and lethal vore effect can have a random
 
 Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
 
-Hunt activity with vore events
-Seduce scheme with vore events
+Make a partially digested person disfigured. Make a similar traumatized modifier for non-fatal vore for the sake of balance.
+
+Hunt activity with vore events like catching some of your guests voring each other, or being eaten by their target, fatally and non-fatally.
+
+Seduce and romance schemes with vore events and endings
+
 Feast activity with vore events
+
+Vore travel events like a wolf, hyena, bear, tiger, lion, crocodile, or hippo devouring someone.
+
+Perhaps have the player or one of their courtiers try to rescue someone from the stomach or a human or animal.
+
+Other feral vore possibilities. Should be a preference option
+
+Maybe someone gets angry your dog or cat ate them or a relative.
 
 County vore modifiers like "Vored wrong person" or "Vored gracefully" or "Digested evil criminal" and such
 
-Battle events for capturing or digesting other knights and commanders
+Battle events for capturing or digesting enemy knights and commanders
+
+Give an artifact away to be eaten in exchange for some bonuses
+
+Steal an artifact vore description
 
 Vore sacrifice event
 
@@ -35,4 +51,6 @@ Implement a new imprison system so lowborn can do proper vore
 
 Add new vore themed men at arms
 
-Add new vore themed faiths to current religions, like norse, bon or papuan
+Add new vore themed faiths to current religions, like norse, bon or heresies
+
+Add new voracious tenet for cultures that increases the chance for vore and capacity.
