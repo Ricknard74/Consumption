@@ -1,4 +1,110 @@
-﻿#Non-lethal Vore
+﻿random_orifice_safe_vore_effect = {
+	random_list = {
+		1 = {
+			trigger = {
+				global_var:oral_banned = no
+			}
+			oral_vore_modifier = {
+				PREY = scope:prey
+			}
+			safe_vore_effect = {
+				type = oral
+				prison_type = $prison_type$
+			}
+		}
+		1 = {
+			trigger = {
+				global_var:anal_banned = no
+			}
+			anal_vore_modifier = {
+				PREY = scope:prey
+			}
+			safe_vore_effect = {
+				prison_type = $prison_type$
+				type = anal
+			}
+		}
+		1 = {
+			trigger = {
+				global_var:unbirth_banned = no
+				is_female = yes
+			}
+			unbirth_vore_modifier = {
+				PREY = scope:prey
+			}
+			safe_vore_effect = {
+				prison_type = $prison_type$
+				type = unbirth
+			}
+		}
+		1 = {
+			trigger = {
+				global_var:cock_banned = no
+				is_female = no
+			}
+			cock_vore_modifier = {
+				PREY = scope:prey
+			}
+			safe_vore_effect = {
+				prison_type = $prison_type$
+				type = cock
+			}
+		}
+	}
+}
+
+random_orifice_lethal_vore_effect = {
+	random_list = {
+		1 = {
+			trigger = {
+				global_var:oral_banned = no
+			}
+			oral_vore_modifier = {
+				PREY = scope:prey
+			}
+			lethal_vore_effect = {
+				type = oral
+			}
+		}
+		1 = {
+			trigger = {
+				global_var:anal_banned = no
+			}
+			anal_vore_modifier = {
+				PREY = scope:prey
+			}
+			lethal_vore_effect = {
+				type = anal
+			}
+		}
+		1 = {
+			trigger = {
+				global_var:unbirth_banned = no
+				is_female = yes
+			}
+			unbirth_vore_modifier = {
+				PREY = scope:prey
+			}
+			lethal_vore_effect = {	
+				type = unbirth
+			}
+		}
+		1 = {
+			trigger = {
+				global_var:cock_banned = no
+				is_female = no
+			}
+			cock_vore_modifier = {
+				PREY = scope:prey
+			}
+			lethal_vore_effect = {
+				type = cock
+			}
+		}
+	}
+}
+
+#Non-lethal Vore
 safe_vore_effect = {
 	if = {
 		limit = {
@@ -38,7 +144,6 @@ safe_vore_effect = {
 				relation = prey
 			}
 			change_variable = { name = num_prey add = 1}
-			add_courtier = scope:prey
 			create_character_memory = { type = pred_non_fatal_memory participants = { prey = scope:prey } }
 		}
 		if = {
@@ -71,7 +176,7 @@ safe_vore_effect = {
 				target = scope:prey
 				relation = prey
 			}
-			create_character_memory = { type = prey_non_fatal_memory participants = { predator = scope:predator } }
+			create_character_memory = { type = prey_non_fatal_memory participants = { pred = scope:predator } }
 		}
 	}
 	else = {

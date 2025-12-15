@@ -17,9 +17,9 @@ destress_vore.0001 = {
 			global_var:digestion_banned = no
 		}
 		add_stress = -40
-		#add_trait = serial_pred # (optional trait you define)
+		#add_trait = serial_pred # (optional trait to define)
 		trigger_event = destress_vore.0003
-		#add_character_flag = seriel_killer
+		#add_character_flag = serial_killer
 	}
 
 	#Fatal gluttony, eat for food

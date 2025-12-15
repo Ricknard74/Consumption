@@ -1,4 +1,8 @@
-increase stomach size depending on number of prey
+Add a notification event every time vore and release happens for debug purposes
+
+Physician vore, either a treatment description or where you are made incapable for a month but have a higher chance of healing.
+
+increase stomach size depending on number of, and accounting for dwarf and giant traits
 
 Add memories like "Ate someone" or "Escaped stomach"
 
@@ -44,8 +48,6 @@ Vore sacrifice event
 Change voreDesc.xxxx to vore_oralDesc so it can be prision_vore_OralDesc.0001
 
 Make so the player can choose to execute a prisoner by vore in addition to lethal and non-lethal interaction choices
-
-Add a jester vore event, and make it so the player can choose to make it lethal if they are sadistic. It might improve or hurt their opinion of the player depending on the jesters traits Also add a chance of failure to digest and make the prey wounded or disfigured
 
 Add some plague vore events, specifically for religions that worship vore gods
 

@@ -12,6 +12,7 @@ courtier_vore.0001 = { # Jester Vore Event
 		}
 	}
 
+	
 	immediate = {
 		court_position:court_jester_court_position = {
 			save_scope_as = predator
@@ -23,12 +24,25 @@ courtier_vore.0001 = { # Jester Vore Event
 			save_scope_as = prey
 		}
 	}
+	
+	left_portrait = {
+		character = scope:predator
+		animation = schadenfreude
+	}
 
+	right_portrait = {
+		character = scope:prey
+		animation = fear
+	}
+
+	lower_left_portrait = {
+		character = root
+		animation = laugh
+	}
 
 	option = {
 		name = courtier_voreOpt.0001
-		safe_vore_effect = {
-			type = oral
+		random_orifice_safe_vore_effect = {
 			prison_type = vore_unwilling
 		}
 	}
@@ -38,9 +52,7 @@ courtier_vore.0001 = { # Jester Vore Event
 		scope:predator = {
 			add_trait = gluttonous
 			add_character_modifier = { modifier = satisfied }
-			lethal_vore_effect = {
-				type = oral
-			}
+			random_orifice_lethal_vore_effect = yes
 		}
 	}
 }
