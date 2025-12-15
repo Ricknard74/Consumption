@@ -5,7 +5,7 @@
         is_female = yes
     }
     #Males Only
-    trigger_ELSE_IF = {
+    trigger_IF = {
         limit = { global_var:gender_allowed = 1 }
         is_female = no
     }

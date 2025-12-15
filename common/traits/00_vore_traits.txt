@@ -13,7 +13,7 @@ anal_vored = {
 	incapacitating = yes
 	birth = 0
 	general_opinion = -15
-	dread = -10	
+	dread_baseline_add = -10	
 	health = -1
 }
 unbirth_vored = {
@@ -100,6 +100,7 @@ cock_predator = {
 predator_1 = {
 	category = fame
 	group = predator
+	level = 1
 	opposites = {
 		preyish
 	}
@@ -111,12 +112,10 @@ predator_1 = {
 	ruler_designer_cost = 50
 	inherit_chance = 0
 	genetic = no
-	random_creation = 0.01
 	prowess = 1
 	martial = 2
 	attraction_opinion = 10
 	fertility = 0.25
-	level = 1
 }
 #chatgpt ideas
 # voraphile = { Likes vore-capable characters
@@ -161,6 +160,7 @@ predator_1 = {
 predator_2 = {
 	category = fame
 	group = predator
+	level = 2
 	opposites = {
 		preyish
 	}
@@ -177,11 +177,11 @@ predator_2 = {
 	martial = 4
 	intrigue = 2
 	stewardship = 2
-	level = 2
 }
 predator_3 = {
 	category = fame
 	group = predator
+	level = 3
 	opposites = {
 		preyish
 	}
@@ -199,7 +199,6 @@ predator_3 = {
 	martial = 6
 	intrigue = 3
 	stewardship = 3
-	level = 3
 }
 preyish = {
 	category = personality
@@ -218,14 +217,13 @@ preyish = {
 	martial = -2
 	intrigue = -2
 	diplomacy = 4
-	dread_gain = -5
+	dread_gain_mult = -5
 }
 
 voracious = {
 	category = personality
 	birth = 1
 	minimum_age = 18
-	random_creation = 0.04
 	shown_in_ruler_designer = yes
 	ruler_designer_cost = 60
 	inherit_chance = 0
@@ -233,7 +231,7 @@ voracious = {
 	intrigue = 2
 	diplomacy = -1
 	stewardship = -1
-	dread_gain = 5
+	dread_gain_mult = 5
 }
 
 # experienced_prey_2 = {

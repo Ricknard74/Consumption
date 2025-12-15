@@ -739,7 +739,7 @@ vore.0001 = {
         #Cock Disposal
         option = {
                 name = vore_releaseOpt.0001g
-                trigger = {
+                trigger = { #Fix trigger for a per prey basis because of multi prey
                         AND = {
                                 global_var:scat_banned = no
                                 has_trait = cock_predator
@@ -766,6 +766,9 @@ vore.0001 = {
 
         #Nevermind
 	option = {
+                trigger = {
+                        is_ai = no
+                }
                 name = vore_releaseOpt.0001i
                 #teased release opinion modifier
         }       
@@ -890,6 +893,17 @@ vore.0002 = {
                         }
                 }
                 finish_digesting_effect = yes
+        }
+}
+
+#Removes Portrait Belly
+vore.0020 = {
+        type = character_event
+        hidden = yes
+        
+        #Doesn't work with multiprey
+        immediate = {
+                remove_trait = oral_predator
         }
 }
 

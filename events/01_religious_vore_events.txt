@@ -16,7 +16,7 @@ religious_vore.0001 = {
                         save_scope_as = predator
                 }
                 create_character = {
-                        location = root.capital_province
+                        location = scope:predator.capital_province
                         template = prey_character_template
                         save_scope_as = prey
                 }
@@ -418,7 +418,7 @@ religious_vore.0008 = {
 	option = {
                 name = religious_voreOpt.0008
                 # scope:predator.faith = {
-                #         change_fervor = { value = 10 }
+                #         change_fervor = { value = 5 }
                 # }
                 scope:predator = {
                         add_piety = 25
@@ -429,7 +429,9 @@ religious_vore.0008 = {
                                                 can_vore = yes
                                                 is_ai = yes
                                         }
-                                        trigger_event = { id = religious_vore.0013 }
+                                        add_piety = 10
+                                        add_trait = oral_predator
+                                        trigger_event = { id = vore.0020 years = { 1 2 }}
                                 }
                         #}
                         clear_saved_scope = predator
@@ -495,32 +497,5 @@ religious_vore.0010 = {
         option = {
                 name = religious_voreOpt.0010
                 release_prey_location_check_effect = yes
-        }
-}
-
-#Makes so some followers have bellies
-religious_vore.0013 = {
-        type = character_event
-        hidden = yes
-
-        immediate = {
-                ROOT = {
-                        save_scope_as = predator
-                }
-                create_character = {
-                        location = ROOT.scope:predator.province
-                        template = prey_character_template
-                        save_scope_as = prey
-                }
-        }
-        
-        option = {
-                name = religious_voreOpt.0013
-                add_piety = 10
-                safe_vore_effect = {
-                        type = oral
-                        prison_type = vore_religious_unwilling
-                }
-                trigger_event = { id = vore.0001 years = { 1 2 }}
         }
 }

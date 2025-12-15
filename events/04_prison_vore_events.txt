@@ -150,7 +150,7 @@ prison_vore.0002 = {
         }
 
         after = {
-                trigger_event = vore.0001
+                trigger_event = { id = vore.0001 months = 3 }
                 clean_up_effect = yes
         }
 }
@@ -203,7 +203,7 @@ prison_vore.0003 = {
                 }
         }
         after = {
-                trigger_event = vore.0001
+                trigger_event = { id = vore.0001 months = 3 }
                 clean_up_effect = yes
         }
 }
@@ -283,7 +283,7 @@ prison_vore.0004 = {
                 }
         }
         after = {
-                trigger_event = vore.0001
+                trigger_event = { id = vore.0001 months = 3 }
                 clean_up_effect = yes
         }
 }
@@ -338,7 +338,7 @@ prison_vore.0005 = {
                 }
         }
         after = {
-                trigger_event = { event = vore.0001 months = 5 }
+                trigger_event = { id = vore.0001 months = 5 }
                 clean_up_effect = yes
         }
 

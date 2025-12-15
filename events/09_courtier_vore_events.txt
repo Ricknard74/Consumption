@@ -7,16 +7,13 @@ courtier_vore.0001 = { # Jester Vore Event
 	desc = courtier_voreDesc.0001
 
 	trigger = {
-		scope:jester = {
+		court_position:court_jester_court_position = {
 			can_vore = yes
 		}
 	}
 
 	immediate = {
-		scope:root = {
-			save_scope_as = observer
-		}
-		scope:jester = {
+		court_position:court_jester_court_position = {
 			save_scope_as = predator
 		}
 		random_courtier_or_guest = {
@@ -37,7 +34,7 @@ courtier_vore.0001 = { # Jester Vore Event
 	}
 
 	option = {
-		name = courtier_voreOpt.0002
+	 	name = courtier_voreOpt.0002
 		scope:predator = {
 			add_trait = gluttonous
 			add_character_modifier = { modifier = satisfied }

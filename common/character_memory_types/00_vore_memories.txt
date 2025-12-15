@@ -48,12 +48,21 @@ pred_non_fatal_memory = {
 	}
 }
 
-# prey_non_fatal_memory = {
-# 	categories = { minor negative }
-# 	icon = "activity_tournament.dds"
-# 	description = {
-# 		first_valid = {
+prey_non_fatal_memory = {
+	categories = { minor negative }
+	icon = "activity_tournament.dds"
+	description = {
+		first_valid = {
+			desc = prey_oral_unwilling_non_fatal_memory_desc
+		}
+	}
 
-# 		}
-# 	}
-# }
+	duration = {
+		years = memory_default_duration
+	
+	}
+
+	participants = {
+		pred
+	}
+}
