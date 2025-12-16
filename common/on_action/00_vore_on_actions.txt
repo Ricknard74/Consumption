@@ -220,6 +220,6 @@ on_release_prey_from_prison = {
 
 jester_ongoing = {
 	random_events = {
-		2000 = courtier_vore.0001
+		100 = courtier_vore.0001
 	}
 }

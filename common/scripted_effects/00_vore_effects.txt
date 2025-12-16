@@ -165,6 +165,13 @@ safe_vore_effect = {
 				}
 			}
 		}
+		if = {
+			limit = {
+				is_ai = yes
+				NOT = { scope:prey = { has_character_flag = release_exception } }
+			}
+			trigger_event = { id = vore.0001 years = { 1 2 } }
+		}
 		
 		scope:prey = {
 			add_character_modifier = { modifier = $type$_vored }

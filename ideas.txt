@@ -1,10 +1,10 @@
 Add a notification event every time vore and release happens for debug purposes
 
+Add vore belly model using decals to affect size
+
 Physician vore, either a treatment description or where you are made incapable for a month but have a higher chance of healing.
 
 increase stomach size depending on number of, and accounting for dwarf and giant traits
-
-Add memories like "Ate someone" or "Escaped stomach"
 
 select the prey that the actor wants to interact with from the relationship screen, use bigui ll mod for reference
 
@@ -17,7 +17,7 @@ New effect function so safe_vore_effect and lethal vore effect can have a random
 
 Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
 
-Make a partially digested person disfigured. Make a similar traumatized modifier for non-fatal vore for the sake of balance.
+Make a partially digested person disfigured. Make a similar traumatized modifier for non-fatal vore for the sake of balance. Maybe
 
 Hunt activity with vore events like catching some of your guests voring each other, or being eaten by their target, fatally and non-fatally.
 
@@ -27,7 +27,7 @@ Feast activity with vore events
 
 Vore travel events like a wolf, hyena, bear, tiger, lion, crocodile, or hippo devouring someone.
 
-Perhaps have the player or one of their courtiers try to rescue someone from the stomach or a human or animal.
+Perhaps have the player or one of their courtiers try to rescue someone from the stomach of a human or animal.
 
 Give the player the option to help the pred digest their prey or non-lethally tire their prey out by rubbing their belly.
 

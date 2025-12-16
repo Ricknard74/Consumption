@@ -15,6 +15,7 @@ courtier_vore.0001 = { # Jester Vore Event
 	
 	immediate = {
 		court_position:court_jester_court_position = {
+			add_character_flag = portrait_belly
 			save_scope_as = predator
 		}
 		random_courtier_or_guest = {
@@ -31,14 +32,15 @@ courtier_vore.0001 = { # Jester Vore Event
 	}
 
 	right_portrait = {
+		character = root
+		animation = laugh
+	}
+	
+	lower_right_portrait = {
 		character = scope:prey
 		animation = fear
 	}
 
-	lower_left_portrait = {
-		character = root
-		animation = laugh
-	}
 
 	option = {
 		name = courtier_voreOpt.0001

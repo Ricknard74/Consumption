@@ -1,0 +1,22 @@
+﻿vore_clothing = {
+	# interface_position = 1
+	usage = game
+	selection_behavior = max
+	vore_clothing  = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = clothes
+				template = no_clothes
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}	
+		weight = {
+			base = 0
+            modifier = {
+                add = 5000
+                has_character_flag = vore_predator
+            }
+		}
+	}
+}

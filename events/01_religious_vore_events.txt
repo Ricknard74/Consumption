@@ -430,6 +430,34 @@ religious_vore.0008 = {
                                                 is_ai = yes
                                         }
                                         add_piety = 10
+                                        random_list = {
+                                                50 = {
+                                                        trigger = {
+                                                                global_var:oral_banned = no
+                                                        }
+                                                        add_trait = oral_predator
+                                                }
+                                                0 = {
+                                                        trigger = {
+                                                                global_var:anal_banned = no
+                                                        }
+                                                        add_trait = anal_predator
+                                                }
+                                                75 = {
+                                                        trigger = {
+                                                                global_var:unbirth_banned = no
+                                                                is_female = yes
+                                                        }
+                                                        add_trait = unbirth_predator
+                                                }
+                                                0 = {
+                                                        trigger = {
+                                                                global_var:cock_banned = no
+                                                                is_female = no
+                                                        }
+                                                        add_trait = cock_predator
+                                                }
+                                        }
                                         add_trait = oral_predator
                                         trigger_event = { id = vore.0020 years = { 1 2 }}
                                 }

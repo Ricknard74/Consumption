@@ -7,8 +7,7 @@ special_genes = {
                 index = 0
                 female = {
                     setting = { 
-                        attribute = "f_clothes_vore_belly"
-                        #attribute = "bs_body_belly_1" 
+                        attribute = "bs_body_belly_1" 
                         value = { min = 0.0 max = 1.0 }
                         # curve = {
                         #     0.0 2.0

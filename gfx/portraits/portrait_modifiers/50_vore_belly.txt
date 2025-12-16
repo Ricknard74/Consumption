@@ -1,8 +1,8 @@
-﻿vore_belly = {
+﻿add_vore_belly = {
 
    usage = game
 
-   belly = {
+   vore_belly = {
       ignore_outfit_tags = yes
       dna_modifiers = {
          morph = {
@@ -46,3 +46,11 @@
       }
    }
 }
+
+# add_accessory_modifiers = {
+#    gene = clothes
+#    template = tgp_chinese_commoner_clothes
+#    is_valid_custom = {
+#       has_tgp_dlc_trigger = yes
+#    }
+# }
