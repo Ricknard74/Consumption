@@ -33,6 +33,8 @@ Give the player the option to help the pred digest their prey or non-lethally ti
 
 Other feral vore possibilities. Should be a preference option
 
+Killer whale event for sea travel.
+
 Maybe someone gets angry your dog or cat ate them or a relative.
 
 County vore modifiers like "Vored wrong person" or "Vored gracefully" or "Digested evil criminal" and such
@@ -45,16 +47,32 @@ Steal an artifact vore description
 
 Vore sacrifice event
 
+Vore duel event, whether it be attempting to swallow someone results in something like a duel, or you can randomly swallow your opponent to finish the fight
+
 Change voreDesc.xxxx to vore_oralDesc so it can be prision_vore_OralDesc.0001
 
 Make so the player can choose to execute a prisoner by vore in addition to lethal and non-lethal interaction choices
 
 Add some plague vore events, specifically for religions that worship vore gods
 
-Implement a new imprison system so lowborn can do proper vore
+Implement a new imprison system so lowborn can do proper vore, if possible
 
 Add new vore themed men at arms
 
 Add new vore themed faiths to current religions, like norse, bon or heresies
 
 Add new voracious tenet for cultures that increases the chance for vore and capacity.
+
+Random event to turn your pet into a belly pet or digest it after it gets to a certain age.
+
+Caravan Master travel vore event where you can increase safety but delay the trip by riding in the stomach of this courtier for a while
+
+Investigate story cycles for vore toggles
+
+Investigate activities for vore your lover/invite pred/prey events
+
+Investigate siphon treasury vore event where you swallow up the gold
+
+Add toggles for supernatural events, old preds, and feral preds.
+
+Add a view prey interaction that uses an event or story cycle to be able to understand what and where the prey is

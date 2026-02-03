@@ -1,9 +1,8 @@
 ﻿add_vore_belly = {
-
+   selection_behavior = max
    usage = game
 
    vore_belly = {
-      ignore_outfit_tags = yes
       dna_modifiers = {
          morph = {
             mode = add
@@ -31,7 +30,8 @@
             mode = add
             gene = clothes
             template = no_clothes
-            range = { 0 1 } # For the randomness to work correctly
+            value = 0 # For the randomness to work correctly
+            #try copying and pasting 01_legwear_base.txt and replace the conditions for removing the top. Try removing it piece by piece and see if the file is what doesn't work or something else
          }
       }
 
@@ -51,11 +51,3 @@
       }
    }
 }
-
-# add_accessory_modifiers = {
-#    gene = clothes
-#    template = tgp_chinese_commoner_clothes
-#    is_valid_custom = {
-#       has_tgp_dlc_trigger = yes
-#    }
-# }
