@@ -7,40 +7,83 @@
 seduce_vore.1000 = {
     type = character_event
     title = seduce_vore.1000.t
-    theme = seduce_event
     desc = seduce_vore.1000.desc
+    theme = seduce_scheme
+     
+    left_portrait = {
+        character = scope:target
+        animation = personality_content
+    }
+    
+    lower_right_portrait = {
+        character = root
+        animation = happiness
+    }
+    
+    widget = {
+        gui = "event_window_widget_scheme"
+        container = "custom_widgets_container"
+    }
+    
+    cooldown = { years = 2 }
     
     trigger = {
         NOT = { has_variable = scheme_event_active_flag }
-        # Must be capable of vore
         scope:target = { can_vore = yes }
-        can_be_prey = yes
+        scope:owner = {
+            can_be_prey = yes
+        }
     }
     
-    # Set flag to prevent MP overlapping
     immediate = {
-        set_variable = scheme_event_active_flag 
+        set_variable = scheme_event_active_flag
         scope:target = {
             add_character_flag = portrait_belly
         }
     }
-
+    
+    # Accept the embrace
     option = {
-        name = seduce_vore.1000.opt.a
+        name = seduce_vore.1000.a
         
         # Successful interaction
-        hidden_effect = {
-            seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
-            
-            if = {
-                add_character_modifier = { modifier = vore_seduced_warmth days = 30 }
+        seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+        
+        scope:owner = {
+            add_character_modifier = {
+                modifier = vore_seduced_warmth
+                days = 30
             }
         }
         
+        scope:target = {
+            add_opinion = {
+                target = scope:owner
+                modifier = intimate_opinion
+                opinion = 10
+            }
+        }
     }
     
-    # Always remove flag at end
+    # Decline the event (for player choice)
+    option = {
+        name = seduce_vore.1000.b
+        custom_tooltip = seduce_ongoing_decline_event.tt
+        trigger = {
+            is_ai = no
+        }
+        
+        scope:scheme = {
+            set_variable = {
+                name = declined_seduce_milestone_1_event
+                value = yes
+            }
+        }
+    
+    }
+    
     after = {
+        scope:target = { remove_character_flag = portrait_belly }
         remove_variable = scheme_event_active_flag
     }
 }
@@ -50,9 +93,28 @@ seduce_vore.1000 = {
 seduce_vore.1001 = {
     type = character_event
     title = seduce_vore.1001.t
-    theme = seduce_event
     desc = seduce_vore.1001.desc
-
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = personality_compassionate
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = thinking
+    }
+    
+    lower_left_portrait = root
+    
+    widget = {
+        gui = "event_window_widget_scheme"
+        container = "custom_widgets_container"
+    }
+    
+    cooldown = { years = 2 }
+    
     trigger = {
         NOT = { has_variable = scheme_event_active_flag }
         # Player must be the predator capable of holding someone
@@ -61,51 +123,184 @@ seduce_vore.1001 = {
             can_be_prey = yes
         }
     }
-
-	immediate = { set_variable = scheme_event_active_flag }
-
+    
+    immediate = {
+        set_variable = scheme_event_active_flag
+        # Add belly portrait flag to root (the pred)
+        add_character_flag = {
+            flag = portrait_belly
+            days = 3
+        }
+    }
+    
+    # Offer the safe resting place
     option = {
-        name = seduce_vore.1001.opt.a
+        name = seduce_vore.1001.a
+        
+        # Show tooltip of possible outcomes
+        custom_tooltip = seduce_vore.1001.a.tt
+        
         hidden_effect = {
             # Determine if they accept based on their trust/traits
-            random = {
-                chance = 60
-                modifier = {
-                    factor = 0.1
-                    scope:target = { has_trait = shy }
+            random_list = {
+                60 = {  # Base 60% success chance
+                    modifier = {
+                        add = -50
+                        scope:target = { has_trait = shy }
+                    }
+                    modifier = {
+                        add = 20
+                        scope:target = { has_trait = lustful }
+                    }
+                    modifier = {
+                        add = 20
+                        scope:target = { has_trait = trusting }
+                    }
+                    modifier = {
+                        add = -20
+                        scope:target = { has_trait = paranoid }
+                    }
+                    
+                    # Success: They accept the offer
+                    seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+                    
+                    scope:target = {
+                        add_opinion = {
+                            target = scope:owner
+                            modifier = intimate_opinion
+                            opinion = 15
+                        }
+                    }
+                    
+                    # Trigger follow-up flavor event
+                    scope:owner = {
+                        trigger_event = {
+                            id = seduce_vore.1002
+                            days = 1
+                        }
+                    }
                 }
-                modifier = {
-                    factor = 2.0
-                    scope:target = { has_trait = lustful }
+                40 = {  # 40% failure chance
+                    # Failure: They are weirded out
+                    scope:target = {
+                        add_opinion = {
+                            target = scope:owner
+                            modifier = disappointed_opinion
+                            opinion = -10
+                        }
+                    }
+                    
+                    # Trigger failure event
+                    scope:owner = {
+                        trigger_event = {
+                            id = seduce_vore.1003
+                            days = 1
+                        }
+                    }
                 }
-                
-                # Success: They accept the offer
-                scope:scheme = {
-                    add_scheme_progress = { value = 40 }
-                }
-                # Optional: Trigger a small flavor event about them napping inside you
-                trigger_event = { id = seduce_vore.1500 days = 1 }
             }
-            # Failure: They are weirded out
-            # scope:scheme = {
-            #     add_scheme_progress = { value = -10 }
-            # }
+        }
+        
+        ai_chance = {
+            base = 100
+        }
+    }
+    
+    # Decline to offer (player choice)
+    option = {
+        name = seduce_vore.1001.b
+        custom_tooltip = seduce_ongoing_decline_event.tt
+        
+        scope:scheme = {
+            set_variable = {
+                name = declined_seduce_milestone_1_event
+                value = yes
+            }
+        }
+        
+        ai_chance = {
+            base = 0
         }
     }
     
     after = {
-		remove_variable = scheme_event_active_flag
+        remove_variable = scheme_event_active_flag
+        scope:owner = { remove_character_flag = portrait_belly }
+    }
+}
+
+# Follow-up: Success - They enjoyed the rest
+seduce_vore.1002 = {
+    type = character_event
+    title = seduce_vore.1001.t
+    desc = seduce_vore.1002.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = happiness
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = personality_content
+    }
+    
+    trigger = {
+        exists = scope:scheme
+    }
+    
+    option = {
+        name = seduce_vore.1002.a
+        # Already got scheme progress in the first event
+        stress_impact = {
+            compassionate = minor_stress_impact_loss
+            kind = minor_stress_impact_loss
+        }
+    }
+}
+
+# Follow-up: Failure - They were uncomfortable
+seduce_vore.1003 = {
+    type = character_event
+    title = seduce_vore.1001.t
+    desc = seduce_vore.1003.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = embarrassed
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = dismissal
+    }
+    
+    trigger = {
+        exists = scope:scheme
+    }
+    
+    option = {
+        name = seduce_vore.1003.a
+        # No scheme progress penalty - failure is penalty enough
+        stress_impact = {
+            arrogant = minor_stress_impact_gain
+        }
     }
 }
 
 seduce_vore.1500 = {
     type = character_event
     title = seduce_vore.1500.t
-    theme = love
+    theme = seduction
     desc = seduce_vore.1500.d
 
     option = {
-        name = seduce_vore.1500.o
+        name = seduce_vore.1500.
+        scope:predator = {
+            remove_character_flag = portrait_belly
+        }
     }
 }
 

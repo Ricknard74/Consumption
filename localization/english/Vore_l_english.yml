@@ -10,6 +10,12 @@ game_concept_vore_dungeon_desc:0 "Imprisoned inside of a person"
 game_concept_vore_willing_desc:0 "Willingly inside of someone"
 game_concept_vore_religious_unwilling_desc:0 "Vored unwillingly for religious reasons"
 
+game_concept_prison_oral:0 "Stomach"
+game_concept_prison_anal:0 "Bowels"
+game_concept_prison_unbirth:0 "Womb"
+game_concept_prison_cock:0 "Testes"
+
+
 ##Vore Toggles##
 #Basics
 vore_menu_title:0 "Vore Control Panel"

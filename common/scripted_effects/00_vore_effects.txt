@@ -349,11 +349,6 @@ release_prey_effect = {
             }
 
             add_character_modifier = { modifier = satisfied years = 1 }
-            remove_relation_flag = {
-                flag = $type$
-                target = scope:prey
-                relation = prey
-            }
             remove_relation_prey = scope:prey
             remove_list_variable = {
                 name = prey_list
@@ -366,7 +361,6 @@ release_prey_effect = {
             remove_character_modifier = $type$_vored
             remove_trait = $type$_vored
             
-            # Restore previous prison or release
             if = {
                 limit = { has_character_flag = vored_from_dungeon }
                 change_prison_type = dungeon
@@ -377,7 +371,8 @@ release_prey_effect = {
                 change_prison_type = house_arrest
                 remove_character_flag = vored_from_house_arrest
             }
-            else = {
+            else_if = {
+                limit = { is_imprisoned = yes }
                 release_from_prison = yes
             }
         }
@@ -395,7 +390,6 @@ release_prey_effect = {
 
 # Used when finishing digestion (Called from on_action)
 finish_digesting_effect = {
-    # Predation Level Up
     if = { 
         limit = { has_trait_rank = { trait = predator rank < 1 } }         
         add_trait = predator_1
@@ -424,7 +418,6 @@ finish_digesting_effect = {
         if = { limit = { has_trait = genital_digesting } remove_trait = genital_digesting }
     }
 
-    # CRITICAL: Reduce prey count, as the mass is now converted to weight/gain
     change_variable = { name = num_prey add = -1 }
     change_variable = { name = num_$type$_prey add = -1 }
     
