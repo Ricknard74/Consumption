@@ -47,6 +47,7 @@ PREY_RELEASE:0 "Release"
 PREY_RELEASE_TT:0 "Release this prey from your stomach"
 PREY_DIGEST:0 "Digest"
 PREY_DIGEST_TT:0 "Digest this prey permanently"
+BELLY_CAPACITY_TOOLTIP:0 "Current prey count out of maximum belly capacity"
 
 view_prey_list_interaction:0 "View Prey List"
 view_prey_list_interaction_desc:0 "View [recipient.GetFirstNamePossessive] current prey."

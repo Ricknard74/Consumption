@@ -1,10 +1,10 @@
 ﻿vore_safe_story = { #story owner is prey
 	on_setup = {
-
+		set_variable = { name = imprisonment_duration value = 0}
 	}
 
 	on_end = {
-
+		release_prey_effect_location_check = yes
 	}
 
 	on_owner_death = {
@@ -12,11 +12,16 @@
 	}
 
 	effect_group = {
+		#Add a mean time to happen
 		months = 1
 		triggered_effect = {
 			trigger = { exists = imprisonment_duration}
 			effect = {
 				change_variable = { name = imprisonment_duration add = 1}
+			}
+			if = {
+				limit = { var:imprisonment_duration > 4 }
+				end_story = yes
 			}
 		}
 		# add modifier for release chance that is multiplied by imprisonment duration / 2

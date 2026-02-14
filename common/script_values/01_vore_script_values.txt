@@ -73,3 +73,93 @@ cock_vore_chance = {
         	add = var:cock_vore_tendency
 		}
 }
+
+max_belly_capacity = {
+    value = 0
+    
+    # --- CAPACITY 10 ---
+    # Predator 3 + Giant
+    if = {
+        limit = {
+            has_trait = predator_3
+            has_trait = giant
+        }
+        value = 10
+    }
+    
+    # --- CAPACITY 8 ---
+    # Predator 3 (Normal) OR Predator 2 + Giant
+    else_if = {
+        limit = {
+            OR = {
+                has_trait = predator_3
+                AND = {
+                    has_trait = predator_2
+                    has_trait = giant
+                }
+            }
+        }
+        value = 8
+    }
+    
+    # --- CAPACITY 6 ---
+    # Predator 2 (Normal) OR Predator 1 + Giant OR Predator 3 + Dwarf
+    else_if = {
+        limit = {
+            OR = {
+                has_trait = predator_2
+                AND = {
+                    has_trait = predator_1
+                    has_trait = giant
+                }
+                AND = {
+                    has_trait = predator_3
+                    has_trait = dwarf
+                }
+            }
+        }
+        value = 6
+    }
+    
+    # --- CAPACITY 4 ---
+    # Predator 1 (Normal) OR Base + Giant OR Predator 2 + Dwarf
+    else_if = {
+        limit = {
+            OR = {
+                has_trait = predator_1
+                AND = {
+                    has_character_flag = vore_capable
+                    has_trait = giant
+                }
+                AND = {
+                    has_trait = predator_2
+                    has_trait = dwarf
+                }
+            }
+        }
+        value = 4
+    }
+    
+    # --- CAPACITY 2 ---
+    # Base (Normal) OR Predator 1 + Dwarf
+    else_if = {
+        limit = {
+            OR = {
+                AND = {
+                    has_character_flag = vore_capable
+                    NOT = { has_trait = dwarf }
+                }
+                AND = {
+                    has_trait = predator_1
+                    has_trait = dwarf
+                }
+            }
+        }
+        value = 2
+    }
+    
+    # Default fallback (shouldn't reach here if vore_capable)
+    else = {
+        value = 1
+    }
+}

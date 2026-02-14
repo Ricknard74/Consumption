@@ -12,6 +12,12 @@ on_game_start_after_lobby = {
     }
 }
 
+random_yearly_playable_pulse = {
+    on_actions = {
+        random_vore_events
+    }
+}
+
 # Run checks again 5 years in just in case startup failed
 five_year_playable_pulse = {
     on_actions = {
@@ -60,7 +66,7 @@ murder_success_standard_event_list_on_action = {
 
 seduce_ongoing_milestone_1 = {
     random_events = {
-        100 = seduce_vore.1000 
+        5000 = seduce_vore.1000 
         100 = seduce_vore.1001
     }
 }
@@ -382,12 +388,10 @@ on_vore_18th_birthday_gift = {
 
 random_vore_events = {
     effect = {
-        random_ruler = {
-            limit = {
-                number_of_concubines >= 2
-            }
-            trigger_event = { id = courtier_vore.0050 }
+        trigger = {
+            number_of_concubines >= 2
         }
+        trigger_event = { id = courtier_vore.0050 }
     }
 }
 
