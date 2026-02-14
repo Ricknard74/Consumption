@@ -388,8 +388,8 @@ on_vore_18th_birthday_gift = {
 
 random_vore_events = {
     effect = {
-        trigger = {
-            number_of_concubines >= 2
+        if = {
+            limit = { number_of_concubines >= 2 }
         }
         trigger_event = { id = courtier_vore.0050 }
     }

@@ -15,3 +15,23 @@ vore_religious_unwilling = {
     parent = prison
     texture = "gfx/interface/icons/event_types/type_prison.dds"
 }
+
+prison_oral = {
+    parent = prison
+    texture = "gfx/interface/icons/event_types/type_prison.dds"
+}
+
+prison_anal = {
+    parent = prison
+    texture = "gfx/interface/icons/event_types/type_prison.dds"
+}
+
+prison_unbirth = {
+    parent = prison
+    texture = "gfx/interface/icons/event_types/type_prison.dds"
+}
+
+prison_cock = {
+    parent = prison
+    texture = "gfx/interface/icons/event_types/type_prison.dds"
+}

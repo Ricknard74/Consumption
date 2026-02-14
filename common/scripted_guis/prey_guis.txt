@@ -13,8 +13,9 @@
         }
         save_scope_as = plyr
         
-        # Clear prey list
+        # Clear both prey list and prison type list
         clear_variable_list = prey_list
+        clear_variable_list = prey_prison_types
         
         # Check if we're viewing an AI character or the player
         if = {
@@ -37,9 +38,43 @@
                 save_temporary_scope_as = prey_character
                 
                 scope:plyr = {
+                    # Add prey to list
                     add_to_variable_list = {
                         name = prey_list
                         target = scope:prey_character
+                    }
+                    
+                    # Determine and store prison type
+                    # Check for oral vored
+                    if = {
+                        limit = {
+                            scope:prey_character = {
+                                has_trait = oral_vored
+                            }
+                        }
+                        add_to_variable_list = {
+                            name = prey_prison_types
+                            target = flag:oral
+                        }
+                    }
+                    # Check for anal vored
+                    else_if = {
+                        limit = {
+                            scope:prey_character = {
+                                has_trait = anal_vored
+                            }
+                        }
+                        add_to_variable_list = {
+                            name = prey_prison_types
+                            target = flag:anal
+                        }
+                    }
+                    # Default to generic vored
+                    else = {
+                        add_to_variable_list = {
+                            name = prey_prison_types
+                            target = flag:vored
+                        }
                     }
                 }
             }
@@ -49,6 +84,7 @@
         set_variable = show_prey_list_window
     }
 }
+
 close_prey_window = {
     scope = character
     

@@ -6,7 +6,7 @@ window = {
     name = "prey_list_window"
     parentanchor = center
     layer = windows_layer
-    movable = no
+    movable = yes
     size = { 600 500 }
     
     ### Use variable visibility check from docs
@@ -71,7 +71,6 @@ window = {
                 expand = {}
                 
                 ### Right side - Belly Capacity
-                ### Get capacity from the predator in the list
                 container = {
                     datamodel = "[Character.MakeScope.GetList('current_predator_view')]"
                     
@@ -79,33 +78,37 @@ window = {
                         container = {
                             datacontext = "[Scope.GetCharacter]"
                             
-                            hbox = {
-                                spacing = 5
-                                tooltip = "BELLY_CAPACITY_TOOLTIP"
+                            widget = {
+                                size = { 200 30 }
                                 
-                                icon = {
-                                    size = { 25 25 }
-                                    texture = "gfx/interface/icons/icon_food.dds"
-                                }
-                                
-                                text_single = {
-                                    raw_text = "Capacity: "
-                                    default_format = "#low"
-                                }
-                                
-                                text_single = {
-                                    text = "[GetDataModelSize(GetPlayer.MakeScope.GetList('prey_list'))]"
-                                    default_format = "#high"
-                                }
-                                
-                                text_single = {
-                                    raw_text = " / "
-                                    default_format = "#low"
-                                }
-                                
-                                text_single = {
-                                    text = "[Character.MakeScope.ScriptValue('max_belly_capacity')]"
-                                    default_format = "#high"
+                                hbox = {
+                                    spacing = 5
+                                    tooltip = "BELLY_CAPACITY_TOOLTIP"
+                                    
+                                    icon = {
+                                        size = { 25 25 }
+                                        texture = "gfx/interface/icons/icon_food.dds"
+                                    }
+                                    
+                                    text_single = {
+                                        raw_text = "Capacity: "
+                                        default_format = "#low"
+                                    }
+                                    
+                                    text_single = {
+                                        text = "[GetDataModelSize(GetPlayer.MakeScope.GetList('prey_list'))]"
+                                        default_format = "#high"
+                                    }
+                                    
+                                    text_single = {
+                                        raw_text = " / "
+                                        default_format = "#low"
+                                    }
+                                    
+                                    text_single = {
+                                        text = "[Character.MakeScope.ScriptValue('max_belly_capacity')]"
+                                        default_format = "#high"
+                                    }
                                 }
                             }
                         }
@@ -119,7 +122,7 @@ window = {
                 layoutpolicy_horizontal = expanding
                 
                 item = {
-                    container = {
+                    hbox = {
                         datacontext = "[Scope.GetCharacter]"
                         layoutpolicy_horizontal = expanding
                         
@@ -153,7 +156,7 @@ window = {
                     datamodel = "[Character.MakeScope.GetList('prey_list')]"
                     
                     item = {
-                        container = {
+                        hbox = {
                             datacontext = "[Scope.GetCharacter]"
                             layoutpolicy_horizontal = expanding
                             
@@ -222,11 +225,11 @@ types PreyListWindow
                     layoutpolicy_horizontal = expanding
                     
                     text_single = {
-                        raw_text = "Location: "
+                        raw_text = "Character's Age: "
                     }
                     
                     text_single = {
-                        text = "[Character.GetLocation.GetProvince.GetNameNoTooltip]"
+                        text = "[Character.GetAge]"
                     }
                 }
             }
@@ -279,15 +282,59 @@ types PreyListWindow
                     autoresize = no
                 }
 
+                ### Location and Prison Type
                 hbox = {
                     layoutpolicy_horizontal = expanding
+                    spacing = 10
                     
-                    text_single = {
-                        raw_text = "Age: "
+                    ### Location
+                    hbox = {
+                        spacing = 3
+                        
+                        icon = {
+                            size = { 20 20 }
+                            texture = "gfx/interface/icons/icon_domain.dds"
+                        }
+                        
+                        text_single = {
+                            text = "[Character.GetAge]"
+                        }
                     }
                     
-                    text_single = {
-                        text = "[Character.GetAge]"
+                    ### Prison Type - Check trait on the prey character
+                    hbox = {
+                        visible = "[Character.IsImprisoned]"
+                        spacing = 3
+                        
+                        icon = {
+                            size = { 20 20 }
+                            texture = "gfx/interface/icons/portraits/punishment.dds"
+                        }
+                        
+                        ### Check for vored traits
+                        text_single = {
+                            visible = "[Character.HasTrait(GetTrait('oral_vored'))]"
+                            raw_text = "Stomach"
+                            tooltip = "ORAL_VORED_PRISON_TYPE_TT"
+                        }
+                        
+                        text_single = {
+                            visible = "[Character.HasTrait(GetTrait('anal_vored'))]"
+                            raw_text = "Bowels"
+                            tooltip = "ANAL_VORED_PRISON_TYPE_TT"
+                        }
+                        
+                        text_single = {
+                            visible = "[Character.HasTrait(GetTrait('unbirth_vored'))]"
+                            raw_text = "Womb"
+                            tooltip = "UNBIRTH_VORED_PRISON_TYPE_TT"
+                        }
+                        
+                        text_single = {
+                            visible = "[Character.HasTrait(GetTrait('cock_vored'))]"
+                            raw_text = "Cock"
+                            tooltip = "COCK_VORED_PRISON_TYPE_TT"
+                        }
                     }
                 }
             }
@@ -295,9 +342,9 @@ types PreyListWindow
             vbox = {
                 spacing = 3
                 
-                ### Check the variable on GetPlayer, not on the current Character (which is the prey)
+                ### Only show buttons if NOT viewing AI prey
                 visible = "[Not(GetPlayer.MakeScope.Var('viewing_ai_prey').IsSet)]"
-            
+
                 button_standard = {
                     text = "PREY_RELEASE"
                     size = { 90 30 }
@@ -305,7 +352,7 @@ types PreyListWindow
                     onclick = "[GetScriptedGui('release_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
                     tooltip = "PREY_RELEASE_TT"
                 }
-            
+
                 button_standard = {
                     text = "PREY_DIGEST"
                     size = { 90 30 }

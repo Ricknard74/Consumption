@@ -766,7 +766,7 @@ window = {
 				# Vore Prey List Button
 				button_normal = {
 					name = "open_prey_list_button"
-					visible = "[Or(Or(Character.HasTrait('oral_predator'), Character.HasTrait('anal_predator')), Or(Character.HasTrait('unbirth_predator'), Character.HasTrait('cock_predator')))]"
+					visible = "[Or(Or(Character.HasTrait(GetTrait('oral_predator')), Character.HasTrait(GetTrait('anal_predator'))), Or(Character.HasTrait(GetTrait('unbirth_predator')), Character.HasTrait(GetTrait('cock_predator'))))]"
 					datacontext = "[CharacterWindow.AccessCharacter]"
 					tooltip = "PREY_WINDOW_TITLE"
 					using = tooltip_es
@@ -775,9 +775,8 @@ window = {
 
 					icon_round_button_base = {}
 					
-					button_barbershop = {
-						visible = "[Or(Or(Character.HasTrait('oral_predator'), Character.HasTrait('anal_predator')), Or(Character.HasTrait('unbirth_predator'), Character.HasTrait('cock_predator')))]"
-						
+					button_prey_list = {
+				
 						### Pass the character as 'target' scope
 						onclick = "[GetScriptedGui('open_prey_window_for_character').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Character.MakeScope).End)]"
 						
