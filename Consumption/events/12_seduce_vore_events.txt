@@ -29,10 +29,10 @@ seduce_vore.1000 = {
     
     trigger = {
         NOT = { has_variable = scheme_event_active_flag }
-        scope:target = { can_vore = yes }
-        scope:owner = {
-            can_be_prey = yes
-        }
+        # scope:target = { can_vore = yes }
+        # scope:owner = {
+        #     can_be_prey = yes
+        # }
     }
     
     immediate = {

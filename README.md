@@ -18,7 +18,6 @@ Credit to Bloodborn for inspiring this mod
 **Install Instructions**
 
 1. Download the folder and drop it in the C:\Users\%USER%\Documents\Paradox Interactive\Crusader Kings III\mod folder.
-2. Cut the Consumption.mod file and paste it directly into the mod folder
 
 **Incompatibilities**
 
