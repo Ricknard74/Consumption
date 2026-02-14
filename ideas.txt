@@ -1,9 +1,5 @@
 # Add vore belly model using decals to affect size
 
-Events for releasing or digesting prey from the prey list window
-
-Random event within a week of lethal vore make so the prey may have a prowess struggle to escape
-
 Replace prison_type with character flag, than use prison_type for womb vs stomach vs bowels vs balls
 
 Investigate using story cycle for safe vore so prey are garunteed release at some random interval. Use random_relation_pred as the prey are still alive at this point
@@ -14,14 +10,13 @@ Spouse vore events, like devouring a concubine or secondary spouse. Concubine on
 
 Stress break as prey event
 
-select the prey that the actor wants to interact with from the relationship screen, use bigui ll mod for reference
-
 Vore event for conversion of court members
 
 Vore Conversion flavor for convert county
+
 Vore themed priest council role
 
-Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
+Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional? #Technically quite challenging to implement. Should honestly instantly initate a duel-like event upon unwilling vore
 
 Hunt activity with vore events like catching some of your guests voring each other, or being eaten by their target, fatally and non-fatally.
 
@@ -49,17 +44,17 @@ Vore sacrifice
 
 Vore scheme
 
-Vore duel event, whether it be attempting to swallow someone results in something like a duel, or you can randomly swallow your opponent to finish the fight
+Vore duel events where you can attempt to swallow your opponent to finish the fight
 
-Change voreDesc.xxxx to vore_oralDesc so it can be prision_vore_OralDesc.0001
+Change voreDesc.xxxx to xxxx_vore.xxxx.desc.
 
-Make so the player can choose to execute a prisoner by vore in addition to lethal and non-lethal interaction choices
+Make so the player can choose to execute a prisoner by vore in addition to the lethal and non-lethal interaction choices
 
 Add some plague vore events, specifically for religions that worship vore gods
 
 Add new vore themed men at arms
 
-Add new vore themed faiths to current religions, like norse, bon or heresies
+Add new vore themed faiths to current religions, like norse, bon or heresies if possible with massive compatibility issues
 
 Add new voracious tenet for cultures that increases the chance for vore and capacity.
 
@@ -67,10 +62,8 @@ Random event to turn your pet into a belly pet or digest it after it gets to a c
 
 Caravan Master travel vore event where you can increase safety but delay the trip by riding in the stomach of this courtier for a while
 
-Investigate activities for vore your lover/invite pred/prey events
+Investigate using activities for vore your lover/invite pred/prey events
 
 Investigate siphon treasury vore event where you swallow up the gold
 
 Add toggles for supernatural events, old preds, and feral preds.
-
-Add a view prey interaction that uses an event or story cycle to be able to understand what and where the prey is
