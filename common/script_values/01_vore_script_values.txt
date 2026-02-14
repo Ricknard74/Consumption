@@ -1,0 +1,75 @@
+﻿oral_vore_chance = {
+ 
+        if = { limit = { has_trait = gluttonous } }
+        add = 20
+ 
+        if = { limit = { has_trait = shy } }
+        add = 10
+ 
+        if = { limit = { has_variable = oral_vore_tendency } }
+        add = var:oral_vore_tendency
+}
+
+anal_vore_chance = {
+ 
+        if = { limit = { has_trait = sadistic }
+			add = 15
+		}
+        if = { limit = { has_trait = craven }
+        	add = 10
+		}
+        if = { limit = { is_female = yes } 
+        	add = 5
+		}
+ 
+        if = { limit = { has_variable = anal_vore_tendency }
+        	add = var:anal_vore_tendency
+		}
+}
+
+unbirth_vore_chance = {
+ 
+        if = { 
+			limit = {
+            	is_female = yes
+            	NOT = { has_trait = pregnant }
+        	}
+        	add = 25
+		}
+ 
+        if = { 
+			limit = {
+				OR = {
+					is_female = no
+					has_trait = pregnant
+				}
+			}
+			add = -999
+		}
+        if = { limit = { has_trait = compassionate }
+     	   add = 20
+		}	
+ 
+        if = { limit = { has_variable = unbirth_vore_tendency }
+        	add = var:unbirth_vore_tendency
+		}
+}
+
+cock_vore_chance = {
+ 
+        if = { 
+			limit = {
+            	is_female = no
+            	has_trait = lustful
+        	}
+        	add = 30
+		}
+ 
+        if = { limit = { is_female = yes }
+        	add = -999
+		}
+ 
+        if = { limit = { has_variable = cock_vore_tendency } 
+        	add = var:cock_vore_tendency
+		}
+}

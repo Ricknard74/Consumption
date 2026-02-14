@@ -1,280 +1,254 @@
 ﻿base_voraciousness_modifier = {
-	# Predator trait modifiers
-	modifier = {
-		trigger = { has_trait = predator_1 }
-		add = 25
-	}
-	modifier = {
-		trigger = { has_trait = predator_2 }
-		add = 33
-	}
-	modifier = {
-		trigger = { has_trait = predator_3 }
-		add = 50
-	}
+    # Predator trait modifiers
+    modifier = {
+        trigger = { has_trait = predator_1 }
+        add = 25
+    }
+    modifier = {
+        trigger = { has_trait = predator_2 }
+        add = 33
+    }
+    modifier = {
+        trigger = { has_trait = predator_3 }
+        add = 50
+    }
 
-	modifier = {
-		trigger = { has_trait = preyish}
-		add = -20
-	}
-	
-	# Other trait modifiers
-	modifier = {
-		trigger = { has_trait = gluttonous }
-		add = 20	
-	}
-	modifier = {
-		trigger = { has_trait = sadistic }
-		add = 15
-	} 
-	modifier = {
-		trigger = { has_trait = lustful }
-		add = 10
-	}
-	modifier = {
-		trigger = { has_trait = compassionate }
-		add = -10
-	}
-	modifier = {
-		trigger = { has_trait = chaste }
-		add = -10
-	}
+    modifier = {
+        trigger = { has_trait = preyish }
+        add = -20
+    }
+    
+    # Other trait modifiers
+    modifier = {
+        trigger = { has_trait = gluttonous }
+        add = 20	
+    }
+    modifier = {
+        trigger = { has_trait = sadistic }
+        add = 15
+    } 
+    modifier = {
+        trigger = { has_trait = lustful }
+        add = 10
+    }
+    modifier = {
+        trigger = { has_trait = compassionate }
+        add = -10
+    }
+    modifier = {
+        trigger = { has_trait = chaste }
+        add = -10
+    }
 
-	#Prey modifiers
-	modifier = {
-		trigger = {
-			$PREY$ = {
-				has_trait = preyish
-			}
-		}
-		add = 20
-	}
-	# Religious modifiers
-	modifier = {
-		trigger = { religion = { is_in_family = rf_voraphillic } }
-		add = 20
-	}
-	#Religious modifiers for religions tenets
-	#Also add cultural and religious modifiers
-	
-	# Age modifiers
-	modifier = {
-		trigger = { age = { 18 30 } }
-		add = 20
-	}
-	modifier = {
-		trigger = { age = { 31 40 } }
-		add = 5
-	}
-	modifier = {
-		trigger = { age = { 41 50 } }
-		add = -15	
-	}
-	modifier = {
-		trigger = { age > 50 }
-		add = -50
-	}
-	
-	# Global modifier
-	modifier = {
-		trigger = { exists = global_var:global_voraciousness }
-		add = { value = global_var:global_voraciousness }
-	}
-	
-	# Character voraciousness (if variable exists)
-	modifier = {
-		trigger = { exists = var:voraciousness }
-		add = var:voraciousness
-	}
+    # Prey modifiers
+    modifier = {
+        trigger = {
+            $PREY$ = { has_trait = preyish }
+        }
+        add = 20
+    }
+    
+    # Religious modifiers
+    modifier = {
+        trigger = { religion = { is_in_family = rf_voraphillic } }
+        add = 20
+    }
+    
+    # Age modifiers
+    modifier = {
+        trigger = { age = { 18 30 } }
+        add = 20
+    }
+    modifier = {
+        trigger = { age = { 31 40 } }
+        add = 5
+    }
+    modifier = {
+        trigger = { age = { 41 50 } }
+        add = -15	
+    }
+    modifier = {
+        trigger = { age > 50 }
+        add = -50
+    }
+    
+    # Global modifier
+    modifier = {
+        trigger = { exists = global_var:global_voraciousness }
+        add = { value = global_var:global_voraciousness }
+    }
+    
+    # Character voraciousness (if variable exists)
+    modifier = {
+        trigger = { has_variable = voraciousness }
+        add = var:voraciousness
+    }
 }
 
 lethal_vore_modifier = {
-	modifier = {
-		trigger = { has_trait = sadistic }
-		add = 20
-	}
-	modifier = {
-		trigger = { has_trait = compassionate }
-		add = -50
-	}
-	modifier = {
-		trigger = { has_trait = generous }
-		add = -20
-	}
-	modifier = {
-		trigger = { has_trait = cannibal }
-		add = 30
-	}
-	modifier = {
-		trigger = { has_trait = gluttonous }
-		add = 10
-	}
+    modifier = {
+        trigger = { has_trait = sadistic }
+        add = 20
+    }
+    modifier = {
+        trigger = { has_trait = compassionate }
+        add = -50
+    }
+    modifier = {
+        trigger = { has_trait = generous }
+        add = -20
+    }
+    modifier = {
+        trigger = { has_trait = cannibal }
+        add = 30
+    }
+    modifier = {
+        trigger = { has_trait = gluttonous }
+        add = 10
+    }
 
-	# Relation modifiers
-	modifier = {
-		trigger = { has_relation_rival = $PREY$ }
-		add = 20
-	}
-	modifier = {
-		trigger = { has_relation_nemesis = $PREY$ }
-		add = 50
-	}
-	modifier = {
-		trigger = { has_relation_friend = $PREY$ }
-		add = -20
-	}
-	modifier = {
-		trigger = { has_relation_lover = $PREY$ }
-		add = -50
-	}
+    # Relation modifiers
+    modifier = {
+        trigger = { has_relation_rival = $PREY$ }
+        add = 20
+    }
+    modifier = {
+        trigger = { has_relation_nemesis = $PREY$ }
+        add = 50
+    }
+    modifier = {
+        trigger = { has_relation_friend = $PREY$ }
+        add = -20
+    }
+    modifier = {
+        trigger = { has_relation_lover = $PREY$ }
+        add = -50
+    }
 
-	modifier = {
-		trigger = { global_var:digestion_banned = yes }
-		add = -999 # Fully blocks if banned
-	}
-	modifier = {
-		trigger = { exists = var:lethal_vore_tendency }
-		add = var:lethal_vore_tendency
-	}
+    modifier = {
+        trigger = { global_var:digestion_banned = yes }
+        add = -999 
+    }
+    modifier = {
+        trigger = { has_variable = lethal_vore_tendency }
+        add = var:lethal_vore_tendency
+    }
 }
 
 safe_vore_modifier = {
-	modifier = {
-		trigger = { has_relation_rival = $PREY$ }
-		add = -20
-	}
-	modifier = {
-		trigger = { has_relation_nemesis = $PREY$ }
-		add = -50
-	}
-	modifier = {
-		trigger = { has_relation_friend = $PREY$ }
-		add = 20
-	}
-	modifier = {
-		trigger = { has_relation_lover = $PREY$ }
-		add = 50
-	}
+    # Relation modifiers
+    modifier = {
+        trigger = { has_relation_rival = $PREY$ }
+        add = -20
+    }
+    modifier = {
+        trigger = { has_relation_nemesis = $PREY$ }
+        add = -50
+    }
+    modifier = {
+        trigger = { has_relation_friend = $PREY$ }
+        add = 20
+    }
+    modifier = {
+        trigger = { has_relation_lover = $PREY$ }
+        add = 50
+    }
 
-	modifier = {
-		trigger = { has_trait = compassionate }
-		add = 30
-	}
-	modifier = {
-		trigger = { has_trait = shy }
-		add = 10
-	}
-	modifier = {
-		trigger = { global_var:digestion_banned = yes }
-		add = 50
-	}
-	modifier = {
-		trigger = { exists = var:non_lethal_vore_tendency }
-		add = var:non_lethal_vore_tendency
-	}
+    modifier = {
+        trigger = { has_trait = compassionate }
+        add = 30
+    }
+    modifier = {
+        trigger = { has_trait = shy }
+        add = 10
+    }
+    modifier = {
+        trigger = { global_var:digestion_banned = yes }
+        add = 50
+    }
+    modifier = {
+        trigger = { has_variable = non_lethal_vore_tendency }
+        add = var:non_lethal_vore_tendency
+    }
 }
 
 oral_vore_modifier = {
-	modifier = {
-		trigger = { has_trait = gluttonous }
-		add = 20
-	}
-	modifier = {
-		trigger = { has_trait = shy }
-		add = 10
-	}
-	modifier = {
-		$PREY$ = {
-			has_trait = preyish
-		}
-	}
-	modifier = {
-		trigger = { exists = var:oral_vore_tendency }
-		add = var:oral_vore_tendency
-	}
+    modifier = {
+        trigger = { has_trait = gluttonous }
+        add = 20
+    }
+    modifier = {
+        trigger = { has_trait = shy }
+        add = 10
+    }
+    modifier = {
+        trigger = { has_variable = oral_vore_tendency }
+        add = var:oral_vore_tendency
+    }
 }
 
 anal_vore_modifier = {
-	modifier = {
-		$PREY$ = {
-			has_trait = preyish
-		}
-		add = 20
-	}
-	modifier = {
-		trigger = { has_trait = sadistic }
-		add = 15
-	}
-	modifier = {
-		trigger = {
-			has_trait = craven
-		}
-		add = 10
-	}
-	modifier = {
-		trigger = { is_female = yes }
-		add = 5
-	}
-	modifier = {
-		trigger = { exists = var:anal_vore_tendecny }
-		add = var:anal_vore_tendecny
-	}
+    modifier = {
+        trigger = { has_trait = sadistic }
+        add = 15
+    }
+    modifier = {
+        trigger = { has_trait = craven }
+        add = 10
+    }
+    modifier = {
+        trigger = { is_female = yes }
+        add = 5
+    }
+    modifier = {
+        trigger = { has_variable = anal_vore_tendency }
+        add = var:anal_vore_tendency
+    }
 }
 
 unbirth_vore_modifier = {
-	modifier = {
-		trigger = {
-			is_female = yes
-			not = { has_trait = pregnant }
-		}
-		add = 25
-	}
-	modifier = {
-		$PREY$ = {
-			has_trait = preyish
-		}
-	}
-	modifier = {
-		trigger = {
-			OR = {
-				is_female = no
-				has_trait = pregnant
-			}
-		}
-		add = -999
-	}
-	modifier = {
-		trigger = { has_trait = compassionate }
-		add = 20
-	}
-	modifier = {
-		trigger = { exists = var:unbirth_vore_tendency }
-		add = var:unbirth_vore_tendency
-	}
+    modifier = {
+        trigger = {
+            is_female = yes
+            NOT = { has_trait = pregnant }
+        }
+        add = 25
+    }
+    # Completely block if male or pregnant
+    modifier = {
+        trigger = {
+            OR = {
+                is_female = no
+                has_trait = pregnant
+            }
+        }
+        add = -999
+    }
+    modifier = {
+        trigger = { has_trait = compassionate }
+        add = 20
+    }
+    modifier = {
+        trigger = { has_variable = unbirth_vore_tendency }
+        add = var:unbirth_vore_tendency
+    }
 }
 
 cock_vore_modifier = {
-	modifier = {
-		trigger = {
-			is_female = no
-			has_trait = lustful
-		}
-		add = 30
-	}
-	modifier = {
-		$PREY$ = {
-			has_trait = preyish
-		}
-		add = 20
-	}
-	modifier = {
-		trigger = {
-			is_female = yes
-		}
-		add = -999
-	}
-	modifier = {
-		trigger = { exists = var:cock_vore_tendency }
-		add = var:cock_vore_tendency
-	}
+    modifier = {
+        trigger = {
+            is_female = no
+            has_trait = lustful
+        }
+        add = 30
+    }
+    # Completely block if female
+    modifier = {
+        trigger = { is_female = yes }
+        add = -999
+    }
+    modifier = {
+        trigger = { has_variable = cock_vore_tendency }
+        add = var:cock_vore_tendency
+    }
 }

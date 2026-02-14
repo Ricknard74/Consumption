@@ -1,0 +1,556 @@
+﻿namespace = hunt_vore
+
+# Event: A hunting party member is ambushed by the beast (The Setup)
+hunt_vore.0001 = {
+    type = character_event
+    title = hunt.9000.t
+    desc = hunt.9000.desc
+    theme = activity
+
+    trigger = {
+        global_var:feral_banned = no
+    }
+    
+    left_portrait = {
+        character = scope:victim
+        animation = fear
+    }
+    
+    immediate = {
+        # Pick a random guest/party member to be the victim
+        scope:activity = {
+            random_attending_character = {
+                limit = { 
+                    is_alive = yes 
+                    is_imprisoned = no 
+                    NOT = { this = root } 
+                }
+                save_scope_as = victim
+            }
+        }
+    }
+
+
+    option = {
+        name = hunt.9000.opt.a
+        trigger_event = hunt_vore.0002
+    }
+}
+
+# Event: The Outcome (Router)
+hunt_vore.0002 = {
+    type = character_event
+    title = hunt.0002.t
+    desc = hunt.0002.desc
+    theme = activity
+
+    option = {
+        name = hunt.0002.opt.a 
+        
+        hidden_effect = {
+            random_list = {
+                # Oral
+                25 = {
+                    oral_vore_modifier = yes
+                    trigger_event = hunt_vore.0003
+                }
+                # Unbirth (Female check)
+                25 = { 
+                    anal_vore_modifier = yes
+                    trigger_event = hunt_vore.0004 
+                }
+                # Anal
+                25 = {
+                    unbirth_vore_modifier = yes
+                    trigger_event = hunt_vore.0005 
+                }
+                # Cock (Male check)
+                25 = { 
+                    cock_vore_modifier = yes
+                    trigger_event = hunt_vore.0006 
+                }
+            }
+        }
+    }
+}
+
+# --- SUB-EVENTS ---
+
+# Oral Vore
+hunt_vore.0003 = {
+    type = character_event
+    title = hunt.0003.t
+    theme = activity
+    
+    # Dynamic Description
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:tiger
+                        scope:activity.var:animal_type = flag:leopard
+                        scope:activity.var:animal_type = flag:lion
+                        scope:activity.var:animal_type = flag:bear
+                    }
+                }
+                desc = hunt_vore.0003.desc.claws
+            }
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:hyena
+                        scope:activity.var:animal_type = flag:wolf
+                        scope:activity.var:animal_type = flag:lynx
+                    }
+                }
+                desc = hunt_vore.0003.desc.fangs
+            }
+            desc = hunt_vore.0003.desc.fallback
+        }
+    }
+
+    right_portrait = {
+        character = scope:victim
+        animation = fear
+    }
+
+    option = {
+        name = hunt.0003.opt.a
+        hidden_effect = {
+            scope:victim = {
+                # Check if digestion is banned
+                if = {
+                    limit = { global_var:digestion_banned = no }
+                    # Standard lethal outcome
+                    death = { death_reason = death_hunting_accident killer = root }
+                }
+                else = {
+                    # Mysterious disappearance outcome
+                    # 'silent = yes' hides the murder popup, making it look like they vanished
+                    death = { death_reason = death_vanished }
+                }
+            }
+            root = {
+                add_stress = 10
+                add_prestige = -5
+            }
+        }
+    }
+}
+
+# Unbirth
+hunt_vore.0004 = {
+    type = character_event
+    title = hunt.0004.t
+    theme = activity
+    
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:tiger
+                        scope:activity.var:animal_type = flag:leopard
+                        scope:activity.var:animal_type = flag:lion
+                        scope:activity.var:animal_type = flag:bear
+                    }
+                }
+                desc = hunt_vore.0004.desc.claws
+            }
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:hyena
+                        scope:activity.var:animal_type = flag:wolf
+                        scope:activity.var:animal_type = flag:lynx
+                    }
+                }
+                desc = hunt_vore.0004.desc.fangs
+            }
+            desc = hunt_vore.0004.desc.fallback
+        }
+    }
+    
+    right_portrait = {
+        character = scope:victim
+        animation = fear
+    }
+
+    option = {
+        name = hunt.0004.opt.a
+        hidden_effect = {
+            scope:victim = {
+                if = {
+                    limit = { global_var:digestion_banned = no }
+                    death = { death_reason = death_hunting_accident killer = root }
+                }
+                else = {
+                    death = { death_reason = death_vanished }
+                }
+            }
+        }
+    }
+}
+
+# Anal Vore
+hunt_vore.0005 = {
+    type = character_event
+    title = hunt.0005.t
+    theme = activity
+
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:tiger
+                        scope:activity.var:animal_type = flag:leopard
+                        scope:activity.var:animal_type = flag:lion
+                        scope:activity.var:animal_type = flag:bear
+                    }
+                }
+                desc = hunt_vore.0005.desc.claws
+            }
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:hyena
+                        scope:activity.var:animal_type = flag:wolf
+                        scope:activity.var:animal_type = flag:lynx
+                    }
+                }
+                desc = hunt_vore.0005.desc.fangs
+            }
+            desc = hunt_vore.0005.desc.fallback
+        }
+    }
+
+    right_portrait = {
+        character = scope:victim
+        animation = fear
+    }
+
+    option = {
+        name = hunt.0005.opt.a
+        hidden_effect = {
+            scope:victim = {
+                if = {
+                    limit = { global_var:digestion_banned = no }
+                    death = { death_reason = death_hunting_accident killer = root }
+                }
+                else = {
+                    death = { death_reason = death_vanished }
+                }
+            }
+        }
+    }
+}
+
+# Cock Vore
+hunt_vore.0006 = {
+    type = character_event
+    title = hunt.0006.t
+    theme = activity
+
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:tiger
+                        scope:activity.var:animal_type = flag:leopard
+                        scope:activity.var:animal_type = flag:lion
+                        scope:activity.var:animal_type = flag:bear
+                    }
+                }
+                desc = hunt_vore.0006.desc.claws
+            }
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:hyena
+                        scope:activity.var:animal_type = flag:wolf
+                        scope:activity.var:animal_type = flag:lynx
+                    }
+                }
+                desc = hunt_vore.0006.desc.fangs
+            }
+            desc = hunt_vore.0006.desc.fallback
+        }
+    }
+
+    right_portrait = {
+        character = scope:victim
+        animation = fear
+    }
+
+    option = {
+        name = hunt.0006.opt.a
+        hidden_effect = {
+            scope:victim = {
+                if = {
+                    limit = { global_var:digestion_banned = no }
+                    death = { death_reason = death_hunting_accident killer = root }
+                }
+                else = {
+                    death = { death_reason = death_vanished }
+                }
+            }
+        }
+    }
+}
+
+# Event: Successful Vore Outcome (Hunt)
+# Replaces the simple character_event with a full activity event
+hunt_vore.0007 = {
+    type = activity_event
+    title = hunt_vore.0003.t
+    desc = {
+        first_valid = {
+            # ORAL
+            triggered_desc = {
+                trigger = { has_trait = oral_predator }
+                desc = {
+                    random_valid = {
+                        desc = hunt_vore.0003.desc.oral.1
+                        desc = hunt_vore.0003.desc.oral.2
+                    }
+                }
+            }
+            # ANAL
+            triggered_desc = {
+                trigger = { has_trait = anal_predator }
+                desc = {
+                    random_valid = {
+                        desc = hunt_vore.0003.desc.anal.1
+                        desc = hunt_vore.0003.desc.anal.2
+                    }
+                }
+            }
+            # UNBIRTH
+            triggered_desc = {
+                trigger = { has_trait = unbirth_predator }
+                desc = {
+                    random_valid = {
+                        desc = hunt_vore.0003.desc.unbirth.1
+                        desc = hunt_vore.0003.desc.unbirth.2
+                    }
+                }
+            }
+            # COCK
+            triggered_desc = {
+                trigger = { has_trait = cock_predator }
+                desc = {
+                    random_valid = {
+                        desc = hunt_vore.0003.desc.cock.1
+                        desc = hunt_vore.0003.desc.cock.2
+                    }
+                }
+            }
+        }
+    }
+    theme = hunt_activity
+    
+    # Left Portrait: The Predator (Player/Host)
+    left_portrait = {
+        character = root
+        animation = schadenfreude # Satisfied
+    }
+    
+    # Center Portrait: A Witness (Random Guest)
+    center_portrait = {
+        character = scope:witness
+        triggered_animation = {
+            trigger = { has_trait = lustful }
+            animation = intrigue
+        }
+        triggered_animation = {
+            trigger = { has_trait = compassionate }
+            animation = worry
+        }
+        triggered_animation = {
+            trigger = {
+                NOT = { has_trait = lustful }
+                NOT = { has_trait = compassionate }
+            }
+            animation = shock
+        }
+    }
+    
+    # Right Portrait: The Prey (Victim)
+    right_portrait = {
+        character = scope:prey
+        animation = fear
+    }
+    
+    override_background = { reference = forest_path }
+
+    immediate = {
+        # 1. Setup Witness Scope (Random participant who isn't the prey)
+        scope:activity = {
+            random_attending_character = {
+                limit = { 
+                    is_alive = yes
+                    NOT = { this = scope:prey }
+                }
+                save_scope_as = witness
+            }
+        }
+        
+        # 2. Execute Vore Logic (Imprisonment)
+        # This adds traits, counters, and belly visuals
+        random_orifice_safe_vore_effect = { 
+            prison_type = vore_dungeon
+        }
+        
+        # 3. Add Activity Log
+        scope:activity = {
+            add_activity_log_entry = {
+                key = hunt_vore_success_log
+                score = 25
+                tags = { random bad }
+                character = root
+                target = scope:prey
+            }
+        }
+    }
+
+    # Option 1: Continue Hunt (The Predator remains active)
+    option = {
+        name = hunt_vore.0003.opt.continue
+        trigger = {
+            is_alive = yes
+        }
+        flavor = hunt_vore.0003.flavor.continue
+        
+        scope:activity = {
+            add_activity_log_entry = {
+                key = hunt_vore_continue_log
+                score = 25
+                tags = { random bad }
+                character = root
+                target = scope:prey
+            }
+            # Effect: The predator is energized/full
+            root = {
+                add_stress = 10 # Burden of carrying prey
+                add_prestige = 5 # Dominance
+            }
+        }
+        
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_energy = 1 # Full of energy
+                ai_rationality = -0.5 # Irrational to keep hunting
+            }
+        }
+    }
+
+    # Option 2: End Hunt (Return Home)
+    option = {
+        name = hunt_vore.0003.opt.end
+        flavor = hunt_vore.0003.flavor.end
+        
+        scope:activity = {
+            set_variable = {
+                name = hunt_invalidated
+            }
+            set_variable = {
+                name = hunt_invalidated_flavor
+                value = root
+            }
+            add_activity_log_entry = {
+                key = hunt_vore_end_log
+                score = 25
+                tags = { random bad }
+                character = root
+                target = scope:prey
+            }
+            # Effect: Stress relief for ending it early, or stress gain for hiding it?
+            # Let's say stress gain for hiding a "terrible crime" (if discovered) or relief (if sadistic).
+            root = {
+                custom_tooltip = hunt_voreTooltip.0003b
+                # stress_impact = {
+                #     sadistic = minor_stress_relief_gain
+                #     gluttonous = minor_stress_relief_gain
+                #     chaste = major_stress_impact_gain
+                # }
+            }
+        }
+        
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_energy = -0.5
+                ai_rationality = 1
+            }
+        }
+    }
+}
+
+# Event: The Beast's Hunger (Alternative Start)
+# Triggers when the hunt party encounters the chosen legendary beast
+hunt_vore.9000 = {
+    type = character_event
+    title = hunt_vore.9000.t
+    theme = intrigue
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:tiger
+                        scope:activity.var:animal_type = flag:leopard
+                        scope:activity.var:animal_type = flag:lion
+                        scope:activity.var:animal_type = flag:bear
+                    }
+                }
+                desc = hunt_vore.9000.desc.claws
+            }
+            
+            triggered_desc = {
+                trigger = {
+                    OR = {
+                        scope:activity.var:animal_type = flag:hyena
+                        scope:activity.var:animal_type = flag:wolf
+                        scope:activity.var:animal_type = flag:lynx
+                    }
+                }
+                desc = hunt_vore.9000.desc.fangs
+            }
+            desc = hunt_vore.9000.desc.fallback
+        }
+    }
+
+    immediate = { 
+        scope:activity = {
+            random_attending_character = {
+                limit = { 
+                    is_alive = yes
+                    can_be_prey = yes 
+                }
+                save_scope_as = prey
+            }
+        }             
+    }
+
+    option = {
+        name = hunt_vore.9000.opt.a
+        
+        hidden_effect = {
+            # This event uses the 'death_murder' logic to simulate a mysterious disappearance 
+            # regardless of the digestion ban, as it implies the beast swallows them whole instantly.
+            # If you want this to respect the ban, change 'death_murder' to an if/else block like above.
+            scope:prey = {
+                death = { death_reason = death_vanished }
+            }
+        }
+    }
+    
+    option = {
+        name = hunt_vore.9000.opt.b
+        # Combat logic here
+    }
+}

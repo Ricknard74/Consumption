@@ -1,314 +1,287 @@
 ﻿namespace = religious_vore
 
-#Feast of the Redeemers
+# Event 0001: The Feast Begins
 religious_vore.0001 = {
-	type = character_event
-	title = religious_voreTitle.0001
-	theme = feast_activity
-	desc = religious_voreDesc.0001
+    type = character_event
+    title = religious_voreTitle.0001
+    theme = feast_activity
+    desc = religious_voreDesc.0001
 
-	trigger = {
-		has_faith = faith:savior 
-	}
+    # FIX: Corrected faith syntax
+    trigger = {
+        has_faith = faith:savior
+    }
 
-        immediate = {
-                ROOT = {
-                        save_scope_as = predator
-                }
-                create_character = {
-                        location = scope:predator.capital_province
-                        template = prey_character_template
-                        save_scope_as = prey
-                }
+    immediate = {
+        ROOT = {
+            save_scope_as = predator
         }
-
-        right_portrait = {
-                character = scope:prey
-                animation = fear
+        create_character = {
+            location = scope:predator.capital_province
+            template = prey_character_template
+            save_scope_as = prey
         }
+    }
 
-	#Partake
-	option = {
-                name = religious_voreOpt.0001a
-		trigger = {
-                        can_vore = yes
-		}
-                ai_chance = {
-                        base = 0
-                        base_voraciousness_modifier = {
-                                PREY = scope:prey
-                        }
-                }
-                scope:predator = {
-                        add_character_modifier = religious_vore_predator
-                        save_scope_as = predator
-                }
-                trigger_event = religious_vore.0002       
-	}
-        #Different Prey 
-        option = {
-                trigger = {
-                        is_ai = no
-                }
-                name = religious_voreOpt.0001b
-                hidden_effect = {
-                        scope:prey = { silent_disappearance_effect = yes }
-                        trigger_event = religious_vore.0001       
-                }
+    right_portrait = {
+        character = scope:prey
+        animation = fear
+    }
+
+    # Partake
+    option = {
+        name = religious_voreOpt.0001a
+        trigger = {
+            can_vore = yes
         }
-	#Watch
-	option = {
-		name = religious_voreOpt.0001c
-                ai_chance = {
-                        base = 20
-                }
-                hidden_effect = {
-                        scope:prey = { silent_disappearance_effect = yes }
-                        trigger_event = religious_vore.0003       
-                }
-	}
-}	
+        ai_chance = {
+            base = 1
+            base_voraciousness_modifier = {
+                PREY = scope:prey
+            }
+        }
+        scope:predator = {
+            add_character_modifier = religious_vore_predator
+        }
+        trigger_event = religious_vore.0002       
+    }
+    
+    # Different Prey 
+    option = {
+        trigger = {
+            is_ai = no
+        }
+        name = religious_voreOpt.0001b
+        hidden_effect = {
+            # Kill current prey silently and reroll event
+            scope:prey = { silent_disappearance_effect = yes }
+            trigger_event = religious_vore.0001       
+        }
+    }
 
-#Player Vores Someone
+    # Watch
+    option = {
+        name = religious_voreOpt.0001c
+        ai_chance = {
+            base = 20
+        }
+        hidden_effect = {
+            scope:prey = { silent_disappearance_effect = yes }
+            trigger_event = religious_vore.0003       
+        }
+    }
+}    
+
+# Event 0002: The Vore Choice
 religious_vore.0002 = {
-	type = character_event
-	title = religious_voreTitle.0002
-	theme = feast_activity
-	desc = religious_voreDesc.0002
+    type = character_event
+    title = religious_voreTitle.0002
+    theme = feast_activity
+    desc = religious_voreDesc.0002
 
-	trigger = {
-                can_vore = yes
-	}
+    trigger = {
+        can_vore = yes
+    }
 
-	left_portrait = {
-                character = scope:predator
-                animation = flirtation
-	}
-	right_portrait = {
-                character = scope:prey
-                animation = fear
-	}
+    left_portrait = {
+        character = scope:predator
+        animation = flirtation
+    }
+    right_portrait = {
+        character = scope:prey
+        animation = fear
+    }
 
-        immediate = {
-                scope:predator = {
-                        add_visiting_courtier = scope:prey
-                }
+    immediate = {
+        scope:predator = {
+            add_visiting_courtier = scope:prey
         }
+    }
 
-	#Oral
-	option = {
-                name = religious_voreOpt.0002a
-                ai_chance = {
-                        base = 0
-                        oral_vore_modifier = {
-                                PREY = scope:prey
-                        }
-                } 
-                trigger = { 
-                        global_var:oral_banned = no 
-                }
-                hidden_effect = {
-                        trigger_event = religious_vore.0004       
-                }
-	}            
-
-	#Anal
-	option = {
-                name = religious_voreOpt.0002b
-                ai_chance = {
-                        base = 0
-                        anal_vore_modifier = {
-                                PREY = scope:prey
-                        }
-                }
-                trigger = {
-                        global_var:anal_banned = no
-                }
-                hidden_effect = {
-                        trigger_event = religious_vore.0005       
-                }
-	}
-
-	#Unbirth
-	option = {
-                name = religious_voreOpt.0002c
-                ai_chance = {
-                        base = 0
-                        unbirth_vore_modifier = {
-                                PREY = scope:prey
-                        }
-                }
-                trigger = {
-                        AND = {
-                                is_female = yes
-                                NOT = { has_trait = pregnant }
-                                global_var:unbirth_banned = no       
-                        }
-                }
-                hidden_effect = {
-                        trigger_event = religious_vore.0006 
-                }
-	}
-
-	#Cock
-	option = {
-                name = religious_voreOpt.0002d
-                ai_chance = {
-                        base = 0
-                        cock_vore_modifier = {
-                                PREY = scope:prey
-                        }
-                }
-                trigger = {
-                        AND = {
-                                is_female = no
-                                global_var:cock_banned = no
-                        }
-                }
-                hidden_effect = {
-                        trigger_event = religious_vore.0007
-                }
-	}
-		
-	#Exit
-	option = {
-		name = religious_voreOpt.0002e
-                ai_chance = {
-                        base = 15
-                }
-                hidden_effect = {
-                        scope:predator = {
-                                clear_saved_scope = predator
-                        }
-                }
-		trigger_event = religious_vore.0003
-	}
-        after = {
-                exit_clean_up_effect = yes
+    # Oral
+    option = {
+        name = religious_voreOpt.0002a
+        trigger = { global_var:oral_banned = no }
+        ai_chance = {
+            base = 0
+            oral_vore_modifier = yes
         }
+        hidden_effect = {
+            trigger_event = religious_vore.0004       
+        }
+    }            
+
+    # Anal
+    option = {
+        name = religious_voreOpt.0002b
+        trigger = { global_var:anal_banned = no }
+        ai_chance = {
+            base = 0
+            anal_vore_modifier = yes
+        }
+        hidden_effect = {
+            trigger_event = religious_vore.0005       
+        }
+    }
+
+    # Unbirth
+    option = {
+        name = religious_voreOpt.0002c
+        trigger = {
+            AND = {
+                scope:predator = { is_female = yes }
+                NOT = { scope:predator = { has_trait = pregnant } }
+                global_var:unbirth_banned = no       
+            }
+        }
+        ai_chance = {
+            base = 0
+            unbirth_vore_modifier = yes
+        }
+        hidden_effect = {
+            trigger_event = religious_vore.0006 
+        }
+    }
+
+    # Cock
+    option = {
+        name = religious_voreOpt.0002d
+        trigger = {
+            AND = {
+                scope:predator = { is_female = no }
+                global_var:cock_banned = no
+            }
+        }
+        ai_chance = {
+            base = 0
+            cock_vore_modifier = yes
+        }
+        hidden_effect = {
+            trigger_event = religious_vore.0007
+        }
+    }
+        
+    # Exit
+    option = {
+        name = religious_voreOpt.0002e
+        ai_chance = {
+            base = 15
+        }
+        trigger_event = religious_vore.0003
+    }
 }
 
-#Player Watches the Feast
+# Event 0003: Watch
 religious_vore.0003 = {
-	type = character_event
-	title = religious_voreTitle.0003
-	theme = feast_activity
-	desc = religious_voreDesc.0003
+    type = character_event
+    title = religious_voreTitle.0003
+    theme = feast_activity
+    desc = religious_voreDesc.0003
 
-        #Watch the Feast Until the End
-        option = {
-                ai_chance = {
-                        base = 150
-                }
-                name = religious_voreOpt.0003a
-                hidden_effect = {
-                        trigger_event = religious_vore.0008
-                }
+    # Watch Feast Until End
+    option = {
+        ai_chance = {
+            base = 150
         }
-	#Leave Feast Early
-	# option = {
-	# 	name = religious_voreOpt.0003b
-        #         hidden_effect = {
-        #                 trigger_event = religious_vore.0011       
-        #         }
-	# }
+        name = religious_voreOpt.0003a
+        hidden_effect = {
+            trigger_event = religious_vore.0008
+        }
+        # CLEANUP: Since this branch ends here, we must clean up scopes immediately after 0008
+    }
+    after = { clean_up_effect = yes }
 }
 
-#Oral
+# Oral
 religious_vore.0004 = {
-        title = religious_voreTitle.0004
-	type = character_event
-	desc = religious_voreDesc.0004
-        theme = feast_activity
+    title = religious_voreTitle.0004
+    type = character_event
+    desc = religious_voreDesc.0004
+    theme = feast_activity
 
-        left_portrait = {
-                character = scope:predator
-                animation = flirtation
-	}
+    left_portrait = {
+        character = scope:predator
+        animation = flirtation
+    }
 
-        immediate = {
-                scope:predator = {
-                        add_character_flag = portrait_belly  
-                }
-        }    
-
-        #Non-lethal
-        option = {
-                name = religious_voreOpt.0004
-                hidden_effect = {
-                        safe_vore_effect = {
-                                type = oral
-                                prison_type = vore_religious_unwilling
-                        }
-                        trigger_event = religious_vore.0008
-                        random_list = {
-                                100 = {
-                                        trigger_event = { id = religious_vore.0009 days = 5 }
-                                }
-                                0 = {
-                                        trigger_event = { id = religious_vore.0010 days = 10 }
-                                }
-                        }       
-                }
+    immediate = {
+        scope:predator = {
+            add_character_flag = portrait_belly  
         }
-        after = {
-                clean_up_effect = yes
+    }    
+
+    # Non-lethal
+    option = {
+        name = religious_voreOpt.0004
+        hidden_effect = {
+            safe_vore_effect = {
+                type = oral
+                prison_type = vore_religious_unwilling
+            }
+            # Trigger Feast End (Runs immediately)
+            trigger_event = religious_vore.0008
+            # Schedule Conversion (Runs later)
+            random_list = {
+                100 = {
+                    trigger_event = { id = religious_vore.0009 days = 5 }
+                }
+                0 = {
+                    trigger_event = { id = religious_vore.0010 days = 10 }
+                }
+            }       
         }
+    }
 }
 
-#Anal
+# Event 0005: Anal Outcome
 religious_vore.0005 = {
-        title = religious_voreTitle.0005
-	type = character_event
-	desc = religious_voreDesc.0005
-	theme = feast_activity
+    title = religious_voreTitle.0005
+    type = character_event
+    desc = religious_voreDesc.0005
+    theme = feast_activity
 
-        immediate = {
-                scope:predator = {
-                        add_character_flag = portrait_belly
-                        add_character_flag = vore_predator   
-                }
+    immediate = {
+        scope:predator = {
+            add_character_flag = portrait_belly
+            add_character_flag = vore_predator   
         }
+    }
 
-        #Non-lethal
-        option = {
-                name = religious_voreOpt.0005
-                hidden_effect = {
-                        safe_vore_effect = {
-                                type = anal
-                                prison_type = vore_religious_unwilling
-                        }
-                        trigger_event = religious_vore.0008
-                        random_list = {
-                                75 = {
-                                        trigger_event = { id = religious_vore.0009 years = 1 }
-                                }
-                                25 = {
-                                        trigger_event = { id = religious_vore.0010 years = 2 }
-                                }
-                        }       
+    option = {
+        name = religious_voreOpt.0005
+        hidden_effect = {
+            safe_vore_effect = {
+                type = anal
+                prison_type = vore_religious_unwilling
+            }
+            trigger_event = religious_vore.0008
+            random_list = {
+                75 = {
+                    trigger_event = { id = religious_vore.0009 years = 1 }
                 }
+                25 = {
+                    trigger_event = { id = religious_vore.0010 years = 2 }
+                }
+            }       
         }
-        after = {
-                clean_up_effect = yes
-        }
+    }
 }
 
-#Unbirth
+# Event 0006: Unbirth Outcome
 religious_vore.0006 = {
-        title = religious_voreTitle.0006
-	type = character_event
-	desc = religious_voreDesc.0006
-	theme = feast_activity
+    title = religious_voreTitle.0006
+    type = character_event
+    desc = religious_voreDesc.0006
+    theme = feast_activity
 
-        immediate = {
-                scope:predator = {
-                        add_character_flag = portrait_belly
-                        add_character_flag = vore_predator   
-                }
+    immediate = {
+        scope:predator = {
+            add_character_flag = portrait_belly
+            add_character_flag = vore_predator   
         }
+    }
 
-        #Rebirth/Transformation
+            #Rebirth/Transformation
         # option = {
         #         name = religious_voreOpt.0006a
         #         trigger = {
@@ -330,200 +303,143 @@ religious_vore.0006 = {
         #         }
         #         trigger_event = { vore.0014 months = 9 }
         # }
-
-        #Non-lethal
-        option = {
-                name = religious_voreOpt.0006b
-                hidden_effect = {
-                        safe_vore_effect = {
-                                type = unbirth
-                                prison_type = vore_religious_unwilling
-                        }
-                        trigger_event = religious_vore.0008
-                        random_list = {
-                                75 = {
-                                        trigger_event = { id = religious_vore.0009 years = 1 }
-                                }
-                                25 = {
-                                        trigger_event = { id = religious_vore.0010 years = 2 }
-                                }
-                                # instead of having random chance, make it more likely for the event to activate depending on how many days
-                        }       
+    option = {
+        name = religious_voreOpt.0006b
+        hidden_effect = {
+            safe_vore_effect = {
+                type = unbirth
+                prison_type = vore_religious_unwilling
+            }
+            trigger_event = religious_vore.0008
+            random_list = {
+                75 = {
+                    trigger_event = { id = religious_vore.0009 years = 1 }
                 }
+                25 = {
+                    trigger_event = { id = religious_vore.0010 years = 2 }
+                }
+            }       
         }
-        after = {
-                clean_up_effect = yes
-        }
+    }
 }
 
-#Cock
+# Cock
 religious_vore.0007 = {
-        title = religious_voreTitle.0007
-	type = character_event
-	desc = religious_voreDesc.0007
-        theme = feast_activity
+    title = religious_voreTitle.0007
+    type = character_event
+    desc = religious_voreDesc.0007
+    theme = feast_activity
 
-        immediate = {
-                scope:predator = {
-#                        add_character_flag = genital_vore_predator 
-                        add_character_flag = vore_predator   
-                }
+    immediate = {
+        scope:predator = {
+            add_character_flag = vore_predator   
         }
+    }
 
-        #Non-lethal
-        option = {
-                name = religious_voreOpt.0007
-                hidden_effect = {
-                        safe_vore_effect = {
-                                type = cock
-                                prison_type = vore_religious_unwilling
-                        }
-                        trigger_event = religious_vore.0008
-                        random_list = {
-                                75 = {
-                                        trigger_event = { id = religious_vore.0009 years = 1 }
-                                }
-                                25 = {
-                                        trigger_event = { id = religious_vore.0010 years = 2 }
-                                }
-                        }       
+    option = {
+        name = religious_voreOpt.0007
+        hidden_effect = {
+            safe_vore_effect = {
+                type = cock
+                prison_type = vore_religious_unwilling
+            }
+            trigger_event = religious_vore.0008
+            random_list = {
+                75 = {
+                    trigger_event = { id = religious_vore.0009 years = 1 }
                 }
+                25 = {
+                    trigger_event = { id = religious_vore.0010 years = 2 }
+                }
+            }       
         }
-        after = {
-                clean_up_effect = yes
-        }
+    }
 }
 
-#Rest of Feast
+# Rest of Feast
 religious_vore.0008 = {
-	type = character_event
-	title = religious_voreTitle.0008
-	theme = feast_activity
-	desc = religious_voreDesc.0008
+    type = character_event
+    title = religious_voreTitle.0008
+    theme = feast_activity
+    desc = religious_voreDesc.0008
 
-        # immediate = {
-        #         create_character = {
-        #                 location = root.capital_province
-        #                 template = prey_character_template
-        #                 gender_female_chance = 50
-        #                 save_scope_as = prey
-        #         }
-        #         root = {
-        #                 save_scope_as = predator
-        #                 add_character_flag = religious_vore_predator 
-        #         }
-        # }
-
-	#End of Feast
-	option = {
-                name = religious_voreOpt.0008
-                # scope:predator.faith = {
-                #         change_fervor = { value = 5 }
-                # }
-                scope:predator = {
-                        add_piety = 25
-                        #hidden_effect = {
-                                every_courtier_or_guest = {
-                                        limit = {
-                                                has_faith = court_owner.faith
-                                                can_vore = yes
-                                                is_ai = yes
-                                        }
-                                        add_piety = 10
-                                        random_list = {
-                                                50 = {
-                                                        trigger = {
-                                                                global_var:oral_banned = no
-                                                        }
-                                                        add_trait = oral_predator
-                                                }
-                                                0 = {
-                                                        trigger = {
-                                                                global_var:anal_banned = no
-                                                        }
-                                                        add_trait = anal_predator
-                                                }
-                                                75 = {
-                                                        trigger = {
-                                                                global_var:unbirth_banned = no
-                                                                is_female = yes
-                                                        }
-                                                        add_trait = unbirth_predator
-                                                }
-                                                0 = {
-                                                        trigger = {
-                                                                global_var:cock_banned = no
-                                                                is_female = no
-                                                        }
-                                                        add_trait = cock_predator
-                                                }
-                                        }
-                                        add_trait = oral_predator
-                                        trigger_event = { id = vore.0020 years = { 1 2 }}
-                                }
-                        #}
-                        clear_saved_scope = predator
+    # End of Feast
+    option = {
+        name = religious_voreOpt.0008
+        hidden_effect = {
+            scope:predator = {
+                add_piety = 25
+            }
+            # AI logic for other guests
+            every_courtier_or_guest = {
+                limit = {
+                    has_faith = court_owner.faith
+                    can_vore = yes
+                    is_ai = yes
                 }
-	}
+                add_piety = 10
+
+                
+                simulate_npc_vore_effect = yes 
+            }
+            
+            # FIX: Do NOT clear scopes here. They are needed for events 0009/0010.
+        }
+    }
 }
 
-#Savior Prey converted 1 year later
+# Converted 1 Year Later
 religious_vore.0009 = {
-        type = character_event
-        title = religious_voreTitle.0009
-        theme = crown
-        desc = religious_voreDesc.0009
-        # desc = { # Makes for different descriptions depending on how long it took to convert the prey
-        #         first_valid = {
-        #                 triggered_desc = { 
-        #                         trigger = { days_of_conversion <= 365 } 
-        #                         desc = religious_voreDesc.0009a
-        #                 } 
-        #                 triggered_desc = {
-        #                         trigger = { days_of_conversion > 365 }
-        #                         desc = religious_voreDesc.0009b
-        #                 }       
-        #         }
-        # }
+    type = character_event
+    title = religious_voreTitle.0009
+    theme = crown
+    desc = religious_voreDesc.0009
 
-        immediate = {
-                scope:prey = {
-                        set_character_faith_with_conversion = faith:savior
-                }
+    immediate = {
+        scope:prey = {
+            set_character_faith_with_conversion = faith:savior
         }
+    }
 
-        right_portrait = {
-                character = scope:prey
-                animation = happiness
-        }
+    right_portrait = {
+        character = scope:prey
+        animation = happiness
+    }
 
-        option = {
-                name = religious_voreOpt.0009
-                release_prey_location_check_effect = yes
+    option = {
+        name = religious_voreOpt.0009
+        hidden_effect = {
+            release_prey_location_check_effect = yes
+            # CLEANUP: Scopes cleared now that the chain is truly finished
+            clean_up_effect = yes
         }
+    }
 }
 
-#Savior Prey converted 2 years later
+# Event 0010: Converted 2 Years Later
 religious_vore.0010 = {
-        type = character_event
-        title = religious_voreTitle.0010
-        theme = crown
-        desc = religious_voreDesc.0010
+    type = character_event
+    title = religious_voreTitle.0010
+    theme = crown
+    desc = religious_voreDesc.0010
 
-        immediate = {
-                #Prey Converted
-                scope:recipient = {
-                        set_character_faith_with_conversion = faith:savior
-                }
+    immediate = {
+        scope:prey = {
+            set_character_faith = scope:predator.faith
         }
+    }
 
-        right_portrait = {
-                character = scope:recipient
-                animation = happiness
-        }
+    right_portrait = {
+        character = scope:prey
+        animation = happiness
+    }
 
-        option = {
-                name = religious_voreOpt.0010
-                release_prey_location_check_effect = yes
+    option = {
+        name = religious_voreOpt.0010
+        hidden_effect = {
+            release_prey_location_check_effect = yes
+            # CLEANUP: Scopes cleared now
+            clean_up_effect = yes
         }
+    }
 }

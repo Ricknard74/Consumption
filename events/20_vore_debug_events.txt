@@ -1,0 +1,19 @@
+﻿namespace = vore_debug
+
+vore_debug.0001 = {
+    type = character_event
+    hidden = yes
+    
+#     immediate = {
+#         debug_log = "DEBUG: [scope:predator.GetFirstName] has vored [scope:prey.GetFirstName] via $type$ vore"
+#     }
+}
+
+vore_debug.0002 = {
+    type = character_event
+    hidden = yes
+    
+    # immediate = {
+    #     debug_log = "DEBUG: [scope:predator.GetFirstName] has released [scope:prey.GetFirstName] from $type$ vore"
+    # }
+}

@@ -1,10 +1,18 @@
-Add a notification event every time vore and release happens for debug purposes
+# Add vore belly model using decals to affect size
 
-Add vore belly model using decals to affect size
+Events for releasing or digesting prey from the prey list window
+
+Random event within a week of lethal vore make so the prey may have a prowess struggle to escape
+
+Replace prison_type with character flag, than use prison_type for womb vs stomach vs bowels vs balls
+
+Investigate using story cycle for safe vore so prey are garunteed release at some random interval. Use random_relation_pred as the prey are still alive at this point
 
 Physician vore, either a treatment description or where you are made incapable for a month but have a higher chance of healing.
 
-increase stomach size depending on number of, and accounting for dwarf and giant traits
+Spouse vore events, like devouring a concubine or secondary spouse. Concubine on concubine vore?
+
+Stress break as prey event
 
 select the prey that the actor wants to interact with from the relationship screen, use bigui ll mod for reference
 
@@ -13,15 +21,9 @@ Vore event for conversion of court members
 Vore Conversion flavor for convert county
 Vore themed priest council role
 
-New effect function so safe_vore_effect and lethal vore effect can have a random orifice generated
-
 Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional
 
-Make a partially digested person disfigured. Make a similar traumatized modifier for non-fatal vore for the sake of balance. Maybe
-
 Hunt activity with vore events like catching some of your guests voring each other, or being eaten by their target, fatally and non-fatally.
-
-Seduce and romance schemes with vore events and endings
 
 Feast activity with vore events
 
@@ -33,8 +35,6 @@ Give the player the option to help the pred digest their prey or non-lethally ti
 
 Other feral vore possibilities. Should be a preference option
 
-Killer whale event for sea travel.
-
 Maybe someone gets angry your dog or cat ate them or a relative.
 
 County vore modifiers like "Vored wrong person" or "Vored gracefully" or "Digested evil criminal" and such
@@ -45,7 +45,9 @@ Give an artifact away to be eaten in exchange for some bonuses
 
 Steal an artifact vore description
 
-Vore sacrifice event
+Vore sacrifice 
+
+Vore scheme
 
 Vore duel event, whether it be attempting to swallow someone results in something like a duel, or you can randomly swallow your opponent to finish the fight
 
@@ -54,8 +56,6 @@ Change voreDesc.xxxx to vore_oralDesc so it can be prision_vore_OralDesc.0001
 Make so the player can choose to execute a prisoner by vore in addition to lethal and non-lethal interaction choices
 
 Add some plague vore events, specifically for religions that worship vore gods
-
-Implement a new imprison system so lowborn can do proper vore, if possible
 
 Add new vore themed men at arms
 
@@ -66,8 +66,6 @@ Add new voracious tenet for cultures that increases the chance for vore and capa
 Random event to turn your pet into a belly pet or digest it after it gets to a certain age.
 
 Caravan Master travel vore event where you can increase safety but delay the trip by riding in the stomach of this courtier for a while
-
-Investigate story cycles for vore toggles
 
 Investigate activities for vore your lover/invite pred/prey events
 

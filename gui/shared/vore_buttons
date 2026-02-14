@@ -1,0 +1,5 @@
+type button_prey_list = button_icon
+{
+    texture = "gfx/interface/icons/flat_icons/prey_list_button_icon.dds"
+    framesize = { 60 60 }
+}

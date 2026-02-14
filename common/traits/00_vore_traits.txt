@@ -207,6 +207,7 @@ preyish = {
 		predator_1
 		predator_2
 		predator_3
+		voracious
     }
 	minimum_age = 18
 	ruler_designer_cost = 60

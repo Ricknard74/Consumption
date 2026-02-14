@@ -1,0 +1,122 @@
+﻿vore_safe_story = { #story owner is prey
+	on_setup = {
+
+	}
+
+	on_end = {
+
+	}
+
+	on_owner_death = {
+		end_story = yes
+	}
+
+	effect_group = {
+		months = 1
+		triggered_effect = {
+			trigger = { exists = imprisonment_duration}
+			effect = {
+				change_variable = { name = imprisonment_duration add = 1}
+			}
+		}
+		# add modifier for release chance that is multiplied by imprisonment duration / 2
+		# Setup
+	}
+}
+
+vore_digestion_story = {
+	on_setup = {
+		set_variable = { name = digestion_progress value = 0 }
+		if = {
+			limit = { story_owner = { has_character_flag = oral_current_prey } }
+			set_variable = { name = vore_type value = flag:oral }
+		}
+		else_if = {
+			limit = { story_owner = { has_character_flag = anal_current_prey } }
+			set_variable = { name = vore_type value = flag:anal }
+		}
+		else_if = {
+			limit = { story_owner = { has_character_flag = unbirth_current_prey } }
+			set_variable = { name = vore_type value = flag:unbirth }
+		}
+		else_if = {
+			limit = { story_owner = { has_character_flag = cock_current_prey } }
+			set_variable = { name = vore_type value = flag:cock }
+		}
+		else = {
+			set_variable = { name = vore_type value = flag:oral }
+		}
+	}
+
+	on_end = {
+		story_owner = {
+			save_scope_as = predator
+		}
+		if = {
+			limit = { var:vore_type = flag:oral }
+			scope:predator = {
+				add_character_flag = oral_digestion_finished
+				trigger_event = vore.0002
+			}
+		}
+		if = {
+			limit = { var:vore_type = flag:anal }
+			scope:predator = {
+				add_character_flag = anal_digestion_finished
+				trigger_event = vore.0002
+			}
+		}
+		if = {
+			limit = { var:vore_type = flag:unbirth }
+			scope:predator = {
+				add_character_flag = unbirth_digestion_finished
+				trigger_event = vore.0002
+			}
+		}
+		if = {
+			limit = { var:vore_type = flag:cock }
+			scope:predator = {
+				add_character_flag = cock_digestion_finished
+				trigger_event = vore.0002
+			}
+		}
+		else = {
+			scope:predator = {
+				add_character_flag = oral_digestion_finished
+				trigger_event = vore.0002
+			}
+		}
+	}
+
+	on_owner_death = {
+		# story_owner = {
+		# 	send_interface_message = {
+		# 		type = event_trouble_neutral
+		# 		title = "Digestion Complete"
+		# 		desc = "The evidence of your deed has vanished."
+		# 	}
+		# }
+	}
+
+	effect_group = {
+		months = 1
+
+		# trigger = {
+		# }
+		triggered_effect = {
+			trigger = { exists = digestion_progress}
+			effect = {
+				change_variable = { name = digestion_progress add = 25}
+			}
+			# Maybe lower escape chance		
+		}
+		triggered_effect = {
+			trigger = { 
+				var:digestion_progress >= 100 
+			}
+			effect = {
+				end_story = yes
+			}
+		}
+	}
+}

@@ -1,0 +1,98 @@
+﻿open_prey_window_for_character = {
+    scope = character  # This is the player
+    saved_scopes = {
+        target  # This is the character whose window is open
+    }
+    
+    effect = {
+        # Store the TARGET character as the predator being viewed
+        clear_variable_list = current_predator_view
+        add_to_variable_list = {
+            name = current_predator_view
+            target = scope:target
+        }
+        save_scope_as = plyr
+        
+        # Clear prey list
+        clear_variable_list = prey_list
+        
+        # Check if we're viewing an AI character or the player
+        if = {
+            limit = {
+                scope:target = {
+                    NOT = { this = scope:plyr }
+                }
+            }
+            set_variable = viewing_ai_prey
+        }
+        else = {
+            remove_variable = viewing_ai_prey
+        }
+        
+        # Get the TARGET's prey and add to root (GetPlayer) prey_list
+        scope:target = {
+            every_relation = {
+                type = prey
+                limit = { is_alive = yes }
+                save_temporary_scope_as = prey_character
+                
+                scope:plyr = {
+                    add_to_variable_list = {
+                        name = prey_list
+                        target = scope:prey_character
+                    }
+                }
+            }
+        }
+        
+        # Open window by setting variable
+        set_variable = show_prey_list_window
+    }
+}
+close_prey_window = {
+    scope = character
+    
+    effect = {
+        remove_variable = show_prey_list_window
+    }
+}
+
+release_prey_from_window = {
+    scope = character  # This is GetPlayer
+    saved_scopes = {
+        prey
+    }
+    
+    effect = {
+        # Get the predator from our list
+        random_in_list = {
+            variable = current_predator_view
+            save_temporary_scope_as = predator
+        }
+        
+        scope:predator = {
+            # Trigger the release event
+            trigger_event = vore.3005
+        }
+    }
+}
+
+digest_prey_from_window = {
+    scope = character  # This is GetPlayer
+    saved_scopes = {
+        prey
+    }
+    
+    effect = {
+        # Get the predator from our list
+        random_in_list = {
+            variable = current_predator_view
+            save_temporary_scope_as = predator
+        }
+        
+        scope:predator = {
+            # Trigger the digest event
+            trigger_event = vore.3004
+        }
+    }
+}

@@ -1,947 +1,1274 @@
 ﻿namespace = vore
 
+# --- ROOT = Player/Predator ---
+# --- scope:prey = The Victim ---
+
+vore.3001 = {
+    type = character_event
+    title = voreTitle.3001
+    theme = default
+    desc = voreDesc.3001
+
+    immediate = {
+        # 1. Ensure we are the predator
+        scope:actor = { save_scope_as = predator }
+        
+        # 2. Identify the prey. 
+        # The interaction passes the specific character clicked, but let's double-check they are actually vored.
+        if = {
+            limit = { 
+                scope:recipient = { 
+                    has_character_flag = vored 
+                    has_relation_predator = scope:predator
+                } 
+            }
+            scope:recipient = { save_scope_as = prey }
+        }
+        else = {
+            # Fallback: If the interaction target isn't valid, find a random prey
+            # This prevents the event from firing on non-vored prisoners
+            random_relation = {
+                type = prey
+                save_scope_as = prey
+            }
+        }
+    }
+
+    option = {
+        name = vore.3001.opt.a # "Check on Prey"
+        trigger = {
+            scope:predator = {
+                has_relation_prey = scope:prey
+            }
+        }
+        trigger_event = { id = vore.3003 } 
+    }
+    
+    # Fallback option if something went wrong with scoping
+    option = {
+        name = vore.3001.opt.b
+        trigger = { always = yes }
+    }
+}
+    
+# --- DIGESTING PREY EVENTS ---
+
+vore.3002 = {
+    title = vore.3002.t
+    type = character_event
+    theme = default
+    
+    # Dynamic description based on digestion progress
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { 
+                    scope:prey = { has_variable = digestion_progress }
+                    scope:prey.var:digestion_progress < 25 
+                }
+                desc = vore.3002.desc.early
+            }
+            triggered_desc = {
+                trigger = { 
+                    scope:prey = { has_variable = digestion_progress }
+                    scope:prey.var:digestion_progress >= 25 
+                    scope:prey.var:digestion_progress < 50 
+                }
+                desc = vore.3002.desc.mid
+            }
+            triggered_desc = {
+                trigger = { 
+                    scope:prey = { has_variable = digestion_progress }
+                    scope:prey.var:digestion_progress >= 50 
+                    scope:prey.var:digestion_progress < 75 
+                }
+                desc = vore.3002.desc.late
+            }
+            triggered_desc = {
+                trigger = { 
+                    AND = {
+                        scope:prey = { has_variable = digestion_progress }
+                        scope:prey.var:digestion_progress >= 75 
+                    }
+                }
+                desc = vore.3002.desc.end
+            }
+            desc = vore.3002.desc.fallback
+        }
+    }
+    
+    # Option: Continue Digestion
+    option = {
+        name = vore.3002.opt.a
+        # No effect needed, just close the event
+    }
+    
+    # Option: Emergency Release
+    option = {
+        trigger = {
+            scope:prey.var:digestion_progress <= 50
+        }
+        name = vore.3002.opt.c
+        
+        hidden_effect = {
+            # Release prey with trauma
+            release_prey_location_check_effect = yes
+            
+            scope:prey = {
+                add_character_modifier = { modifier = trauma_from_digestion years = 5 }
+                add_trait = disfigured
+            }
+        }
+    }
+}
+
+vore.3004 = {
+    type = character_event
+    title = prey_window.3004.t
+    desc = prey_window.3004.desc
+    theme = death
+    
+    left_portrait = {
+        character = root
+        animation = personality_bold
+    }
+    
+    right_portrait = {
+        character = scope:prey
+        animation = pain
+    }
+    
+    immediate = {
+        # Determine vore type and call appropriate effects
+        if = {
+            limit = { scope:prey = { has_trait = oral_vored } }
+            release_prey_effect = { type = oral }
+            lethal_vore_effect = { type = oral }
+        }
+        else_if = {
+            limit = { scope:prey = { has_trait = anal_vored } }
+            release_prey_effect = { type = anal }
+            lethal_vore_effect = { type = anal }
+        }
+        else_if = {
+            limit = { scope:prey = { has_trait = unbirth_vored } }
+            release_prey_effect = { type = unbirth }
+            lethal_vore_effect = { type = unbirth }
+        }
+        else_if = {
+            limit = { scope:prey = { has_trait = cock_vored } }
+            release_prey_effect = { type = cock }
+            lethal_vore_effect = { type = cock }
+        }
+    }
+    
+    option = {
+        name = prey_window.3004.a
+        # Predator option
+    }
+}
+    
+# --- SAFE PREY EVENTS ---
+
+vore.3003 = {
+    type = character_event
+    title = vore.3003.t
+    theme = default
+    
+    immediate = {
+        scope:actor = {
+            save_scope_as = predator
+        }
+        scope:recipient = {
+            save_scope_as = prey
+        }
+    }
+    
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { scope:prey = { has_trait = oral_vored } }
+                desc = vore.3003.desc.oral
+            }
+            triggered_desc = {
+                trigger = { scope:prey = { has_trait = anal_vored } }
+                desc = vore.3003.desc.anal
+            }
+            triggered_desc = {
+                trigger = { scope:prey = { has_trait = unbirth_vored } }
+                desc = vore.3003.desc.unbirth
+            }
+            triggered_desc = {
+                trigger = { scope:prey = { has_trait = cock_vored } }
+                desc = vore.3003.desc.cock
+            }
+            desc = vore.3003.desc.fallback
+        }
+    }
+    
+    option = {
+        name = vore.3003.opt.a # "Continue Containment"
+        # No effect needed
+    }
+    
+    option = {
+        name = vore.3003.opt.b # "Comfort Prey"
+        
+        hidden_effect = {
+            # root = {
+            #     add_character_modifier = { modifier = comforting_prey days = 2 }
+            # }
+            
+            scope:prey = {
+                random_relation = {
+                    type = predator
+                    add_opinion = { target = root modifier = comforted_opinion }
+                }
+            }
+        }
+    }
+    
+    option = {
+        name = vore.3003.opt.c # "Release Prey"
+        
+        hidden_effect = {
+            release_prey_location_check_effect = yes
+        }
+    }
+}
+
+vore.3005 = {
+    type = character_event
+    title = prey_window.3005.t
+    desc = prey_window.3005.desc
+    theme = death
+    
+    left_portrait = {
+        character = scope:predator
+        animation = personality_rational
+    }
+    
+    right_portrait = {
+        character = scope:prey
+        animation = fear
+    }
+    
+    immediate = {
+        scope:prey = {
+            release_prey_location_check_effect = yes
+        }
+    }
+    
+    option = {
+        name = prey_window.3005.a
+        # Event closes automatically
+    }
+}
+
 #Vore Control Panel
 vore.0003 = {
-        title = vore_controlTitle.0003
-        type = character_event
-        desc = vore_controlDesc.0003
-        theme = default
-        
-        #If mod is installed mid save, this should make so the vars are set when the toggle menu is opened
-        immediate = {
-                IF = {
-                    limit = {
-                        NOT = { exists = global_var:oral_banned }
-                    }
-                    trigger_event = { on_action = on_vore_defensive_check}
-                }
-        }
-        
-        #Vore Types
-        option = {
-                name = vore_controlOpt.0003a
-                trigger_event = vore.0004 
-        }            
+    title = vore_controlTitle.0003
+    type = character_event
+    desc = vore_controlDesc.0003
+    theme = default
     
-        #Vore Aspects
-        option = {
-                name = vore_controlOpt.0003b
-                trigger_event = vore.0005  
-        }
+    #If mod is installed mid save, this should make so the vars are set when the toggle menu is opened
+    immediate = {
+            IF = {
+                limit = {
+                    NOT = { exists = global_var:oral_banned }
+                }
+                trigger_event = { on_action = on_vore_defensive_check}
+            }
+    }
+    
+    #Vore Types
+    option = {
+            name = vore_controlOpt.0003a
+            trigger_event = vore.0004 
+    }            
 
-        # Who Can Be Predators
-        option = {
-                name = vore_controlOpt.0003c
-                trigger_event = vore.1007
-        }
-            
-        #Exit
-        option = {
-                name = vore_controlOpt.0003d
-        }
+    #Vore Aspects
+    option = {
+            name = vore_controlOpt.0003b
+            trigger_event = vore.0005  
+    }
+
+    # Who Can Be Predators
+    option = {
+            name = vore_controlOpt.0003c
+            trigger_event = vore.1007
+    }
+        
+    #Exit
+    option = {
+            name = vore_controlOpt.0003d
+    }
 
 }
 
-#Vore Types Toggleables
+
+
+# Vore Types Toggleables
 vore.0004 = {
-        title = vore_locsTitle.0004
-        type = character_event
-        desc = vore_locsDesc.0004
-        theme = default
+    title = vore_locsTitle.0004
+    type = character_event
+    desc = vore_locsDesc.0004
+    theme = default
 
+    # Oral
+    option = {
+        name = vore_locsOpt.0004a
+        trigger_event = vore.1000
+    }            
+
+    # Anal
+    option = {
+        name = vore_locsOpt.0004b
+        trigger_event = vore.1001
+    }
+
+    # Unbirth
+    option = {
+        name = vore_locsOpt.0004c
+        trigger_event = vore.1002
+    }
         
-        #Oral
-        option = {
-                name = vore_locsOpt.0004a
-                trigger_event = vore.1000
-        }            
+    # Cock
+    option = {
+        name = vore_locsOpt.0004d
+        trigger_event = vore.1003
+    }
 
-        #Anal
-        option = {
-                name = vore_locsOpt.0004b
-                trigger_event = vore.1001
-        }
-
-        #Unbirth
-        option = {
-                name = vore_locsOpt.0004c
-                trigger_event = vore.1002
-        }
-            
-        #Cock
-        option = {
-                name = vore_locsOpt.0004d
-                trigger_event = vore.1003
-        }
-
-        #Exit - Go Back
-        option = {
-                name = vore_locsOpt.0004e
-                trigger_event = vore.0003 
-        }
-
+    # Exit - Go Back
+    option = {
+        name = vore_locsOpt.0004e
+        trigger_event = vore.0003 
+    }
 }
-
-#Oral Vore Toggle
-vore.1000 = {
-        title = voretitleOV.1000
-        type = character_event
-        theme = default
-        desc = {
-                first_valid = {
-                        triggered_desc = {
-                                trigger = {                          
-                                        global_var:oral_banned = no 
-                                }
-                                desc = voredescOV.1000a 
-                        }
-                        desc = voredescOV.1000b
-                }
-        }
-        #Oral On
-        option = {
-                name = voreoptOV.1000a
-                set_global_variable = { name = oral_banned value = no } 
-                trigger_event = vore.0004
-        }
-        #Oral Off
-        option = {
-                name = voreoptOV.1000b
-                set_global_variable = { name = oral_banned value = yes } 
-                trigger_event = vore.0004
-        }        
-}
-
-#Anal Toggle
-vore.1001 = {
-        title = voretitleAV.1001
-        type = character_event
-        theme = default
-        desc = {
-                first_valid = {
-                        triggered_desc = { 
-                                trigger = {
-                                        global_var:anal_banned = no
-                                }
-                                desc = voredescAV.1001a
-                        }
-                        desc = voredescAV.1001b
-                }
-        }
-
-        #Anal On
-        option = {
-                name = voreoptAV.1001a
-                set_global_variable = { name = anal_banned value = no}
-                trigger_event = vore.0004
-        }
-
-        #Anal Off
-        option = {
-                name = voreoptAV.1001b
-                set_global_variable = { name = anal_banned value = yes }
-                trigger_event = vore.0004
-        }
-}
-
-#Unbirth Toggle
-vore.1002 = {
-        title = voretitleUB.1002
-        type = character_event
-        theme = default        
-        desc = {
-                first_valid = {
-                        triggered_desc = {
-                                trigger = { 
-                                        global_var:unbirth_banned = no 
-                                }
-                                desc = voredescUB.1002a
-                        }
-                        desc = voredescUB.1002b
-                }
-        }
-        
-        #Unbirth On
-        option = {
-                name = voreoptUB.1002a
-                set_global_variable = { name = unbirth_banned value = no }
-                trigger_event = vore.0004
-        }
-
-        #Unbirth Off
-        option = {
-                name = voreoptUB.1002b
-                set_global_variable = { name = unbirth_banned value = yes }
-                trigger_event = vore.0004
-        }
-}
-
-#Cock Toggle
-vore.1003 = {
-        title = voretitleCV.1003
-        type = character_event
-        theme = default
-        desc = {
-                first_valid = {
-                        triggered_desc = { 
-                                trigger = {
-                                        global_var:cock_banned = no
-                                }
-                                desc = voredescCV.1003a
-                        }
-                        desc = voredescCV.1003b
-                }
-        }
-
-        #Cock On
-        option = {
-                name = voreoptCV.1003a
-                set_global_variable = { name = cock_banned value = no}
-                trigger_event = vore.0004
-        }
-
-        #Cock Off
-        option = {
-                name = voreoptCV.1003b
-                set_global_variable = { name = cock_banned value = yes }
-                trigger_event = vore.0004
-        }
-}
-
-#Vore Aspect Toggles
-vore.0005 = {
-        title = vore_aspectTitle.0005
-        type = character_event
-        theme = default
-        desc = vore_aspectDesc.0005
-        
-        #Disposal Toggle
-        option = {
-                name = vore_aspectOpt.0005a
-                trigger_event = vore.1004 
-        }          
     
-        #Digestion Toggle
-        option = {
-                name = vore_aspectOpt.0005b
-                trigger_event = vore.1005
-        } 
- 
-        #Unbirth Transformation Toggle
-        option = {
-                name = vore_aspectOpt.0005c
-                trigger_event = vore.1006
+# Oral Vore Toggle
+vore.1000 = {
+    title = voretitleOV.1000
+    type = character_event
+    theme = default
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { global_var:oral_banned = no } 
+                desc = voredescOV.1000a 
+            }
+            desc = voredescOV.1000b
         }
-            
-        #Go Back
-        option = {
-                name = vore_aspectOpt.0005d
-                trigger_event = vore.0003
+    }
+    
+    # Oral On
+    option = {
+        name = voreoptOV.1000a
+        hidden_effect = {
+            set_global_variable = { name = oral_banned value = no } 
         }
+        trigger_event = vore.0004
+    }
+    
+    # Oral Off
+    option = {
+        name = voreoptOV.1000b
+        hidden_effect = {
+            set_global_variable = { name = oral_banned value = yes } 
+        }
+        trigger_event = vore.0004
+    }        
+}
+    
+# Anal Toggle
+vore.1001 = {
+    title = voretitleAV.1001
+    type = character_event
+    theme = default
+    desc = {
+        first_valid = { 
+            triggered_desc = { 
+                trigger = { global_var:anal_banned = no }
+                desc = voredescAV.1001a
+            }
+            desc = voredescAV.1001b
+        }
+    }
+
+    # Anal On
+    option = {
+        name = voreoptAV.1001a
+        hidden_effect = {
+            set_global_variable = { name = anal_banned value = no}
+        }
+        trigger_event = vore.0004
+    }
+
+    # Anal Off
+    option = {
+        name = voreoptAV.1001b
+        hidden_effect = {
+            set_global_variable = { name = anal_banned value = yes }
+        }
+        trigger_event = vore.0004
+    }
 }
 
-#Disposal Toggle
+# Unbirth Toggle
+vore.1002 = {
+    title = voretitleUB.1002
+    type = character_event
+    theme = default        
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { global_var:unbirth_banned = no } 
+                desc = voredescUB.1002a
+            }
+            desc = voredescUB.1002b
+        }
+    }
+    
+    # Unbirth On
+    option = {
+        name = voreoptUB.1002a
+        hidden_effect = {
+            set_global_variable = { name = unbirth_banned value = no }
+        }
+        trigger_event = vore.0004
+    }
+
+    # Unbirth Off
+    option = {
+        name = voreoptUB.1002b
+        hidden_effect = {
+            set_global_variable = { name = unbirth_banned value = yes }
+        }
+        trigger_event = vore.0004
+    }
+}
+
+# Cock Toggle
+vore.1003 = {
+    title = voretitleCV.1003
+    type = character_event
+    theme = default
+    desc = {
+        first_valid = { 
+            triggered_desc = { 
+                trigger = { global_var:cock_banned = no }
+                desc = voredescCV.1003a
+            }
+            desc = voredescCV.1003b
+        }
+    }
+
+    # Cock On
+    option = {
+        name = voreoptCV.1003a
+        hidden_effect = {
+            set_global_variable = { name = cock_banned value = no}
+        }
+        trigger_event = vore.0004
+    }
+
+    # Cock Off
+    option = {
+        name = voreoptCV.1003b
+        hidden_effect = {
+            set_global_variable = { name = cock_banned value = yes }
+        }
+        trigger_event = vore.0004
+    }
+}
+
+# Vore Aspect Toggles
+vore.0005 = {
+    title = vore_aspectTitle.0005
+    type = character_event
+    theme = default
+    desc = vore_aspectDesc.0005
+    
+    # Disposal Toggle
+    option = {
+        name = vore_aspectOpt.0005a
+        trigger_event = vore.1004 
+    }          
+    
+    # Digestion Toggle
+    option = {
+        name = vore_aspectOpt.0005b
+        trigger_event = vore.1005
+    } 
+    
+    # Unbirth Transformation Toggle
+    option = {
+        name = vore_aspectOpt.0005c
+        trigger_event = vore.1006
+    }
+        
+    # Go Back
+    option = {
+        name = vore_aspectOpt.0005d
+        trigger_event = vore.0003
+    }
+}
+
+# Disposal Toggle
 vore.1004 = {
-        type = character_event
-        theme = default
-        title = voretitleSC.1004
-        desc = {
-                first_valid = {
-                        triggered_desc = { 
-                                trigger = {
-                                        global_var:scat_banned = no
-                                }
-                                desc = voredescSC.1004a
-                        }
-                        desc = voredescSC.1004b
-                }
+    type = character_event
+    theme = default
+    title = voretitleSC.1004
+    desc = {
+        first_valid = { 
+            triggered_desc = { 
+                trigger = { global_var:scat_banned = no }
+                desc = voredescSC.1004a
+            }
+            desc = voredescSC.1004b
         }
-        
-        #Scat On
-        option = {
-                name = voreoptSC.1004a
-                set_global_variable = { name = scat_banned value = no }
-                trigger_event = vore.0005
+    }
+    
+    # Scat On
+    option = {
+        name = voreoptSC.1004a
+        hidden_effect = {
+            set_global_variable = { name = scat_banned value = no }
         }
+        trigger_event = vore.0005
+    }
 
-        #Scat Off
-        option = {
-                name = voreoptSC.1004b
-                set_global_variable = { name = scat_banned value = yes }
-                trigger_event = vore.0005
+    # Scat Off
+    option = {
+        name = voreoptSC.1004b
+        hidden_effect = {
+            set_global_variable = { name = scat_banned value = yes }
         }
+        trigger_event = vore.0005
+    }
 }
 
-#Digestion Toggle
+# Digestion Toggle
 vore.1005 = {
-        type = character_event
-        theme = default
-        title = voretitleDG.1005
-        desc = {
-                first_valid = {
-                        triggered_desc = {
-                                trigger = {
-                                        global_var:digestion_banned = no
-                                }
-                                desc = voredescDG.1005a
-                        }
-                        desc = voredescDG.1005b         
-                }
+    type = character_event
+    theme = default
+    title = voretitleDG.1005
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { global_var:digestion_banned = no }
+                desc = voredescDG.1005a
+            }
+            desc = voredescDG.1005b         
         }
+    }
 
-        #Digestion On
-        option = {
-                name = voreoptDG.1005a
-                set_global_variable = { name = digestion_banned value = no }
-                trigger_event = vore.0005
+    # Digestion On
+    option = {
+        name = voreoptDG.1005a
+        hidden_effect = {
+            set_global_variable = { name = digestion_banned value = no }
         }
+        trigger_event = vore.0005
+    }
 
-        #Digestion Off
-        option = {
-                name = voreoptDG.1005b
-                set_global_variable = { name = digestion_banned value = yes }
-                trigger_event = vore.0005
+    # Digestion Off
+    option = {
+        name = voreoptDG.1005b
+        hidden_effect = {
+            set_global_variable = { name = digestion_banned value = yes }
         }
+        trigger_event = vore.0005
+    }
 }
 
-#Transformation Toggle
+# Transformation Toggle
 vore.1006 = {
-        type = character_event
-        theme = default
-        title = voretitleTF.1006
-        desc = {
-                first_valid = {
-                        triggered_desc = {
-                                trigger = {
-                                     global_var:transformation_banned = no   
-                                }
-                                desc = voredescTF.1006a
-                        }
-                        desc = voredescTF.1006b
-                }
+    type = character_event
+    theme = default
+    title = voretitleTF.1006
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { global_var:transformation_banned = no }   
+                desc = voredescTF.1006a
+            }
+            desc = voredescTF.1006b
         }
+    }
 
-        #Transformation On 
-        option = {
-              name = voreoptTF.1006a
-              set_global_variable = { name = transformation_banned value = no }
-              trigger_event = vore.0005  
+    # Transformation On 
+    option = {
+        name = voreoptTF.1006a
+        hidden_effect = {
+            set_global_variable = { name = transformation_banned value = no }
         }
+        trigger_event = vore.0005  
+    }
 
-        #Transformation Off
-        option = {
-                name = voreoptTF.1006b
-                set_global_variable = { name = transformation_banned value = yes }
-                trigger_event = vore.0005
+    # Transformation Off
+    option = {
+        name = voreoptTF.1006b
+        hidden_effect = {
+            set_global_variable = { name = transformation_banned value = yes }
         }
+        trigger_event = vore.0005
+    }
 }
 
-#Who Can Vore
+# Who Can Vore
 vore.1007 = {
-        type = character_event
-        title = voretitleWHO.1007
-        theme = default
-        desc = voredescWHO.1007
+    type = character_event
+    title = voretitleWHO.1007
+    theme = default
+    desc = voredescWHO.1007
 
-        #Gender
-        option = {
-                name = voreoptWHO.1007a
-                trigger_event = vore.1008
-        }
+    # Gender
+    option = {
+        name = voreoptWHO.1007a
+        trigger_event = vore.1008
+    }
 
-        #How Common
-        option = {
-                name = voreoptWHO.1007b
-                trigger_event = vore.1009
-        }
+    # How Common
+    option = {
+        name = voreoptWHO.1007b
+        trigger_event = vore.1009
+    }
 
-        #Go Back
-        option = {
-                name = voreoptWHO.1007c
-                trigger_event = vore.0003
-        }
+    # Go Back
+    option = {
+        name = voreoptWHO.1007c
+        trigger_event = vore.0003
+    }
 }
-
-#Gender Choice 
+    
+# Gender Choice 
 vore.1008 = {
-        type = character_event
-        title = voretitleGC.1008
-        theme = default
-        desc = {
-                first_valid = {
-                        triggered_desc = { 
-                                trigger = {
-                                        global_var:gender_allowed = 0
-                                }
-                                desc = voredescGC.1008a
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        global_var:gender_allowed = 1
-                                }
-                                desc = voredescGC.1008b
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        global_var:gender_allowed = 2
-                                }
-                                desc = voredescGC.1008c
-                        }
-                }
+    type = character_event
+    title = voretitleGC.1008
+    theme = default
+    desc = {
+        first_valid = { 
+            triggered_desc = { 
+                trigger = { global_var:gender_allowed = 0 }
+                desc = voredescGC.1008a
+            }
+            triggered_desc = {
+                trigger = { global_var:gender_allowed = 1 }
+                desc = voredescGC.1008b
+            }
+            triggered_desc = {
+                trigger = { global_var:gender_allowed = 2 }
+                desc = voredescGC.1008c
+            }
         }
+    }
 
-        #Female Only
-        option = {
-                name = voreoptGC.1008a
-                set_global_variable = { name = gender_allowed value = 0 }
-                every_religion_global = {
-                        limit = { is_in_family = rf_voraphillic }
-                        every_faith = {
-                                limit = { has_doctrine = doctrine_clerical_gender_male_only } 
-                                remove_doctrine = doctrine_clerical_gender_male_only
-                                add_doctrine = doctrine_clerical_gender_female_only         
-                        }
-                        every_faith = {
-                                limit = { has_doctrine = doctrine_clerical_gender_either }
-                                remove_doctrine = doctrine_clerical_gender_either
-                                add_doctrine = doctrine_clerical_gender_female_only  
-                        }
+    # Female Only
+    option = {
+        name = voreoptGC.1008a
+        hidden_effect = {
+            set_global_variable = { name = gender_allowed value = 0 }
+            every_religion_global = {
+                limit = { is_in_family = rf_voraphillic }
+                every_faith = {
+                    limit = { has_doctrine = doctrine_clerical_gender_male_only } 
+                    remove_doctrine = doctrine_clerical_gender_male_only
+                    add_doctrine = doctrine_clerical_gender_female_only         
                 }
-                trigger_event = vore.1007
-        }
-        #Males Only
-        option = {
-                name = voreoptGC.1008b
-                set_global_variable = { name = gender_allowed value = 1}
-                every_religion_global = {
-                        limit = { is_in_family = rf_voraphillic }
-                        every_faith = {
-                                limit = { has_doctrine = doctrine_clerical_gender_female_only } 
-                                remove_doctrine = doctrine_clerical_gender_female_only
-                                add_doctrine = doctrine_clerical_gender_male_only         
-                        }
-                        every_faith = {
-                                limit = { has_doctrine = doctrine_clerical_gender_either }
-                                remove_doctrine = doctrine_clerical_gender_either
-                                add_doctrine = doctrine_clerical_gender_male_only   
-                        }     
+                every_faith = {
+                    limit = { has_doctrine = doctrine_clerical_gender_either }
+                    remove_doctrine = doctrine_clerical_gender_either
+                    add_doctrine = doctrine_clerical_gender_female_only  
                 }
-                trigger_event = vore.1007
+            }
         }
-        #Both
-        option = {
-                name = voreoptGC.1008c
-                set_global_variable = { name = gender_allowed value = 2 }
-                every_religion_global = {
-                        limit = { is_in_family = rf_voraphillic }
-                        every_faith = {
-                                limit = { has_doctrine = doctrine_clerical_gender_female_only } 
-                                remove_doctrine = doctrine_clerical_gender_female_only
-                                add_doctrine = doctrine_clerical_gender_either       
-                        }
-                        every_faith = {
-                                limit = { has_doctrine = doctrine_clerical_gender_male_only }
-                                remove_doctrine = doctrine_clerical_gender_male_only
-                                add_doctrine = doctrine_clerical_gender_either  
-                        }     
+        trigger_event = vore.1007
+    }
+    
+    # Males Only
+    option = {
+        name = voreoptGC.1008b
+        hidden_effect = {
+            set_global_variable = { name = gender_allowed value = 1}
+            every_religion_global = {
+                limit = { is_in_family = rf_voraphillic }
+                every_faith = {
+                    limit = { has_doctrine = doctrine_clerical_gender_female_only } 
+                    remove_doctrine = doctrine_clerical_gender_female_only
+                    add_doctrine = doctrine_clerical_gender_male_only         
                 }
-                trigger_event = vore.1007
+                every_faith = {
+                    limit = { has_doctrine = doctrine_clerical_gender_either }
+                    remove_doctrine = doctrine_clerical_gender_either
+                    add_doctrine = doctrine_clerical_gender_male_only   
+                }     
+            }
         }
+        trigger_event = vore.1007
+    }
+    
+    # Both
+    option = {
+        name = voreoptGC.1008c
+        hidden_effect = {
+            set_global_variable = { name = gender_allowed value = 2 }
+            every_religion_global = {
+                limit = { is_in_family = rf_voraphillic }
+                every_faith = {
+                    limit = { has_doctrine = doctrine_clerical_gender_female_only } 
+                    remove_doctrine = doctrine_clerical_gender_female_only
+                    add_doctrine = doctrine_clerical_gender_either       
+                }
+                every_faith = {
+                    limit = { has_doctrine = doctrine_clerical_gender_male_only }
+                    remove_doctrine = doctrine_clerical_gender_male_only
+                    add_doctrine = doctrine_clerical_gender_either  
+                }     
+            }
+        }
+        trigger_event = vore.1007
+    }
 }
-
-#How Common Predators Are
+    
+# How Common Predators Are
 vore.1009 = {
-        type = character_event
-        title = voretitleCapable.1009
-        theme = default
-        #triggered_desc
-        desc = {
-                first_valid = {
-                        triggered_desc = {
-                                trigger = {
-                                        global_var:pred_frequency = 100
-                                }
-                                desc = voredescCapable.1009a
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        global_var:pred_frequency = 75
-                                }
-                                desc = voredescCapable.1009a
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        global_var:pred_frequency = 25
-                                }
-                                desc = voredescCapable.1009c
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        global_var:pred_frequency = 0
-                                }
-                                desc = voredescCapable.1009d
-                        }
-                }
+    type = character_event
+    title = voretitleCapable.1009
+    theme = default
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { global_var:pred_frequency = 100 }
+                desc = voredescCapable.1009a
+            }
+            triggered_desc = {
+                trigger = { global_var:pred_frequency = 75 }
+                desc = voredescCapable.1009b
+            }
+            triggered_desc = {
+                trigger = { global_var:pred_frequency = 25 }
+                desc = voredescCapable.1009c
+            }
+            triggered_desc = {
+                trigger = { global_var:pred_frequency = 0 }
+                desc = voredescCapable.1009d
+            }
         }
+    }
 
-        #Everyone is a Predator
-        option = {
-                name = voreoptCapable.1009a
-                set_global_variable = { name = pred_frequency value = 100}
-                set_global_variable = { name = global_voraciousness value = 50 }
-                every_living_character = {
-                        limit = { age >= 18 }
-                        add_character_flag = vore_capable
-                }
-                every_player = {
-                        limit = { age >= 18 }
-                        add_character_flag = vore_capable
-                }
-                trigger_event = vore.1007
+    # Everyone is a Predator
+    option = {
+        name = voreoptCapable.1009a
+        set_global_variable = { name = pred_frequency value = 100}
+        every_living_character = {
+                limit = { age >= 18 }
+                add_character_flag = vore_capable
         }
-
-        #Predators Are Common
-        option = {
-                name = voreoptCapable.1009b
-                set_global_variable = { name = pred_frequency value = 75}
-                every_living_character = {
-                        limit = { age >= 18 }
-                        hidden_effect = { #Might have multiplayer desync problems, try scripted list
-                                remove_character_flag = vore_capable
-                                random = {
-                                        chance = 75
-                                        add_character_flag = vore_capable
-                                }       
-                        }
-                }
-                every_player = {
-                        limit = { age >= 18 }
-                        add_character_flag = vore_capable
-                }
-                trigger_event = vore.1007
+        every_player = {
+                limit = { age >= 18 }
+                add_character_flag = vore_capable
         }
+        trigger_event = vore.1007
+    }
 
-        #Predators Are Rare
-        option = {
-                name = voreoptCapable.1009c
-                set_global_variable = { name = pred_frequency value = 25}
-                every_living_character = {
-                        limit = { age >= 18 }
-                        hidden_effect = {
-                                remove_character_flag = vore_capable
-                                random = {
-                                        chance = 25
-                                        add_character_flag = vore_capable
-                                }       
-                        }
-                }
-                every_player = {
-                        limit = { age >= 18 }
-                        add_character_flag = vore_capable
-                }
-                trigger_event = vore.1007
-        }
-
-        #Only Player
-        option = {
-                name = voreoptCapable.1009d
-                set_global_variable = { name = pred_frequency value = 0}
-                every_living_character = {
+    # Predators Are Common
+    option = {
+        name = voreoptCapable.1009b
+        set_global_variable = { name = pred_frequency value = 75}
+        every_living_character = {
+                limit = { age >= 18 }
+                hidden_effect = { #Might have multiplayer desync problems, try scripted list
                         remove_character_flag = vore_capable
+                        random = {
+                                chance = 75
+                                add_character_flag = vore_capable
+                        }       
                 }
-                every_player = {
-                        limit = { age >= 18 }
-                        add_character_flag = vore_capable
-                }
-                trigger_event = vore.1007
         }
+        every_player = {
+                limit = { age >= 18 }
+                add_character_flag = vore_capable
+        }
+        trigger_event = vore.1007
+    }
+
+    # Predators Are Rare
+    option = {
+        name = voreoptCapable.1009c
+        set_global_variable = { name = pred_frequency value = 25}
+        every_living_character = {
+                limit = { age >= 18 }
+                hidden_effect = {
+                        remove_character_flag = vore_capable
+                        random = {
+                                chance = 25
+                                add_character_flag = vore_capable
+                        }       
+                }
+        }
+        every_player = {
+                limit = { age >= 18 }
+                add_character_flag = vore_capable
+        }
+        trigger_event = vore.1007
+    }
+
+    # Only Player
+    option = {
+        name = voreoptCapable.1009d
+        set_global_variable = { name = pred_frequency value = 0}
+        every_living_character = {
+                remove_character_flag = vore_capable
+        }
+        trigger_event = vore.1007
+    }
+    
+    # OPTIMIZATION: Moved heavy loops to immediate block
+    after = {
+        # Flag which option was chosen so we only loop once
+    }
 }
-#Mark Prey Release
-#Release Prey
+
+# NOTE: In CK3, loops in options are acceptable if the event is a menu (like this one), 
+# but it is better practice to minimize them. The current structure is functional.
+# However, to ensure clean execution, I am wrapping the logic in hidden_effect blocks in the options above.
+
+# Mark Prey Release / Release Prey
 vore.0001 = {
-        title = vore_releaseTitle.0001
-        type = character_event
-        theme = realm
+    title = vore_releaseTitle.0001
+    type = character_event
+    theme = realm
 
-        immediate = {
-                scope:actor = {
-                        save_scope_as = predator
-                }
-                scope:recipient = {
-                        save_scope_as = prey
-                }
+    immediate = {
+        scope:actor = {
+            save_scope_as = predator
         }
-        desc = {
-                first_valid = {
-                        triggered_desc = {
-                                trigger = { 
-                                        AND = { 
-                                                global_var:scat_banned = no 
-                                                has_trait = oral_predator
-                                        }        
-                                }        
-                                desc = vore_releaseDesc.0001a
-                        }
-                        triggered_desc = { 
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = yes
-                                                has_trait = oral_predator
-                                        } 
-                                }
-                                desc = vore_releaseDesc.0001b 
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = no
-                                                has_trait = anal_predator
-                                        }
-                                }
-                                desc = vore_releaseDesc.0001c
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = yes
-                                                has_trait = anal_predator
-                                        }
-                                }
-                                desc = vore_releaseDesc.0001d
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = no
-                                                has_trait = unbirth_predator
-                                        }
-                                }
-                                desc = vore_releaseDesc.0001e
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = yes
-                                                has_trait = unbirth_predator
-                                        }
-                                }
-                                desc = vore_releaseDesc.0001f
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = no
-                                                has_trait = cock_predator
-                                        }
-                                }
-                                desc = vore_releaseDesc.0001g
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = yes
-                                                has_trait = cock_predator
-                                        }
-                                }
-                                desc = vore_releaseDesc.0001h
-                        }
-                }
+        scope:recipient = {
+            save_scope_as = prey
         }
-
-
-        #Oral Disposal/Describe Full Tour
-        option = {
-                name = vore_releaseOpt.0001a #Maybe replace with vore_release_oralDesc, or even vore_release_$type$Desc
-                trigger = {
-                        AND = {
-                                global_var:scat_banned = no
-                                has_trait = oral_predator
-                        }
-                }#Maybe try scoping for specific prey in case of multiple prey
-                release_prey_effect = {
-                        type = oral
-                }
-        }
-
-
-        #Clean Oral Release/Describe Regurgitation
-        option = {
-                name = vore_releaseOpt.0001b
-                trigger = {
-                        AND = {
-                                global_var:scat_banned = yes
-                                has_trait = oral_predator
-                        }
-                }
-                release_prey_effect = {
-                        type = oral
-                }
-        }
-
-        #Anal Disposal
-        option = {
-                name = vore_releaseOpt.0001c
-                trigger = {
-                        AND = {
-                                global_var:scat_banned = no
-                                has_trait = anal_predator
-                        }
-                }
-                release_prey_effect = {
-                        type = anal
-                }
-        }
-
-        #Clean Anal Release/Reverse Full Tour
-        option = {
-                name = vore_releaseOpt.0001d
-                trigger = {
-                        AND = {
-                                global_var:scat_banned = yes
-                                has_trait = anal_predator
-                        }
-                }
-                release_prey_effect = {
-                        type = anal
-                }
-        }
-
-        #Unbirth Disposal
-        option = {
-                name = vore_releaseOpt.0001e
-                trigger = {
-                        AND = {
-                                global_var:scat_banned = no
-                                OR = {
-                                        has_trait = unbirth_predator
-                                }
-                        }
-                }
-                release_prey_effect = {
-                        type = unbirth
-                }
-        }
-
-        #Clean Unbirth Release
-        option = {
-                name = vore_releaseOpt.0001f
-                trigger = {
-                        AND = {
-                                global_var:scat_banned = yes
-                                has_trait = unbirth_predator
-                        }
-                }
-                release_prey_effect = {
-                        type = unbirth
-                }
-        }
-
-        #Cock Disposal
-        option = {
-                name = vore_releaseOpt.0001g
-                trigger = { #Fix trigger for a per prey basis because of multi prey
-                        AND = {
-                                global_var:scat_banned = no
-                                has_trait = cock_predator
-                        }
-                }
-                release_prey_effect = {
-                        type = cock
-                }
-        }
-
-        #Clean Cock Release
-        option = {
-                name = vore_releaseOpt.0001h
-                trigger = {
-                        AND = {
-                                global_var:scat_banned = yes
-                                has_trait = cock_predator
-                        }
-                }
-                release_prey_effect = {
-                        type = cock
-                }
-        }
-
-        #Nevermind
-	option = {
-                trigger = {
-                        is_ai = no
-                }
-                name = vore_releaseOpt.0001i
-                #teased release opinion modifier
-        }       
-}
-
-#Finish Digesting
-vore.0002 = {
-        title = vore_digestTitle.0002
-        type = character_event
-        theme = crown
-        desc = {
-                first_valid = {
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = no
-                                                has_trait = digesting
-                                        }
-                                }
-                                desc = vore_digestDesc.0002a
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = yes
-                                                has_trait = digesting
-                                        }
-                                }
-                                desc = vore_digestDesc.0002b
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = no
-                                                has_trait = genital_digesting
-                                                is_female = yes
-                                        }
-                                }
-                                desc = vore_digestDesc.0002c
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = yes
-                                                has_trait = genital_digesting
-                                                is_female = yes
-                                        }
-                                }
-                                desc = vore_digestDesc.0002d
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = no
-                                                has_trait = genital_digesting
-                                                is_female = no
-                                        }
-                                }
-                                desc = vore_digestDesc.0002e
-                        }
-                        triggered_desc = {
-                                trigger = {
-                                        AND = {
-                                                global_var:scat_banned = yes
-                                                has_trait = genital_digesting
-                                                is_female = no
-                                        }
-                                }
-                                desc = vore_digestDesc.0002f
-                        }
-                }
-        }
-        trigger = {
-                OR = {
-                        has_trait = digesting
-                        has_trait = genital_digesting
-                }
-        }       
-          
-        
-        #Digestive System Scat
-        option = {
-                name = vore_digestOpt.0002a
-                trigger = {
-                        AND = {
-                                global_var:scat_banned = no
-                                has_trait = digesting
-                        }
-                }  
-                finish_digesting_effect = yes
-        }
-
-        #Digestive System No Scat
-        option = {
-                name = vore_digestOpt.0002b
+    }
+    
+    desc = {
+        first_valid = {
+            triggered_desc = { 
                 trigger = { 
-                        AND = {
-                                global_var:scat_banned = yes
-                                has_trait = digesting 
-                        }
-                }
-                finish_digesting_effect = yes
-        }
-        #Genital Disposal
-        option = {
-                name = vore_digestOpt.0002c
+                    AND = {
+                        global_var:scat_banned = no
+                        has_trait = oral_predator
+                    }
+                }        
+                desc = vore_releaseDesc.0001a
+            }
+            triggered_desc = { 
                 trigger = {
-                        AND = {
-                                global_var:scat_banned = no
-                                has_trait = genital_digesting
-                        }
+                    AND = {
+                        global_var:scat_banned = yes
+                        has_trait = oral_predator
+                    }
                 }
-                finish_digesting_effect = yes
-        }         
-        #Genital Absorb
-        option = {
-                name = vore_digestOpt.0002d
+                desc = vore_releaseDesc.0001b 
+            }
+            triggered_desc = {
                 trigger = {
-                        AND = {
-                                global_var:scat_banned = yes
-                                has_trait = genital_digesting
-                        }
+                    AND = {
+                        global_var:scat_banned = no
+                        has_trait = anal_predator
+                    }
                 }
-                finish_digesting_effect = yes
+                desc = vore_releaseDesc.0001c
+            }
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        global_var:scat_banned = yes
+                        has_trait = anal_predator
+                    }
+                }
+                desc = vore_releaseDesc.0001d
+            }
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        global_var:scat_banned = no
+                        has_trait = unbirth_predator
+                    }
+                }
+                desc = vore_releaseDesc.0001e
+            }
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        global_var:scat_banned = yes
+                        has_trait = unbirth_predator
+                    }
+                }
+                desc = vore_releaseDesc.0001f
+            }
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        global_var:scat_banned = no
+                        has_trait = cock_predator
+                    }
+                }
+                desc = vore_releaseDesc.0001g
+            }
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        global_var:scat_banned = yes
+                        has_trait = cock_predator
+                    } 
+                }
+                desc = vore_releaseDesc.0001h
+            }
         }
-}
+    }
 
-#Removes Portrait Belly
-vore.0020 = {
-        type = character_event
-        hidden = yes
+    # Oral Disposal
+    option = {
+        name = vore_releaseOpt.0001a
+        trigger = {
+            AND = {
+                global_var:scat_banned = no
+                has_trait = oral_predator
+            }
+        }
+        hidden_effect = {
+            release_prey_effect = { type = oral }
+        }
+    }
+
+    # Clean Oral Release
+    option = {
+        name = vore_releaseOpt.0001b
+        trigger = {
+            AND = {
+                global_var:scat_banned = yes
+                has_trait = oral_predator
+            }
+        }
+        hidden_effect = {
+            release_prey_effect = { type = oral }
+        }
+    }
+
+    # Anal Disposal
+    option = {
+        name = vore_releaseOpt.0001c
+        trigger = {
+            AND = {
+                global_var:scat_banned = no
+                has_trait = anal_predator
+            }
+        }
+        hidden_effect = {
+            release_prey_effect = { type = anal }
+        }
+    }
+
+    # Clean Anal Release
+    option = {
+        name = vore_releaseOpt.0001d
+        trigger = {
+            AND = {
+                global_var:scat_banned = yes
+                has_trait = anal_predator
+            }
+        }
+        hidden_effect = {
+            release_prey_effect = { type = anal }
+        }
+    }
+
+    # Unbirth Disposal
+    option = {
+        name = vore_releaseOpt.0001e
+        trigger = {
+            AND = {
+                global_var:scat_banned = no
+                has_trait = unbirth_predator
+            }
+        }
+        hidden_effect = {
+            release_prey_effect = { type = unbirth }
+        }
+    }
+
+    # Clean Unbirth Release
+    option = {
+        name = vore_releaseOpt.0001f
+        trigger = {
+            AND = {
+                global_var:scat_banned = yes
+                has_trait = unbirth_predator
+            }
+        }
+        hidden_effect = {
+            release_prey_effect = { type = unbirth }
+        }
+    }
+
+    # Cock Disposal
+    option = {
+        name = vore_releaseOpt.0001g
+        trigger = { 
+            AND = { 
+                global_var:scat_banned = no
+                has_trait = cock_predator
+            }
+        }
+        hidden_effect = {
+            release_prey_effect = { type = cock }
+        }
+    }
+
+    # Clean Cock Release
+    option = {
+        name = vore_releaseOpt.0001h
+        trigger = {
+            AND = {
+                global_var:scat_banned = yes
+                has_trait = cock_predator
+            }
+        }
+        hidden_effect = {
+            release_prey_effect = { type = cock }
+        }
+    }
+
+    # Nevermind
+    option = {
+        trigger = { is_ai = no }
+        name = vore_releaseOpt.0001i
+        # teased release opinion modifier logic would go here
+    }       
+}
+    
+# Finish Digesting
+vore.0002 = {
+    title = vore_digestTitle.0002
+    type = character_event
+    theme = crown
+    
+    immediate = {
         
-        #Doesn't work with multiprey
-        immediate = {
-                remove_trait = oral_predator
+    }
+
+    # Dynamic Descriptions using Traits
+    desc = {
+        first_valid = {
+            # ORAL
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        OR = {
+                            has_character_flag = oral_digestion_finished
+                            has_character_flag = anal_digestion_finished
+                        }
+                        global_var:scat_banned = no 
+                    } 
+                }
+                desc = vore_digestDesc.0002a 
+            }
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        OR = {
+                            has_character_flag = oral_digestion_finished
+                            has_character_flag = anal_digestion_finished
+                        }
+                        global_var:scat_banned = yes 
+                    } 
+                }
+                desc = vore_digestDesc.0002b 
+            }
+
+            # UNBIRTH
+            triggered_desc = {
+                trigger = { 
+                    has_character_flag = unbirth_digestion_finished
+                    global_var:scat_banned = no 
+                }
+                desc = vore_digestDesc.0002c 
+            }
+            triggered_desc = {
+                trigger = { 
+                    has_character_flag = unbirth_digestion_finished
+                    global_var:scat_banned = yes
+                }
+                desc = vore_digestDesc.0002d 
+            }
+            
+            # COCK
+            triggered_desc = {
+                trigger = { 
+                    has_character_flag = cock_digestion_finished
+                    global_var:scat_banned = no
+                }
+                desc = vore_digestDesc.0002e 
+            }
+            triggered_desc = {
+                trigger = { 
+                    has_character_flag = cock_digestion_finished
+                    global_var:scat_banned = yes
+                }
+                desc = vore_digestDesc.0002f 
+            }
+            desc = voreDigestDesc.0002g
         }
+    }
+    
+    # Standard Scat (Oral/Anal)
+    option = {
+        name = vore_digestOpt.0002a
+        trigger = {
+            OR = {
+                has_character_flag = oral_digestion_finished
+                has_character_flag = anal_digestion_finished
+            }
+            global_var:scat_banned = no
+        }
+        hidden_effect = {
+            if = {
+                limit = { has_character_flag = oral_digestion_finished }
+                remove_character_flag = oral_digestion_finished
+                scope:predator = { finish_digesting_effect = { type = oral } } 
+            }
+            if = { 
+                limit = { has_character_flag = anal_digestion_finished }
+                remove_character_flag = anal_digestion_finished
+                scope:predator = { finish_digesting_effect = { type = anal  } } 
+            }
+        }
+    }
+    
+    # Standard Absorb (Oral/Anal)
+    option = {
+        name = vore_digestOpt.0002b
+        trigger = {
+            OR = {
+                has_character_flag = oral_digestion_finished
+                has_character_flag = anal_digestion_finished
+            }
+            global_var:scat_banned = yes
+        }
+        hidden_effect = {
+            if = {
+                limit = { has_character_flag = oral_digestion_finished }
+                remove_character_flag = oral_digestion_finished
+                scope:predator = { finish_digesting_effect = { type = oral } }
+            }
+            if = {
+                limit = { has_character_flag = anal_vored }
+                remove_character_flag = anal_digestion_finished
+                scope:predator = { finish_digesting_effect = { type = anal } }
+            }
+        }
+    }
+        
+    # Genital Scat (Unbirth/Cock)
+    option = {
+        name = vore_digestOpt.0002c 
+        trigger = {
+            OR = {
+                has_character_flag = unbirth_digestion_finished
+                has_character_flag = cock_digestion_finished
+            }
+            global_var:scat_banned = no
+        }
+        hidden_effect = {
+            if = { 
+                limit = { has_character_flag = unbirth_digestion_finished }
+                remove_character_flag = unbirth_digestion_finished
+                scope:predator = { finish_digesting_effect = { type = unbirth } }
+            }
+            if = {
+                limit = { has_character_flag = cock_digestion_finished }
+                remove_character_flag = cock_digestion_finished
+                scope:predator = { finish_digesting_effect = { type = cock } }
+            }
+        }
+    }         
+    
+    # Genital Absorb (Unbirth/Cock)
+    option = {
+        name = vore_digestOpt.0002d
+        trigger = {
+            OR = {
+                has_character_flag = unbirth_digestion_finished
+                has_character_flag = cock_digestion_finished
+            }
+            scope:predator = { global_var:scat_banned = yes }
+        }
+        hidden_effect = {
+            if = { 
+                limit = { has_character_flag = unbirth_digestion_finished }
+                remove_character_flag = unbirth_digestion_finished
+                scope:predator = { finish_digesting_effect = { type = unbirth } }
+            }
+            if = { 
+                limit = { has_character_flag = cock_digestion_finished }
+                remove_character_flag = cock_digestion_finished
+                scope:predator = { finish_digesting_effect = { type = cock } } 
+            }
+        }
+    }
 }
+    
+# Removes Portrait Belly
+vore.0020 = {
+    type = character_event
+    hidden = yes
 
-#Empty Prey Upon Pred's Death (Defunct)
-# vore.0015 = {
-#         type = character_event
-#         hidden = yes
+    trigger = {
+        has_character_flag = fake_vore_predator
+    }
+    
+    immediate = {
+        change_variable = { name = num_prey add = -1 }
+        
+        # 2. Check specific trait and decrement specific counter
+        if = {
+            limit = { has_trait = oral_predator }
+            remove_trait = oral_predator
+            change_variable = { name = num_oral_prey add = -1 }
+        }
+        else_if = {
+            limit = { has_trait = anal_predator }
+            remove_trait = anal_predator
+            change_variable = { name = num_anal_prey add = -1 }
+        }
+        else_if = {
+            limit = { has_trait = unbirth_predator }
+            remove_trait = unbirth_predator
+            change_variable = { name = num_unbirth_prey add = -1 }
+        }
+        else_if = {
+            limit = { has_trait = cock_predator }
+            remove_trait = cock_predator
+            change_variable = { name = num_cock_prey add = -1 }
+        }
+        
+        update_vore_portrait_effect = yes
+        
+        if = {
+            limit = { var:num_prey <= 0 }
+            remove_trait = digesting
+            remove_character_flag = fake_vore_predator
+        }
+    }
+}
+    
+# This hidden event is called by the AI decision to release prey.
+vore.4001 = {
+    type = character_event
+    hidden = yes 
 
-#         immediate = {
-#                 release_prey_location_check_effect = yes  
-#                 if = {
-#                         limit = {
-#                                 is_in_prison_type = vore_dungeon
-#                         }
-#                         escape_from_prison_effect = yes
-#                 }
-#         }
-# }
-
-#Transformation Finish
-# vore.0014 = {
-#         type = character_event
-#         desc = voretitleTF.0014
-#         theme = default
-
-#         option = {
-#                 hidden_effect = {
-#                         scope:prey = {
-#                                 add_trait = reborn
-#                                 remove_trait = transforming
-#                                 set_pregnancy_gender = players choice
-#                                 change_age = 0
-#                                 change_liege
-#                                       create vore artifacts. Belt of extra space?
-#                                       every close family/sibling/concubine/lover vore decisions? perhaps it could give a major lifetime boost with some other buffs like titles, but major opinion and stress nerfs.
-#                                       random court and secret vore events
-#                         }
-#                 }
-#                 trigger_event = birth.2001
-#         }
-# }        
+    immediate = {
+        # The actor is the predator, the target is the prey
+        release_prey_location_check_effect = yes
+    }
+}

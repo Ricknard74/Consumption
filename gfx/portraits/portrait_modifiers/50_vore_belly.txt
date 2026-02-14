@@ -51,3 +51,24 @@
       }
    }
 }
+
+remove_clothes_only_modifier = {
+   portrait_modifiers = {
+       clothes = {
+           value = none
+       }
+   }
+   weight = {
+      base = 0
+      modifier = {
+         add = 1000
+         OR = {     
+            portrait_has_trait_trigger = { TRAIT = oral_predator }
+            portrait_has_trait_trigger = { TRAIT = digesting }
+            portrait_has_trait_trigger = { TRAIT = anal_predator }
+            portrait_has_trait_trigger = { TRAIT = unbirth_predator }
+            has_character_flag = portrait_belly
+         }
+      }        
+   }
+}

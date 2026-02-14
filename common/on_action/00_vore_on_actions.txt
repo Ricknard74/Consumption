@@ -1,225 +1,399 @@
-﻿on_game_start = {
-	on_actions = {
-		on_vore_defensive_check
-	}
-}
+﻿# --- GAME START & SETUP ---
 
-#Initial Variables Set
-on_game_start_after_lobby = {
-	on_actions = {
-		on_add_vore_toggles
-	}
-}
-
-#In case of game start failure
-five_year_playable_pulse = {
-	on_actions = {
-		on_vore_defensive_check
-	}
-}
-
-on_vore_defensive_check = {
-	trigger = {
-		NOT = { has_global_variable = oral_banned }
-	}
-	effect = {
-		set_global_variable = { name = oral_banned value = no }
-		set_global_variable = { name = unbirth_banned value = no }
-		set_global_variable = { name = anal_banned value = yes }
-		set_global_variable = { name = cock_banned value = no }
-		set_global_variable = { name = scat_banned value = yes }
-		set_global_variable = { name = digestion_banned value = no }
-		set_global_variable = { name = transformation_banned value = no }
-		set_global_variable = { name = gender_allowed value = 0 }
-		set_global_variable = { name = pred_frequency value = 100}
-		set_global_variable = { name = global_voraciousness value = 50 }
-	}
-}
-
-on_add_vore_toggles = {
-	effect = {
-		# set_global_variable = { name = oral_banned value = no }
-		# set_global_variable = { name = unbirth_banned value = no }
-		# set_global_variable = { name = anal_banned value = no }
-		# set_global_variable = { name = cock_banned value = no }
-		# set_global_variable = { name = scat_banned value = yes }
-		# set_global_variable = { name = digestion_banned value = no }
-		# set_global_variable = { name = transformation_banned value = no }
-		# set_global_variable = { name = gender_allowed value = 0 }
-		# set_global_variable = { name = pred_frequency value = 100}
-		# set_global_variable = { name = global_voraciousness value = 50 }
-		every_player = {
-			if = {
-				limit = { age >= 18 }
-				add_character_flag = vore_capable
-				set_variable = { name = num_prey value = 0 }
-			}
-			save_scope_as = plyr
-			if = {
-				limit = { 
-					OR = {
-						scope:plyr.religion = { is_in_family = rf_voraphillic }
-					}
-				}
-				every_courtier = {
-					limit = { NOT = { faith = scope:plyr.faith } }
-					set_character_faith = scope:plyr.faith
-				}
-				every_vassal_or_below = {
-					limit = { NOT = { faith = scope:plyr.faith } }
-					set_character_faith = scope:plyr.faith
-				}
-				every_courtier_or_guest = {
-					limit = {
-						NOT = { is_foreign_court_guest = yes }
-						NOT = { faith = scope:plyr.faith }
-					}
-					random_list = {
-						25 = {
-							add_piety = 1
-						}
-						75 = {
-							set_character_faith = scope:plyr.faith
-						}
-					}
-				}	
-			}	
-		}
-		every_county = {
-			limit = { 
-				AND = {
-					exists = county_controller
-					county_controller.faith = { is_in_family = rf_voraphillic }
-				}
-			}	
-			set_county_faith = county_controller.faith
-		}
-		clear_saved_scope = plyr
-		every_living_character = {
-			limit = { age >= 18 }
-			add_character_flag = vore_capable
-			save_scope_as = char
-			set_variable = { name = num_prey value = 0 }
-			set_variable = { name = assigned_slot value = 1 }
-			set_variable = { name = voraciousness value = { 45 70 } }
-			set_variable = { name = lethal_vore_tendency value = { 10 90 } }
-			set_variable = { name = non_lethal_vore_tendency value = { 10 90 } } 
-			set_variable = { name = oral_vore_tendency value = { 50 90 } }
-			set_variable = { name = anal_vore_tendecny value = {10 50 } }
-			if = {
-				limit = { is_female = yes }
-				set_variable = { name = unbirth_vore_tendency value = { 10 40 } }
-			} 
-			else = {
-				set_variable = { name = cock_vore_tendency value = { 10 40 } }
-			}
-			if = {
-				limit = {
-					scope:char.religion = { is_in_family = rf_voraphillic}
-				}
-				every_courtier = {
-					limit = { NOT = { faith = scope:char.faith } }
-					set_character_faith = scope:char.faith
-				}
-				random_courtier_or_guest = {
-					limit = { NOT = { faith = scope:char.faith } }
-					set_character_faith_with_conversion = scope:char.faith
-				}
-			}
-			clear_saved_scope = char
-		}
-	}
-}
-
-on_birthday = {
-	on_actions = { 
-		on_vore_18th_birthday_gift
-	}
-}
-
-#Might be buggy, allowing diseased characters to vore
-on_vore_18th_birthday_gift = {
-	trigger = { age >= 18 }
-	effect = {
-		set_variable = { name = voraciousness value = { 45 70 } }
-		set_variable = { name = num_prey value = 0 }
-		add_character_flag = vore_capable
-	}
-}
-
-#Death of predator
-on_death_relation_prey = {
-	on_actions = {
-		on_death_of_pred
-	}
-}
-
-on_death_of_pred = {
-    effect = {
-		every_relation = {
-    		type = prey
-    # Do something with each prey
-		}
-        save_scope_as = predator
-        scope:target = {
-            save_scope_as = prey
-            if = {
-                limit = { is_in_prison_type = vore_dungeon }
-                escape_from_prison_effect = yes
-            }
-        }
-        # Call effect while both scopes are still available
-        if = {
-            limit = { 
-                exists = scope:predator 
-                exists = scope:prey 
-            }
-            release_prey_location_check_effect = yes
-        }
+on_game_start = {
+    on_actions = {
+        on_vore_defensive_check
     }
 }
 
-on_death_relation_predator = {
-	on_actions = {
-		on_death_of_prey
-	}
+on_game_start_after_lobby = {
+    on_actions = {
+        on_add_vore_toggles
+    }
 }
 
-on_death_of_prey = {
-	effect = {
-		save_scope_as = prey
-		scope:target = {
-			save_scope_as = predator
-			release_prey_location_check_effect = yes
-		}
-	}
+# Run checks again 5 years in just in case startup failed
+five_year_playable_pulse = {
+    on_actions = {
+        on_vore_defensive_check
+    }
 }
 
-on_release_from_prison = {
-	on_actions = {
-		on_release_prey_from_prison
-	}
+# --- TRAVEL & MOVEMENT ---
+
+on_travel_start = {
+    on_actions = {
+        on_vore_travel_events
+    }
 }
 
-on_release_prey_from_prison = {
-    trigger = { has_character_flag = vored }
-    effect = {
-        root = {
-            save_scope_as = prey
-            
-            # Find the predator
-			random_relation = {
-				type = predator
-				save_scope_as = predator
-			}
-			# Now call the effect with proper scopes
-			release_prey_location_check_effect = yes
-		}
-	}
+on_sea_travel_start = {
+    on_actions = {
+        on_vore_sea_events
+    }
 }
+
+# --- COMBAT & HUNTING ---
+
+on_combat_end_winner = {
+    on_actions = {
+        on_vore_battle_events
+    }
+}
+
+on_hunt_random_pulse = {
+    on_actions = {
+        on_vore_hunt_events
+    }
+}
+
+# --- SCHEMES & INTERACTIONS ---
+
+# Adding to the standard murder success list (Additive)
+murder_success_standard_event_list_on_action = {
+    random_events = {
+        50 = vore_scheme.0001
+        50 = vore_scheme.0002
+        25 = vore_scheme.0003
+    }
+}
+
+seduce_ongoing_milestone_1 = {
+    random_events = {
+        100 = seduce_vore.1000 
+        100 = seduce_vore.1001
+    }
+}
+
+seduce_ongoing_milestone_2 = {
+    random_events = {
+        # INSERT VANILLA EVENT IDs HERE
+    }
+}
+
+# seduce_generic_success = { - WIP
+#     random_events = {
+#         50 = seduce_vore.2000
+#         50 = seduce_vore.2001
+#     }
+# }
 
 jester_ongoing = {
 	random_events = {
 		100 = courtier_vore.0001
 	}
+}
+
+# --- LIFE CYCLE ---
+
+on_birthday = {
+    on_actions = { 
+        on_vore_18th_birthday_gift
+    }
+}
+
+on_death = {
+    on_actions = {
+        on_vore_death_handler
+    }
+}
+
+on_release_from_prison = {
+    on_actions = {
+        on_release_prey_from_prison
+    }
+}
+
+# =================================================================
+# CUSTOM ACTION DEFINITIONS
+# =================================================================
+
+# 1. Defense & Setup
+on_vore_defensive_check = {
+    effect = {
+        if = {
+            limit = { NOT = { has_global_variable = oral_banned } }
+            set_global_variable = { name = feral_banned value = no }
+            # set_global_variable = { name = supernatural_banned value = yes }
+            set_global_variable = { name = oral_banned value = no }
+            set_global_variable = { name = unbirth_banned value = no }
+            set_global_variable = { name = anal_banned value = no }
+            set_global_variable = { name = cock_banned value = no }
+            set_global_variable = { name = scat_banned value = yes }
+            set_global_variable = { name = digestion_banned value = no }
+            set_global_variable = { name = transformation_banned value = no }
+            set_global_variable = { name = gender_allowed value = 0 }
+            set_global_variable = { name = pred_frequency value = 100}
+            set_global_variable = { name = global_voraciousness value = 50 }
+        }
+    }
+}
+
+on_add_vore_toggles = {
+    effect = {
+        every_player = {
+            if = {
+                limit = { age >= 18 }
+                add_character_flag = vore_capable
+                set_variable = { name = num_prey value = 0 }
+            }
+            save_scope_as = plyr
+            if = {
+                limit = { scope:plyr.religion = { is_in_family = rf_voraphillic } }
+                every_courtier = {
+                    limit = { NOT = { faith = scope:plyr.faith } }
+                    set_character_faith = scope:plyr.faith
+                }
+                every_vassal_or_below = {
+                    limit = { NOT = { faith = scope:plyr.faith } }
+                    set_character_faith = scope:plyr.faith
+                }
+                every_courtier_or_guest = {
+                    limit = {
+                        NOT = { is_foreign_court_guest = yes }
+                        NOT = { faith = scope:plyr.faith }
+                    }
+                    random_list = {
+                        15 = { add_piety = 1 }
+                        85 = { set_character_faith = scope:plyr.faith }
+                    }
+                }	
+            }	
+        }
+        clear_saved_scope = plyr
+
+        # Initialize variables for every living character
+        every_living_character = {
+            limit = { age >= 18 }
+            add_character_flag = vore_capable
+            set_variable = { name = num_prey value = 0 }
+            set_variable = { name = num_oral_prey value = 0 }
+            set_variable = { name = num_anal_prey value = 0 }
+            if = {
+                limit = {
+                    is_female = yes
+                }
+                set_variable = { name = num_unbirth_prey value = 0 }
+            }
+            if = {
+                limit = {
+                    is_female = no
+                }
+                set_variable = { name = num_cock_prey value = 0 }
+            }
+            set_variable = { name = voraciousness value = { 45 70 } }
+            set_variable = { name = lethal_vore_tendency value = { 10 90 } }
+            set_variable = { name = non_lethal_vore_tendency value = { 10 90 } } 
+            set_variable = { name = oral_vore_tendency value = { 50 90 } }
+            set_variable = { name = anal_vore_tendency value = { 10 50 } }
+            
+            if = {
+                limit = { is_female = yes }
+                set_variable = { name = unbirth_vore_tendency value = { 10 40 } }
+            } 
+            else = {
+                set_variable = { name = cock_vore_tendency value = { 10 40 } }
+            }
+        }
+        
+        # Convert counties held by voraphilic faith
+        every_county = {
+            limit = { 
+                AND = {
+                    exists = county_controller
+                    county_controller.faith = { is_in_family = rf_voraphillic }
+                }
+            }	
+            set_county_faith = county_controller.faith
+        }
+    }
+}
+
+# 2. Combined Quarterly Pulse (Performance Optimization)
+on_vore_quarterly_pulse = {
+    effect = {
+        # Single loop over all characters Should be a story cycle - WIP
+        every_living_character = {
+            # --- CONVERSION CHECK ---
+            if = {
+                limit = { is_in_prison_type = vore_religious_unwilling }
+                random_relation = {
+                    type = predator
+                    save_scope_as = predator
+                }
+                
+                if = {
+                    limit = { exists = scope:predator }
+                    random = {
+                        chance = 50
+                        modifier = { factor = 1.5 has_trait = zealous }
+                        modifier = { factor = 0.5 has_trait = cynical }
+                        
+                        set_character_faith = scope:predator.faith
+                        
+                        if = {
+                            trigger_event = { id = religious_vore.0009 }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# 3. Travel Events
+on_vore_travel_events = {
+}
+
+on_vore_sea_events = {
+    # effect = {
+    #     if = {
+    #         limit = { global_var:feral_banned = no }
+    #         trigger_event = { id = vore.0040 }
+    #     }
+    # }
+}
+
+# 4. Combat Events (Fixed Scoping)
+on_vore_battle_events = {
+    effect = {
+        # In on_combat_end, 'root' is the battle scope.
+        # We use random_participant to find a character.
+        random_side_commander = {
+            limit = { 
+                can_vore = yes
+            }
+            save_scope_as = predator
+            
+            # 15% chance this specific winner eats someone
+            random = {
+                chance = 15
+                # We need to find a loser. 
+                # We scope to root (battle) and find a participant who is NOT the winner.
+                # Since 'root' is the battle, we iterate participants again.
+                root = {
+                    enemy_side = {
+                        random_side_knight = {
+                            limit = {
+                                can_be_prey = yes
+                                NOT = { this = scope:predator }
+                            }
+                            save_scope_as = prey
+                        }
+                    } 
+                }
+                
+                if = {
+                    limit = { exists = scope:prey }
+                    random_list = {
+                        40 = {
+                            random_orifice_safe_vore_effect = {
+                                prison_type = vore_dungeon
+                            }
+                            if = { limit = { is_ai = no } trigger_event = { id = vore.3006 } }
+                        }
+                        60 = {
+                            random_orifice_lethal_vore_effect = yes
+                            if = { limit = { is_ai = no } trigger_event = { id = vore.3007 } }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# 5. Death Handler (Merged Logic)
+on_vore_death_handler = {
+    effect = {
+        # Case A: The dying character is a Predator
+        if = {
+            limit = { has_character_flag = vore_predator }
+            save_scope_as = predator
+            
+            every_relation = {
+                type = prey
+                save_scope_as = prey
+                # Release prey logic
+                release_prey_location_check_effect = yes
+            }
+        }
+        
+        # Case B: The dying character is Prey
+        if = {
+            limit = { has_character_flag = vored }
+            save_scope_as = prey
+            
+            random_relation = {
+                type = predator
+                save_scope_as = predator
+            }
+            
+            if = {
+                limit = { exists = scope:predator }
+                release_prey_location_check_effect = yes
+            }
+        }
+    }
+}
+
+on_release_prey_from_prison = {
+    trigger = { has_character_flag = vored }
+    effect = {
+        save_scope_as = prey
+        random_relation = {
+            type = predator
+            save_scope_as = predator
+        }
+        if = {
+            limit = { exists = scope:predator }
+            release_prey_location_check_effect = yes
+        }
+    }
+}
+
+# 6. Birthday
+on_vore_18th_birthday_gift = {
+    trigger = { 
+        age >= 18
+    }
+    effect = {
+        add_character_flag = vore_capable
+        set_variable = { name = num_prey value = 0 }
+        set_variable = { name = num_oral_prey value = 0 }
+        set_variable = { name = num_anal_prey value = 0 }
+        set_variable = { name = num_unbirth_prey value = 0 }
+        set_variable = { name = num_cock_prey value = 0 }
+        set_variable = { name = voraciousness value = { 45 70 } }
+        set_variable = { name = lethal_vore_tendency value = { 10 90 } }
+        set_variable = { name = non_lethal_vore_tendency value = { 10 90 } } 
+        set_variable = { name = oral_vore_tendency value = { 50 90 } }
+        set_variable = { name = anal_vore_tendency value = { 10 50 } }
+        
+        if = {
+            limit = { is_female = yes }
+            set_variable = { name = unbirth_vore_tendency value = { 10 40 } }
+        } 
+        else = {
+            set_variable = { name = cock_vore_tendency value = { 10 40 } }
+        }
+    }
+}
+
+random_vore_events = {
+    effect = {
+        random_ruler = {
+            limit = {
+                number_of_concubines >= 2
+            }
+            trigger_event = { id = courtier_vore.0050 }
+        }
+    }
+}
+
+# 7. Hunting
+on_vore_hunt_events = {
+    random_events = {
+        10 = hunt_vore.0001
+    }
 }

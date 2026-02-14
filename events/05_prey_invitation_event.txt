@@ -1,72 +1,127 @@
-﻿############################################################################## VORE PREY CHAIN #########################################################################################################
-namespace = invite_vore_pred
+﻿namespace = invite_vore_pred
 
-#Arrival
+# EVENT 0001: The Predator Sends the Invitation
+# Fires on the Actor (The Predator)
 invite_vore_pred.0001 = {
-title = invite_vore_predTitle.0001
-type = character_event
-desc = invite_vore_predDesc.0001
-theme = realm
-	
-	immediate = {
-			scope:actor = {
-					save_scope_as = predator
-			}
-			
-			scope:recipient = {
-					save_scope_as = prey
-			}       
-	}
-	#Ask them in private
-	option = {
-		name = invite_vore_predOpt.0001a
-		trigger_event = invite_vore_pred.0002
-	}
+    type = character_event
+    title = invite_vore_predTitle.0001
+    desc = invite_vore_predDesc.0001
+    theme = intrigue
+    
+    # 1. Save our scopes
+    immediate = {
+        # 'scope:recipient' is the Prey (from the interaction)
+        scope:recipient = {
+            save_scope_as = prey
+        }
+    }
 
-	#Cancel
-	option = {
-		name = invite_vore_pred.0001b
-		clean_up_effect = yes
-	}
+    # Option: Send the Invitation
+    option = {
+        name = invite_vore_predOpt.0001a # "Send the letter"
+        
+        # Setup logic
+        hidden_effect = {
+            # LINKING: Save the Predator (root) as a variable on the Prey.
+            # This allows Event 0002 to know who sent the letter.
+            scope:prey = {
+                set_variable = { name = inviter value = root }
+            }
+
+            # TRIGGER: Send the event to the Prey
+            scope:prey = {
+                trigger_event = invite_vore_pred.0002
+            }
+        }
+    }
+
+    # Option: Cancel
+    option = {
+        name = invite_vore_predOpt.0001b
+    }
 }
 
+# EVENT 0002: The Prey Receives the Letter
+# Fires on the Recipient (The Prey)
 invite_vore_pred.0002 = {
-	title = invite_vore_predTitle.0002
-	type = letter_event
-	sender = scope:potential_prey
-	opening = invite_vore_predOpening.0002
-	desc = invite_vore_predDesc.0002
-	#Create new descriptions depending on the senders highest stats
-	#prey's highest PERSONALITY is intrigue or diplomacy to convince predator subtly
-	#prey's highest PERSONALITY is prowess or marital to intimidate predator
-	#prey's highest PERSONALITY is learning or stewardship to be curious about being a prey
+    type = letter_event
+    title = invite_vore_predTitle.0002
+    desc = invite_vore_predDesc.0002
+    
+    opening = invite_vore_predOpening.0002
+    
+    # 1. Re-establish the Inviter scope
+    immediate = {
+        save_scope_as = predator
+    }
+    
+    # The 'sender' of the letter is the Predator
+    sender = scope:predator
 
-	#Send Letter
-	option = {
-			name = invite_vore_predOpt.0002a #Travel to friend/family/foe
+    # Option: Accept Invitation
+    option = {
+        name = invite_vore_predOpt.0002a # "Accept and Travel"
+        
+        hidden_effect = {
+            
+            # Cleanup the variable (optional, but good hygiene)
+            remove_variable = inviter
+            
+            # TRIGGER: Notify the Predator that the prey has arrived
+            scope:predator = {
+                trigger_event = invite_vore_pred.0003
+            }
+        }
+    }
 
-			trigger_event = invite_vore_pred.0003
-			#Not sure why this is here
-			# scope:potential_prey = {
-			#         trigger_event = {
-			#                 id = invite_vore_prey.0003
-			#                 days = 1
-			#         }
-			# }
-	}
-	#Cancel Letter
-	option = {
-		name = invite_vore_predOpt.0001b
-		remove_character_flag = potential_prey
-		remove_character_flag = potential_predator
-		scope:potential_predator = {
-				clear_saved_scope = potential_predator                       
-		}
-		scope:potential_prey = {
-				clear_saved_scope = potential_prey
-		}
-	}
+    # Option: Decline
+    option = {
+        name = invite_vore_predOpt.0002b # "Decline"
+        
+        hidden_effect = {
+            scope:predator = {
+                # The Predator gets annoyed or just forgets
+                add_stress = 5
+            }
+            remove_variable = inviter
+        }
+    }
 }
 
-
-
+# EVENT 0003: The Arrival / Outcome
+# Fires on the Inviter (The Predator)
+invite_vore_pred.0003 = {
+    type = character_event
+    title = invite_vore_predTitle.0003
+    desc = invite_vore_predDesc.0003
+    theme = intrigue
+    
+    immediate = {
+        # The prey is at our court now (we can scope to them via location or just the one who triggered the chain)
+        # Since the prey traveled to us, we can find them at our court.
+        # Or simpler: the prey is still in memory as 'scope:prey' if we didn't clear it, 
+        # but 0002 ran on them. Let's find them at our location.
+        
+        random_courtier_or_guest = {
+            limit = { 
+                has_character_flag = potential_prey # Assuming we set this flag in the interaction
+                # Double check it's the right person if needed
+            }
+            save_scope_as = prey
+        }
+    }
+    
+    option = {
+        name = invite_vore_predOpt.0003a # "Take them immediately"
+        
+        hidden_effect = {
+            # Trigger the actual Vore logic (from your chain)
+            # This calls your main vore event
+            trigger_event = invite_vore_pred.0004 # Replace with your actual vore event ID
+        }
+    }
+    
+    option = {
+        name = invite_vore_predOpt.0003b # "Wait for the feast"
+    }
+}

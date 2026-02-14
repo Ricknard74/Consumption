@@ -1,55 +1,57 @@
-﻿vore_menu = {
+﻿# ==========================================
+# 1. PLAYER MENU
+# ==========================================
+vore_menu = {
   title = vore_menu_title
   picture = {
     reference = "gfx/interface/illustrations/decisions/decision_activity.dds"
   }
   desc = vore_menu_desc
-  ai_check_interval = 0
 
-        #Access Control Panel
-	ai_potential = {
-                     #Player is NOT AI
-    always = no
+  ai_check_interval = 0
+  
+  # This is a player-only debug/settings menu
+  is_shown = {
+    is_ai = no
   }
-    #Event for Initial Control Panel
-                           
+
   effect = {
       trigger_event = vore.0003         
   }
 }
 
+# ==========================================
+# 2. RELIGIOUS FEAST
+# ==========================================
 religious_vore_feast_decision = {
-  title = religious_vore_feast_decision_title
-  desc = religious_vore_feast_decision_desc
-  picture = {
-    reference = "gfx/interface/illustrations/decisions/decision_activity.dds"
-  }
-  ai_check_interval = 5
-  ai_potential = {
-    always = yes
-  }
-  is_shown = {
-    root.religion = {
-      is_in_family = rf_voraphillic
-    }
-  }
-  cost = { gold = 70 }
-  cooldown = { days = 365 }
-  sort_order = 7
+	title = religious_vore_feast_decision_title
+	desc = religious_vore_feast_decision_desc
+		picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_activity.dds"
+	}
 
-  effect = {
-    if = {
-      limit = { has_faith = faith:savior }
-      ROOT = {
-        trigger_event = religious_vore.0001
-      }
-     }
-    # else_if = {
-    #   limit = { has_faith = faith:vore_traditionalist }
-    #   trigger_event = vore.020
-    # }
-  }
+	cost = { gold = 70 }
+	cooldown = { days = 365 }
+	sort_order = 7
+
+	# Only available to Voraphilic faith
+	is_shown = {
+		root.religion = {
+			is_in_family = rf_voraphillic
+		}
+	}
+
+	ai_check_interval = 5
+
+	effect = {
+		# Check for specific faith subtypes
+		if = {
+			limit = { faith = faith:savior } 
+			trigger_event = religious_vore.0001
+		}
+		# else_if = {
+		#   limit = { faith = faith_vore_traditionalist }
+		#   trigger_event = vore.020
+		# }
+	}
 }
-
-        
-

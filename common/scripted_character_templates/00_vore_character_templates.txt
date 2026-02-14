@@ -6,7 +6,7 @@
 #Template-specific education trait is weighted
 
 prey_character_template = {
-	age = { 18 45 }
+	age = { 18 35 }
 	random_traits = yes
 #	created should have traits sinful to religion, not diseased
 	gender_female_chance = 50

@@ -1,8 +1,6 @@
 ﻿prey_list = {
-    every_character = {
-        limit = {
-            has_relation_prey = root
-        }
+    every_relation = {
+        type = prey
     }
 }
 
@@ -24,3 +22,11 @@ predator_prey_list = {
         }
     }
 }
+
+# prey_list = {
+#     even_if_dead = yes
+    
+#     every_relation = {
+#         type = prey
+#     }
+# }

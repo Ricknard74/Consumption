@@ -1,259 +1,209 @@
 ﻿namespace = lover_vore
 
+# 1. Menu: Choose Role
 lover_vore.0001 = {
-        title = lover_voreTitle.0001
-        type = character_event
-        desc = lover_voreDesc.0001
-        theme = seduction
+    title = lover_voreTitle.0001
+    type = character_event
+    desc = lover_voreDesc.0001
+    theme = seduction
 
-        #Actor Wants to Be Predator
-        option = {
-                name = lover_voreOpt.0001a
-                trigger_event = lover_vore.0002
-        }
-        #Actor Wants to Be Prey
-        option = {
-                name = lover_voreOpt.0001b
-                trigger_event = lover_vore.0007
-        }
-        #Exit
-        option = {
-                name = lover_voreOpt.0001c
-        }
+    # Actor Wants to Be Predator
+    option = {
+        name = lover_voreOpt.0001a
+        trigger_event = lover_vore.0002
+    }
+    # Actor Wants to Be Prey
+    option = {
+        name = lover_voreOpt.0001b
+        trigger_event = lover_vore.0007
+    }
+    # Exit
+    option = {
+        name = lover_voreOpt.0001c
+    }
 }
 
-#Actor is the Predator
+# --- ACTOR IS PREDATOR BRANCH ---
+
+# 2. Predator: Choose Orifice
 lover_vore.0002 = {
-        title = lover_voreTitle.0002
-        type = character_event
-        desc = lover_voreDesc.0002
-        theme = seduction
+    title = lover_voreTitle.0002
+    type = character_event
+    desc = lover_voreDesc.0002
+    theme = seduction
 
-        immediate = {
-                scope:actor = {
-                        save_scope_as = predator
-                }
-                scope:recipient = {
-                        save_scope_as = prey
-                }       
+    immediate = {
+        scope:actor = {
+            save_scope_as = predator
         }
+        scope:recipient = {
+            save_scope_as = prey
+        }       
+    }
 
-        left_portrait = {
-                character = scope:predator
-                animation = flirtation
-        }
-        right_portrait = {
-                character = scope:prey
-                animation = flirtation
-        }
+    left_portrait = {
+        character = scope:predator
+        animation = flirtation
+    }
+    right_portrait = {
+        character = scope:prey
+        animation = flirtation
+    }
     
-        #Oral
-        option = {
-                name = lover_voreOpt.0002a
-                trigger = { 
-                        global_var:oral_banned = no 
-                }
-                trigger_event = lover_vore.0003
-        }            
-        #Anal
-        option = {
-                name = lover_voreOpt.0002b
-                trigger = {
-                        global_var:anal_banned = no
-		}
-                trigger_event = lover_vore.0004 
-        }
+    # Oral
+    option = {
+        name = lover_voreOpt.0002a
+        trigger = { global_var:oral_banned = no }
+        trigger_event = lover_vore.0003
+    }            
+    # Anal
+    option = {
+        name = lover_voreOpt.0002b
+        trigger = { global_var:anal_banned = no }
+        trigger_event = lover_vore.0004 
+    }
 
-        #Unbirth
-        option = {
-                name = lover_voreOpt.0002c
-                trigger = {
-                        AND = {
-                                is_female = yes
-                                NOT = { has_trait = pregnant }
-                                global_var:unbirth_banned = no       
-                        }
-                }
-                trigger_event = lover_vore.0005
+    # Unbirth
+    option = {
+        name = lover_voreOpt.0002c
+        trigger = {
+            AND = {
+                scope:predator = { is_female = yes }
+                NOT = { scope:predator = { has_trait = pregnant } }
+                global_var:unbirth_banned = no       
+            }
         }
+        trigger_event = lover_vore.0005
+    }
 
-        #Cock
-        option = {
-                name = lover_voreOpt.0002d
-                trigger = {
-                        AND = {
-                                is_female = no
-                                global_var:cock_banned = no
-                        }
-                }
-                trigger_event = lover_vore.0006
+    # Cock
+    option = {
+        name = lover_voreOpt.0002d
+        trigger = {
+            AND = {
+                scope:predator = { is_female = no }
+                global_var:cock_banned = no
+            }
         }
+        trigger_event = lover_vore.0006
+    }
             
-        #Exit
-        option = {
-                name = lover_voreOpt.0002e
-                hidden_effect = {
-                        scope:predator = {
-                                clear_saved_scope = predator
-                        }
-                        scope:prey = {
-                                clear_saved_scope = prey       
-                        }
-                }
+    # Exit
+    option = {
+        name = lover_voreOpt.0002e
+        hidden_effect = {
+            scope:predator = { clear_saved_scope = predator }
+            scope:prey = { clear_saved_scope = prey }
         }
-                
-        after = {
-                clean_up_effect = yes
-        }
+    }
+    # REMOVED: after = { clean_up_effect = yes } - Handled by sub-events
 }
 
-#Actor Pred Oral Vore
+# 3. Actor Pred Oral Vore
 lover_vore.0003 = {
-        title = lover_voreTitle.0003
-	type = character_event
-	desc = lover_voreDesc.0003
-        theme = seduction
+    title = lover_voreTitle.0003
+    type = character_event
+    desc = lover_voreDesc.0003
+    theme = seduction
 
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
-        immediate = {
-                scope:predator = {
-                        add_character_flag = vore_predator 
-                        add_character_flag = portrait_belly   
-                }
+    immediate = {
+        scope:predator = {
+                add_character_flag = portrait_belly   
         }
+    }
+    left_portrait = {
+        character = scope:predator
+        animation = pregnant
+    }
 
-       left_portrait = {
-                character = scope:predator
-                animation = pregnant
+    # Lethal
+    option = {
+        name = lover_voreOpt.0003a
+        trigger = { global_var:digestion_banned = no }
+        hidden_effect = {
+            scope:predator = {
+                lethal_vore_effect = { type = oral }
+            }
         }
-
-        #Lethal
-        option = {
-                name = lover_voreOpt.0003a
-                trigger = {
-                        AND = {
-                                global_var:digestion_banned = no
-                        }
-                }
-                scope:predator = {
-                        add_trait = digesting
-                        trigger_event = { id = vore.0002 months = { 2 3 } }
-                }
-                scope:prey = {
-                        death = { 
-                                death_reason = death_execution_oral
-                                killer = scope:predator
-                        }
-                }
-
-        }
+    }
         
-
-        #Non-lethal
-        option = {
-                name = lover_voreOpt.0003b
+    # Non-lethal
+    option = {
+        name = lover_voreOpt.0003b
+        hidden_effect = {
+            scope:predator = {
                 safe_vore_effect = {
-                        type = oral
-                        prison_type = vore_willing
+                    type = oral
+                    prison_type = vore_willing
                 }
+            }
         }
-        after = {
-                clean_up_effect = yes
-        }
+    }
+    # REMOVED: after = { clean_up_effect = yes }
 }
 
-#Actor Pred Anal Vore
+# 4. Actor Pred Anal Vore
 lover_vore.0004 = {
-        title = lover_voreTitle.0004
-	type = character_event
-	desc = lover_voreDesc.0004
-	theme = seduction
+    title = lover_voreTitle.0004
+    type = character_event
+    desc = lover_voreDesc.0004
+    theme = seduction
 
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
-        immediate = {
-                scope:predator = {
-                        add_character_flag = portrait_belly
-                        add_character_flag = vore_predator   
-                }
+    immediate = {
+        scope:predator = {
+            add_character_flag = portrait_belly   
         }
+    }
 
-        #Lethal
-        option = {
-                name = lover_voreOpt.0004a
-                trigger = {
-                        global_var:digestion_banned = no
-                }
-                scope:predator = {
-                        add_trait = digesting
-                        trigger_event = { id = vore.0002 months = { 2 3 } }
-                }
-                scope:prey = {
-                        death = { killer = scope:predator death_reason = death_execution_anal }
-                }
+    # Lethal
+    option = {
+        name = lover_voreOpt.0004a
+        trigger = { global_var:digestion_banned = no }
+        hidden_effect = {
+            scope:predator = {
+                lethal_vore_effect = { type = anal }
+            }
         }
+    }
 
-        #Non-lethal
-        option = {
-                name = lover_voreOpt.0004b
+    # Non-lethal
+    option = {
+        name = lover_voreOpt.0004b
+        hidden_effect = {
+            scope:predator = {
                 safe_vore_effect = {
-                        type = anal
-                        prison_type = vore_willing
+                    type = anal
+                    prison_type = vore_willing
                 }
+            }
         }
-        after = {
-                clean_up_effect = yes
-        }
+    }
 }
 
-#Actor Pred Unbirth
+# 5. Actor Pred Unbirth
 lover_vore.0005 = {
-        title = lover_voreTitle.0005
-	type = character_event
-	desc = lover_voreDesc.0005
-	theme = seduction
-
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
-
-        immediate = {
-                scope:predator = {
-                        add_character_flag = portrait_belly
-                        add_character_flag = vore_predator   
-                }
+    title = lover_voreTitle.0005
+    type = character_event
+    desc = lover_voreDesc.0005
+    theme = seduction
+    immediate = {
+        scope:predator = {
+            add_character_flag = portrait_belly   
         }
+    }
 
-        #Lethal Digestion
-        option = {
-                name = lover_voreOpt.0005a
-                trigger = {
-                        AND = {
-                                global_var:digestion_banned = no
-                        }
-                }
-                scope:predator = {
-                        add_character_modifier = {
-                                modifier = fertility_boost
-                        }
-                        trigger_event = { id = vore.0002 months = { 2 3 } }
-                }        
-                scope:prey = {
-                        death = { killer = scope:predator death_reason = death_execution_unbirth }
-                }        
+    # Lethal Digestion
+    option = {
+        name = lover_voreOpt.0005a
+        trigger = { global_var:digestion_banned = no }
+        hidden_effect = {
+            scope:predator = {
+                lethal_vore_effect = { 
+                    type = unbirth
+                }              
+            }
         }
+    }
 
         #Rebirth/Transformation
         # option = {
@@ -278,154 +228,153 @@ lover_vore.0005 = {
         #         trigger_event = { vore.0014 months = 9 }
         # }
 
-        #Non-lethal
-        option = {
-                name = lover_voreOpt.0005c
-                safe_vore_effect = {
-                        type = unbirth
-                        prison_type = vore_willing
-                }
+    # Non-lethal
+    option = {
+        name = lover_voreOpt.0005c
+        hidden_effect = {
+            safe_vore_effect = {
+                type = unbirth
+                prison_type = vore_willing
+            }
         }
-        after = {
-                clean_up_effect = yes
-        }
+    }
 }
 
-#Actor Pred Cock Vore
+# 6. Actor Pred Cock Vore
 lover_vore.0006 = {
-        title = lover_voreTitle.0006
-	type = character_event
-	desc = lover_voreDesc.0006
-        theme = seduction
-
-        # trigger = {
-        #         scope:predator = {
-        #                 has_character_flag = vore_check
-        #         }
-        # }
-
-
-        immediate = {
-                scope:predator = {
-#                        add_character_flag = genital_vore_predator 
-                        add_character_flag = vore_predator   
-                }
-        }
-	
-        #Lethal
-        option = {
-                name = lover_voreOpt.0006a
-                trigger = {
-                        global_var:digestion_banned = no
-                }
-                scope:predator = {
-                        add_character_modifier = { modifier = fertility_boost } 
-                        trigger_event = { id = vore.0002 months = { 2 3 } }    
-                }
-                scope:prey = {
-                        death = { death_reason = death_execution_cock killer = scope:predator }  
-                }
-        }
-
-        #Non-lethal
-        option = {
-                name = lover_voreOpt.0006b
-                safe_vore_effect = {
-                        type = cock
-                        prison_type = vore_willing
-                }
-        }
-        after = {
-                clean_up_effect = yes
-        }
-}
-
-#Actor is prey
-lover_vore.0007 = {
-        title = lover_vore_preyTitle.0007
-        type = character_event
-        desc = lover_vore_preyDesc.0007
-        theme = seduction
-
-        immediate = {
-                scope:actor = {
-                        save_scope_as = prey
-                }
-                scope:recipient = {
-                        save_scope_as = predator
-                }       
-        }
-
-        left_portrait = {
-                character = scope:prey
-                animation = flirtation
-        }
-        right_portrait = {
-                character = scope:predator
-                animation = flirtation
-        }
+    title = lover_voreTitle.0006
+    type = character_event
+    desc = lover_voreDesc.0006
+    theme = seduction
     
-        #Oral
-        option = {
-                name = lover_vore_preyOpt.0007a
-                trigger = { 
-                        global_var:oral_banned = no 
-                }
-                trigger_event = lover_vore.0008
-        }            
-        #Anal
-        option = {
-                name = lover_vore_preyOpt.0007b
-                trigger = {
-                        global_var:anal_banned = no
-		}
-                trigger_event = lover_vore.0009 
+    # Lethal
+    option = {
+        name = lover_voreOpt.0006a
+        trigger = { global_var:digestion_banned = no }
+        hidden_effect = {
+            scope:predator = {
+                lethal_vore_effect = { 
+                    type = cock
+                } 
+                add_character_modifier = { modifier = fertility_boost }     
+            }
         }
+    }
 
-        #Unbirth
-        option = {
-                name = lover_vore_preyOpt.0007c
-                trigger = {
-                        AND = {
-                                is_female = yes
-                                NOT = { has_trait = pregnant }
-                                global_var:unbirth_banned = no       
-                        }
+    # Non-lethal
+    option = {
+        name = lover_voreOpt.0006b
+        hidden_effect = {
+            scope:predator = {
+                safe_vore_effect = {
+                    type = cock
+                    prison_type = vore_willing
                 }
-                trigger_event = lover_vore.0010
+            }
         }
-
-        #Cock
-        option = {
-                name = lover_vore_preyOpt.0007d
-                trigger = {
-                        AND = {
-                                is_female = no
-                                global_var:cock_banned = no
-                        }
-                }
-                trigger_event = lover_vore.0011
-        }
-            
-        #Exit
-        option = {
-                name = lover_vore_preyOpt.0007e
-                hidden_effect = {
-                        scope:predator = {
-                                clear_saved_scope = predator
-                        }
-                        scope:prey = {
-                                clear_saved_scope = prey       
-                        }
-                }
-        }
-                
-        after = {
-                clean_up_effect = yes
-        }
+    }
 }
 
-#Prey Oral vore
+# --- ACTOR IS PREY BRANCH ---
+
+# 7. Prey: Choose Orifice
+lover_vore.0007 = {
+    title = lover_vore_preyTitle.0007
+    type = character_event
+    desc = lover_vore_preyDesc.0007
+    theme = seduction
+
+    immediate = {
+        scope:actor = {
+            save_scope_as = prey
+        }
+        scope:recipient = {
+            save_scope_as = predator
+        }       
+    }
+
+    left_portrait = {
+        character = scope:prey
+        animation = flirtation
+    }
+    right_portrait = {
+        character = scope:predator
+        animation = flirtation
+    }
+
+    
+    # Oral
+    option = {
+        name = lover_vore_preyOpt.0007a
+        trigger = { global_var:oral_banned = no }
+        trigger_event = lover_vore.0008
+    }            
+    # Anal
+    option = {
+        name = lover_vore_preyOpt.0007b
+        trigger = { global_var:anal_banned = no }
+        trigger_event = lover_vore.0009 
+    }
+
+    # Unbirth
+    option = {
+        name = lover_vore_preyOpt.0007c
+        trigger = {
+            AND = {
+                scope:predator = { is_female = yes }
+                NOT = { scope:predator = { has_trait = pregnant } }
+                global_var:unbirth_banned = no       
+            }
+        }
+        trigger_event = lover_vore.0010
+    }
+    
+    # Cock
+    option = {
+        name = lover_vore_preyOpt.0007d
+        trigger = {
+            AND = {
+                scope:predator = { is_female = no }
+                global_var:cock_banned = no
+            }
+        }
+        trigger_event = lover_vore.0011
+    }
+    
+    #Surpise Me
+    option = {
+        name = lover_vore_preyOpt.0007e
+        random_list = {
+            25 = {
+                oral_vore_modifier = yes
+                trigger_event = lover_vore.0008
+            }
+            25 = {
+                anal_vore_modifier = yes
+                trigger_event = lover_vore.0009
+            }
+            25 = {
+                unbirth_vore_modifier = yes
+                trigger_event = lover_vore.0010
+            }
+            25 = {
+                cock_vore_modifier = yes
+                trigger_event = lover_vore.0011
+            }
+        }
+    }
+
+    # Exit
+    option = {
+        name = lover_vore_preyOpt.0007f
+        hidden_effect = {
+            scope:predator = { clear_saved_scope = predator }
+            scope:prey = { clear_saved_scope = prey }
+        }
+    }
+}
+
+# 8. Prey Oral Vore
 lover_vore.0008 = {
     title = lover_vore_prey_oralTitle.0008
     type = character_event
@@ -433,63 +382,45 @@ lover_vore.0008 = {
     theme = seduction
 
     immediate = {
-        scope:actor = {
-                save_scope_as = prey
-        }
-        scope:recipient = {
-                save_scope_as = predator
-        }
         scope:predator = {
             add_character_flag = portrait_belly
-            add_character_flag = vore_predator
         }
     }
+
     # Lethal Oral Vore (player dies)
     option = {
         name = lover_vore_prey_oralOpt.0008a 
         trigger = { global_var:digestion_banned = no }
-        scope:predator = {
-            add_trait = digesting
-            trigger_event = { id = vore.0002 months = { 2 3 } }
-        }
-        scope:prey = {
-            death = {
-                death_reason = death_execution_oral
-                killer = scope:predator
+        hidden_effect = {
+            scope:predator = {
+                lethal_vore_effect = { type = oral }
             }
         }
     }
 
+    # Non-lethal Oral Vore
     option = {
-        name = lover_vore_prey_oralOpt.0008b  # Non-lethal Oral Vore
-        safe_vore_effect = {
-            type = oral
-            prison_type = vore_willing
+        name = lover_vore_prey_oralOpt.0008b
+        hidden_effect = {
+            scope:predator = {
+                safe_vore_effect = {
+                    type = oral
+                    prison_type = vore_willing
+                }
+            }
         }
-    }
-
-    after = {
-        clean_up_effect = yes
     }
 }
 
-#Anal player prey
+# 9. Prey Anal Vore
 lover_vore.0009 = {
     title = lover_vore_prey_analTitle.0009
     type = character_event
     desc = lover_vore_prey_analDesc.0009
     theme = seduction
-
     immediate = {
-        scope:actor = {
-            save_scope_as = prey
-        }
-        scope:recipient = {
-            save_scope_as = predator
-        }
         scope:predator = {
             add_character_flag = portrait_belly
-            add_character_flag = vore_predator
         }
     }
 
@@ -497,32 +428,29 @@ lover_vore.0009 = {
     option = {
         name = lover_vore_prey_analOpt.0009a
         trigger = { global_var:digestion_banned = no }
-        scope:predator = {
-            add_trait = digesting
-            trigger_event = { id = vore.0002 months = { 2 3 } }
-        }
-        scope:prey = {
-            death = {
-                death_reason = death_execution_anal
-                killer = scope:predator
+        hidden_effect = {
+            scope:predator = {
+                lethal_vore_effect = { type = anal }
             }
+
         }
     }
 
     # Non-lethal Anal Vore
     option = {
         name = lover_vore_prey_analOpt.0009b
-        safe_vore_effect = {
-            type = anal
-            prison_type = vore_willing
+        hidden_effect = {
+            scope:predator = {
+                safe_vore_effect = {
+                    type = anal
+                    prison_type = vore_willing
+                }
+            }
         }
-    }
-
-    after = {
-        clean_up_effect = yes
     }
 }
 
+# 10. Prey Unbirth
 lover_vore.0010 = {
     title = lover_vore_prey_unbirthTitle.0010
     type = character_event
@@ -530,15 +458,8 @@ lover_vore.0010 = {
     theme = seduction
 
     immediate = {
-        scope:actor = {
-            save_scope_as = prey
-        }
-        scope:recipient = {
-            save_scope_as = predator
-        }
         scope:predator = {
             add_character_flag = portrait_belly
-            add_character_flag = vore_predator
         }
     }
 
@@ -546,14 +467,10 @@ lover_vore.0010 = {
     option = {
         name = lover_vore_prey_unbirthOpt.0010a
         trigger = { global_var:digestion_banned = no }
-        scope:predator = {
-            add_character_modifier = { modifier = fertility_boost }
-            trigger_event = { id = vore.0002 months = { 2 3 } }
-        }
-        scope:prey = {
-            death = {
-                death_reason = death_execution_unbirth
-                killer = scope:predator
+        hidden_effect = {
+            scope:predator = {
+                lethal_vore_effect = { type = unbirth }
+                add_character_modifier = { modifier = fertility_boost }
             }
         }
     }
@@ -561,48 +478,31 @@ lover_vore.0010 = {
     # Non-lethal Unbirth
     option = {
         name = lover_vore_prey_unbirthOpt.0010b
-        safe_vore_effect = {
-            type = unbirth
-            prison_type = vore_willing
+        hidden_effect = {
+            scope:predator = {
+                safe_vore_effect = {
+                    type = unbirth
+                    prison_type = vore_willing
+                }
+            }
         }
-    }
-
-    after = {
-        clean_up_effect = yes
     }
 }
 
+# 11. Prey Cock Vore
 lover_vore.0011 = {
     title = lover_vore_prey_cockTitle.0011
     type = character_event
     desc = lover_vore_prey_cockDesc.0011
     theme = seduction
 
-    immediate = {
-        scope:actor = {
-            save_scope_as = prey
-        }
-        scope:recipient = {
-            save_scope_as = predator
-        }
-        scope:predator = {
-            add_character_flag = portrait_belly
-            add_character_flag = vore_predator
-        }
-    }
-
     # Lethal Cock Vore
     option = {
         name = lover_vore_prey_cockOpt.0011a
         trigger = { global_var:digestion_banned = no }
-        scope:predator = {
-            add_character_modifier = { modifier = fertility_boost }
-            trigger_event = { id = vore.0002 months = { 2 3 } }
-        }
-        scope:prey = {
-            death = {
-                death_reason = death_execution_cock
-                killer = scope:predator
+        hidden_effect = {
+            scope:predator = {
+                lethal_vore_effect = { type = cock }
             }
         }
     }
@@ -610,13 +510,13 @@ lover_vore.0011 = {
     # Non-lethal Cock Vore
     option = {
         name = lover_vore_prey_cockOpt.0011b
-        safe_vore_effect = {
-            type = cock
-            prison_type = vore_willing
+        hidden_effect = {
+            scope:predator = {
+                safe_vore_effect = {
+                    type = cock
+                    prison_type = vore_willing
+                }
+            }
         }
-    }
-
-    after = {
-        clean_up_effect = yes
     }
 }

@@ -1,0 +1,266 @@
+######################################################
+################## PREY WINDOW #######################
+######################################################
+
+window = {
+    name = "prey_list_window"
+    parentanchor = center
+    layer = windows_layer
+    movable = no
+    size = { 600 500 }
+    
+    ### Use variable visibility check from docs
+    visible = "[GetPlayer.MakeScope.Var('show_prey_list_window').IsSet]"
+    
+    datacontext = "[GetPlayer]"
+
+    state = {
+        name = _show
+        using = Animation_FadeIn_Quick
+        using = Sound_WindowShow_Standard
+    }
+
+    state = {
+        name = _hide
+        using = Animation_FadeOut_Quick
+        using = Sound_WindowHide_Standard
+    }
+
+    using = Window_Background
+
+    
+    vbox = {
+        using = Window_Margins
+        
+        header_pattern = {
+            layoutpolicy_horizontal = expanding
+            
+            blockoverride "header_text"
+            {
+                text = "PREY_WINDOW_TITLE"
+            }
+            
+            blockoverride "button_close"
+            {
+                ### Call scripted GUI to close (remove variable)
+                onclick = "[GetScriptedGui('close_prey_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            }
+        }
+
+        ### Show Predator Being Viewed
+        vbox = {
+            layoutpolicy_horizontal = expanding
+            spacing = 5
+            margin = { 10 10 }
+            
+            background = {
+                using = Background_Area_Dark
+            }
+            
+            text_single = {
+                raw_text = "PREDATOR:"
+                default_format = "#high"
+            }
+            
+            ### Display the predator from current_predator_view list
+            container = {
+                datamodel = "[Character.MakeScope.GetList('current_predator_view')]"
+                layoutpolicy_horizontal = expanding
+                
+                item = {
+                    container = {
+                        datacontext = "[Scope.GetCharacter]"
+                        layoutpolicy_horizontal = expanding
+                        
+                        widget_predator_display = {
+                            layoutpolicy_horizontal = expanding
+                            
+                            ### Hide the action buttons for the predator display
+                            blockoverride "action_buttons" {}
+                        }
+                    }
+                }
+            }
+        }
+        
+        ### Just the Prey List
+        scrollbox = {
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+
+            blockoverride "scrollbox_content"
+            {
+                vbox = {
+                    name = "prey_list"
+                    layoutpolicy_horizontal = expanding
+                    spacing = 5
+                    margin = { 10 10 }
+                    
+                    text_single = {
+                        raw_text = "PREY:"
+                        default_format = "#high"
+                        margin_bottom = 5
+                    }
+                    
+                    datamodel = "[Character.MakeScope.GetList('prey_list')]"
+                    
+                    item = {
+                        widget_prey_item = {
+                            layoutpolicy_horizontal = expanding
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+######################################################
+################ TYPES AND TEMPLATES #################
+######################################################
+
+types PreyListWindow
+{
+    ### Predator display - no action buttons
+    type widget_predator_display = widget {
+        layoutpolicy_horizontal = expanding
+        size = { 0 90 }
+
+        background = {
+            using = Background_Area
+            margin = { 0 2 }
+        }
+
+        hbox = {
+            layoutpolicy_horizontal = expanding
+            margin = { 5 5 }
+            spacing = 10
+
+            portrait_head_small = {
+                blockoverride "opinion_box" {}
+                blockoverride "status_icons" {}
+                
+                blockoverride "portrait_button"
+                {
+                    alwaystransparent = no
+                }
+            }
+
+            vbox = {
+                layoutpolicy_horizontal = expanding
+                spacing = 2
+
+                text_single = {
+                    layoutpolicy_horizontal = expanding
+                    text = "[Character.GetUIName]"
+                    using = Font_Size_Medium
+                    default_format = "#high"
+                    autoresize = no
+                }
+
+                text_single = {
+                    layoutpolicy_horizontal = expanding
+                    text = "[Character.GetPrimaryTitle.GetNameNoTooltip]"
+                    default_format = "#low"
+                    autoresize = no
+                }
+
+                hbox = {
+                    layoutpolicy_horizontal = expanding
+                    
+                    text_single = {
+                        raw_text = "Location: "
+                    }
+                    
+                    text_single = {
+                        text = "[Character.GetLocation.GetProvince.GetNameNoTooltip]"
+                    }
+                }
+            }
+
+            expand = {}
+        }
+    }
+
+    ### Prey display - with action buttons
+    type widget_prey_display = widget {
+        layoutpolicy_horizontal = expanding
+        size = { 0 90 }
+
+        background = {
+            using = Background_Area
+            margin = { 0 2 }
+        }
+
+        hbox = {
+            layoutpolicy_horizontal = expanding
+            margin = { 5 5 }
+            spacing = 10
+
+            portrait_head_small = {
+                blockoverride "opinion_box" {}
+                blockoverride "status_icons" {}
+                
+                blockoverride "portrait_button"
+                {
+                    alwaystransparent = no
+                }
+            }
+
+            vbox = {
+                layoutpolicy_horizontal = expanding
+                spacing = 2
+
+                text_single = {
+                    layoutpolicy_horizontal = expanding
+                    text = "[Character.GetUIName]"
+                    using = Font_Size_Medium
+                    default_format = "#high"
+                    autoresize = no
+                }
+
+                text_single = {
+                    layoutpolicy_horizontal = expanding
+                    text = "[Character.GetPrimaryTitle.GetNameNoTooltip]"
+                    default_format = "#low"
+                    autoresize = no
+                }
+
+                hbox = {
+                    layoutpolicy_horizontal = expanding
+                    
+                    text_single = {
+                        raw_text = "Age: "
+                    }
+                    
+                    text_single = {
+                        text = "[Character.GetAge]"
+                    }
+                }
+            }
+
+            vbox = {
+                spacing = 3
+                
+                ### Only show buttons if NOT viewing AI prey
+                visible = "[Not(Character.MakeScope.Var('viewing_ai_prey').IsSet)]"
+
+                button_standard = {
+                    text = "PREY_RELEASE"
+                    size = { 90 30 }
+                    
+                    onclick = "[GetScriptedGui('release_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
+                    tooltip = "PREY_RELEASE_TT"
+                }
+
+                button_standard = {
+                    text = "PREY_DIGEST"
+                    size = { 90 30 }
+                    
+                    onclick = "[GetScriptedGui('digest_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
+                    tooltip = "PREY_DIGEST_TT"
+                }
+            }
+        }
+    }
+}

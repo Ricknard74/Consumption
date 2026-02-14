@@ -1,670 +1,600 @@
-﻿random_orifice_safe_vore_effect = {
-	random_list = {
-		1 = {
-			trigger = {
-				global_var:oral_banned = no
-			}
-			oral_vore_modifier = {
-				PREY = scope:prey
-			}
-			safe_vore_effect = {
-				type = oral
-				prison_type = $prison_type$
-			}
-		}
-		1 = {
-			trigger = {
-				global_var:anal_banned = no
-			}
-			anal_vore_modifier = {
-				PREY = scope:prey
-			}
-			safe_vore_effect = {
-				prison_type = $prison_type$
-				type = anal
-			}
-		}
-		1 = {
-			trigger = {
-				global_var:unbirth_banned = no
-				is_female = yes
-			}
-			unbirth_vore_modifier = {
-				PREY = scope:prey
-			}
-			safe_vore_effect = {
-				prison_type = $prison_type$
-				type = unbirth
-			}
-		}
-		1 = {
-			trigger = {
-				global_var:cock_banned = no
-				is_female = no
-			}
-			cock_vore_modifier = {
-				PREY = scope:prey
-			}
-			safe_vore_effect = {
-				prison_type = $prison_type$
-				type = cock
-			}
-		}
-	}
+﻿random_orifice_vore_effect = {
+    random_list = {
+        # Safe Vore Branch
+        50 = {
+            safe_vore_modifier = { PREY = scope:prey }
+            random_orifice_safe_vore_effect = { prison_type = $prison_type$ }
+        }
+        # Lethal Vore Branch
+        50 = {
+            trigger = { global_var:digestion_banned = no }
+            lethal_vore_modifier = { PREY = scope:prey }
+            random_orifice_lethal_vore_effect = yes
+        }
+    }
+}
+
+random_orifice_safe_vore_effect = {
+    random_list = {
+        25 = {
+            trigger = { global_var:oral_banned = no }
+            oral_vore_modifier = yes
+            safe_vore_effect = {
+                prison_type = $prison_type$
+                type = oral
+            }
+        }
+        25 = {
+            trigger = { global_var:anal_banned = no }
+            anal_vore_modifier = yes
+            safe_vore_effect = {
+                prison_type = $prison_type$
+                type = anal
+            }
+        }
+        25 = {
+            trigger = {
+                global_var:unbirth_banned = no
+                is_female = yes
+            }
+            unbirth_vore_modifier = yes
+            safe_vore_effect = {
+                prison_type = $prison_type$
+                type = unbirth
+            }
+        }
+        25 = {
+            trigger = {
+                global_var:cock_banned = no
+                is_female = no
+            }
+            cock_vore_modifier = yes
+            safe_vore_effect = {
+                prison_type = $prison_type$
+                type = cock
+            }
+        }
+        0 = {
+            safe_vore_effect = {
+                prison_type = $prison_type$
+                type = oral
+            }
+        }
+    }
 }
 
 random_orifice_lethal_vore_effect = {
-	random_list = {
-		1 = {
-			trigger = {
-				global_var:oral_banned = no
-			}
-			oral_vore_modifier = {
-				PREY = scope:prey
-			}
-			lethal_vore_effect = {
-				type = oral
-			}
-		}
-		1 = {
-			trigger = {
-				global_var:anal_banned = no
-			}
-			anal_vore_modifier = {
-				PREY = scope:prey
-			}
-			lethal_vore_effect = {
-				type = anal
-			}
-		}
-		1 = {
-			trigger = {
-				global_var:unbirth_banned = no
-				is_female = yes
-			}
-			unbirth_vore_modifier = {
-				PREY = scope:prey
-			}
-			lethal_vore_effect = {	
-				type = unbirth
-			}
-		}
-		1 = {
-			trigger = {
-				global_var:cock_banned = no
-				is_female = no
-			}
-			cock_vore_modifier = {
-				PREY = scope:prey
-			}
-			lethal_vore_effect = {
-				type = cock
-			}
-		}
-	}
+    random_list = {
+        25 = {
+            trigger = { global_var:oral_banned = no }
+            oral_vore_modifier = yes
+            lethal_vore_effect = { type = oral }
+            }
+        25 = {
+            trigger = { global_var:anal_banned = no }
+            anal_vore_modifier = yes
+            lethal_vore_effect = { type = anal }
+        }
+        25 = {
+            trigger = {
+                global_var:unbirth_banned = no
+                is_female = yes
+            }
+            unbirth_vore_modifier = yes
+            lethal_vore_effect = { type = unbirth }
+        }
+        25 = {
+            trigger = {
+                global_var:cock_banned = no
+                is_female = no
+            }
+            cock_vore_modifier = yes
+            lethal_vore_effect = { type = cock }
+        }
+        0 = {
+            lethal_vore_effect = { type = oral }
+        }
+    }
 }
 
-#Non-lethal Vore
+# Non-lethal Vore
 safe_vore_effect = {
-	if = {
-		limit = {
-			NOT = { exists = scope:predator }
-		}
-		scope:actor = {
-			save_scope_as = predator
-		}
-	}
-	if = {
-		limit = {
-			NOT = { exists = scope:prey }
-		}
-		scope:recipient = {
-			save_scope_as = prey
-		}
-	}
-	# Find and assign the lowest slot
-    
-    # Check if we found a slot
     if = {
-		limit = {
-			#scope:predator = { var:assigned_slot > 0 }
-			can_vore = yes
-        }
-		
-		#apply_slot_flags_effect = yes
-		scope:predator = {
-			add_trait = $type$_predator
-			add_character_flag = $type$_predator
-			add_character_flag = vore_predator
-			set_relation_prey = scope:prey
-			assign_lowest_slot_effect = yes
-			add_relation_flag = {
-				flag = $type$
-				target = scope:prey
-				relation = prey
-			}
-			change_variable = { name = num_prey add = 1}
-			create_character_memory = { type = pred_non_fatal_memory participants = { prey = scope:prey } }
-		}
-		if = {
-			limit = {
-				scope:prey = {
-					OR = {
-						is_in_prison_type = dungeon
-						is_in_prison_type = house_arrest
-					}
-				}
-			}
-			scope:prey = { change_prison_type = $prison_type$ }
-		}
-		else = {
-			scope:predator = {
-				imprison = {
-					target = scope:prey
-					type = $prison_type$
-				}
-			}
-		}
-		if = {
-			limit = {
-				is_ai = yes
-				NOT = { scope:prey = { has_character_flag = release_exception } }
-			}
-			trigger_event = { id = vore.0001 years = { 1 2 } }
-		}
-		
-		scope:prey = {
-			add_character_modifier = { modifier = $type$_vored }
-			add_character_flag = vored
-			add_trait = $type$_vored
-			#add_trait = incapable Maybe modify it to be a little less harmful
-			add_relation_flag = {
-				flag = $type$
-				target = scope:prey
-				relation = prey
-			}
-			create_character_memory = { type = prey_non_fatal_memory participants = { pred = scope:predator } }
-		}
-	}
-	else = {
-        # No slots available - handle this case
-        scope:predator = {
-            # Maybe send an event saying "stomach is full"
-			#Maybe add a hidden option to the beginning of the events to indicate that the predator is full
-            #trigger_event = vore_stomach_full.0001
-        }
+        limit = { NOT = { exists = scope:predator } }
+        scope:actor = { save_scope_as = predator }
     }
-}
-
-#Lethal Vore
-lethal_vore_effect = {
-	scope:predator = {
-		add_trait = digesting
-		add_character_flag = vore_predator
-		trigger_event = { id = vore.0002 months = { 2 3 } }
-	}
-	scope:prey = {
-		remove_character_flag = vored
-		remove_character_modifier = $type$_vored
-		remove_trait = $type$_vored
-		#remove_variable = vore_type 
-			death = { 
-					death_reason = death_execution_$type$
-					killer = scope:predator
-			}
-			# add_character_modifier = {
-			# 	modifier = digestion_in_progress
-			# 	duration = { days = 7 }
-			# }
-	}
-	hidden_effect = {
-			scope:predator= {
-					if = {	#Should be in lethal_vore_religion
-							limit = { scope:predator.religion = religion:fatal_vore_religion } 
-							show_as_tooltip = {
-									sacrifice_prisoner_effect = {
-											VICTIM = scope:prey
-											EXECUTIONER = scope:predator
-									}       
-							}
-					}
-					else = {
-							show_as_tooltip = {
-									execute_prisoner_effect = {
-											VICTIM = scope:prey
-											EXECUTIONER = scope:predator
-									}       
-							}
-					}
-			}       
-	}
-}
-
-#Check for all locations of vore for release
-release_prey_location_check_effect = {
-	switch = {
-		trigger = has_trait
-		oral_predator = {
-			release_prey_effect = {
-					type = oral
-			}
-		}
-		anal_predator = {
-			release_prey_effect = {
-					type = anal
-			}
-		}
-		unbirth_predator = {
-			release_prey_effect = {
-					type = unbirth
-			}
-		}
-		cock_predator = {
-			release_prey_effect = {
-					type = cock
-			}
-		}
-		fallback = {
-			release_prey_effect = {
-				#log = "Fallback to oral"
-				type = oral
-			}
-		}
-	}
-	#Figure out how to use a variable with flags
-	# if = {
-	# 	limit = { has_variable = vore_type }
-	# 	release_prey_effect = { type = scope:prey.var:flag:vore_type }
-	# }
-	# else = {
-	# 	release_prey_effect = {
-	# 		#log = "Fallback to oral"
-	# 		type = oral
-	# 	}
-	# }
-}
-
-assign_lowest_slot_effect = {
-    # Call this effect and it will set a variable with the slot number
     
-    scope:predator = {
-        # Check each slot in order
+    if = {
+        limit = { NOT = { exists = scope:prey } }
+        scope:recipient = { save_scope_as = prey }
+    }
+
+    else = {
         if = {
-            limit = {
-                NOT = {
-                    any_relation = {
-                        type = prey
-                        has_relation_flag = {
-                            flag = one
-                            target = prev
-                            relation = predator
-						}
-                    }
+            limit = { scope:predator = { can_vore = yes } }
+            
+            scope:predator = {
+                add_trait = $type$_predator
+                add_character_flag = $type$_predator
+                add_character_flag = vore_predator
+                set_relation_prey = scope:prey
+                add_relation_flag = {
+                    flag = $type$
+                    target = scope:prey
+                    relation = prey
                 }
+                
+                create_character_memory = { type = pred_non_fatal_memory participants = { prey = scope:prey } }
+                
+                # INCREMENT PREY COUNTER
+                change_variable = { name = num_prey add = 1 }
+                change_variable = { name = num_$type$_prey add = 1 }
+                
+                # Update Portrait/Belly immediately
+                update_vore_portrait_effect = yes
             }
-            set_variable = { name = assigned_slot value = 1 }
-        }
-        else_if = {
-            limit = {
-                NOT = {
-                    any_relation = {
-                        type = prey
-                        has_relation_flag = {
-                            flag = two
-                            target = prev
-                            relation = predator
+            
+            # Imprisonment Logic
+            if = {
+                limit = {
+                    scope:prey = {
+                        OR = {
+                            is_in_prison_type = dungeon
+                            is_in_prison_type = house_arrest
                         }
                     }
                 }
+                scope:prey = { 
+                    change_prison_type = $prison_type$
+                    if = { limit = { is_in_prison_type = dungeon } add_character_flag = vored_from_dungeon }
+                    if = { limit = { is_in_prison_type = house_arrest } add_character_flag = vored_from_house_arrest }
+                }
             }
-            set_variable = { name = assigned_slot value = 2 }
-        }
-        else_if = {
-            limit = {
-                NOT = {
-                    any_relation = {
-                        type = prey
-                        has_relation_flag = {
-                            flag = three
-                            target = prev
-                            relation = predator
-                        }
+            else_if = {
+                limit = {
+                    scope:predator = {
+                        is_ruler = yes
+                    }
+                }
+                scope:predator = {
+                    imprison = {
+                        target = scope:prey
+                        type = $prison_type$
                     }
                 }
             }
-            set_variable = { name = assigned_slot value = 3 }
-        }
-        else_if = {
-            limit = {
-                NOT = {
-                    any_relation = {
-                        type = prey
-                        has_relation_flag = {
-                            flag = four
-                            target = prev
-                            relation = predator
-                        }
+            else_if = {
+                limit = {
+                    exists = scope:predator.liege
+                }
+                scope:predator.liege = {
+                    imprison = {
+                        target = scope:prey
+                        type = $prison_type$
                     }
                 }
             }
-            set_variable = { name = assigned_slot value = 4 }
-        }
-        else_if = {
-            limit = {
-                NOT = {
-                    any_relation = {
-                        type = prey
-                        has_relation_flag = {
-                            flag = five
-                            target = prev
-                            relation = predator
-                        }
-                    }
+            
+            # Prey Effects
+            scope:prey = {
+                add_character_modifier = { modifier = $type$_vored }
+                add_character_flag = vored
+                add_trait = $type$_vored
+                create_character_memory = { type = prey_non_fatal_memory participants = { pred = scope:predator } }
+                add_to_variable_list = {
+                    name = prey_list
+                    target = scope:predator
                 }
+                if = {
+                    limit = { scope:predator = { is_ai = yes } }
+                    create_story = vore_safe_story
+                }
+                # Initialize variable
+                set_variable = { name = imprisonment_duration value = 0 }
             }
-            set_variable = { name = assigned_slot value = 5 }
         }
-        else = {
-            # No slots available
-            set_variable = { name = assigned_slot value = 0 }
+    }
+    
+    # DEBUG NOTIFICATION
+    hidden_effect = {
+        if = {
+            trigger_event = {
+                id = vore_debug.0001
+            }
         }
     }
 }
 
-apply_slot_flags_effect = {
-    # Use the assigned_slot variable to apply the right flags
-    scope:predator = {
+lethal_vore_effect = {
+    if = {
+        limit = { NOT = { exists = scope:predator } }
+        scope:actor = { save_scope_as = predator }
+    }
+    if = {
+        limit = { NOT = { exists = scope:prey } }
+        scope:recipient = { 
+           save_scope_as = prey
+           set_variable = { name = digestion_progress value = 0}
+        }
+    }
+
+    if = {
+        limit = { global_var:$type$_banned = yes }
+        random_orifice_lethal_vore_effect = yes
+    } 
+    else = {
+
+        # 2. PREDATOR STATE
+        scope:predator = {
+            change_variable = { name = num_prey add = 1 }
+            change_variable = { name = num_$type$_prey add = 1 }
+            add_trait = digesting
+            add_character_flag = vore_predator
+            update_vore_portrait_effect = yes
+            add_character_flag = $type$_current_prey
+            create_story = vore_digestion_story
+        }
+
+        # 1. PRE-DATA SAVING (On Prey)
+        scope:prey = {          
+            death = { 
+                death_reason = death_execution_$type$
+                killer = scope:predator
+            }
+        }
+    }
+}
+
+# Check for all locations of vore for release
+release_prey_location_check_effect = {
+    if = {
+        limit = { NOT = { exists = scope:prey } }
+        root = { save_scope_as = prey }
+    }
+
+    if = {
+        limit = { NOT = { exists = scope:predator } }
+        random_relation = {
+            type = predator
+            save_scope_as = predator
+        }
+    }
+
+    scope:prey = {
         switch = {
-            trigger = var:assigned_slot
-            1 = {
-                add_relation_flag = {
-                    flag = one
-                    target = scope:prey
-                    relation = prey
-                }
-                scope:prey = {
-                    add_relation_flag = {
-                        flag = one
-                        target = scope:predator
-                        relation = predator
+            trigger = has_trait
+            
+            oral_vored = {
+                scope:predator = {
+                    release_prey_effect = { 
+                        type = oral 
                     }
                 }
             }
-            2 = {
-                add_relation_flag = {
-                    flag = two
-                    target = scope:prey
-                    relation = prey
-                }
-                scope:prey = {
-                    add_relation_flag = {
-                        flag = two
-                        target = scope:predator
-                        relation = predator
+        
+            anal_vored = {
+                scope:predator = {
+                    release_prey_effect = { 
+                        type = anal 
                     }
                 }
             }
-            3 = {
-				add_relation_flag = {
-					flag = three
-					target = scope:predator
-					relation = predator
-				}
-			}
-			4 = {
-				add_relation_flag = {
-					flag = four
-					target = scope:predator
-					relation = predator
-				}
-			}
-			5 = {
-				add_relation_flag = {
-					flag = five
-					target = scope:predator	
-					relation = predator
-				}
-			}
+            
+            # Case: Unbirth
+            unbirth_vored = {
+                scope:predator = {
+                    release_prey_effect = { 
+                        type = unbirth 
+                    }
+                }
+            }
+            
+            # Case: Cock
+            cock_vored = {
+                scope:predator = {
+                    release_prey_effect = { 
+                        type = cock 
+                    }
+                }
+            }
+            
+            # Fallback: If no trait found (Safety net)
+            fallback = {
+                scope:predator = {
+                    release_prey_effect = { 
+                        type = oral 
+                    }
+                }
+            }
         }
     }
 }
 
-#Used to properly release prey
+# Used to properly release prey (REVISED LOGIC)
 release_prey_effect = {
-	if = {
-		limit = {
-			NOT = { exists = scope:predator }
-		}
-		scope:actor = {
-			save_scope_as = predator
-		}
-	}
-	if = {
-		limit = {
-			NOT = { exists = scope:prey }
-		}
-		scope:recipient = {
-			save_scope_as = prey
-		}
-	}
-	scope:predator = {
-		 if = {
-			limit = {
-				has_relation_flag = {
-					flag = $type$
-					target = scope:prey
-					relation = prey
-				}
-				NOT = {
-					any_relation = {
-						type = prey
-						NOT = { this = scope:prey }
-						has_relation_flag = {
-							flag = $type$
-							target = prev
-							relation = predator
-						}
-					}
-				}
-			}
-			remove_trait = $type$_predator
-			remove_character_flag = $type$_predator
-		}
-		change_variable = {
-			name = num_prey
-			add = -1
-		}
-		if = {
-			limit = {
-				var:num_prey <= 0
-			}
-			remove_character_flag = vore_predator
-		}
-		add_character_modifier = {
-			modifier = satisfied
-			years = 1
-		}
-		remove_relation_flag = {
-			flag = $type$
-			target = scope:prey
-			relation = prey
-		}
-		remove_relation_prey = scope:prey
-	}
-	scope:prey = {
-		remove_character_flag = vored
-		remove_character_modifier = $type$_vored
-		remove_trait = $type$_vored
-		IF = {
-			limit = { has_character_flag = vored_from_dungeon }
-			change_prison_type = dungeon
-			remove_character_flag = vored_from_dungeon   
-		}
-		ELSE_IF= {
-			limit = { has_character_flag = vored_from_house_arrest }
-			change_prison_type = house_arrest
-			remove_character_flag = vored_from_house_arrest
-		}
-		ELSE = {
-			release_from_prison = yes
-		}
-		# remove_relation_flag = {
-		# 	flag = $type$
-        #     target = scope:predator
-        #     relation = predator
-        # }
-		# remove_relation_predator = scope:predator
-		clear_saved_scope = predator   
-		clear_saved_scope = prey
-	}
+    if = {
+        limit = { AND = { NOT = { exists = scope:prey } has_character_flag = vored} }
+        save_scope_as = prey
+    }
+    if = {
+        limit = { AND = { NOT = { exists = scope:predator } has_character_flag = vore_predator } }
+        random_relation = {
+            type = predator
+            save_scope_as = predator
+        }
+        scope:actor = { save_scope_as = predator }
+    }
+
+    # Ensure prey still exists
+    if = {
+        limit = { scope:prey = { is_alive = yes } }
+    
+        scope:predator = {
+            change_variable = { name = num_prey add = -1 }
+            change_variable = { name = num_$type$_prey add = -1 }
+            
+            # Check if there are OTHER prey of the same type.
+            if = {
+                limit = { scope:predator.var:num_$type$_prey <= 0 }
+                remove_trait = $type$_predator
+                remove_character_flag = $type$_predator
+            }
+
+            update_vore_portrait_effect = yes
+
+            # If empty, remove generic flag
+            if = {
+                limit = { var:num_prey <= 0 }
+                remove_character_flag = vore_predator
+            }
+
+            add_character_modifier = { modifier = satisfied years = 1 }
+            remove_relation_flag = {
+                flag = $type$
+                target = scope:prey
+                relation = prey
+            }
+            remove_relation_prey = scope:prey
+            remove_list_variable = {
+                name = prey_list
+                target = scope:prey
+            }
+        }
+
+        scope:prey = {
+            remove_character_flag = vored
+            remove_character_modifier = $type$_vored
+            remove_trait = $type$_vored
+            
+            # Restore previous prison or release
+            if = {
+                limit = { has_character_flag = vored_from_dungeon }
+                change_prison_type = dungeon
+                remove_character_flag = vored_from_dungeon   
+            }
+            else_if = {
+                limit = { has_character_flag = vored_from_house_arrest }
+                change_prison_type = house_arrest
+                remove_character_flag = vored_from_house_arrest
+            }
+            else = {
+                release_from_prison = yes
+            }
+        }
+    }
+    
+    hidden_effect = {
+        if = {
+            #limit = { global_var:debug_notifications = yes }
+            trigger_event = {
+                id = vore_debug.0002
+            }
+        }
+    }
 }
 
-
-#Used when finishing digestion
+# Used when finishing digestion (Called from on_action)
 finish_digesting_effect = {
-	if = { 
-		limit = { 
-				has_trait_rank = { trait = predator rank < 1 }
-		}         
-		add_trait = predator_1
-	}
-	else_if = { 
-		limit = {
-				has_trait_rank = { trait = predator rank = 1 } 
-		}
-		change_trait_rank = { trait = predator rank = 2 }
-	}
-	else_if = { 
-		limit = { 
-				has_trait_rank = { trait = predator rank >= 2 } 
-		}
-		change_trait_rank = { trait = predator rank = 3 }
-	}        
-	
-	if = {
-		limit = { has_trait = digesting }
-		remove_trait = digesting
-	}
-	if = {
-		limit = { has_trait = genital_digesting }
-		remove_trait = genital_digesting
-	}
+    # Predation Level Up
+    if = { 
+        limit = { has_trait_rank = { trait = predator rank < 1 } }         
+        add_trait = predator_1
+    }
+    else_if = { 
+        limit = { has_trait_rank = { trait = predator rank = 1 } }
+        change_trait_rank = { trait = predator rank = 2 }
+    }
+    else_if = { 
+        limit = { has_trait_rank = { trait = predator rank >= 2 } }
+        change_trait_rank = { trait = predator rank = 3 }
+    }        
+    
+    # Cleanup
+    #Add relations in case of multiple digesting prey
+    if = {
+        limit = {
+            NOT = {
+                any_relation = {
+                    type = prey
+                    owns_story_of_type = vore_digestion_story
+                }
+            }
+        }
+        if = { limit = { has_trait = digesting } remove_trait = digesting }
+        if = { limit = { has_trait = genital_digesting } remove_trait = genital_digesting }
+    }
 
-	random_list = {
-		50 = {
-		add_prowess_skill = 1
-		}
-		50 = {
-		add_diplomacy_skill = 1   
-		}  
-	}
-	add_character_modifier = {
-		modifier = satisfied years = 2
-	}
-	change_current_weight = 30
-	remove_character_flag = vore_predator
+    # CRITICAL: Reduce prey count, as the mass is now converted to weight/gain
+    change_variable = { name = num_prey add = -1 }
+    change_variable = { name = num_$type$_prey add = -1 }
+    
+    update_vore_portrait_effect = yes
+
+    # Rewards
+    random_list = {
+        50 = { add_prowess_skill = 1 }
+        50 = { add_diplomacy_skill = 1 }  
+    }
+    add_character_modifier = { modifier = satisfied years = 2 }
+    change_current_weight = 30
+    
+    # If count is 0, remove the predator flag
+    if = {
+        limit = { var:num_prey <= 0 }
+        remove_character_flag = vore_predator
+    }
 }	
 
-#Removes Unnecessary Info
+
+# --- HELPER EFFECTS ---
+
+# This effect updates the predator's portrait based on their current prey count.
+update_vore_portrait_effect = {
+    # # Clean state
+    # remove_character_modifier = vore_belly_small
+    # remove_character_modifier = vore_belly_medium
+    # remove_character_modifier = vore_belly_large
+    
+    # # --- GIANT LOGIC ---
+    # # Giants need more mass to show the same belly size as a normal human
+    # if = {
+    #     limit = {
+        #         has_trait = giant
+        #         var:num_prey >= 3
+        #     }
+        #     add_character_modifier = vore_belly_small
+        # }
+        # if = {
+            #     limit = {
+                #         has_trait = giant
+                #         var:num_prey >= 7
+                #     }
+                #     add_character_modifier = vore_belly_medium
+                # }
+                # if = {
+                    #     limit = {
+                        #         has_trait = giant
+                        #         var:num_prey >= 11
+                        #     }
+                        #     add_character_modifier = vore_belly_large
+                        # }
+                        
+                        # # --- DWARF LOGIC ---
+    # # Dwarfs fill up faster
+    # else_if = {
+        #     limit = {
+            #         has_trait = dwarf
+            #         var:num_prey >= 1
+            #     }
+            #     add_character_modifier = vore_belly_medium
+            # }
+            # if = {
+                #     limit = {
+                    #         has_trait = dwarf
+                    #         var:num_prey >= 3
+                    #     }
+                    #     add_character_modifier = vore_belly_large
+                    # }
+                    
+                    # # --- NORMAL LOGIC ---
+                    # else_if = {
+                        #     limit = {
+                            #         var:num_prey >= 1
+                            #         var:num_prey < 3
+                            #     }
+                            #     add_character_modifier = vore_belly_small
+                            # }
+                            # else_if = {
+                                #     limit = {
+                                    #         var:num_prey >= 3
+                                    #         var:num_prey < 5
+                                    #     }
+                                    #     add_character_modifier = vore_belly_medium
+                                    # }
+                                    # else_if = {
+                                        #     limit = {
+                                            #         var:num_prey >= 5
+                                            #     }
+    #     add_character_modifier = vore_belly_large
+    # }
+}
+
+# Simulates the appearance of vore without creating a victim (should do everything though, like add num_prey
+simulate_npc_vore_effect = {
+    # 1. Increment the "Prey Count" (This triggers the belly visual)
+    change_variable = { name = num_prey add = 1 }
+    
+    # 2. Update the portrait immediately (Show the belly)
+    
+    add_character_flag = fake_vore_predator
+    
+    random_list = {
+        # Oral
+        25 = {
+            oral_vore_modifier = yes
+            trigger = { global_var:oral_banned = no }
+            change_variable = { name = num_oral_prey add = 1 }
+            add_trait = oral_predator
+        }
+        # Anal
+        25 = {
+            oral_vore_modifier = yes
+            trigger = { global_var:anal_banned = no }
+            change_variable = { name = num_anal_prey add = 1 }
+            add_trait = anal_predator
+        }
+        # Unbirth
+        25 = {
+            unbirth_vore_modifier = yes
+            trigger = {
+                global_var:unbirth_banned = no
+                is_female = yes
+            }
+            change_variable = { name = num_unbirth_prey add = 1 }
+            add_trait = unbirth_predator
+        }
+        # Cock
+        25 = {
+            cock_vore_modifier = yes
+            trigger = {
+                global_var:cock_banned = no
+                is_female = no
+            }
+            change_variable = { name = num_cock_prey add = 1 }
+            add_trait = cock_predator
+        }
+    }
+    update_vore_portrait_effect = yes
+    
+    # 6 months to 1 year later
+    trigger_event = {
+        id = vore.0020
+        days = { 180 360 }
+    }
+}
+
+# Removes Unnecessary Info
 clean_up_effect = {
-	scope:predator = {
-		if = {
-			limit = { has_character_flag = portrait_belly }
-			remove_character_flag = portrait_belly
-			#remove_character_flag = portrait_genitals
-		}
-		clear_saved_scope = predator
-	}
-	scope:prey = {
-		clear_saved_scope = prey
-	}
+    if = {
+        limit = { exists = scope:predator }
+        scope:predator = {
+            if = { limit = { has_character_flag = portrait_belly } remove_character_flag = portrait_belly }
+            clear_saved_scope = predator
+        }
+    }
+    if = {
+        limit = { exists = scope:prey }
+        scope:prey = {
+            clear_saved_scope = prey
+        }
+    }
 }
 
-#Removes Unneccessary Info in Events With Exit Options (Defunct)
 exit_clean_up_effect = {
-	# scope:predator = {
-	# 	clear_saved_scope = predator
-	# 	scope:prey = {
-	# 		clear_saved_scope = prey       
-	# 	}
-	# }
+    scope:predator = {
+        clear_saved_scope = predator
+    }
+    scope:prey = {
+        clear_saved_scope = prey       
+    }   
 }
-
-vore_imprison_character_effect = {
-
-	scope:predator = {
-		imprison = {
-			target = scope:new_target
-			type = house_arrest
-		}
-	}
-
-	imprison_hostage_tooltip_effect = { WHO = scope:prey }
-
-}
-
-# escape_from_stomach_effect = {
-# 	play_music_cue = "mx_cue_sacredrite"
-# 	scope:imprisoner = {
-# 		if = {
-# 			limit = {
-# 				exists = capital_province
-# 			}
-# 			capital_province = {
-# 				save_scope_as = background_wilderness_scope
-# 			}
-# 		}
-# 		else = {
-# 			location = {
-# 				save_scope_as = background_wilderness_scope
-# 			}
-# 		}
-# 		if = {
-# 			limit = {
-# 				OR = {
-# 					has_revoke_title_reason = root
-# 					has_banish_reason = root
-# 					has_execute_reason = root
-# 				}
-# 			}
-# 			add_opinion = {
-# 				target = root
-# 				modifier = escaped_from_prison_crime
-# 			}
-# 		}
-# 		else = {
-# 			add_opinion = {
-# 				target = root
-# 				modifier = escaped_from_prison_opinion
-# 			}
-# 		}
-# 	}
-# 	create_character_memory = {
-# 		type = escaped_from_prison_memory
-		
-# 		participants = {
-# 			imprisoner = scope:imprisoner
-# 		}
-# 	}
-# 	add_character_flag = {
-# 		flag = escaped_from_prison_flag
-# 		days = 1
-# 	}
-# 	add_character_flag = { #To make sure you don't get spammed about the release
-# 		flag = block_for_prison_release_notification
-# 		days = 1
-# 	}
-# 	release_from_prison = yes
-# 	random_dummy_gender_soldier_effect = { SCOPE_NAME = dummy_gender }
-# 	hidden_effect = {
-# 		remove_decision_cooldown = escape_from_prison_decision
-# 	}
-# 	if = {
-# 		limit = { has_character_modifier = allowed_to_go_outside }
-# 		remove_character_modifier = allowed_to_go_outside
-# 	}
-# 	if = {
-# 		limit = { has_character_modifier = moldy_gruel_diet }
-# 		remove_character_modifier = moldy_gruel_diet
-# 	}
-# }

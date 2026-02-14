@@ -1,60 +1,391 @@
 ﻿namespace = courtier_vore
 
-courtier_vore.0001 = { # Jester Vore Event
-	type = character_event
-	title = courtier_voreTitle.0001
-	theme = court
-	desc = courtier_voreDesc.0001
+# 1. The Jester's New Trick (Fixed & Expanded)
+courtier_vore.0001 = {
+    type = character_event
+    title = courtier_voreTitle.0001
+    theme = court
+    desc = courtier_voreDesc.0001
 
-	trigger = {
-		court_position:court_jester_court_position = {
-			can_vore = yes
-		}
-	}
+    trigger = {
+        court_position:court_jester_court_position = {
+            can_vore = yes
+        }
+        any_courtier_or_guest = {
+            can_be_prey = yes
+        }
+    }
 
-	
-	immediate = {
-		court_position:court_jester_court_position = {
-			add_character_flag = portrait_belly
-			save_scope_as = predator
-		}
-		random_courtier_or_guest = {
-			limit = {
-				can_be_prey = yes
-			}
-			save_scope_as = prey
-		}
-	}
-	
-	left_portrait = {
-		character = scope:predator
-		animation = schadenfreude
-	}
+    immediate = {
+        court_position:court_jester_court_position = {
+            save_scope_as = predator
+            add_character_flag = portrait_belly
+        }
+        # Pick a random guest/courtier target isn't the jester
+        random_courtier_or_guest = {
+            limit = {
+                can_be_prey = yes
+                NOT = { this = scope:predator }
+            }
+            save_scope_as = prey
+        }
+    }
 
-	right_portrait = {
-		character = root
-		animation = laugh
-	}
-	
-	lower_right_portrait = {
-		character = scope:prey
-		animation = fear
-	}
+    left_portrait = {
+        character = scope:predator
+        animation = schadenfreude
+    }
+    
+    # Showing the Player (Root) watching
+    right_portrait = {
+        character = root
+        animation = intrigue # Intrigue/Amusement looks better than laughing for the player
+    }
 
+    option = {
+        name = courtier_voreOpt.0001a # "Keep them as a pet"
+        trigger_event = courtier_vore.0002 # Branch to outcome event
+    }
 
-	option = {
-		name = courtier_voreOpt.0001
-		random_orifice_safe_vore_effect = {
-			prison_type = vore_unwilling
-		}
-	}
+    option = {
+        name = courtier_voreOpt.0001b # "Digest the fool"
+        trigger_event = courtier_vore.0003 # Branch to lethal outcome
+    }
+}
 
-	option = {
-	 	name = courtier_voreOpt.0002
-		scope:predator = {
-			add_trait = gluttonous
-			add_character_modifier = { modifier = satisfied }
-			random_orifice_lethal_vore_effect = yes
-		}
-	}
+# Outcome: Safe Vore
+courtier_vore.0002 = {
+    type = character_event
+    title = courtier_voreTitle.0002
+    theme = court
+    desc = courtier_voreDesc.0002 # A different description line for safety
+
+    hidden = yes
+
+    immediate = {
+        random_orifice_safe_vore_effect = {
+            prison_type = vore_dungeon
+        }
+    }
+}
+
+# Outcome: Lethal Vore
+courtier_vore.0003 = {
+    type = character_event
+    title = courtier_voreTitle.0001
+    theme = court
+    desc = courtier_voreDesc.0001_lethal
+
+    hidden = yes
+
+    immediate = {
+        scope:predator = {
+            add_trait = gluttonous
+            add_character_modifier = { modifier = satisfied }
+        }
+        random_orifice_lethal_vore_effect = yes
+    }
+}
+
+# 2. The Spouse's Solution
+courtier_vore.0010 = {
+    type = character_event
+    title = courtier_voreTitle.0010
+    theme = court
+    desc = courtier_voreDesc.0010
+
+    trigger = {
+        primary_spouse = {
+            can_vore = yes
+        }
+        any_courtier_or_guest = {
+            can_be_prey = yes
+            # Target someone with bad opinion or a rival
+            opinion = { target = court_owner value < -20 }
+        }
+    }
+
+    immediate = {
+        primary_spouse = {
+            add_character_flag = portrait_belly
+            save_scope_as = predator
+        }
+        random_courtier_or_guest = {
+            limit = {
+                can_be_prey = yes
+                NOT = { this = scope:predator }
+                opinion <= { target = scope:predator value <= -20 }
+                opinion <= { target = court_owner value <= -20} 
+            }
+            save_scope_as = prey
+        }
+    }
+
+    left_portrait = {
+        character = scope:predator
+        animation = seduction # Spouse is being helpful/tempting
+    }
+
+    right_portrait = {
+        character = root
+        animation = happiness
+    }
+
+    option = {
+        name = courtier_voreOpt.0010a # "Thank you, my dear."
+        ai_chance = {
+            base = 70
+        }
+        hidden_effect = {
+            # Spouse safely stores the annoying guest
+            safe_vore_effect = {
+                type = unbirth
+                prison_type = vore_dungeon
+            }
+        }
+    }
+
+    option = {
+        name = courtier_voreOpt.0010b # "We have no need for witnesses."
+        trigger = {
+            global_var:digestion_banned = no
+        }
+        hidden_effect = {
+            lethal_vore_effect = {
+                type = oral
+            }
+        }
+    }
+}
+
+# 4. The Vanishing Rival (Need to improve so prey is rival to both scopes or both scopes are friends)
+courtier_vore.0030 = {
+    type = character_event
+    title = courtier_voreTitle.0030
+    theme = intrigue
+    desc = courtier_voreDesc.0030
+
+    trigger = {
+        any_courtier_or_guest = {
+            can_vore = yes
+            NOT = { this = root }
+            NOT = { has_relation_rival = root } # The predator isn't the rival
+            opinion = { target = court_owner value > 20 }
+        }
+        any_courtier_or_guest = {
+            has_relation_rival = root
+            can_be_prey = yes
+        }
+    }
+
+    immediate = {
+        random_courtier_or_guest = {
+            limit = {
+                can_vore = yes
+                NOT = { this = root }
+                NOT = { this = scope:prey }
+                opinion = { target = court_owner value > 20 } # Likes the player enough
+            }
+            save_scope_as = predator
+        }
+        random_courtier_or_guest = {
+            limit = {
+                has_relation_rival = root
+                can_be_prey = yes
+            }
+            save_scope_as = prey
+        }
+    }
+
+    left_portrait = {
+        character = scope:predator
+        animation = smile
+    }
+    
+    # Empty portrait slot or black background could imply the rival is missing/gone
+    # But we show them here for the "About to happen" moment
+    right_portrait = {
+        character = scope:prey
+        animation = horror
+    }
+
+    option = {
+        trigger = {
+            global_var:digestion_banned = no
+        }
+        name = courtier_voreOpt.0030a # "Dispose of the nuisance."
+        hidden_effect = {
+            scope:predator = {
+                if = {
+                    limit = { global_var:anal_banned = no }
+                    lethal_vore_effect = {
+                        type = anal
+                    }
+                } 
+                else = {
+                    random_orifice_lethal_vore_effect = yes
+                }
+                root = {
+                    add_dread = 10
+                    # add_opinion = { target = scope:predator modifier = 35 }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = courtier_voreOpt.0030b
+        hidden_effect = {
+            scope:predator = {
+                safe_vore_effect = {
+                    prison_type = vore_dungeon
+                    type = anal
+                }
+            }
+        }
+    }
+
+    option = {
+        name = courtier_voreOpt.0030b # "Stop this madness!"
+        hidden_effect = {
+            # Rival is released, but now hates you AND the predator
+            scope:prey = {
+                # add_opinion = { target = court_owner modifier = opinion_knew_about_murder_plot }
+                add_stress = 10
+            }
+        }
+    }
+}
+
+# Event: Concubine Devours Concubine
+courtier_vore.0050 = {
+    type = character_event
+    title = courtier_voreTitle.0050
+    desc = {
+        first_valid = {
+            # The Predator is eccentric
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = eccentric } }
+                desc = courtier_vore.0050.desc.envy
+            }
+            # The Predator is Gluttonous
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = gluttonous } }
+                desc = courtier_vore.0050.desc.gluttony
+            }
+            # Generic
+            desc = courtier_vore.0050.desc.generic
+        }
+    }
+    theme = intrigue
+    
+    # Portraits
+    left_portrait = {
+        character = root
+        animation = idle_standing # Observer
+    }
+    center_portrait = {
+        character = scope:predator
+        animation = schadenfreude # The dominant one
+    }
+    right_portrait = {
+        character = scope:prey
+        animation = fear # The victim
+    }
+
+    trigger = {      
+        # One must be capable of vore
+        any_concubine = { can_vore = yes }
+        
+        # And one must be valid prey
+        any_concubine = { can_be_prey = yes }
+    }
+
+    immediate = {
+        # 1. Find the Predator (One of the consorts)
+        random_concubine = {
+            limit = { can_vore = yes }
+            save_scope_as = predator
+        }
+        
+        # 2. Find the Prey (A different consort)
+        random_concubine = {
+            limit = { 
+                can_be_prey = yes
+                NOT = { this = scope:predator }
+            }
+            save_scope_as = prey
+        }
+        
+        # 3. The Action (Hidden from player initially, or just implied)
+        # We start the vore process but don't finish it until the player chooses.
+        scope:predator = {
+            add_character_flag = portrait_belly
+        }
+    }
+
+    # Option 1: Punish the Predator (Stop the fight)
+    option = {
+        name = courtier_vore.0050.opt.punish
+        flavor = courtier_vore.0050.flavor.punish
+        
+        hidden_effect = {
+            scope:predator = {
+                # Release the prey
+                release_prey_location_check_effect = yes # Assume oral for the rescue
+                
+                # Predator gets stressed/angry
+                add_stress = 20
+            }
+            scope:prey = {
+                # Prey is grateful
+                add_trait = disfigured # Slight trauma from the attempt
+            }
+            # Update visuals (Remove the belly we added in immediate)
+            scope:predator = { remove_character_flag = portrait_belly }
+        }
+    }
+    
+    # Option 2: Allow the Feast (Lethal)
+    option = {
+        name = courtier_vore.0050.opt.allow
+        flavor = courtier_vore.0050.flavor.allow
+    
+        hidden_effect = {
+            scope:predator = {
+                # Execute the lethal vore
+                lethal_vore_effect = { type = oral } # You can randomize this if you want
+                
+                # Predator loves you for allowing it
+                add_character_modifier = { modifier = satisfied years = 1 }
+            }
+        }
+    }
+    
+    # Option 3: Safe Storage (Non-Lethal)
+    option = {
+        name = courtier_vore.0050.opt.storage
+        flavor = courtier_vore.0050.flavor.storage
+        
+        # scope:activity = {
+        #     add_activity_log_entry = {
+        #         key = courtier_vore_storage_log
+        #         score = 25
+        #         tags = { random bad }
+        #         character = root
+        #         target = scope:prey
+        #         actor = scope:predator
+        #     }
+        # }
+        hidden_effect = {
+            scope:predator = {
+                # Execute safe vore
+                safe_vore_effect = {
+                    type = unbirth # Unbirth fits the "harem" theme well
+                    prison_type = vore_dungeon
+                }
+                add_character_modifier = { modifier = satisfied years = 1 }
+            }
+        }
+    }
 }

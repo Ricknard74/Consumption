@@ -9,21 +9,20 @@
         limit = { global_var:gender_allowed = 1 }
         is_female = no
     }
-    age >= 18
-    has_character_flag = vore_capable  
+    is_alive = yes
+    age >= 16
+    has_character_flag = vore_capable 
+    trigger_IF = {
+        limit = { has_variable = num_prey }
+        #can_take_more_prey_trigger = yes
+    } 
     NOT = {
         OR = { 
             has_character_flag = vored
             has_character_flag = potential_prey
-            trigger_if = {
-                limit = {
-                    var:num_prey >= 4
-                }
-                has_character_flag = potential_predator
-            }
             has_trait = incapable
             has_trait = digesting
-            age < 18
+            age < 16
         }
     }
 }
@@ -37,24 +36,90 @@ can_be_prey = {
                 has_character_flag = vore_predator
             }
         }
-        age >= 18
+        age >= 16
+        is_alive = yes
     }
 }
 
 can_take_more_prey_trigger = {
-    trigger_if = {
-        limit = { has_trait = predator_1 }
-        var:num_prey < 1
-    }
-    trigger_else_if = {
-        limit = { has_trait = predator_2 }
-        var:num_prey < 2
-    }
-    trigger_else_if = {
-        limit = { has_trait = predator_3 }
-        var:num_prey < 3
-    }
-    trigger_else = {
-        always = no
+    OR = {
+        # --- CAPACITY 9 (Limit < 10) ---
+        # Predator 3 + Giant (Level 3 shifted up)
+        AND = {
+            var:num_prey < 10
+            has_trait = predator_3
+            has_trait = giant
+        }
+
+        # --- CAPACITY 7 (Limit < 8) ---
+        # Predator 3 (Normal)
+        # OR Predator 2 + Giant (Level 2 shifted up)
+        AND = {
+            var:num_prey < 8
+            OR = {
+                has_trait = predator_3
+                AND = {
+                    has_trait = predator_2
+                    has_trait = giant
+                }
+            }
+        }
+
+        # --- CAPACITY 5 (Limit < 6) ---
+        # Predator 2 (Normal)
+        # OR Predator 1 + Giant (Level 1 shifted up)
+        # OR Predator 3 + Dwarf (Level 3 shifted down)
+        AND = {
+            var:num_prey < 6
+            OR = {
+                has_trait = predator_2
+                AND = {
+                    has_trait = predator_1
+                    has_trait = giant
+                }
+                AND = {
+                    has_trait = predator_3
+                    has_trait = dwarf
+                }
+            }
+        }
+
+        # --- CAPACITY 3 (Limit < 4) ---
+        # Predator 1 (Normal)
+        # OR Base + Giant (Level 0 shifted up)
+        # OR Predator 2 + Dwarf (Level 2 shifted down)
+        AND = {
+            var:num_prey < 4
+            OR = {
+                has_trait = predator_1
+                AND = {
+                    has_character_flag = vore_capable
+                    has_trait = giant
+                }
+                AND = {
+                    has_trait = predator_2
+                    has_trait = dwarf
+                }
+            }
+        }
+
+        # --- CAPACITY 1 (Limit < 2) ---
+        # Base (Normal)
+        # OR Predator 1 + Dwarf (Level 1 shifted down)
+        AND = {
+            var:num_prey < 2
+            OR = {
+                # Base: Just need to be vore_capable and not a dwarf
+                AND = {
+                    has_character_flag = vore_capable
+                    NOT = { has_trait = dwarf }
+                }
+                # Predator 1 + Dwarf
+                AND = {
+                    has_trait = predator_1
+                    has_trait = dwarf
+                }
+            }
+        }
     }
 }

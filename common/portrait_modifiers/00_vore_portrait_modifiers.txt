@@ -1,0 +1,27 @@
+﻿###########################
+# PORTRAIT/BELLY MODIFIERS
+###########################
+
+vore_belly_small = {
+  icon = "gfx/interface/icons/modifier_icons/belly_small.png"
+  portrait_modifier = {
+      portrait_modifier = "vore_belly"
+      variation = 1
+  }
+}
+
+vore_belly_medium = {
+  icon = "gfx/interface/icons/modifier_icons/belly_medium.png"
+  portrait_modifier = {
+      portrait_modifier = "vore_belly"
+      variation = 2
+  }
+}
+
+vore_belly_large = {
+  icon = "gfx/interface/icons/modifier_icons/belly_large.png"
+  portrait_modifier = {
+      portrait_modifier = "vore_belly"
+      variation = 3
+  }
+}

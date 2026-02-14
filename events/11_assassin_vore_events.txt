@@ -1,0 +1,345 @@
+﻿namespace = vore_scheme
+
+# Owner POV — Success
+vore_scheme.0001 = {
+    type = character_event
+    window = scheme_successful_event
+    title = vore_scheme.0001.t
+    desc = {
+        # 1. Opening Declaration
+        first_valid = {
+            # NON-LETHAL / PERMANENT (Digestion Banned)
+            triggered_desc = {
+                trigger = { global_var:digestion_banned = yes }
+                desc = {
+                    random_valid = {
+                        desc = vore_scheme.0001.opening.banned.1
+                        desc = vore_scheme.0001.opening.banned.2
+                    }
+                }
+            }
+            # LETHAL (Normal)
+            desc = {
+                random_valid = {
+                    desc = vore_scheme.0001.opening.generic.1
+                    desc = vore_scheme.0001.opening.generic.2
+                }
+            }
+        }
+        
+        # 2. Memories/Context
+        first_valid = {
+            # House Feud
+            triggered_desc = {
+                trigger = {
+                    has_relation_rival = scope:target
+                }
+                desc = vore_scheme.0001.context.feud
+            }
+            # Gluttony (Lethal only)
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        has_trait = gluttonous
+                        global_var:digestion_banned = no
+                    }
+                }
+                desc = vore_scheme.0001.context.gluttony
+            }
+            # Possessive (Banned only)
+            triggered_desc = {
+                trigger = {
+                    AND = {
+                        global_var:digestion_banned = yes
+                    }
+                }
+                desc = vore_scheme.0001.context.possessive
+            }
+            # Generic
+            desc = vore_scheme.0001.context.generic
+        }
+
+        # 3. The Method
+        first_valid = {
+            # Seduction
+            triggered_desc = {
+                trigger = {
+                    scope:target = { is_in_prison_type = house_arrest }
+                    OR = {
+                        scope:target = { has_relation_lover = scope:owner }
+                        scope:target = { has_relation_friend = scope:owner }
+                    }
+                }
+                desc = vore_scheme.0001.method.seduction
+            }
+            # Prison
+            triggered_desc = {
+                trigger = { scope:target = { is_imprisoned_by = scope:owner } }
+                desc = vore_scheme.0001.method.prison
+            }
+            # Ambush
+            desc = vore_scheme.0001.method.ambush
+        }
+        
+        # 4. Secrecy
+        first_valid = {
+            # Revealed
+            triggered_desc = {
+                trigger = { exists = scope:scheme_discovered }
+                desc = {
+                    random_valid = {
+                        desc = vore_scheme.0001.revealed.1
+                        desc = vore_scheme.0001.revealed.2
+                    }
+                }
+            }
+            # Secret
+            desc = {
+                random_valid = {
+                    desc = vore_scheme.0001.secret.1
+                    desc = vore_scheme.0001.secret.2
+                }
+            }
+        }
+    }
+    
+    theme = intrigue
+    left_portrait = {
+        character = scope:owner
+        animation = schadenfreude
+    }
+    center_portrait = {
+        character = scope:assassin
+        animation = idle_standing
+    }
+    right_portrait = {
+        character = scope:target
+        animation = map_fear
+    }
+    override_background = { reference = corridor_night }
+
+    trigger = {
+        scope:target = {
+            location = { is_sea_province = no }
+        }
+    }
+
+    immediate = {
+        scope:owner = { save_scope_as = assassin }
+        
+        # LOGIC BRANCH: Ban vs Lethal
+        if = {
+            limit = { global_var:digestion_banned = yes }
+            # NON-LETHAL: Silent disappearance (The "Permanent" end)
+            scope:target = { 
+                death = { 
+                    death_reason = death_vanished 
+                    killer = scope:owner 
+                } 
+            }
+            # Optional: Add a flavor modifier to the predator to track their "collection"
+            scope:owner = { add_character_modifier = { modifier = satisfied years = 1 } }
+        }
+        else = {
+            # LETHAL: Normal digestion
+            scope:owner = {
+                scope:target = { save_scope_as = prey }
+                random_orifice_lethal_vore_effect = yes
+            }
+        }
+        
+        # Vanilla scheme effects
+        scheme_owner_pov_murder_success_effect = { REASON = death_mysterious }
+    }
+
+    option = {
+        name = {
+            text = {
+                first_valid = {
+                    triggered_desc = {
+                        trigger = { exists = scope:scheme_discovered }
+                        desc = vore_scheme.0001.option.discovered
+                    }
+                    desc = vore_scheme.0001.option.secret
+                }
+            }
+        }
+    }
+    
+    after = {
+        scope:target = { trigger_event = vore_scheme.0002 }
+    }
+}
+
+# Target POV — Success
+vore_scheme.0002 = {
+    type = character_event
+    window = scheme_target_event
+    title = vore_scheme.0002.t
+    desc = {
+        # 1. The Trap / Outcome
+        first_valid = {
+            # NON-LETHAL (Banned)
+            triggered_desc = {
+                trigger = { global_var:digestion_banned = yes }
+                desc = vore_scheme.0002.desc.banned
+            }
+            # LETHAL
+            desc = vore_scheme.0002.desc
+        }
+        
+        # 2. Secrecy
+        triggered_desc = {
+            trigger = {
+                exists = scope:scheme_discovered
+                exists = scope:owner_to_reveal
+            }
+            desc = {
+                random_valid = {
+                    desc = vore_scheme.0002.revealed.1
+                    desc = vore_scheme.0002.revealed.2
+                }
+            }
+        }
+    }
+    theme = intrigue
+    left_portrait = {
+        character = scope:target
+        animation = map_fear
+    }
+    center_portrait = {
+        character = scope:assassin
+        animation = idle_standing
+        camera = camera_event_right_pointing_right
+    }
+    right_portrait = {
+        character = scope:owner_to_reveal
+        animation = schadenfreude
+    }
+    override_background = { reference = corridor_night }
+
+    option = { name = vore_scheme.0002.opt }
+}
+
+# Owner POV — Failure (Prey Escapes)
+vore_scheme.0003 = {
+    type = character_event
+    window = scheme_failed_event
+    title = vore_scheme.0003.t
+    desc = {
+        random_valid = {
+            desc = vore_scheme.0003.opening.generic.1
+            desc = vore_scheme.0003.opening.generic.2
+        }
+        # Why did it fail?
+        desc = vore_scheme.0003.reason
+    }
+    theme = intrigue
+    left_portrait = {
+        character = scope:owner
+        animation = fear # Hunger denied
+    }
+    center_portrait = {
+        character = scope:assassin
+        animation = sword_yield_start # Struggle
+    }
+    right_portrait = {
+        character = scope:target
+        animation = rage # They survived!
+    }
+    override_background = { reference = corridor_night }
+
+    trigger = {
+        scope:target = {
+            location = { is_sea_province = no }
+        }
+    }
+
+    immediate = {
+        scope:owner = { save_scope_as = assassin }
+        
+        # Failure Effect: Stress for the hungry predator
+        add_stress = 20
+        
+        # Vanilla failure logic
+        murder_failure_effect = yes
+    }
+
+    option = {
+        name = {
+            text = {
+                first_valid = {
+                    triggered_desc = {
+                        trigger = { exists = scope:scheme_discovered }
+                        desc = vore_scheme.0003.option.discovered
+                    }
+                    desc = vore_scheme.0003.option.secret
+                }
+            }
+        }
+        scope:scheme = { end_scheme = yes }
+    }
+    
+    # Restart option handled by vanilla logic usually, or added here if needed
+    after = {
+        scope:target = { trigger_event = vore_scheme.0004 }
+    }
+}
+
+# Target POV — Failure (Prey Survives)
+vore_scheme.0004 = {
+    type = character_event
+    window = scheme_target_event
+    title = vore_scheme.0004.t
+    desc = {
+        desc = vore_scheme.0004.desc
+        
+        triggered_desc = {
+            trigger = {
+                exists = scope:scheme_discovered
+                exists = scope:owner_to_reveal
+            }
+            desc = {
+                random_valid = {
+                    desc = vore_scheme.0004.revealed.1
+                    desc = vore_scheme.0004.revealed.2
+                }
+            }
+        }
+    }
+    theme = intrigue
+    left_portrait = {
+        character = scope:target
+        animation = rage # I survived!
+    }
+    center_portrait = {
+        character = scope:assassin
+        animation = sword_yield_start
+        camera = camera_event_center_pointing_left
+    }
+    right_portrait = {
+        character = scope:owner_to_reveal
+        animation = fear # Failed to eat
+    }
+    override_background = { reference = corridor_night }
+
+    immediate = {
+        
+        # Target survived, maybe they got Trauma?
+        add_character_modifier = { modifier = trauma_from_vore years = 5 }
+    }
+
+    option = {
+        name = {
+            text = {
+                first_valid = {
+                    triggered_desc = {
+                        trigger = { exists = scope:scheme_discovered }
+                        desc = vore_scheme.0004.option.discovered
+                    }
+                    desc = vore_scheme.0004.opt
+                }
+            }
+        }
+    }
+}

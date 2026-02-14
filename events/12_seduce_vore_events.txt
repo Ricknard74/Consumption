@@ -1,0 +1,193 @@
+﻿namespace = seduce_vore
+
+# --- ONGOING EVENTS ---
+
+# Event: A Tight Embrace (Milestone 1/2)
+# The player offers a "massage" or "hug" that turns into being held inside the pred.
+seduce_vore.1000 = {
+    type = character_event
+    title = seduce_vore.1000.t
+    theme = seduce_event
+    desc = seduce_vore.1000.desc
+    
+    trigger = {
+        NOT = { has_variable = scheme_event_active_flag }
+        # Must be capable of vore
+        scope:target = { can_vore = yes }
+        can_be_prey = yes
+    }
+    
+    # Set flag to prevent MP overlapping
+    immediate = {
+        set_variable = scheme_event_active_flag 
+        scope:target = {
+            add_character_flag = portrait_belly
+        }
+    }
+
+    option = {
+        name = seduce_vore.1000.opt.a
+        
+        # Successful interaction
+        hidden_effect = {
+            seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+            
+            if = {
+                add_character_modifier = { modifier = vore_seduced_warmth days = 30 }
+            }
+        }
+        
+    }
+    
+    # Always remove flag at end
+    after = {
+        remove_variable = scheme_event_active_flag
+    }
+}
+
+# Event: Safe Resting (Milestone 1/2)
+# The player (as predator) offers to hold the target inside them for "protection" or "warmth".
+seduce_vore.1001 = {
+    type = character_event
+    title = seduce_vore.1001.t
+    theme = seduce_event
+    desc = seduce_vore.1001.desc
+
+    trigger = {
+        NOT = { has_variable = scheme_event_active_flag }
+        # Player must be the predator capable of holding someone
+        can_vore = yes
+        scope:target = {
+            can_be_prey = yes
+        }
+    }
+
+	immediate = { set_variable = scheme_event_active_flag }
+
+    option = {
+        name = seduce_vore.1001.opt.a
+        hidden_effect = {
+            # Determine if they accept based on their trust/traits
+            random = {
+                chance = 60
+                modifier = {
+                    factor = 0.1
+                    scope:target = { has_trait = shy }
+                }
+                modifier = {
+                    factor = 2.0
+                    scope:target = { has_trait = lustful }
+                }
+                
+                # Success: They accept the offer
+                scope:scheme = {
+                    add_scheme_progress = { value = 40 }
+                }
+                # Optional: Trigger a small flavor event about them napping inside you
+                trigger_event = { id = seduce_vore.1500 days = 1 }
+            }
+            # Failure: They are weirded out
+            # scope:scheme = {
+            #     add_scheme_progress = { value = -10 }
+            # }
+        }
+    }
+    
+    after = {
+		remove_variable = scheme_event_active_flag
+    }
+}
+
+seduce_vore.1500 = {
+    type = character_event
+    title = seduce_vore.1500.t
+    theme = love
+    desc = seduce_vore.1500.d
+
+    option = {
+        name = seduce_vore.1500.o
+    }
+}
+
+# --- SUCCESS EVENTS (Outcomes) --- WIP
+
+# Success: A Private Sanctuary
+# The seduction concludes with the target climbing inside the player for the night.
+# seduce_vore.2000 = {
+#     type = character_event
+#     title = seduce_vore.2000.t
+#     theme = romance
+#     desc = seduce_vore.2000.desc
+    
+#     trigger = {
+#         NOT = { has_variable = scheme_event_active_flag }
+#         can_vore = yes
+#     }
+
+#     immediate = {
+#         # The intimacy of being the container
+#         add_character_modifier = { modifier = vore_seduced_warmth days = 60 }
+#     }
+
+#     option = {
+#         name = seduce_vore.2000.opt.a
+        
+#         hidden_effect = {
+#             # We use a custom effect to "store" them temporarily without it being a prison sentence
+#             # Or we use a very short "House Arrest" type to simulate the act
+#             scope:target = {
+#                 add_character_modifier = { modifier = hidden_in_stomach_romantic days = 1 }
+#             }
+#             scope:scheme = {
+#                 end_scheme = yes
+#             }
+#             # Create a memory
+#             create_character_memory = {
+#                 type = romantic_vore_encounter
+#                 participants = { partner = scope:target }
+#             }
+#         }
+#     }
+
+#     after = {
+#         remove_variable = scheme_event_active_flag
+#     }
+# }
+
+# # Success: Willing Prey
+# # The target *wants* to be inside the player.
+# seduce_vore.2001 = {
+#     type = character_event
+#     title = seduce_vore.2001.t
+#     theme = romance
+#     desc = seduce_vore.2001.desc
+    
+#     trigger = {
+#         NOT = { has_variable = scheme_event_active_flag }
+#         can_vore = yes
+#         # Target is eager
+#         scope:target = { has_trait = lustful }
+#     }
+
+#     option = {
+#         name = seduce_vore.2001.opt.a
+        
+#         hidden_effect = {
+#             safe_vore_effect = {
+#                 type = oral
+#                 prison_type = vore_willing # Keeps them in your court/dungeon safely
+#             }
+            
+#             # Since this is seduction, we make the prison feel "romantic" via modifiers
+#             scope:target = {
+#                 add_character_modifier = { modifier = romantic_vore_captivity months = 2 }
+#             }
+            
+#             add_diplomacy = 2 # Intimacy boosts
+#         }
+#     }
+
+#     after = {
+#         remove_variable = scheme_event_active_flag
+#     }
+# }

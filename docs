@@ -1,0 +1,293 @@
+########################
+### scripted_effects ###
+########################
+
+random_orifice_vore_effect = { prison_type = $prison_type$ } # Decides randomly between lethal and non-lethal vore. Calls random_orifice_$lethality$_vore_effect
+
+random_orifice_safe_vore_effect = { prison_type = $prison_type$ } # Activates a safe vore effect using a random orifice
+
+random_orifice_lethal_vore_effect = { prison_type = $prison_type$ } # Activates a lethal vore effect using a random orifice
+
+safe_vore_effect = { type = $type$ prison_type = $prison_type$ } # Activtes a safe vore effect on scope:predator and scope:prey.
+
+lethal_vore_effect = { type = $type$ } # Activates a lethal vore effect and starts a story cycle. Triggers event vore.0002 after a period of time
+
+release_prey_location_check_effect = yes # Checks the prey to see where they are located and then calls the release_prey_effect
+
+release_prey_effect = yes # Removes all necessary traits, variables, and flags from pred and prey
+
+finish_digesting_effect = yes # Removes all necessary flags, traits, and variables from predator, and is activated by the digestion story cycle
+
+update_vore_portrait = yes # If final descision is using clothing for the belly, this updates which belly should be used
+
+simulate_npc_vore_effect = yes # Lightweight function to give the pred all the necessary aspects needed for vore without needing a prey character
+
+clean_up_effect = yes # Removes any temporary variables and clears the scopes.
+
+exit_clean_up_effect = yes # Used when backing out of a vore descision to clear the scopes
+
+##############################
+### character_interactions ###
+##############################
+
+prey_invitation_interaction # Allows the actor to invite a character over to be prey
+
+pred_invitation_interaction # Allows the actor to invite a character over to be a pred
+
+prisoner_vore_interaction # Allows the actor to vore a prisoner
+
+lover_vore_interaction # Allows the actor to vore a lover, either a prey or pred
+
+release_prey_interaction # Allows the actor to release their prey -Not working
+
+check_on_prey # Allows the actor to mildy interact with prey, along with releasing them - Should add the option to start digestion as well
+
+##############################
+### character_memory_types ###
+##############################
+
+pred_non_fatal_memory # Memory for the pred in non-fatal vore - Should rename to pred_safe_vore_memory
+
+prey_non_fatal_memory # Memory for the prey in non-fatal vore - Should rename to prey_save_vore_memory
+
+#####################
+### death_reasons ###
+#####################
+
+death_execution_oral
+
+death_execution_anal
+
+death_execution_unbirth
+
+death_execution_cock
+
+##################
+### descisions ###
+##################
+
+vore_menu # Allows the player to access all of the toggles for the vore mod
+
+religious_vore_feat # Allows for followers of vore faiths to hold a vore-themed feast. The exact theme changes depending on faith
+
+#####################
+### vore_concepts ###
+#####################
+
+vore_dungeon # General unwilling vore location
+
+vore_willing # Willing vore
+
+vore_religious_unwilling # Specifically unwilling vore activated by a religious event
+
+###########################
+# PREY STATUS MODIFIERS
+###########################
+
+oral_vored = yes 
+
+anal_vored = yes
+  
+unbirth_vored = yes
+  
+cock_vored = yes
+  
+hidden_in_stomach_romantic = yes # Used in Seduction Events
+
+romantic_vore_captivity = yes # Used in vore seduction success
+  
+vore_seduced_warmth = yes # Used in seduction ongoing
+
+safe_inside_predator = yes # Used in seduction scheme ongoing
+
+trauma_from_digestion = yes # Trauma from being digested and released
+
+trauma_from_vore = yes # Trauma from being vored and released
+
+###########################
+# PREDATOR STATUS MODIFIERS
+###########################
+
+satisfied = yes # Gained after disposing of or releasing prey
+ 
+digesting = yes # Pred gains while digesting prey
+
+comforting_prey = yes # Gained from comforting prey
+
+religious_vore_predator = yes # Gained from specific schemes
+
+fertility_boost = yes # Used for cock and unbirth vore
+
+##################
+### on_actions ###
+##################
+
+# --- GAME START & SETUP ---
+
+on_game_start = {
+    on_actions = {
+        on_vore_defensive_check # Adds all of the variables for the toggles
+    }
+}
+
+on_game_start_after_lobby = {
+    on_actions = {
+        on_add_vore_toggles # Sets up intialization with toggles, character variables, and religious conversions
+    }
+}
+
+# Run checks again 5 years in just in case startup failed
+five_year_playable_pulse = {
+    on_actions = {
+        on_vore_defensive_check # Same as on game start
+    }
+}
+
+# --- PERIODIC PULSES ---
+
+on_yearly_pulse = {
+    on_actions = {
+        on_increment_prey_imprisonment_duration
+    }
+}
+
+# --- TRAVEL & MOVEMENT ---
+
+on_travel_start = {
+    on_actions = {
+        on_vore_travel_events
+    }
+}
+
+on_sea_travel_start = {
+    on_actions = {
+        on_vore_sea_events
+    }
+}
+
+# --- COMBAT & HUNTING ---
+
+on_combat_end_winner = {
+    on_actions = {
+        on_vore_battle_events
+    }
+}
+
+# I don't think this is a real on_action - WIP
+on_hunt_random_pulse = {
+    on_actions = {
+        on_vore_hunt_events
+    }
+}
+
+# --- SCHEMES & INTERACTIONS ---
+
+murder_success_standard_event_list_on_action = {
+    random_events = {
+        50 = vore_scheme.0001
+        50 = vore_scheme.0002
+        25 = vore_scheme.0003
+    }
+}
+
+seduce_ongoing_milestone_1 = {
+    random_events = {
+        100 = seduce_vore.1000 
+        100 = seduce_vore.1001
+    }
+}
+
+seduce_ongoing_milestone_2 = {
+    random_events = {
+        # None yet
+    }
+}
+
+seduce_generic_success # Seduce success events, WIP
+
+jester_ongoing = {
+	random_events = {
+		100 = courtier_vore.0001
+	}
+}
+
+# --- LIFE CYCLE ---
+
+on_birthday = {
+    on_actions = { 
+        on_vore_18th_birthday_gift
+    }
+}
+
+on_death = {
+    on_actions = {
+        on_vore_death_handler
+    }
+}
+
+on_release_from_prison = {
+    on_actions = {
+        on_release_prey_from_prison
+    }
+}
+
+# ==========================================
+# VORE MOD - ON ACTIONS
+# ==========================================
+
+# 1. Defense & Setup
+on_vore_defensive_check = {
+    # Initializes global game rules and content restrictions (like banning specific vore types) 
+    # if they haven't been set yet.
+}
+
+on_add_vore_toggles = {
+    # Sets up the initial state for all adult characters by granting capabilities and randomizing stats, 
+    # and handles mass religious conversion for followers of the Voraphillic faith.
+}
+
+# 2. Combined Quarterly Pulse
+on_vore_quarterly_pulse = {
+    # Quarterly checks for unwilling prisoners of the faith, giving them a chance to 
+    # convert to their predator's religion over time.
+}
+
+# 3. Travel Events
+on_vore_travel_events = {
+    # Reserved for random events that occur while a character is traveling.
+}
+
+on_vore_sea_events = {
+    # Reserved for random events that occur during sea travel (currently disabled).
+}
+
+# 4. Combat Events
+on_vore_battle_events = {
+    # Triggers at the end of battles, giving winning commanders a chance to consume 
+    # defeated enemies as either lethal or non-lethal prey.
+}
+
+# 5. Death Handler
+on_vore_death_handler = {
+    # Handles the cleanup process when a character dies, ensuring all prey are released 
+    # if their predator dies, or the predator is notified if the prey dies inside them.
+}
+
+on_release_prey_from_prison = {
+    # A utility action used to properly scope the predator and execute the release logic 
+    # when a prey character is freed.
+}
+
+# 6. Birthday
+on_vore_18th_birthday_gift = {
+    # Initializes vore-related stats and capabilities for characters as soon as they reach adulthood (age 18).
+}
+
+random_vore_events = {
+    # Fires random events involving vore dynamics between characters with concubines at court. Should be renamed to random_vore_events
+}
+
+# 7. Hunting
+on_vore_hunt_events = {
+    # Adds random vore-themed events to the activity pool during the hunting activity.
+}

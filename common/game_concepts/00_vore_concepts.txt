@@ -1,14 +1,17 @@
-﻿vore_dungeon = {
-	parent = prison
-	texture = "gfx/interface/icons/event_types/type_prison.dds"
+﻿# Unwilling Vore
+vore_dungeon = {
+    parent = prison
+    texture = "gfx/interface/icons/event_types/type_prison.dds"
 }
 
+# Willing Prey
 vore_willing = {
-	parent = prison
-	texture = "gfx/interface/icons/event_types/type_prison.dds"
+    parent = prison
+    texture = "gfx/interface/icons/event_types/type_prison.dds"
 }
 
+# Religious Unwilling
 vore_religious_unwilling = {
-	parent = prison
-	texture = "gfx/interface/icons/event_types/type_prison.dds"
+    parent = prison
+    texture = "gfx/interface/icons/event_types/type_prison.dds"
 }

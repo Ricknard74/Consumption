@@ -1,256 +1,278 @@
-﻿#Inviting Possible Prey Over
+﻿# Inviting Possible Prey Over
 prey_invitation_interaction = {
-		category = interaction_category_friendly
-		interface_priority = 30
-		desc = prey_invitation_interaction_desc
-		#only_playable = yes
+    category = interaction_category_friendly
+    interface_priority = 30
+    desc = prey_invitation_interaction_desc
 
-	is_shown = {
-		NOT = { scope:actor = scope:recipient }
-		scope:actor = {
-			can_vore = yes
-			age >= 18
-		}
-		scope:recipient = {
-			can_be_prey = yes
-		}
-	}
 
-	ai_will_do = {
-		base = 100
-		base_voraciousness_modifier = {
-			PREY = scope:recipient
-		}
-	}
+    # is_shown: Filter visibility to the Actor and the Target
+    is_shown = {
+        scope:recipient != scope:actor
+        scope:actor = {
+            is_available_adult = yes
+            can_vore = yes
+        }
+        scope:recipient = {
+            is_available_adult = yes
+            can_be_prey = yes
+        }
+    }
 
-	on_accept = {
-		scope:actor = {
-			add_character_flag = potential_predator
-			trigger_event = invite_vore_pred.0001
-		}
-		scope:recipient = {
-			add_character_flag = potential_prey
-		}
-	}
+    ai_will_do = {
+        base = 100
+        base_voraciousness_modifier = {
+            PREY = scope:recipient
+        }
+    }
+
+    on_accept = {
+        scope:actor = {
+            add_character_flag = potential_predator
+            trigger_event = invite_vore_pred.0001
+        }
+        scope:recipient = {
+            add_character_flag = potential_prey
+        }
+    }
 }
 
-#Inviting a Predator Over
+# Inviting a Predator Over
 pred_invitation_interaction = {
-	category = interaction_category_friendly
-	interface_priority = 30
-	desc = pred_invitation_interaction_desc
+    category = interaction_category_friendly
+    interface_priority = 30
+    desc = pred_invitation_interaction_desc
+    
+    is_shown = {
+        scope:recipient != scope:actor
+        scope:actor = {
+            can_be_prey = yes
+        }
+        scope:recipient = {
+            can_vore = yes
+        }
+    }
 
-	ai_will_do = {
-		base = 100
-	}
+    ai_will_do = {
+        base = 100
+    }
 
-	is_shown = {
-		NOT = { scope:actor = scope:recipient }
-		scope:actor = {
-			can_be_prey = yes
-		}
-		scope:recipient = {
-			can_vore = yes
-		}
-	}
-
-	#Debug only
-	auto_accept = yes
-
-	on_accept = {
-		scope:actor = {
-			add_character_flag = potential_prey
-			trigger_event = invite_vore_prey.0001	
-		}
-		scope:recipient = {
-			add_character_flag = potential_predator
-		}
-#		custom_tooltip = pred_invitation_tooltip
-	}
-}  	 
+    # REMOVED auto_accept = yes unless you want AI to always succeed instantly.
+    
+    on_accept = {
+        scope:actor = {
+            add_character_flag = potential_prey
+            trigger_event = invite_vore_prey.0001 
+        }
+        scope:recipient = {
+            add_character_flag = potential_predator
+        }
+    }
+}     
 
 #Vore Prisoner
-vore_prisoner_interaction = {	
-	interface_priority = 30
-	common_interaction = no
-	icon = prison
+vore_prisoner_interaction = {    
+    interface_priority = 30
+    common_interaction = no
+    icon = "gfx/interface/icons/actions/prison.dds" # Added .dds
 
-	category = interaction_category_prison
-	desc = vore_prisoner_interaction_desc
-	ai_targets = {
-		ai_recipients = prisoners
-	}
-	ai_frequency = 25
-	ai_will_do = {
-		base = 25
-		modifier = { #Traits will modify how likely this will happen
-			add = {
-				IF = {
-					limit = { scope:actor = { has_trait = predator_1 } }
-					value = 25
-				}
-				ELSE_IF = {
-					limit = { scope:actor = { has_trait = predator_2 } }
-					value = 33
-				}
-				ELSE_IF = {
-					limit = { scope:actor = { has_trait = predator_3 } }
-					value = 50
-				}
-				ELSE_IF = {
-					limit = { scope:actor = { has_trait = preyish } }
-					value = -20
-				}
-				IF = {
-					limit = { scope:recipient = { has_trait = preyish } }	 
-					value = 40
-				}
-			}	
-		}
-	}
+    category = interaction_category_prison
+    desc = vore_prisoner_interaction_desc
 
-	#filter = court
-	#ai_target_filter = court
+    ai_targets = {
+        ai_recipients = prisoners
+    }
+    ai_frequency = 25
+    
+    ai_will_do = {
+        base = 100
+        base_voraciousness_modifier = {
+            PREY = scope:recipient
+        } 
+    }
 
-   is_shown = {
-		scope:actor = {
-			can_vore = yes
-			age >= 18
-		}
-		scope:recipient = {
-			can_be_prey = yes
-			is_imprisoned_by = scope:actor
-			age >= 18
-		}
-	}
+    is_shown = {
+        scope:recipient != scope:actor
+        scope:actor = {
+            can_vore = yes
+        }
+        scope:recipient = {
+            is_imprisoned_by = scope:actor
+            can_be_prey = yes
+        }
+    }
 
-   auto_accept = yes
+    auto_accept = yes
 
-	on_accept = {
-		scope:actor = {
-			trigger_event = prison_vore.0001
-		}
-		scope:recipient = {
-			custom_tooltip = vore_prisoner_interaction_tooltip
-			#trigger_event = prison_vore.0001
-			if = {
-				limit = { is_in_prison_type = dungeon }
-				add_character_flag = vored_from_dungeon
-			}
-			if = {
-				limit = { is_in_prison_type = house_arrest }
-				add_character_flag = vored_from_house_arrest
-			}
-		}
-	}
+    on_accept = {
+        scope:actor = {
+            trigger_event = prison_vore.0001
+        }
+        scope:recipient = {
+#            custom_tooltip = vore_prisoner_interaction_tooltip
+            if = {
+                limit = { is_in_prison_type = dungeon }
+                add_character_flag = vored_from_dungeon
+            }
+            if = {
+                limit = { is_in_prison_type = house_arrest }
+                add_character_flag = vored_from_house_arrest
+            }
+        }
+    }
 }
 
-#Vore Lover
+# Vore Lover
 lover_vore_interaction = {
-	category = interaction_category_friendly
-	use_diplomatic_range = no
-	icon = lover
-	desc = lover_vore_interaction_Desc
-	ai_potential = {
-		always = yes
-	}
-	ai_targets = {
-		ai_recipients = spouses
-	}
-	ai_frequency = 7
-	ai_will_do = {
-		base = 0
-		base_voraciousness_modifier = {
-			PREY = scope:recipient
-		}
-	}
+    category = interaction_category_friendly
+    use_diplomatic_range = no
+    icon = "gfx/interface/icons/actions/lover.dds"
+    desc = lover_vore_interaction_Desc
 
-	is_shown = {
-		NOT = { scope:actor = scope:recipient }
-		scope:actor = {
-			can_vore = yes
-			has_relation_lover = scope:recipient
-			# save_temporary_scope_as = predator
-		}
-		scope:recipient = {
-			can_be_prey = yes
-			has_relation_lover = scope:actor
-		}
-	}
+    ai_targets = {
+        ai_recipients = spouses
+    }
+    ai_frequency = 7
+    
+    ai_will_do = {
+        base = 100
+        base_voraciousness_modifier = {
+            PREY = scope:recipient
+        }
+    }
 
-	on_accept = {
-		scope:actor = {
-			trigger_event = lover_vore.0001
-			stress_impact = {
-				lustful = minor_stress_impact_loss
-				compassionate = minor_stress_impact_loss
-			}
-		}
-		scope:recipient = {
-			#trigger_event = lover_vore.0001
-			stress_impact = {
-				lustful = minor_stress_impact_loss
-				compassionate = minor_stress_impact_loss
-			}
-		}
-	}
+    is_shown = {
+        scope:recipient != scope:actor
+        scope:actor = {
+            is_available_adult = yes
+            can_vore = yes
+            has_relation_lover = scope:recipient
+        }
+        scope:recipient = {
+            is_available_adult = yes
+            can_be_prey = yes
+            has_relation_lover = scope:actor
+        }
+    }
+
+    on_accept = {
+        scope:actor = { trigger_event = lover_vore.0001 }
+    }
+    
+    # REMOVED: potential_show_as_tooltip (Invalid in interactions)
+    # To show stress impact, put it in the tooltip in localization files (e.g., "tooltip: [GetStressImpact]")
 }
 
-#Release Prey
-release_prey_interaction = {
-	category = interaction_category_friendly
-	interface_priority = 30
-	desc = release_prey_interaction_desc
+# Release Prey
+interaction_release_prey = {
+    icon = "gfx/interface/icons/actions/interaction_release.dds"
+    category = interaction_category_friendly
+    
+    # --- IS_SHOWN ---
+    # Who appears in the list?
+    is_shown = {
+        scope:actor = {
+            has_character_flag = vore_predator
+        }
+        scope:recipient = {
+            has_character_flag = vored
+            # Validate that the target actually belongs to the predator
+            has_relation_predator = scope:actor
+        }
+    }
+    
+    # --- AI LOGIC ---
+    ai_will_do = {
+        factor = 5
 
-	ai_will_do = {
-		base = 0
-	}
+        # Predator Personality
+        modifier = {
+            factor = 3.0
+            scope:actor = { has_trait = compassionate }
+        }
+        modifier = {
+            factor = 0.1
+            OR = {
+                scope:actor = { has_trait = sadistic }
+                scope:actor = { has_trait = gluttonous }
+            }
+        }
+        modifier = {
+            factor = 2.0
+            scope:actor = { ai_zeal > 50 }
+            faith = scope:actor.faith
+        }
 
-	is_shown = {
-		NOT = { scope:actor = scope:recipient }
-		scope:actor = {
-			has_character_flag = vore_predator
-		}
-		scope:recipient = {
-			is_imprisoned_by = scope:actor
-			has_character_flag = vored
-		}
-	}
-	auto_accept = yes
+        # Prey Relationship
+        modifier = {
+            factor = 0.05
+            has_relation_rival = scope:actor
+        }
+        modifier = {
+            factor = 5.0
+            OR = {
+                has_relation_friend = scope:actor
+                has_relation_lover = scope:actor
+            }
+        }
+        modifier = {
+            factor = 10.0
+            is_close_family_of = scope:actor
+        }
 
-	on_accept = {
-		scope:actor = {
-			trigger_event = vore.0001	
-		}
-	}
+        # Prey Traits
+        modifier = {
+            factor = 0.5
+            has_trait = preyish
+        }
+
+        # Time Held
+        modifier = {
+            factor = 1.5
+            var:imprisonment_duration >= 5
+        }
+        modifier = {
+            factor = 1.2
+            var:imprisonment_duration >= 3
+        }
+        modifier = {
+            factor = 1.1
+            var:imprisonment_duration >= 1
+        }
+    }
+
+    on_accept = {
+        scope:actor = {
+            trigger_event = { id = vore.3003 }
+        }
+    }
 }
 
-#Negotiate Release
-# negotiate_prey_release_interaction = {
-# 	category = interaction_category_diplomatic
-# 	interface_priority = 30
-# 	desc = negotiate_prey_release_interaction_desc
+# Check on Prey
+check_on_prey = {
+    category = interaction_category_friendly
+    interface_priority = 30
+    desc = check_on_prey_interaction_desc
 
-# 	ai_will_do = {
-# 		base = 50
-# 	}
+    ai_will_do = {
+        base = 0 # Player only interaction
+    }
 
-# 	is_shown = {
-# 		NOT = { scope:actor = scope:recipient }
-# 		scope:actor = {
-# 			has_character_flag = vore_predator
-# 		}
-# 		scope:recipient = {
-# 			is_imprisoned_by = scope:actor
-# 			has_character_flag = vored
-# 			can_be_released_by_negotiation = yes
-# 		}
-# 	}
-# 	auto_accept = yes
+    is_shown = {
+        scope:recipient != scope:actor
+        scope:actor = {
+            has_character_flag = vore_predator
+        }
+        scope:recipient = {
+            has_character_flag = vored
+            has_relation_prey = scope:actor
+        }
+    }
+    
+    auto_accept = yes
 
-# 	on_accept = {
-# 		scope:actor = {
-# 			trigger_event = negotiate_vore.0001	
-# 		}
-# 	}
-# }
+    on_accept = {
+        scope:actor = {
+            trigger_event = vore.3001 
+        }
+    }
+}

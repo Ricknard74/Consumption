@@ -1,17 +1,6 @@
-﻿# transforming_1 = {
-#   health = 2
-#   icon = 10
-# }
-
-# transforming_2 = {
-#   health = 4
-#   icon = 10
-# }
-
-# transforming_3 = {
-#   health = 10
-#   icon = 10
-# }
+﻿###########################
+# PREY STATUS MODIFIERS
+###########################
 
 oral_vored = {
   fertility = -2.0
@@ -41,12 +30,42 @@ cock_vored = {
   icon = 10
 }
 
-fertility_boost = {
-  fertility = 2.0
-  health = 0.5
-  icon = 10
+# Used in Seduction Events (Hidden/Romantic)
+# This hides the character for a day without killing them
+hidden_in_stomach_romantic = {
+    health = 0.5
+    icon = 10
 }
 
+# Used in Unbirth/Seduction Success
+# Makes prey happy to be inside, prevents imprisonment stress
+romantic_vore_captivity = {
+    stewardship = 2
+    intrigue = 2
+    icon = 10
+}
+
+# Used in Seduction Ongoing
+# Player feels warm/comforted after interacting with a pred
+vore_seduced_warmth = {
+    diplomacy = 2
+    health = 0.5
+    icon = 10
+}
+
+# Used in Scheme Ongoing (Prey)
+# Prey feels safe and protected
+safe_inside_predator = {
+    health = 1
+    stress_gain_mult = -0.5
+    icon = 10
+}
+
+###########################
+# PREDATOR STATUS MODIFIERS
+###########################
+
+# Gained from eating/killing
 satisfied = {
   martial = 1
   diplomacy = 1
@@ -57,6 +76,47 @@ satisfied = {
   icon = 10
 }
 
+# Gained from digestion
+digesting = {
+  martial = 2
+  health = 0.5
+  icon = 10
+}
+
+# Gained from comforting prey
+comforting_prey = {
+  diplomacy = 2
+  learning = 1
+  icon = 10
+}
+
+# Gained from specific schemes (e.g., Religious Feast)
 religious_vore_predator = {
-	learning = 1
+    learning = 1
+}
+
+###########################
+# BODY/META MODIFIERS
+###########################
+
+fertility_boost = {
+  fertility = 2.0
+  health = 0.5
+  icon = 10
+}
+
+# Trauma from being digested and released
+trauma_from_digestion = {
+    health = -2
+    stewardship = -2
+    intrigue = -2
+    fertility = -1.0
+    icon = 10
+}
+
+# Trauma from being vored and released
+trauma_from_vore = {
+    health = -1
+    intrigue = -1
+    icon = 10
 }
