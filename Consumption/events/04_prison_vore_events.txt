@@ -33,12 +33,6 @@ prison_vore.0001 = {
             oral_vore_modifier = yes
         }
         trigger_event = prison_vore.0002 
-        hidden_effect = {
-            scope:predator = {
-                change_variable = { name = num_prey add = 1 }
-                update_vore_portrait_effect = yes
-            }
-        }
     }            
  
     # Anal
@@ -49,12 +43,6 @@ prison_vore.0001 = {
             anal_vore_modifier = yes
         }
         trigger_event = prison_vore.0003 
-        hidden_effect = {
-            scope:predator = {
-                change_variable = { name = num_prey add = 1 }
-                update_vore_portrait_effect = yes
-            }
-        }
     }
 
     # Unbirth
@@ -71,12 +59,6 @@ prison_vore.0001 = {
             unbirth_vore_modifier = yes
         }
         trigger_event = prison_vore.0004 
-        hidden_effect = {
-            scope:predator = {
-                change_variable = { name = num_prey add = 1 }
-                update_vore_portrait_effect = yes
-            }
-        }
     }
 
     # Cock
@@ -92,12 +74,6 @@ prison_vore.0001 = {
             cock_vore_modifier = yes
         }
         trigger_event = prison_vore.0005
-        hidden_effect = {
-            scope:predator = {
-                change_variable = { name = num_prey add = 1 }
-                update_vore_portrait_effect = yes
-            }
-        }
     }
         
     # Exit
@@ -119,6 +95,10 @@ prison_vore.0002 = {
     left_portrait = {
         character = scope:predator
         animation = lunatic
+    }
+
+    immediate = {
+        scope:predator = { add_character_flag = portrait_belly }
     }
 
     # Fatal Digestion
@@ -164,6 +144,10 @@ prison_vore.0003 = {
     desc = prison_voreDesc.0003
     theme = dungeon
 
+    immediate = {
+        scope:predator = { add_character_flag = portrait_belly }
+    }
+
     # Fatal
     option = {
         name = prison_voreOpt.0003a
@@ -200,6 +184,10 @@ prison_vore.0004 = {
     desc = prison_voreDesc.0004
     theme = dungeon
 
+    immediate = {
+        scope:predator = { add_character_flag = portrait_belly }
+    }
+
     # Fatal Digestion
     option = {
         name = prison_voreOpt.0004a
@@ -234,12 +222,6 @@ prison_vore.0004 = {
     }
     
     after = {
-        # FIXED: Only trigger follow-up if prey survived (implied by safe_vore_effect)
-        # We check if prey is alive to avoid triggering on the fatal option
-        if = {
-            limit = { scope:prey = { is_alive = yes } }
-            trigger_event = { id = vore.0001 months = 3 }
-        }
         clean_up_effect = yes
     }
 }
@@ -250,11 +232,9 @@ prison_vore.0005 = {
     type = character_event
     desc = prison_voreDesc.0005
     theme = dungeon
-
+    
     immediate = {
-        scope:predator = {
-            add_character_flag = vore_predator   
-        }
+        scope:predator = { add_character_flag = portrait_belly }
     }
     
     # Fatal
@@ -288,11 +268,6 @@ prison_vore.0005 = {
     }
     
     after = {
-        # FIXED: Check if prey is alive before triggering follow-up
-        if = {
-            limit = { scope:prey = { is_alive = yes } }
-            trigger_event = { id = vore.0001 months = 5 }
-        }
         clean_up_effect = yes
     }
 }
