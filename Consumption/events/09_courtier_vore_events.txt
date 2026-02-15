@@ -46,9 +46,12 @@ courtier_vore.0001 = {
         name = courtier_voreOpt.0001a # "Keep them as a pet"
         trigger_event = courtier_vore.0002 # Branch to outcome event
     }
-
+    
     option = {
         name = courtier_voreOpt.0001b # "Digest the fool"
+        ai_chance = {
+            lethal_vore_modifier = { PREY = scope:prey }
+        }
         trigger_event = courtier_vore.0003 # Branch to lethal outcome
     }
 }
@@ -82,8 +85,8 @@ courtier_vore.0003 = {
         scope:predator = {
             add_trait = gluttonous
             add_character_modifier = { modifier = satisfied }
+            random_orifice_lethal_vore_effect = yes
         }
-        random_orifice_lethal_vore_effect = yes
     }
 }
 
@@ -379,10 +382,22 @@ courtier_vore.0050 = {
         # }
         hidden_effect = {
             scope:predator = {
-                # Execute safe vore
-                safe_vore_effect = {
-                    type = unbirth # Unbirth fits the "harem" theme well
-                    prison_type = vore_dungeon
+                if = {
+                    limit = { AND = { is_female = yes global_var:unbirth_banned = no } }
+                    safe_vore_effect = {
+                        type = unbirth
+                        prison_type = vore_dungeon
+                    }
+                }
+                else_if = {
+                    limit = { AND = { is_female = no global_var:cock_banned = no } }
+                    safe_vore_effect = {
+                        type = cock
+                        prison_type = vore_dungeon
+                    }
+                } 
+                else = {
+                    random_orifice_safe_vore_effect = { prison_type = vore_dungeon }
                 }
                 add_character_modifier = { modifier = satisfied years = 1 }
             }

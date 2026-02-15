@@ -281,12 +281,6 @@ courtier_voreDesc.0010:0 "[spouse.GetTitledFirstName] approaches me with a sly s
 courtier_voreOpt.0010a:0 "Thank you, my dear."
 courtier_voreOpt.0010b:0 "We have no need for witnesses."
 
-# Event 0020: Tutor
-courtier_voreTitle.0020:0 "The Tutor's Lesson"
-courtier_voreDesc.0020:0 "My tutor, [predator.GetTitledFirstName], was overheard shouting at [prey.GetFirstName]. 'If you cannot swallow your pride, perhaps you shall be swallowed instead!'\n\nThe sounds that followed suggest this was not a metaphor."
-courtier_voreOpt.0020a:0 "Discipline is important."
-courtier_voreOpt.0020b:0 "That is my child! Release them!"
-
 # Event 0030: Rival
 courtier_voreTitle.0030:0 "The Disappearing Rival"
 courtier_voreDesc.0030:0 "[predator.GetTitledFirstName], one of my loyal courtiers, has cornered my rival [prey.GetTitledFirstName] in the gardens. The poor fool looks about to become a permanent addition to [predator.GetFirstNamePossessive] anatomy."

@@ -29,10 +29,8 @@ seduce_vore.1000 = {
     
     trigger = {
         NOT = { has_variable = scheme_event_active_flag }
-        # scope:target = { can_vore = yes }
-        # scope:owner = {
-        #     can_be_prey = yes
-        # }
+        scope:target = { can_vore = yes }
+        can_be_prey = yes
     }
     
     immediate = {
@@ -49,7 +47,7 @@ seduce_vore.1000 = {
         # Successful interaction
         seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
         
-        scope:owner = {
+        root = {
             add_character_modifier = {
                 modifier = vore_seduced_warmth
                 days = 30
@@ -58,8 +56,7 @@ seduce_vore.1000 = {
         
         scope:target = {
             add_opinion = {
-                target = scope:owner
-                modifier = intimate_opinion
+                target = root
                 opinion = 10
             }
         }
@@ -101,12 +98,10 @@ seduce_vore.1001 = {
         animation = personality_compassionate
     }
     
-    right_portrait = {
+    lower_right_portrait = {
         character = scope:target
-        animation = thinking
+        animation = hapiness
     }
-    
-    lower_left_portrait = root
     
     widget = {
         gui = "event_window_widget_scheme"
@@ -117,7 +112,6 @@ seduce_vore.1001 = {
     
     trigger = {
         NOT = { has_variable = scheme_event_active_flag }
-        # Player must be the predator capable of holding someone
         can_vore = yes
         scope:target = {
             can_be_prey = yes
@@ -126,11 +120,8 @@ seduce_vore.1001 = {
     
     immediate = {
         set_variable = scheme_event_active_flag
-        # Add belly portrait flag to root (the pred)
-        add_character_flag = {
-            flag = portrait_belly
-            days = 3
-        }
+        add_character_flag = portrait_belly
+
     }
     
     # Offer the safe resting place
@@ -161,13 +152,9 @@ seduce_vore.1001 = {
                         scope:target = { has_trait = paranoid }
                     }
                     
-                    # Success: They accept the offer
-                    seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
-                    
                     scope:target = {
                         add_opinion = {
                             target = scope:owner
-                            modifier = intimate_opinion
                             opinion = 15
                         }
                     }
@@ -185,7 +172,6 @@ seduce_vore.1001 = {
                     scope:target = {
                         add_opinion = {
                             target = scope:owner
-                            modifier = disappointed_opinion
                             opinion = -10
                         }
                     }
@@ -225,7 +211,7 @@ seduce_vore.1001 = {
     
     after = {
         remove_variable = scheme_event_active_flag
-        scope:owner = { remove_character_flag = portrait_belly }
+        root = { remove_character_flag = portrait_belly }
     }
 }
 
@@ -252,10 +238,11 @@ seduce_vore.1002 = {
     
     option = {
         name = seduce_vore.1002.a
-        # Already got scheme progress in the first event
+        # Success: They accept the offer
+        seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
         stress_impact = {
             compassionate = minor_stress_impact_loss
-            kind = minor_stress_impact_loss
+            lustful = minor_stress_impact_loss
         }
     }
 }

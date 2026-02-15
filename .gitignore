@@ -3,3 +3,4 @@ Consumption.code-workspace
 *.code
 *.bak*
 *.blend*
+/game

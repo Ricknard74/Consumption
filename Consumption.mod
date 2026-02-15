@@ -7,5 +7,5 @@ tags={
 	"Gameplay"
 }
 name="Consumption"
-supported_version="1.18.0.1"
+supported_version="1.18.*"
 path="mod/Consumption"
