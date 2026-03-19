@@ -7,5 +7,4 @@ tags={
 	"Gameplay"
 }
 name="Consumption"
-supported_version="1.18.*"
-path="mod/Consumption"
+path="C:/Users/color/Documents/Paradox Interactive/Crusader Kings III/mod/Consumption"

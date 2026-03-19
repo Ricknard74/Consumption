@@ -22,7 +22,7 @@ CHARACTER_AS_PREDATOR_HEADER_ALT:0 "This character hunts:"
 CHARACTER_AS_PREY_HEADER_ALT:0 "This character is hunted by:"
 
 #Memories
-pred_oral_unwilling_non_fatal_memory_desc:0 "I forcefully swallowed [prey.GetName] into my stomach and kept her there"
+pred_oral_unwilling_non_fatal_memory_desc:0 "I forcefully swallowed [prey.GetName] into my stomach and kept [prey.GetHerHim] there"
 prey_oral_unwilling_non_fatal_memory_desc:0 "I was forced down the throat of [pred.GetName], but not digested"
 
 # Custom Localization Keys
@@ -38,6 +38,12 @@ concept_dungeon_stomach:0 "Stomach"
 
 # Status
 concept_imprisonment_storage:0 "Internal Containment"
+
+# Game Concept Descriptions
+game_concept_prison_oral_desc:0 "A prisoner held within the predator's stomach, kept safe from digestion."
+game_concept_prison_anal_desc:0 "A prisoner held within the predator's bowels, kept safe from digestion."
+game_concept_prison_unbirth_desc:0 "A prisoner held within the predator's womb, kept safe from harm."
+game_concept_prison_cock_desc:0 "A prisoner held within the predator's reproductive organ, kept safe from harm."
 
 PREY_WINDOW_TITLE:0 "Living Prey"
 PREY_NO_PREY:0 "You have no living prey to track"

@@ -1,10 +1,36 @@
-﻿vore_safe_story = { #story owner is prey
+﻿vore_safe_story = { # Story owner is prey (non-lethal/endo vore)
 	on_setup = {
-		set_variable = { name = imprisonment_duration value = 0}
+		set_variable = { name = imprisonment_duration value = { 0 7 } }
+		
+		# Set vore_type based on prey traits (no $type$ needed)
+		if = {
+			limit = { story_owner = { has_trait = oral_vored } }
+			set_variable = { name = vore_type value = flag:oral }
+		}
+		else_if = {
+			limit = { story_owner = { has_trait = anal_vored } }
+			set_variable = { name = vore_type value = flag:anal }
+		}
+		else_if = {
+			limit = { story_owner = { has_trait = unbirth_vored } }
+			set_variable = { name = vore_type value = flag:unbirth }
+		}
+		else_if = {
+			limit = { story_owner = { has_trait = cock_vored } }
+			set_variable = { name = vore_type value = flag:cock }
+		}
+		else = {
+			story_owner = { set_variable = { name = vore_type value = flag:oral } } # Fallback
+		}
 	}
 
 	on_end = {
-		release_prey_location_check_effect = yes
+		debug_log = "Safe vore story end"
+
+		story_owner = {
+			remove_variable = vore_type # Cleanup
+		}
+		remove_variable = imprisonment_duration
 	}
 
 	on_owner_death = {
@@ -12,25 +38,73 @@
 	}
 
 	effect_group = {
-		#Add a mean time to happen
+		# Monthly duration increment and auto-release after ~4 months
 		months = 1
 		triggered_effect = {
-			trigger = { exists = imprisonment_duration}
+			trigger = { 
+				story_owner = {
+					is_ai = yes
+					has_variable = imprisonment_duration 
+				}
+			}
 			effect = {
-				change_variable = { name = imprisonment_duration add = 1}
+				debug_log = "safe vore effect group 1"
+				change_variable = { name = imprisonment_duration add = 1 }
+				random_relation = {
+					type = predator
+					save_scope_as = predator
+				}
 				if = {
-					limit = { var:imprisonment_duration > 4 }
-					end_story = yes
+					limit = { 
+						var:imprisonment_duration > 10 
+						scope:predator = {
+							is_ai = yes
+						}
+					}
+					if = {
+						limit = { scope:predator = { is_ai = yes } }
+						release_prey_location_check_effect = yes
+					}
 				}
 			}
 		}
-		# add modifier for release chance that is multiplied by imprisonment duration / 2
-		# Setup
+	}
+	
+	effect_group = {
+		months = 3
+		triggered_effect = {
+			trigger = { story_owner = { is_in_prison_type = vore_religious_unwilling } }
+			effect = {
+				debug_log = "safe vore effect group 2"
+				story_owner = {
+					random_relation = {
+						type = predator
+						save_scope_as = predator
+					}
+					if = {
+						limit = { exists = scope:predator }
+						random = {
+							chance = 50 # Base for safe vore (time to convert)
+							modifier = { factor = 1.5 root = { has_trait = zealous } } # More likely if prey zealous
+							modifier = { factor = 0.5 root = { has_trait = cynical } } # Less if cynical
+							
+							set_character_faith = scope:predator.faith
+							trigger_event = { id = religious_vore.0009 }
+							
+							# Optional: Release or change prison on conversion
+							# change_prison_type = vore_religious_willing # If you have a willing type
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
 vore_digestion_story = {
+	#Should add the stage of digestion using the vore.3002 localization, maybe as some sort of descriptor of death or something
 	on_setup = {
+		debug_log = "Digestion Story Started"
 		set_variable = { name = digestion_progress value = 0 }
 		if = {
 			limit = { story_owner = { has_character_flag = oral_current_prey } }
@@ -54,6 +128,7 @@ vore_digestion_story = {
 	}
 
 	on_end = {
+		debug_log = "Digestion Story Ending"
 		story_owner = {
 			save_scope_as = predator
 		}
@@ -64,21 +139,21 @@ vore_digestion_story = {
 				trigger_event = vore.0002
 			}
 		}
-		if = {
+		else_if = {
 			limit = { var:vore_type = flag:anal }
 			scope:predator = {
 				add_character_flag = anal_digestion_finished
 				trigger_event = vore.0002
 			}
 		}
-		if = {
+		else_if = {
 			limit = { var:vore_type = flag:unbirth }
 			scope:predator = {
 				add_character_flag = unbirth_digestion_finished
 				trigger_event = vore.0002
 			}
 		}
-		if = {
+		else_if = {
 			limit = { var:vore_type = flag:cock }
 			scope:predator = {
 				add_character_flag = cock_digestion_finished
@@ -91,6 +166,8 @@ vore_digestion_story = {
 				trigger_event = vore.0002
 			}
 		}
+		remove_variable = digestion_progress
+        remove_variable = vore_type
 	}
 
 	on_owner_death = {
@@ -101,26 +178,25 @@ vore_digestion_story = {
 		# 		desc = "The evidence of your deed has vanished."
 		# 	}
 		# }
+		end_story = yes
 	}
 
 	effect_group = {
 		months = 1
 
-		# trigger = {
-		# }
 		triggered_effect = {
-			trigger = { exists = digestion_progress}
-			effect = {
-				change_variable = { name = digestion_progress add = 25}
-			}
-			# Maybe lower escape chance		
-		}
-		triggered_effect = {
-			trigger = { 
-				var:digestion_progress >= 100 
-			}
+			debug_log = "Digestion completed"
+			trigger = { var:digestion_progress >= 100 }
 			effect = {
 				end_story = yes
+			}
+		}
+		triggered_effect = {
+			debug_log = "Digestion progressing"
+			trigger = { has_variable = digestion_progress }
+			effect = {
+				change_variable = { name = digestion_progress add = 25}
+				# Maybe lower escape chance		
 			}
 		}
 	}

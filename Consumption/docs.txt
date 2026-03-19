@@ -1,0 +1,361 @@
+########################
+### scripted_effects ###
+########################
+
+random_orifice_vore_effect = { prison_type = $prison_type$ } # Decides randomly between lethal and non-lethal vore. Calls random_orifice_$lethality$_vore_effect
+
+random_orifice_safe_vore_effect = { prison_type = $prison_type$ } # Activates a safe vore effect using a random orifice
+
+random_orifice_lethal_vore_effect = { prison_type = $prison_type$ } # Activates a lethal vore effect using a random orifice
+
+safe_vore_effect = { type = $type$ prison_type = $prison_type$ } # Activates a safe vore effect on scope:predator and scope:prey.
+
+lethal_vore_effect = { type = $type$ } # Activates a lethal vore effect and starts a story cycle. Triggers event vore.0002 after a period of time
+
+release_prey_location_check_effect = yes # Checks the prey to see where they are located and then calls the release_prey_effect
+
+release_prey_effect = { type = $type$ } # Removes all necessary traits, variables, and flags from pred and prey
+
+fatal_vore_effect = yes # Kills the prey and cleans up
+
+update_vore_portrait_effect = yes # Updates the portrait modifier for the predator
+
+clean_up_effect = yes # Removes unnecessary scopes/flags/variables after vore/release
+
+exit_clean_up_effect = yes # Similar to clean_up_effect but for event exits
+
+[NEW] add_vore_belly = yes # Adds belly portrait modifier based on prey count/digestion (uses genes/morph)
+
+[NEW] give_random_commander_trait_effect = yes # Assigns random vore-related commander traits (from templates)
+
+[NEW] set_interesting_traits_and_modifiers_effect = yes # Sets traits/modifiers for generated characters (e.g., prey templates)
+
+[NEW] add_random_tiered_trait_xp_effect = { TRAIT = $trait$ LEVEL_1/3 = yes/no } # Adds XP to tiered traits (e.g., predator levels)
+
+[NEW] add_random_tiered_trait_track_xp_effect = { TRAIT = $trait$ TRACK = $track$ LEVEL_1/3 = yes/no } # Adds XP to trait tracks (e.g., hunter)
+
+[NEW] remove_law_related_modifiers_effect = yes # Cleans up modifiers from laws/authority changes (crossover from laws file)
+
+########################
+### scripted_triggers ###
+########################
+
+can_vore = yes # Checks if a character can perform vore (age, flags, capacity, gender toggles, etc.)
+
+can_be_prey = yes # Checks if a character can be vored (age, flags, health, etc.)
+
+[NEW] has_education_learning_trigger = yes # Checks for learning education (used in court positions)
+
+[NEW] has_lifestyle = { lifestyle = $lifestyle$ } # Checks for specific lifestyles (e.g., learning_lifestyle)
+
+[NEW] is_parent_of = { target = scope:target } # Checks parent-child relation (blocks vore on own children unless flagged)
+
+[NEW] is_incapable = no # Blocks vore on incapable characters
+
+[NEW] in_diplomatic_range = { target = scope:owner } # Checks if target is in range (for schemes/abductions)
+
+[NEW] has_trait_with_flag = { flag = $flag$ } # E.g., can_murder_own_children
+
+[NEW] has_opinion_modifier = { modifier = $modifier$ target = $target$ } # E.g., for grudges/post-vore opinions
+
+[NEW] is_secondary_character_involvement_involved_trigger = { CHAR = scope:target } # For struggles/involvement
+
+[NEW] has_realm_law = { law = $law$ } # E.g., for authority levels
+
+[NEW] has_title = { title = $title$ } # E.g., for special empires like Mongol
+
+################
+### ON_ACTIONS ###
+################
+
+on_vore_death_handler = yes # Handles the cleanup process when a character dies, ensuring all prey are released if their predator dies, or the predator is notified if the prey dies inside them.
+
+on_release_prey_from_prison = yes # A utility action used to properly scope the predator and execute the release logic when a prey character is freed.
+
+on_vore_18th_birthday_gift = yes # Initializes vore-related stats and capabilities for characters as soon as they reach adulthood (age 18).
+
+random_vore_events = yes # Fires random events involving vore dynamics between characters with concubines at court. Should be renamed to random_vore_events
+
+on_vore_hunt_events = yes # Adds random vore-themed events to the activity pool during the hunting activity.
+
+on_vore_defensive_check = yes # Runs defensive checks for vore capability at game start/5-year pulses
+
+on_add_vore_toggles = yes # Sets up global toggles (e.g., digestion_banned, oral_banned) at game start
+
+on_vore_travel_events = yes # Triggers vore events during land travel (e.g., bandit/feral encounters)
+
+on_vore_sea_events = yes # Triggers vore events during sea travel (e.g., siren events)
+
+on_vore_battle_events = yes # After combat victory, gives winning commanders a chance to consume defeated enemies as either lethal or non-lethal prey.
+
+murder_success_standard_event_list_on_action = yes # Adds vore-themed murder success events (e.g., vore_scheme.0001)
+
+murder_failure_standard_event_list_on_action = yes # Adds vore-themed murder failure events (e.g., vore_scheme.0003)
+
+seduce_ongoing_standard_event_list_on_action = yes # Adds vore-themed seduction events (e.g., seduce_vore series)
+
+abduct_success_standard_event_list_on_action = yes # Adds vore-themed abduction success events (e.g., vore_assassin.0003)
+
+on_combat_end_winner = yes # Triggers battle_vore events post-combat
+
+on_hunt_random_pulse = yes # Triggers hunt_vore events during hunts
+
+on_travel_start = yes # Entry point for travel vore events
+
+on_sea_travel_start = yes # Entry point for sea vore events
+
+random_yearly_playable_pulse = yes # Pulse for random courtier/concubine vore events
+
+five_year_playable_pulse = yes # Re-checks vore setup after 5 years
+
+on_game_start = yes # Initial vore setup (defensive checks)
+
+on_game_start_after_lobby = yes # Post-lobby toggles setup
+
+##############
+### EVENTS ###
+##############
+
+# Core Vore Mechanics (00_vore_background.txt - namespace: vore)
+vore.0002: Digestion completion event (lethal vore outcome).
+vore.0003: Player vore settings menu (toggles for bans, genders, etc.).
+vore.0020: Follow-up event 6-12 months after lethal vore (e.g., predator reflections).
+vore.3001: Check on specific prey (interaction-triggered).
+vore.3002: Check on all prey (bulk view).
+vore.3003: Digest specific prey.
+vore.3004: Release specific prey.
+vore.4001: Digest all prey.
+vore.4002: Release all prey (if digestion banned).
+vore.4003: Release all prey.
+
+# Religious Vore (01_religious_vore_events.txt - namespace: religious_vore)
+religious_vore.0001: Religious feast begins (prey generation/choice).
+religious_vore.0002-0005: Orifice-specific vore choices during feast.
+religious_vore.0006: Prey struggles inside.
+religious_vore.0007: Prey converts over time.
+religious_vore.0008: Predator decides prey fate (release/digest).
+religious_vore.0009: Prey released (non-lethal).
+religious_vore.0010: Prey fully converted (2 years later).
+
+# Predator Invites Prey (02_pred_invitation_event.txt - namespace: invite_vore_prey) [NOTE: File name mismatch; content is invite_vore_prey]
+invite_vore_prey.0001: Prey invites predator.
+invite_vore_prey.0002: Predator receives invitation.
+invite_vore_prey.0003: Predator arrives/choice.
+invite_vore_prey.0004-0007: Orifice-specific vore (oral/anal/unbirth/cock).
+
+# Lover Vore (03_lover_vore_events.txt - namespace: lover_vore)
+lover_vore.0001: Role choice menu (pred/prey).
+lover_vore.0002: Predator orifice choice.
+lover_vore.0003-0006: Predator orifice vore (oral/anal/unbirth/cock).
+lover_vore.0007: Prey orifice choice.
+lover_vore.0008-0011: Prey orifice vore (oral/anal/unbirth/cock).
+
+# Prison Vore (04_prison_vore_events.txt - namespace: prison_vore)
+prison_vore.0001: Prison vore choice menu.
+prison_vore.0002-0005: Orifice-specific prison vore (oral/anal/unbirth/cock).
+
+# Prey Invites Predator (05_prey_invitation_event.txt - namespace: invite_vore_pred)
+invite_vore_pred.0001: Predator sends invitation.
+invite_vore_pred.0002: Prey receives letter.
+invite_vore_pred.0003: Prey arrives/choice.
+invite_vore_pred.0004: Vore execution.
+
+# Assassin/Abduction Vore (06_vore_assassin_abduction_event.txt - namespace: vore_assassin)
+vore_assassin.0001: Abduction method choice.
+vore_assassin.0002: Lethal abduction vore.
+vore_assassin.0003: Non-lethal abduction vore.
+
+# [NEW] Pilgrimage Vore (07_vore_pilgrimage_event.txt - namespace: vore_pilgrimage)
+# (Empty in provided file; placeholder for future events)
+
+# Courtier Vore (09_courtier_vore_events.txt - namespace: courtier_vore)
+courtier_vore.0001: Jester's vore trick.
+courtier_vore.0010: Concubine vore request.
+courtier_vore.0030: Courtier rivalry vore.
+
+# Hunt Vore (10_hunt_vore_events.txt - namespace: hunt_vore)
+hunt_vore.0001: Party member ambushed by beast (setup).
+hunt_vore.0002-0004: Feral vore by animal type (e.g., bear, wolf).
+hunt_vore.9000: Random hunt pulse event (prey devoured by animal).
+
+# Scheme/Assassin Vore (11_assassin_vore_events.txt - namespace: vore_scheme)
+vore_scheme.0001: Scheme success (owner POV).
+vore_scheme.0003: Non-lethal scheme (assassin POV).
+vore_scheme.0004: Scheme failure/discovery.
+
+# Seduction Vore (12_seduce_vore_events.txt - namespace: seduce_vore)
+seduce_vore.1010: Playful possession (artifact swallow).
+seduce_vore.1020: Hidden desires revealed.
+seduce_vore.1030: Teasing entrapment.
+seduce_vore.2000: Seduction success (lethal option).
+seduce_vore.2001: Seduction success (non-lethal).
+
+# Supernatural Vore (13_supernatural_vore_events.txt - namespace: supernat_vore)
+supernat_vore.0001: Siren sea travel event.
+
+# Battle Vore (14_battle_vore_events.txt - namespace: battle_vore)
+battle_vore.0001: Victory meal (player as predator).
+battle_vore.0002: Defeat meal (player as prey).
+
+# Debug Vore (20_vore_debug_events.txt)
+# (Empty in provided file; placeholder for testing events)
+
+###################
+### INTERACTIONS ### [NEW SECTION]
+###################
+
+# From 01_vore_interactions.txt
+prey_invitation_interaction: Invite potential prey to court for vore.
+pred_invitation_interaction: Invite potential predator to court for vore.
+vore_interaction: Direct vore on a target (e.g., prisoner).
+release_prey_interaction: Release a specific prey.
+digest_prey_interaction: Digest a specific prey (banned check).
+check_on_prey: View/status check on imprisoned prey.
+
+################
+### DECISIONS ### [NEW SECTION]
+################
+
+# From vore_decisions.txt
+vore_menu: Player settings menu (toggles bans, etc.).
+religious_vore_feast_decision: Host a vore-themed religious feast (Voraphillic faiths only).
+
+############
+### TRAITS ### [NEW SECTION]
+############
+
+# From 00_vore_traits.txt
+oral_vored / anal_vored / unbirth_vored / cock_vored: Prey status traits (incapacitating).
+digesting: Digestion in progress (health effects).
+predator_1/2/3: Predator levels (voraciousness boosts).
+preyish: Reduces voraciousness.
+iron_stomach: Allows eating ill prey (prowess boost).
+# (Commented out: transforming, reborn - for unbirth/reform mechanics)
+
+#################
+### MODIFIERS ### [NEW SECTION]
+#################
+
+# Character Modifiers (00_vore_character_modifiers.txt)
+base_voraciousness_modifier: Base voraciousness calc (traits like gluttonous/sadistic).
+oral/anal/unbirth/cock_vore_modifier: Orifice-specific chances.
+fertility_boost: Post-vore fertility/health.
+trauma_from_digestion/vore: Negative health/intrigue from survival.
+# Global: vore_dungeon/willing/unwilling/religious_unwilling (stress/dread effects).
+
+# Opinion Modifiers (01_vore_opinion_modifiers.txt)
+vored_me_unwilling_opinion: -25 opinion penalty.
+
+# Portrait Modifiers (00_vore_portrait_modifiers.txt / 50_vore_belly.txt)
+vore_belly_small/medium/large: Belly bulge visuals based on prey.
+
+#############################
+### RELIGIONS / DOCTRINES ### [NEW SECTION]
+#############################
+
+# From 00_voraphillic.txt, 01_safe_vore_religion.txt, 02_fatal_vore_religion.txt, 30_doctrines_vore_hostility.txt
+rf_voraphillic: Voraphillic religion family (pagan roots, eastern piety icons).
+safe_vore_religion: Non-lethal vore focus (doctrines: equal gender, pluralism righteous, sacred childbirth).
+fatal_vore_religion: Lethal vore focus (doctrines: human sacrifice, monasticism).
+savior_voraphillic_hostility_doctrine: Hostility parameters (same religion/family: 1, others: 2).
+voraphillic_hostility_doctrine: Broader hostility (same religion: 1, family: 2, others: 2).
+
+###########################
+### FLAGS / VARIABLES ### [NEW SECTION]
+###########################
+
+# Character Flags
+vore_capable: Can perform vore.
+vored: Is currently vored.
+potential_prey/predator: Invitation/setup flags.
+vore_predator: Active predator.
+portrait_belly: Shows belly modifier.
+# Globals: digestion_banned, oral_banned, anal_banned, unbirth_banned, cock_banned, feral_banned, gender_allowed (0=females,1=males,2=both).
+
+# Variables
+num_prey / num_oral/anal/unbirth/cock_prey: Prey counts per orifice.
+max_belly_capacity: Calculated capacity (traits like giant/dwarf affect).
+voraciousness: Base vore tendency.
+imprisonment_duration: Time inside (days/months).
+digestion_progress: Lethal digestion tracker (0-100).
+vore_type: Current orifice (flag: oral/anal/unbirth/cock).
+
+################
+### RELATIONS ### [NEW SECTION]
+################
+
+# From 00_pred_prey_relations.txt
+prey: Prey relation (flags: oral/anal/unbirth/cock; opposites: predator).
+predator: Predator relation (flags: oral/anal/unbirth/cock; opposites: prey).
+
+################
+### CONCEPTS ### [NEW SECTION]
+################
+
+# From 00_vore_concepts.txt
+vore_dungeon/willing/religious_unwilling: Custom prison types (stomach-based).
+prison_oral/anal/unbirth/cock: Orifice-specific prisons.
+
+#####################
+### DEATH REASONS ### [NEW SECTION]
+#####################
+
+# From 00_vore_deaths.txt
+death_execution_oral/anal/unbirth/cock: Public execution via vore.
+death_digested_by_wild_beast: Digested by feral animal.
+death_vored_by_wild_beast: Vored (non-digested) by feral animal.
+
+###################
+### STORY CYCLES ### [NEW SECTION]
+###################
+
+# From 00_vore_story_cycles.txt
+vore_safe_story: Non-lethal story (prey as owner; duration 0-7 days; vore_type set).
+vore_lethal_story: Lethal story (prey as owner; digestion_progress tracks; ends on death/100 progress).
+
+#############################
+### GUI / PORTRAIT ELEMENTS ### [NEW SECTION]
+#############################
+
+# From prey_guis.txt, prey_widgets.txt, 50_vore_belly.txt, 50_genes_vore.txt
+open_prey_window_for_character: Opens prey list UI for a character (scopes predator/prey lists).
+release_specific_prey_from_window: Releases selected prey from UI.
+digest_specific_prey_from_window: Digests selected prey (banned check).
+digest_all_prey_from_window: Digests all (banned check; fallback to release).
+release_all_prey_from_window: Releases all.
+# Genes: morph_genes (gene_bs_belly for belly visuals).
+# Widgets: prey_list_window (GUI for viewing prey).
+
+####################
+### CUSTOM LOC ### [NEW SECTION]
+####################
+
+# From 00_vore_custom_loc.txt
+prisontype_stomach: Renames prison to "Stomach".
+concept_prey_vore: Renames "Prisoner" to "Prey".
+concept_dungeon_stomach: Renames "Dungeon" to "Stomach".
+concept_imprisonment_storage: Renames "Imprisonment" to "Digestion/Storage".
+
+##################
+### SCHEMES ### [NEW SECTION] (Crossover from vanilla overrides)
+##################
+
+# From 00_vore_abduct_scheme.txt, 01_vore_assassin_scheme.txt
+abduct: Vore-enabled abduction scheme (power/resistance tweaks; perk unlocks).
+murder: Vore-enabled murder scheme (hostile; intrigue-based; child protections).
+
+#################
+### OTHER NOTES ### [NEW SECTION]
+#################
+
+- Global Toggles: Use vore_menu decision to set bans (e.g., digestion_banned = yes/no).
+- AI Behavior: Voraciousness modifiers guide AI choices (e.g., sadistic boosts lethal chance).
+- Portrait System: Uses add_vore_belly for dynamic belly visuals (small/medium/large).
+- Capacity: max_belly_capacity scripted value (2-4 base; traits like giant boost to 6).
+- Laws: From 05_vore_laws.txt - Authority levels affect vore opinions/modifiers.
+- Character Templates: From 00_vore_character_templates.txt - prey_character_template (random traits, skills).
+- Court Positions: From 00_vore_court_positions.txt - Vore-themed positions (e.g., court_physician with vore aptitude).
+- Men-at-Arms: From 07_vore_maa.txt - Vore-themed units (e.g., light_footmen with bonuses).
+- Hooks: From 00_vore_hook_types.txt - Vore-related hooks (e.g., weak_blackmail_hook for schemes).
+- Memories: From 00_vore_memories.txt - pred/prey_non_fatal_memory (positive/negative recollections).
+- Debug: Empty 20_vore_debug_events.txt for testing.

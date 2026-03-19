@@ -1,0 +1,17 @@
+﻿namespace = supernat_vore
+
+supernat_vore.0001 = { #Siren sea travel event
+	type = character_event
+	title = supernat_vore.0001.t 
+	theme = travel_danger
+	desc = supernat_vore.0001.d
+
+	immediate = {
+		save_scope_as = prey
+	}
+
+	option = {
+		name = supernat_vore.0001.opt.a
+	}
+
+}

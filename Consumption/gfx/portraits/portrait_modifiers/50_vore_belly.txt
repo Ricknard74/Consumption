@@ -52,23 +52,54 @@
    }
 }
 
-remove_clothes_only_modifier = {
-   portrait_modifiers = {
-       clothes = {
-           value = none
-       }
-   }
-   weight = {
-      base = 0
-      modifier = {
-         add = 1000
-         OR = {     
-            portrait_has_trait_trigger = { TRAIT = oral_predator }
-            portrait_has_trait_trigger = { TRAIT = digesting }
-            portrait_has_trait_trigger = { TRAIT = anal_predator }
-            portrait_has_trait_trigger = { TRAIT = unbirth_predator }
-            has_character_flag = portrait_belly
-         }
-      }        
-   }
-}
+﻿# Vore Belly Portrait Modifiers
+# Place PNGs in gfx/interface/icons/modifier_icons/ (or full paths)
+
+# vore_belly_small = {
+# 	priority = 100
+	
+# 	# Belly bulge overlay (small)
+# 	modifier = {
+# 		texture = "gfx/interface/icons/modifier_icons/belly_small.dds"
+# 		position = { x = 0.5 y = 0.6 }
+# 		size = { width = 0.3 height = 0.2 }
+# 	}
+# }
+
+# vore_belly_medium = {
+# 	priority = 100
+	
+# 	# Medium bulge
+# 	modifier = {
+# 		texture = "gfx/interface/icons/modifier_icons/belly_medium.dds"
+# 		position = { x = 0.5 y = 0.55 }
+# 		size = { width = 0.4 height = 0.25 }
+# 	}
+	
+# 	# Stretch marks?
+# 	modifier = {
+# 		texture = "gfx/interface/icons/modifier_icons/stretch_marks.dds"
+# 		position = { x = 0.5 y = 0.65 }
+# 		size = { width = 0.35 height = 0.15 }
+# 		blend_mode = add
+# 	}
+# }
+
+# vore_belly_large = {
+# 	priority = 100
+	
+# 	# Large bulge
+# 	modifier = {
+# 		texture = "gfx/interface/icons/modifier_icons/belly_large.dds"
+# 		position = { x = 0.5 y = 0.5 }
+# 		size = { width = 0.5 height = 0.35 }
+# 	}
+	
+# 	# Additional strain
+# 	modifier = {
+# 		texture = "gfx/interface/icons/modifier_icons/belly_strain.dds"
+# 		position = { x = 0.5 y = 0.7 }
+# 		size = { width = 0.45 height = 0.2 }
+# 		blend_mode = multiply
+# 	}
+# }

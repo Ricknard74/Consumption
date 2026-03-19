@@ -29,7 +29,6 @@ vore_scheme.0001 = {
         
         # 2. Memories/Context
         first_valid = {
-            # House Feud
             triggered_desc = {
                 trigger = {
                     has_relation_rival = scope:target
@@ -46,7 +45,6 @@ vore_scheme.0001 = {
                 }
                 desc = vore_scheme.0001.context.gluttony
             }
-            # Possessive (Banned only)
             triggered_desc = {
                 trigger = {
                     AND = {
@@ -127,28 +125,24 @@ vore_scheme.0001 = {
     immediate = {
         scope:owner = { save_scope_as = assassin }
         
-        # LOGIC BRANCH: Ban vs Lethal
         if = {
             limit = { global_var:digestion_banned = yes }
-            # NON-LETHAL: Silent disappearance (The "Permanent" end)
+            # NON-LETHAL: Perma-endo
             scope:target = { 
                 death = { 
                     death_reason = death_vanished 
                     killer = scope:owner 
                 } 
             }
-            # Optional: Add a flavor modifier to the predator to track their "collection"
             scope:owner = { add_character_modifier = { modifier = satisfied years = 1 } }
         }
         else = {
-            # LETHAL: Normal digestion
             scope:owner = {
                 scope:target = { save_scope_as = prey }
                 random_orifice_lethal_vore_effect = yes
             }
         }
-        
-        # Vanilla scheme effects
+        debug_log = "[owner.GetName] voraciously eliminated [target.GetName]"
         scheme_owner_pov_murder_success_effect = { REASON = death_mysterious }
     }
 

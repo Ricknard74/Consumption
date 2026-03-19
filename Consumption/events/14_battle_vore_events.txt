@@ -1,0 +1,183 @@
+﻿namespace = battle_vore
+
+# Event: Victory Meal (Player as Predator)
+battle_vore.0001 = {
+    type = character_event
+    title = battle_vore.0001.t
+    desc = battle_vore.0001.desc
+    theme = battle
+    
+    left_portrait = {
+        character = root
+        animation = war_over_win
+    }
+    
+    right_portrait = {
+        character = scope:prey
+        animation = fear
+    }
+    
+    lower_left_portrait = root
+    
+    immediate = {
+        # Block vanilla imprisonment event since we're handling it custom
+        scope:prey = {
+            add_character_flag = {
+                flag = block_imprisonment_event
+                days = 1
+            }
+        }
+    }
+    
+    # Capture them safely
+    option = {
+        name = battle_vore.0001.a
+        
+        # Don't log battle event - vanilla already did this
+        # Don't add to prisoners_of_war - vanilla already did this
+        
+        random_orifice_safe_vore_effect = {
+            prison_type = vore_dungeon
+        }
+        
+        scope:prey = {
+            add_opinion = {
+                target = root
+                modifier = scared_opinion
+                opinion = -20
+            }
+        }
+        
+        stress_impact = {
+            compassionate = minor_stress_impact_loss
+            sadistic = minor_stress_impact_gain
+        }
+        
+        ai_chance = {
+            base = 60
+            modifier = {
+                add = 30
+                has_trait = compassionate
+            }
+            modifier = {
+                add = -40
+                has_trait = sadistic
+            }
+        }
+    }
+    
+    # Digest them
+    option = {
+        name = battle_vore.0001.b
+        
+        trigger = {
+            global_var:digestion_banned = no
+        }
+        
+        # Release them from vanilla prison first
+        scope:prey = {
+            if = {
+                limit = { is_imprisoned_by = root }
+                release_from_prison = yes
+            }
+        }
+        
+        random_orifice_lethal_vore_effect = yes
+        
+        stress_impact = {
+            compassionate = major_stress_impact_gain
+            sadistic = major_stress_impact_loss
+            callous = minor_stress_impact_loss
+        }
+        
+        ai_chance = {
+            base = 40
+            modifier = {
+                add = 40
+                has_trait = sadistic
+            }
+            modifier = {
+                add = -60
+                has_trait = compassionate
+            }
+            modifier = {
+                add = 20
+                has_trait = wrathful
+            }
+        }
+    }
+    
+    after = {
+        # Don't call clean_up_effect here - not sure what it does
+    }
+}
+
+# Event: Defeated and Devoured (Player as Prey)
+battle_vore.0002 = {
+    type = character_event
+    title = battle_vore.0002.t
+    desc = battle_vore.0002.desc
+    theme = battle
+    
+    # root IS the prey in this event
+    right_portrait = {
+        character = root
+        animation = fear
+    }
+    
+    left_portrait = {
+        character = scope:predator
+        animation = war_over_win
+    }
+    
+    lower_left_portrait = scope:predator
+    
+    immediate = {
+        # Block vanilla imprisonment event
+        add_character_flag = {
+            flag = block_imprisonment_event
+            days = 1
+        }
+        
+        scope:predator = {
+            add_character_flag = {
+                flag = portrait_belly
+                days = 7
+            }
+        }
+    }
+    
+    # Accept your fate
+    option = {
+        name = battle_vore.0002.a
+        
+        custom_tooltip = battle_vore.0002.a.tt
+        
+        # Effects already applied by on_action
+        
+        stress_impact = {
+            brave = medium_stress_impact_loss
+            craven = major_stress_impact_gain
+        }
+    }
+    
+    # Struggle against it (doesn't help, but makes you feel better)
+    option = {
+        name = battle_vore.0002.b
+        
+        trigger = {
+            OR = {
+                has_trait = wrathful
+                has_trait = brave
+            }
+        }
+        
+        custom_tooltip = battle_vore.0002.b.tt
+        
+        # Doesn't change outcome, but reduces stress
+        stress_impact = {
+            wrathful = medium_stress_impact_loss
+            brave = minor_stress_impact_loss
+        }
+    }
+}

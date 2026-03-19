@@ -38,7 +38,8 @@ lover_vore.0002 = {
         }
         scope:recipient = {
             save_scope_as = prey
-        }       
+        }   
+        debug_log = "[predator.GetName] has vored their lover [prey.GetName]"    
     }
 
     left_portrait = {
@@ -108,7 +109,7 @@ lover_vore.0003 = {
 
     immediate = {
         scope:predator = {
-                add_character_flag = portrait_belly   
+            add_character_flag = portrait_belly   
         }
     }
     left_portrait = {
@@ -204,29 +205,6 @@ lover_vore.0005 = {
             }
         }
     }
-
-        #Rebirth/Transformation
-        # option = {
-        #         name = EVTOPTAvore.0010b
-        #         trigger = {
-        #                 AND = {
-        #                         global_var:transformation_banned = no
-        #                         can_have_children = yes
-        #                 } 
-        #         }    
-        #         scope:predator = {
-        #                 add_trait = unbirth_predator
-        #                 make_pregnant = {
-        #                         father = scope:prey
-        #                         number_of_children = 1
-        #                 }
-        #         }
-        #         scope:prey = {
-        #                 add_trait = transforming
-        #                 add_character_modifier = { modifier = transforming_1 months = 9 }
-        #         }
-        #         trigger_event = { vore.0014 months = 9 }
-        # }
 
     # Non-lethal
     option = {

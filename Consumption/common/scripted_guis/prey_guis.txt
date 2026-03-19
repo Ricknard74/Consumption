@@ -69,11 +69,33 @@
                             target = flag:anal
                         }
                     }
+                    else_if = {
+                        limit = {
+                            scope:prey_character = {
+                                has_trait = unbirth_vored
+                            }
+                        }
+                        add_to_variable_list = {
+                            name = prey_prison_types
+                            target = flag:unbirth
+                        }
+                    }
+                    else_if = {
+                        limit = {
+                            scope:prey_character = {
+                                has_trait = cock_vored
+                            }
+                        }
+                        add_to_variable_list = {
+                            name = prey_prison_types
+                            target = flag:cock
+                        }
+                    }
                     # Default to generic vored
                     else = {
                         add_to_variable_list = {
                             name = prey_prison_types
-                            target = flag:vored
+                            target = flag:oral
                         }
                     }
                 }
@@ -129,6 +151,47 @@ digest_prey_from_window = {
         scope:predator = {
             # Trigger the digest event
             trigger_event = vore.3004
+        }
+    }
+}
+
+# Digest All Prey
+digest_all_prey_from_window = {
+    scope = character
+    effect = {
+        if = {
+            limit = { global_var:digestion_banned = no }
+            random_in_list = {
+                variable = current_predator_view
+                save_temporary_scope_as = predator
+            }
+            scope:predator = {
+                trigger_event = vore.4002
+            }
+        }
+        else = {
+            # Auto-release if banned
+            random_in_list = {
+                variable = current_predator_view
+                save_temporary_scope_as = predator
+            }
+            scope:predator = {
+                trigger_event = vore.4003
+            }
+        }
+    }
+}
+
+# Release All Prey
+release_all_prey_from_window = {
+    scope = character
+    effect = {
+        random_in_list = {
+            variable = current_predator_view
+            save_temporary_scope_as = predator
+        }
+        scope:predator = {
+            trigger_event = vore.4003
         }
     }
 }

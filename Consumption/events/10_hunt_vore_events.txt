@@ -5,12 +5,15 @@ hunt_vore.0001 = {
     type = character_event
     title = hunt.9000.t
     desc = hunt.9000.desc
-    theme = activity
+    theme = hunting
 
     trigger = {
         global_var:feral_banned = no
     }
     
+    # NOTE: scope:victim is set in immediate below.
+    # Portrait will fall back gracefully on first fire since immediate runs after portrait evaluation.
+    # To fix properly, victim selection would need to happen earlier in the call chain.
     left_portrait = {
         character = scope:victim
         animation = fear
@@ -18,6 +21,7 @@ hunt_vore.0001 = {
     
     immediate = {
         # Pick a random guest/party member to be the victim
+        # FIX: Added scope:activity guard - verify this is passed from on_hunt_random_pulse context
         scope:activity = {
             random_attending_character = {
                 limit = { 
@@ -30,7 +34,6 @@ hunt_vore.0001 = {
         }
     }
 
-
     option = {
         name = hunt.9000.opt.a
         trigger_event = hunt_vore.0002
@@ -40,34 +43,40 @@ hunt_vore.0001 = {
 # Event: The Outcome (Router)
 hunt_vore.0002 = {
     type = character_event
-    title = hunt.0002.t
-    desc = hunt.0002.desc
-    theme = activity
+    title = hunt_vore.0002.t
+    desc = hunt_vore.0002.desc
+    theme = hunting
 
     option = {
-        name = hunt.0002.opt.a 
+        name = hunt_vore.0002.opt.a 
         
         hidden_effect = {
             random_list = {
                 # Oral
-                25 = {
-                    oral_vore_modifier = yes
+                66 = {
+                    trigger = { global_var:oral_banned = no }
                     trigger_event = hunt_vore.0003
                 }
-                # Unbirth (Female check)
-                25 = { 
-                    anal_vore_modifier = yes
-                    trigger_event = hunt_vore.0004 
-                }
                 # Anal
-                25 = {
-                    unbirth_vore_modifier = yes
-                    trigger_event = hunt_vore.0005 
+                11 = { 
+                    trigger = { global_var:anal_banned = no }
+                    trigger_event = hunt_vore.0004
+                }
+                # Unbirth
+                12 = {
+                    trigger = { 
+                        global_var:unbirth_banned = no
+                        is_female = yes
+                    }
+                    trigger_event = hunt_vore.0005
                 }
                 # Cock (Male check)
-                25 = { 
-                    cock_vore_modifier = yes
-                    trigger_event = hunt_vore.0006 
+                11 = { 
+                    trigger = {
+                        global_var:cock_banned = no
+                        is_female = no
+                    }
+                    trigger_event = hunt_vore.0006
                 }
             }
         }
@@ -75,14 +84,14 @@ hunt_vore.0002 = {
 }
 
 # --- SUB-EVENTS ---
+#These four events (0003-0006) are feral vore events - a beast eats a party member.
 
-# Oral Vore
+# Oral Vore (Feral)
 hunt_vore.0003 = {
     type = character_event
     title = hunt.0003.t
-    theme = activity
+    theme = hunting
     
-    # Dynamic Description
     desc = {
         first_valid = {
             triggered_desc = {
@@ -119,16 +128,12 @@ hunt_vore.0003 = {
         name = hunt.0003.opt.a
         hidden_effect = {
             scope:victim = {
-                # Check if digestion is banned
                 if = {
                     limit = { global_var:digestion_banned = no }
-                    # Standard lethal outcome
-                    death = { death_reason = death_hunting_accident killer = root }
+                    death = { death_reason = death_digested_by_wild_beast }
                 }
                 else = {
-                    # Mysterious disappearance outcome
-                    # 'silent = yes' hides the murder popup, making it look like they vanished
-                    death = { death_reason = death_vanished }
+                    death = {death_reason = death_vored_by_wild_beast }
                 }
             }
             root = {
@@ -139,11 +144,11 @@ hunt_vore.0003 = {
     }
 }
 
-# Unbirth
+# Anal Vore (Feral)
 hunt_vore.0004 = {
     type = character_event
     title = hunt.0004.t
-    theme = activity
+    theme = hunting
     
     desc = {
         first_valid = {
@@ -183,21 +188,21 @@ hunt_vore.0004 = {
             scope:victim = {
                 if = {
                     limit = { global_var:digestion_banned = no }
-                    death = { death_reason = death_hunting_accident killer = root }
+                    death = { death_reason = death_digested_by_wild_beast }
                 }
                 else = {
-                    death = { death_reason = death_vanished }
+                    death = { death_reason = death_vored_by_wild_beast }
                 }
             }
         }
     }
 }
 
-# Anal Vore
+# Unbirth Vore (Feral)
 hunt_vore.0005 = {
     type = character_event
     title = hunt.0005.t
-    theme = activity
+    theme = hunting
 
     desc = {
         first_valid = {
@@ -237,21 +242,21 @@ hunt_vore.0005 = {
             scope:victim = {
                 if = {
                     limit = { global_var:digestion_banned = no }
-                    death = { death_reason = death_hunting_accident killer = root }
+                    death = { death_reason = death_digested_by_wild_beast }
                 }
                 else = {
-                    death = { death_reason = death_vanished }
+                    death = {death_reason = death_vored_by_wild_beast }
                 }
             }
         }
     }
 }
 
-# Cock Vore
+# Cock Vore (Feral)
 hunt_vore.0006 = {
     type = character_event
     title = hunt.0006.t
-    theme = activity
+    theme = hunting
 
     desc = {
         first_valid = {
@@ -291,18 +296,17 @@ hunt_vore.0006 = {
             scope:victim = {
                 if = {
                     limit = { global_var:digestion_banned = no }
-                    death = { death_reason = death_hunting_accident killer = root }
+                    death = { death_reason = death_digested_by_wild_beast }
                 }
                 else = {
-                    death = { death_reason = death_vanished }
+                    death = {death_reason = death_vored_by_wild_beast }
                 }
             }
         }
     }
 }
 
-# Event: Successful Vore Outcome (Hunt)
-# Replaces the simple character_event with a full activity event
+# Event: Successful Vore Outcome (Hunt) - Player/character eats someone during the hunt
 hunt_vore.0007 = {
     type = activity_event
     title = hunt_vore.0003.t
@@ -350,15 +354,13 @@ hunt_vore.0007 = {
             }
         }
     }
-    theme = hunt_activity
+    theme = hunting
     
-    # Left Portrait: The Predator (Player/Host)
     left_portrait = {
         character = root
-        animation = schadenfreude # Satisfied
+        animation = schadenfreude
     }
     
-    # Center Portrait: A Witness (Random Guest)
     center_portrait = {
         character = scope:witness
         triggered_animation = {
@@ -378,16 +380,17 @@ hunt_vore.0007 = {
         }
     }
     
-    # Right Portrait: The Prey (Victim)
     right_portrait = {
         character = scope:prey
         animation = fear
     }
     
-    override_background = { reference = forest_path }
+    override_background = { reference = wilderness }
 
     immediate = {
-        # 1. Setup Witness Scope (Random participant who isn't the prey)
+        scope:victim = { save_scope_as = prey }
+
+        # Setup Witness Scope (Random participant who isn't the prey)
         scope:activity = {
             random_attending_character = {
                 limit = { 
@@ -398,13 +401,12 @@ hunt_vore.0007 = {
             }
         }
         
-        # 2. Execute Vore Logic (Imprisonment)
-        # This adds traits, counters, and belly visuals
+        # Execute Vore Logic (Imprisonment)
         random_orifice_safe_vore_effect = { 
             prison_type = vore_dungeon
         }
         
-        # 3. Add Activity Log
+        # Add Activity Log
         scope:activity = {
             add_activity_log_entry = {
                 key = hunt_vore_success_log
@@ -416,7 +418,7 @@ hunt_vore.0007 = {
         }
     }
 
-    # Option 1: Continue Hunt (The Predator remains active)
+    # Option 1: Continue Hunt
     option = {
         name = hunt_vore.0003.opt.continue
         trigger = {
@@ -424,6 +426,7 @@ hunt_vore.0007 = {
         }
         flavor = hunt_vore.0003.flavor.continue
         
+        # FIX: Moved root effects outside scope:activity block
         scope:activity = {
             add_activity_log_entry = {
                 key = hunt_vore_continue_log
@@ -432,18 +435,17 @@ hunt_vore.0007 = {
                 character = root
                 target = scope:prey
             }
-            # Effect: The predator is energized/full
-            root = {
-                add_stress = 10 # Burden of carrying prey
-                add_prestige = 5 # Dominance
-            }
+        }
+        root = {
+            add_stress = 10
+            add_prestige = 5
         }
         
         ai_chance = {
             base = 50
             ai_value_modifier = {
-                ai_energy = 1 # Full of energy
-                ai_rationality = -0.5 # Irrational to keep hunting
+                ai_energy = 1
+                ai_rationality = -0.5
             }
         }
     }
@@ -453,6 +455,7 @@ hunt_vore.0007 = {
         name = hunt_vore.0003.opt.end
         flavor = hunt_vore.0003.flavor.end
         
+        # FIX: Moved root effects outside scope:activity block
         scope:activity = {
             set_variable = {
                 name = hunt_invalidated
@@ -468,16 +471,14 @@ hunt_vore.0007 = {
                 character = root
                 target = scope:prey
             }
-            # Effect: Stress relief for ending it early, or stress gain for hiding it?
-            # Let's say stress gain for hiding a "terrible crime" (if discovered) or relief (if sadistic).
-            root = {
-                custom_tooltip = hunt_voreTooltip.0003b
-                # stress_impact = {
-                #     sadistic = minor_stress_relief_gain
-                #     gluttonous = minor_stress_relief_gain
-                #     chaste = major_stress_impact_gain
-                # }
-            }
+        }
+        root = {
+            custom_tooltip = hunt_voreTooltip.0003b
+            # stress_impact = {
+            #     sadistic = minor_stress_relief_gain
+            #     gluttonous = minor_stress_relief_gain
+            #     chaste = major_stress_impact_gain
+            # }
         }
         
         ai_chance = {
@@ -491,7 +492,8 @@ hunt_vore.0007 = {
 }
 
 # Event: The Beast's Hunger (Alternative Start)
-# Triggers when the hunt party encounters the chosen legendary beast
+# FIX: This event was unconnected. Wire it up from on_hunt_random_pulse or a hunt on_action
+# to actually trigger it. Currently it will never fire.
 hunt_vore.9000 = {
     type = character_event
     title = hunt_vore.9000.t
@@ -540,11 +542,8 @@ hunt_vore.9000 = {
         name = hunt_vore.9000.opt.a
         
         hidden_effect = {
-            # This event uses the 'death_murder' logic to simulate a mysterious disappearance 
-            # regardless of the digestion ban, as it implies the beast swallows them whole instantly.
-            # If you want this to respect the ban, change 'death_murder' to an if/else block like above.
             scope:prey = {
-                death = { death_reason = death_vanished }
+                death = {death_reason = death_vored_by_wild_beast }
             }
         }
     }

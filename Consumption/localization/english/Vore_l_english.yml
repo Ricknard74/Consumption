@@ -154,7 +154,7 @@ trait_preyish_desc:0 "This character is naturally nervous and submissive around 
 ########################################
 
 #Doctrines
-voraphillic_hostiliy_doctrine_name:0 "Not tolerant"
+voraphillic_hostility_doctrine_name:0 "Not tolerant"
 voraphillic_hostility_doctrine_desc:0 "More Tolerant than some"
 savior_voraphillic_hostility_doctrine_name:0 "Tolerance"
 savior_voraphillic_hostility_doctrine_desc:0 "Even More tolerant than most"

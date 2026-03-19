@@ -14,6 +14,7 @@ prison_vore.0001 = {
         scope:recipient = {
             save_scope_as = prey
         }       
+        debug_log = "[predator.GetName] has vored their prisoner [prey.GetName]"
     }
 
     left_portrait = {
@@ -28,9 +29,9 @@ prison_vore.0001 = {
     # Oral
     option = {
         name = prison_voreOpt.0001a
-        trigger = { global_var:oral_banned = no }
-        ai_chance = {
-            oral_vore_modifier = yes
+        trigger = { 
+            is_ai = no
+            global_var:oral_banned = no 
         }
         trigger_event = prison_vore.0002 
     }            
@@ -38,9 +39,9 @@ prison_vore.0001 = {
     # Anal
     option = {
         name = prison_voreOpt.0001b
-        trigger = { global_var:anal_banned = no }
-        ai_chance = {
-            anal_vore_modifier = yes
+        trigger = { 
+            is_ai = no
+            global_var:anal_banned = no 
         }
         trigger_event = prison_vore.0003 
     }
@@ -50,13 +51,11 @@ prison_vore.0001 = {
         name = prison_voreOpt.0001c
         trigger = {
             AND = {
+                is_ai = no
                 scope:predator = { is_female = yes }
                 NOT = { scope:predator = { has_trait = pregnant } }
                 global_var:unbirth_banned = no       
             }
-        }
-        ai_chance = {
-            unbirth_vore_modifier = yes
         }
         trigger_event = prison_vore.0004 
     }
@@ -65,17 +64,22 @@ prison_vore.0001 = {
     option = {
         name = prison_voreOpt.0001d
         trigger = {
-            AND = {
-                scope:predator = { is_female = no }
-                global_var:cock_banned = no
-            }
-        }
-        ai_chance = {
-            cock_vore_modifier = yes
+            is_ai = no
+            scope:predator = { is_female = no }
+            global_var:cock_banned = no
         }
         trigger_event = prison_vore.0005
     }
-        
+    
+    # AI Only Option:
+    option = {
+        trigger = {
+            is_ai = yes
+        }
+        ai_chance = 100
+        random_orifice_vore_effect = { prison_type = vore_dungeon }
+    }
+
     # Exit
     option = {
         name = prison_voreOpt.0001e
@@ -108,7 +112,6 @@ prison_vore.0002 = {
         ai_chance = {
             lethal_vore_modifier = { PREY = scope:prey }
         }
-        # FIXED: Changed type from 'unbirth' to 'oral'
         lethal_vore_effect = {
             type = oral
         }
@@ -123,12 +126,6 @@ prison_vore.0002 = {
         safe_vore_effect = {
             type = oral
             prison_type = vore_dungeon
-        }
-        hidden_effect = {
-            if = {
-                limit = { is_ai = yes }
-                trigger_event = { id = vore.0001 months = 3 }
-            }
         }
     }
 
@@ -197,17 +194,10 @@ prison_vore.0004 = {
         }
         hidden_effect = {
             scope:predator = {
-                add_character_modifier = { modifier = fertility_boost }
-                trigger_event = { id = vore.0002 months = { 2 3 } }
-            }        
-            scope:prey = {
-                death = { killer = scope:predator death_reason = death_execution_unbirth }
-            }        
+                lethal_vore_effect = { type = unbirth }
+            }               
         }
     }
-
-    # Rebirth/Transformation (Commented out as per your file)
-    # option = { ... }
 
     # Non-fatal
     option = {
@@ -246,11 +236,7 @@ prison_vore.0005 = {
         }
         hidden_effect = {
             scope:predator = {
-                add_character_modifier = { modifier = fertility_boost } 
-                trigger_event = { id = vore.0002 months = { 2 3 } }
-            }
-            scope:prey = {
-                death = { death_reason = death_execution_cock killer = scope:predator }
+                lethal_vore_effect = { type = cock }
             }
         }
     }
@@ -261,9 +247,11 @@ prison_vore.0005 = {
         ai_chance = {
             safe_vore_modifier = { PREY = scope:prey }
         }
-        safe_vore_effect = {
-            type = cock
-            prison_type = vore_dungeon
+        hidden_effect = {
+            safe_vore_effect = {
+                type = cock
+                prison_type = vore_dungeon
+            }
         }
     }
     

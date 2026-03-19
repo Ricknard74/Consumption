@@ -72,11 +72,12 @@ pred_invitation_interaction = {
 #Vore Prisoner
 vore_prisoner_interaction = {    
     interface_priority = 30
-    common_interaction = no
     icon = "gfx/interface/icons/actions/prison.dds" # Added .dds
 
     category = interaction_category_prison
     desc = vore_prisoner_interaction_desc
+
+    ignores_pending_interaction_block = yes
 
     ai_targets = {
         ai_recipients = prisoners

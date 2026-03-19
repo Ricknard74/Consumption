@@ -49,76 +49,9 @@ vore.3001 = {
         name = vore.3001.opt.b
         trigger = { always = yes }
     }
-}
-    
-# --- DIGESTING PREY EVENTS ---
 
-vore.3002 = {
-    title = vore.3002.t
-    type = character_event
-    theme = default
-    
-    # Dynamic description based on digestion progress
-    desc = {
-        first_valid = {
-            triggered_desc = {
-                trigger = { 
-                    scope:prey = { has_variable = digestion_progress }
-                    scope:prey.var:digestion_progress < 25 
-                }
-                desc = vore.3002.desc.early
-            }
-            triggered_desc = {
-                trigger = { 
-                    scope:prey = { has_variable = digestion_progress }
-                    scope:prey.var:digestion_progress >= 25 
-                    scope:prey.var:digestion_progress < 50 
-                }
-                desc = vore.3002.desc.mid
-            }
-            triggered_desc = {
-                trigger = { 
-                    scope:prey = { has_variable = digestion_progress }
-                    scope:prey.var:digestion_progress >= 50 
-                    scope:prey.var:digestion_progress < 75 
-                }
-                desc = vore.3002.desc.late
-            }
-            triggered_desc = {
-                trigger = { 
-                    AND = {
-                        scope:prey = { has_variable = digestion_progress }
-                        scope:prey.var:digestion_progress >= 75 
-                    }
-                }
-                desc = vore.3002.desc.end
-            }
-            desc = vore.3002.desc.fallback
-        }
-    }
-    
-    # Option: Continue Digestion
-    option = {
-        name = vore.3002.opt.a
-        # No effect needed, just close the event
-    }
-    
-    # Option: Emergency Release
-    option = {
-        trigger = {
-            scope:prey.var:digestion_progress <= 50
-        }
-        name = vore.3002.opt.c
-        
-        hidden_effect = {
-            # Release prey with trauma
-            release_prey_location_check_effect = yes
-            
-            scope:prey = {
-                add_character_modifier = { modifier = trauma_from_digestion years = 5 }
-                add_trait = disfigured
-            }
-        }
+    after = {
+        clean_up_effect = yes
     }
 }
 
@@ -166,6 +99,10 @@ vore.3004 = {
         name = prey_window.3004.a
         # Predator option
     }
+
+    after = {
+        clean_up_effect = yes
+    }
 }
     
 # --- SAFE PREY EVENTS ---
@@ -182,6 +119,15 @@ vore.3003 = {
         scope:recipient = {
             save_scope_as = prey
         }
+    }
+
+    left_portrait = {
+        character = scope:predator
+    }
+    
+    lower_right_portrait = {
+        character = scope:prey
+        animation = thinking        
     }
     
     desc = {
@@ -222,7 +168,7 @@ vore.3003 = {
             scope:prey = {
                 random_relation = {
                     type = predator
-                    add_opinion = { target = root modifier = comforted_opinion }
+                    add_opinion = { target = scope:predator modifier = comforted_opinion }
                 }
             }
         }
@@ -232,8 +178,12 @@ vore.3003 = {
         name = vore.3003.opt.c # "Release Prey"
         
         hidden_effect = {
-            release_prey_location_check_effect = yes
+            trigger_event = vore.0001
         }
+    }
+
+    after = {
+        clean_up_effect = yes
     }
 }
 
@@ -262,6 +212,10 @@ vore.3005 = {
     option = {
         name = prey_window.3005.a
         # Event closes automatically
+    }
+
+    after = {
+        clean_up_effect = yes
     }
 }
 
@@ -501,12 +455,6 @@ vore.0005 = {
         name = vore_aspectOpt.0005b
         trigger_event = vore.1005
     } 
-    
-    # Unbirth Transformation Toggle
-    option = {
-        name = vore_aspectOpt.0005c
-        trigger_event = vore.1006
-    }
         
     # Go Back
     option = {
@@ -578,40 +526,6 @@ vore.1005 = {
         name = voreoptDG.1005b
         hidden_effect = {
             set_global_variable = { name = digestion_banned value = yes }
-        }
-        trigger_event = vore.0005
-    }
-}
-
-# Transformation Toggle
-vore.1006 = {
-    type = character_event
-    theme = default
-    title = voretitleTF.1006
-    desc = {
-        first_valid = {
-            triggered_desc = {
-                trigger = { global_var:transformation_banned = no }   
-                desc = voredescTF.1006a
-            }
-            desc = voredescTF.1006b
-        }
-    }
-
-    # Transformation On 
-    option = {
-        name = voreoptTF.1006a
-        hidden_effect = {
-            set_global_variable = { name = transformation_banned value = no }
-        }
-        trigger_event = vore.0005  
-    }
-
-    # Transformation Off
-    option = {
-        name = voreoptTF.1006b
-        hidden_effect = {
-            set_global_variable = { name = transformation_banned value = yes }
         }
         trigger_event = vore.0005
     }
@@ -842,11 +756,24 @@ vore.0001 = {
     theme = realm
 
     immediate = {
-        scope:actor = {
+        scope:actor ?= {
             save_scope_as = predator
         }
-        scope:recipient = {
+        scope:recipient ?= {
             save_scope_as = prey
+        }
+        if = {
+            limit = { NOT = { exists = scope:predator } }
+            root = { save_scope_as = predator }
+        }
+        if = {
+            limit = { NOT = { exists = scope:prey } }
+            scope:predator = {
+                random_relation = {
+                    type = prey
+                    save_scope_as = prey
+                }
+            }
         }
     }
     
@@ -931,7 +858,7 @@ vore.0001 = {
     option = {
         name = vore_releaseOpt.0001a
         trigger = {
-            AND = {
+            scope:predator = {
                 global_var:scat_banned = no
                 has_trait = oral_predator
             }
@@ -1054,7 +981,9 @@ vore.0002 = {
     theme = crown
     
     immediate = {
-        
+        scope:actor ?= {
+            save_scope_as = predator
+        }
     }
 
     # Dynamic Descriptions using Traits
@@ -1063,25 +992,21 @@ vore.0002 = {
             # ORAL
             triggered_desc = {
                 trigger = {
-                    AND = {
-                        OR = {
-                            has_character_flag = oral_digestion_finished
-                            has_character_flag = anal_digestion_finished
-                        }
-                        global_var:scat_banned = no 
-                    } 
+                    OR = {
+                        has_character_flag = oral_digestion_finished
+                        has_character_flag = anal_digestion_finished
+                    }
+                    global_var:scat_banned ?= no 
                 }
                 desc = vore_digestDesc.0002a 
             }
             triggered_desc = {
                 trigger = {
-                    AND = {
-                        OR = {
-                            has_character_flag = oral_digestion_finished
-                            has_character_flag = anal_digestion_finished
-                        }
-                        global_var:scat_banned = yes 
-                    } 
+                    OR = {
+                        has_character_flag = oral_digestion_finished
+                        has_character_flag = anal_digestion_finished
+                    }
+                    global_var:scat_banned ?= yes 
                 }
                 desc = vore_digestDesc.0002b 
             }
@@ -1090,14 +1015,14 @@ vore.0002 = {
             triggered_desc = {
                 trigger = { 
                     has_character_flag = unbirth_digestion_finished
-                    global_var:scat_banned = no 
+                    global_var:scat_banned ?= no 
                 }
                 desc = vore_digestDesc.0002c 
             }
             triggered_desc = {
                 trigger = { 
                     has_character_flag = unbirth_digestion_finished
-                    global_var:scat_banned = yes
+                    global_var:scat_banned ?= yes
                 }
                 desc = vore_digestDesc.0002d 
             }
@@ -1106,14 +1031,14 @@ vore.0002 = {
             triggered_desc = {
                 trigger = { 
                     has_character_flag = cock_digestion_finished
-                    global_var:scat_banned = no
+                    global_var:scat_banned ?= no
                 }
                 desc = vore_digestDesc.0002e 
             }
             triggered_desc = {
                 trigger = { 
                     has_character_flag = cock_digestion_finished
-                    global_var:scat_banned = yes
+                    global_var:scat_banned ?= yes
                 }
                 desc = vore_digestDesc.0002f 
             }
@@ -1162,7 +1087,7 @@ vore.0002 = {
                 scope:predator = { finish_digesting_effect = { type = oral } }
             }
             if = {
-                limit = { has_character_flag = anal_vored }
+                limit = { has_character_flag = anal_digestion_finished }
                 remove_character_flag = anal_digestion_finished
                 scope:predator = { finish_digesting_effect = { type = anal } }
             }
@@ -1201,7 +1126,7 @@ vore.0002 = {
                 has_character_flag = unbirth_digestion_finished
                 has_character_flag = cock_digestion_finished
             }
-            scope:predator = { global_var:scat_banned = yes }
+            global_var:scat_banned = yes
         }
         hidden_effect = {
             if = { 
@@ -1228,7 +1153,10 @@ vore.0020 = {
     }
     
     immediate = {
-        change_variable = { name = num_prey add = -1 }
+        if = {
+            limit = { var:num_prey > 0 }
+            change_variable = { name = num_prey add = -1 }
+        }
         
         # 2. Check specific trait and decrement specific counter
         if = {
@@ -1261,14 +1189,56 @@ vore.0020 = {
         }
     }
 }
-    
-# This hidden event is called by the AI decision to release prey.
-vore.4001 = {
+
+#Digest All
+vore.4002 = {
     type = character_event
-    hidden = yes 
+    hidden = yes
 
     immediate = {
-        # The actor is the predator, the target is the prey
-        release_prey_location_check_effect = yes
+        root = {
+            save_scope_as = predator
+        }
+        every_relation = {
+            type = prey
+            limit = { is_alive = yes }
+            save_scope_as = prey
+            if = {
+                limit = { scope:prey = { has_trait = oral_vored } }
+                release_prey_effect = { type = oral }
+                lethal_vore_effect = { type = oral }
+            }
+            else_if = {
+                limit = { scope:prey = { has_trait = anal_vored } }
+                release_prey_effect = { type = anal }
+                lethal_vore_effect = { type = anal }
+            }
+            else_if = {
+                limit = { scope:prey = { has_trait = unbirth_vored } }
+                release_prey_effect = { type = unbirth }
+                lethal_vore_effect = { type = unbirth }
+            }
+            else_if = {
+                limit = { scope:prey = { has_trait = cock_vored } }
+                release_prey_effect = { type = cock }
+                lethal_vore_effect = { type = cock }
+            }
+        }
+    }
+}
+
+# Release All Prey
+vore.4003 = {
+    type = character_event
+    hidden = yes
+
+    immediate = {
+        save_scope_as = predator
+        every_relation = {
+            type = prey
+            limit = { is_alive = yes }
+            save_scope_as = prey
+            release_prey_location_check_effect = yes  # Your existing release logic
+        }
     }
 }

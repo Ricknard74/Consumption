@@ -7,10 +7,13 @@ l_english:
 
 #Release Prey
 
-release_prey_interaction:0 "Release Prey"
-release_prey_interaction_desc:0 "Choose to release your current prey"
+interaction_release_prey:0 "Release Prey"
+interaction_release_prey_desc:0 "Choose to release your current prey"
 release_prey_tooltip:0 "Release Prey"
 release_prey_confirm:0 "Release Prey"
+
+# Opinion modifier (prey holds grudge for being vored unwillingly)
+vored_me_unwilling_opinion:0 "Vored Me Unwillingly"
 
 vore_releaseTitle.0001:0 "Releasing Your Prey"
 vore_releaseDesc.0001a:0 "Dirty Full Tour Description"
@@ -54,8 +57,20 @@ vore_digestOpt.0002d:0 "Unbirth Absorption Option"
 vore_digestOpt.0002f:0 "Cock Absorption Option"
 
 #Prey Death
-death_execution_oral:0 "was eaten"
-death_execution_oral_killer:0 "Eaten by [TARGET_CHARACTER.GetUIName]"
+death_execution_oral:0 "was swallowed"
+death_execution_oral_killer:0 "Swallowed by [TARGET_CHARACTER.GetUIName]"
+
+death_execution_anal:0 "was digested"
+death_execution_anal_killer:0 "Digested by [TARGET_CHARACTER.GetUIName]"
+
+death_execution_unbirth:0 "was unbirthed"
+death_execution_unbirth_killer:0 "Unbirthed by [TARGET_CHARACTER.GetUIName]"
+
+death_execution_cock:0 "was engulfed"
+death_execution_cock_killer:0 "engulfed by [TARGET_CHARACTER.GetUIName]"
+
+death_digested_by_wild_beast:0 "Was digested by a wild beast"
+death_vored_by_wild_beast:0 "Was devoured and spirited away by a wild beast"
 
 ########################################
 ################Events##################
@@ -247,9 +262,9 @@ hunt.9000.t:0 "A Cry in the Woods"
 hunt.9000.desc:0 "A piercing scream echoes through the forest, cutting through the rustling leaves. One of the hunting party, [victim.GetTitledFirstName], seems to have strayed too far from the group... or perhaps the beast has come to us."
 hunt.9000.opt.a:0 "Investigate the source!"
 
-hunt.9001.t:0 "The Predator's Meal"
-hunt.9001.desc:0 "You push through the brambles just in time to see a massive shadow rise over [victim.GetTitledFirstName]. The beast is not merely hunting; it is feeding."
-hunt.9001.opt.a:0 "Nature is cruel."
+vore_hunt.9001.t:0 "The Predator's Meal"
+vore_hunt.9001.desc:0 "You push through the brambles just in time to see a massive shadow rise over [victim.GetTitledFirstName]. The beast is not merely hunting; it is feeding."
+vore_hunt.9001.opt.a:0 "Nature is cruel."
 
 hunt.9010.t:0 "Swallowed Whole"
 hunt.9010.desc:0 "With a sickening snap of its jaws, the beast engulfs [victim.GetFirstName]. There is little struggle, only the inevitable slide down the gullet."
@@ -269,8 +284,8 @@ hunt.9040.opt.a:0 "A grim end."
 
 # Event 0001: Jester
 courtier_voreTitle.0001:0 "A New Act"
-courtier_voreDesc.0001:0 "My court jester, [predator.GetTitledFirstName], has decided to debut a new routine. To my surprise, [predator.GetHerHim] grabbed [prey.GetTitledFirstName], a guest at court, and proceeded to swallow [prey.GetHimHer] whole before the throne."
-courtier_voreDesc.0001_safe:0 "[predator.GetFirstName] belches loudly, patting a squirming midsection. It seems [prey.GetFirstName] will be part of the court for quite some time... internally."
+courtier_vore.0001.desc:0 "My court jester, [predator.GetTitledFirstName], has decided to debut a new routine. To my surprise, [predator.GetHerHim] grabbed [prey.GetTitledFirstName], a guest at court, and proceeded to swallow [prey.GetHimHer] whole before the throne."
+courtier_vore.0001.desc_safe:0 "[predator.GetFirstName] belches loudly, patting a squirming midsection. It seems [prey.GetFirstName] will be part of the court for quite some time... internally."
 courtier_voreDesc.0001_lethal:0 "There is a sickening slurp, followed by silence. [predator.GetFirstName] licks [predator.GetHerHis] lips, bowing deeply. The performance is over."
 courtier_voreOpt.0001:0 "Keep them in there for now."
 courtier_voreOpt.0002:0 "Digest the fool."
@@ -278,14 +293,7 @@ courtier_voreOpt.0002:0 "Digest the fool."
 # Event 0010: Spouse
 courtier_voreTitle.0010:0 "A Helpful Spouse"
 courtier_voreDesc.0010:0 "[spouse.GetTitledFirstName] approaches me with a sly smile. 'That guest, [prey.GetTitledFirstName], was saying the most dreadful things about you. I... took the liberty of handling it.'\n\n[spouse.GetSheHe] pats [spouse.GetHerHis] stomach significantly."
-courtier_voreOpt.0010a:0 "Thank you, my dear."
 courtier_voreOpt.0010b:0 "We have no need for witnesses."
-
-# Event 0030: Rival
-courtier_voreTitle.0030:0 "The Disappearing Rival"
-courtier_voreDesc.0030:0 "[predator.GetTitledFirstName], one of my loyal courtiers, has cornered my rival [prey.GetTitledFirstName] in the gardens. The poor fool looks about to become a permanent addition to [predator.GetFirstNamePossessive] anatomy."
-courtier_voreOpt.0030a:0 "Dispose of the nuisance."
-courtier_voreOpt.0030b:0 "Stop this madness!"
 
 # VORE.3001: Status Check (Hidden Event)
 # vore.3001.t: "" 
@@ -293,10 +301,10 @@ courtier_voreOpt.0030b:0 "Stop this madness!"
 
 # VORE.3002: Checking on Digesting/Trapped Prey
 vore.3002.t:0 "Checking on Stomach Contents"
-vore.3002.desc.early:0 "[scope:prey.GetName] is only just beginning to melt away inside you."
-vore.3002.desc.mid:0 "The digestion is progressing rapidly. [scope:prey.GetName] has become significantly smaller."
-vore.3002.desc.late:0 "There is barely anything left of [scope:prey.GetName] now. Just a soft mass."
-vore.3002.desc.end:0 "The process is nearly complete. [scope:prey.GetName] has almost entirely become part of you."
+vore.3002.desc.early:0 "[prey.GetName] is only just beginning to melt away inside you."
+vore.3002.desc.mid:0 "The digestion is progressing rapidly. [prey.GetName] has become significantly smaller."
+vore.3002.desc.late:0 "There is barely anything left of [prey.GetName] now. Just a soft mass."
+vore.3002.desc.end:0 "The process is nearly complete. [prey.GetName] has almost entirely become part of you."
 vore.3002.desc.fallback:0 "Your prey is currently stewing in your gut."
 
 vore.3002.opt.a:0 "Continue Digestion"
@@ -327,26 +335,26 @@ prey_window.3004.a:0 "A satisfying meal."
 
  # VORE.3004: Vore Conversion
  vore.3004.t:0 "Vore Conversion"
- vore.3004.desc:0 "You have an opportunity to convert [scope:prey.GetFirstNameNoTooltip] to your faith through the intimate experience of vore. This could be a powerful spiritual experience for them."
+ vore.3004.desc:0 "You have an opportunity to convert [prey.GetFirstNameNoTooltip] to your faith through the intimate experience of vore. This could be a powerful spiritual experience for them."
  vore.3004.opt.a:0 "Convert Through Oral Vore"
  vore.3004.opt.b:0 "Convert Through Unbirth"
  vore.3004.opt.c:0 "Perhaps Another Time"
 
  # VORE.3005: Successful Conversion
  vore.3005.t:0 "Successful Vore Conversion"
- vore.3005.desc:0 "[scope:prey.GetFirstNameNoTooltip] has converted to your faith after their experience inside you. They now see the world through your eyes."
+ vore.3005.desc:0 "[prey.GetFirstNameNoTooltip] has converted to your faith after their experience inside you. They now see the world through your eyes."
  vore.3005.opt.a:0 "Praise the Gods"
  vore.3005.opt.b:0 "A Necessary Conversion"
 
  # VORE.3006: Battlefield Capture
  vore.3006.t:0 "Battlefield Capture"
- vore.3006.desc:0 "During the chaos of battle, [scope:predator.GetFirstNameNoTooltip] managed to capture [scope:prey.GetFirstNameNoTooltip] and has swallowed them whole. They will be held in [scope:predator.GetHerHis] stomach until further notice."
+ vore.3006.desc:0 "During the chaos of battle, [predator.GetFirstNameNoTooltip] managed to capture [prey.GetFirstNameNoTooltip] and has swallowed them whole. They will be held in [predator.GetHerHis] stomach until further notice."
  vore.3006.opt.a:0 "An Effective Prison"
  vore.3006.opt.b:0 "Disturbing but Effective"
 
  # VORE.3007: Battlefield Digestion
  vore.3007.t:0 "Battlefield Consumption"
- vore.3007.desc:0 "During the chaos of battle, [scope:predator.GetFirstNameNoTooltip] managed to consume [scope:prey.GetFirstNameNoTooltip]. [scope:prey.GetSheHe] will not be seen again."
+ vore.3007.desc:0 "During the chaos of battle, [predator.GetFirstNameNoTooltip] managed to consume [prey.GetFirstNameNoTooltip]. [prey.GetSheHe] will not be seen again."
  vore.3007.opt.a:0 "A Fitting End"
  vore.3007.opt.b:0 "Horrifying"
 
@@ -410,28 +418,28 @@ vore_scheme.0001.t:0 "The Hunger Sated"
 
 # 1. Openings
 # Lethal
-vore_scheme.0001.opening.generic.1:0 "My hunger is finally sated. [scope:target.GetTitledName] has been consumed."
-vore_scheme.0001.opening.generic.2:0 "A delicious meal. [scope:target.GetTitledName] is now part of me, forever."
+vore_scheme.0001.opening.generic.1:0 "My hunger is finally sated. [target.GetTitledName] has been consumed."
+vore_scheme.0001.opening.generic.2:0 "A delicious meal. [target.GetTitledName] is now part of me, forever."
 
 # Banned (Permanent/Non-Lethal)
-vore_scheme.0001.opening.banned.1:0 "I have claimed a permanent possession. [scope:target.GetTitledName] is gone from the world, held safely within me."
+vore_scheme.0001.opening.banned.1:0 "I have claimed a permanent possession. [target.GetTitledName] is gone from the world, held safely within me."
 vore_scheme.0001.opening.banned.2:0 "They are mine now. Hidden away, safe, and mine forever."
 
 # 2. Context/Memories
 vore_scheme.0001.context.feud:0 "My rival has been permanently removed from the playing field."
 vore_scheme.0001.context.gluttony:0 "I simply couldn't resist. The temptation was too great to deny."
-vore_scheme.0001.context.possessive:0 "I won't let anyone else have [scope:target.GetHimHer]. [scope:target.GetHeShe] belongs to me now, and always."
+vore_scheme.0001.context.possessive:0 "I won't let anyone else have [target.GetHimHer]. [target.GetHeShe] belongs to me now, and always."
 vore_scheme.0001.context.generic:0 "Some men rule with iron. I rule with an insatiable appetite."
 
 # 3. Methods
-vore_scheme.0001.method.seduction:0 "I invited [scope:target.GetTitledName] to my private chambers. [scope:target.GetSheHe] came willingly, unaware of the true purpose of the night."
-vore_scheme.0001.method.prison:0 "I visited the dungeon. [scope:target.GetTitledName] was confused at first, then terrified as the reality of the situation set in."
-vore_scheme.0001.method.ambush:0 "I caught [scope:target.GetTitledName] alone in the wild. There was nowhere to run."
+vore_scheme.0001.method.seduction:0 "I invited [target.GetTitledName] to my private chambers. [target.GetSheHe] came willingly, unaware of the true purpose of the night."
+vore_scheme.0001.method.prison:0 "I visited the dungeon. [target.GetTitledName] was confused at first, then terrified as the reality of the situation set in."
+vore_scheme.0001.method.ambush:0 "I caught [target.GetTitledName] alone in the wild. There was nowhere to run."
 
 # 4. Secrecy
 vore_scheme.0001.revealed.1:0 "Unfortunately, a servant saw me at my most vulnerable moment. My secret is out."
-vore_scheme.0001.revealed.2:0 "Witnesses saw me consume [scope:target.GetTitledName]. They will whisper of my hunger for years."
-vore_scheme.0001.secret.1:0 "No one will ever suspect what happened. It will be as if [scope:target.GetTitledName] vanished into thin air."
+vore_scheme.0001.revealed.2:0 "Witnesses saw me consume [target.GetTitledName]. They will whisper of my hunger for years."
+vore_scheme.0001.secret.1:0 "No one will ever suspect what happened. It will be as if [target.GetTitledName] vanished into thin air."
 vore_scheme.0001.secret.2:0 "The only witnesses are the walls of this room. My secret is safe."
 
 # Options
@@ -444,14 +452,14 @@ vore_scheme.0001.option.secret:0 "Delicious."
 vore_scheme.0002.t:0 "Consumed"
 
 # Lethal Desc
-vore_scheme.0002.desc:0 "I walked into a trap. The warmth I felt was not an embrace, but the heat of digestion. I am now trapped within the belly of [scope:owner.GetName], melting away."
+vore_scheme.0002.desc:0 "I walked into a trap. The warmth I felt was not an embrace, but the heat of digestion. I am now trapped within the belly of [owner.GetName], melting away."
 
 # Banned Desc (Non-Lethal/Mysterious)
-vore_scheme.0002.desc.banned:0 "I was trapped. But instead of pain, I was overwhelmed by a heavy, suffocating embrace. I am not being digested, but I am not free. I am hidden away, kept as a permanent prize by [scope:owner.GetName]."
+vore_scheme.0002.desc.banned:0 "I was trapped. But instead of pain, I was overwhelmed by a heavy, suffocating embrace. I am not being digested, but I am not free. I am hidden away, kept as a permanent prize by [owner.GetName]."
 
 # Secrecy
 vore_scheme.0002.revealed.1:0 "I screamed, but no one came. Everyone knows what happened to me."
-vore_scheme.0002.revealed.2:0 "The servants saw [scope:owner.GetName] leave the room, looking full. My fate is known to all."
+vore_scheme.0002.revealed.2:0 "The servants saw [owner.GetName] leave the room, looking full. My fate is known to all."
 vore_scheme.0002.opt:0 "Lost forever..."
 
 # ==========================================
@@ -460,8 +468,8 @@ vore_scheme.0002.opt:0 "Lost forever..."
 vore_scheme.0003.t:0 "Failed to Feed"
 
 vore_scheme.0003.opening.generic.1:0 "My prey managed to slip away. I was too slow, too clumsy."
-vore_scheme.0003.opening.generic.2:0 "I failed to contain [scope:target.GetTitledName]. My hunger remains unsatisfied."
-vore_scheme.0003.reason:0 "Despite my preparations, [scope:target.GetTitledName] fought back with unexpected ferocity and escaped my grasp."
+vore_scheme.0003.opening.generic.2:0 "I failed to contain [target.GetTitledName]. My hunger remains unsatisfied."
+vore_scheme.0003.reason:0 "Despite my preparations, [target.GetTitledName] fought back with unexpected ferocity and escaped my grasp."
 
 vore_scheme.0003.revealed.1:0 "The attempt was a disaster. Witnesses saw me struggle."
 vore_scheme.0003.secret.1:0 "At least I managed to hide my shame. No one knows what I tried to do."
@@ -473,10 +481,10 @@ vore_scheme.0003.option.secret:0 "Next time..."
 # TARGET POV - FAILURE (PREY SURVIVED)
 # ==========================================
 vore_scheme.0004.t:0 "Narrow Escape"
-vore_scheme.0004.desc:0 "I saw the hunger in [scope:owner.GetName]'s eyes. I fought with every ounce of strength I had and managed to claw my way out of [scope:owner.GetHerHim]."
+vore_scheme.0004.desc:0 "I saw the hunger in [owner.GetName]'s eyes. I fought with every ounce of strength I had and managed to claw my way out of [owner.GetHerHim]."
 
-vore_scheme.0004.revealed.1:0 "The attack was witnessed. Everyone knows what [scope:owner.GetName] tried to do."
-vore_scheme.0004.revealed.2:0 "I emerged from [scope:owner.GetName]'s quarters terrified, but alive. The truth is out."
+vore_scheme.0004.revealed.1:0 "The attack was witnessed. Everyone knows what [owner.GetName] tried to do."
+vore_scheme.0004.revealed.2:0 "I emerged from [owner.GetName]'s quarters terrified, but alive. The truth is out."
 
 vore_scheme.0004.option.discovered:0 "I will be watching my back."
 vore_scheme.0004.opt:0 "I need to rest."
@@ -515,20 +523,20 @@ opinion_vore_religious:0 "Spiritual Containment"
 hunt_vore.0007.t:0 "A New Prey"
 
 # Oral
-hunt_vore.0007.desc.oral.1:0 "The hunt is over. I caught [scope:prey.GetTitledName] off guard and swallowed [scope:prey.GetHerHim] whole. [scope:prey.GetSheHe] is now safely tucked away in my belly."
-hunt_vore.0007.desc.oral.2:0 "My hunger got the better of me. [scope:prey.GetTitledName] is no longer with us, having become a meal for the predator inside me."
+hunt_vore.0007.desc.oral.1:0 "The hunt is over. I caught [prey.GetTitledName] off guard and swallowed [prey.GetHerHim] whole. [prey.GetSheHe] is now safely tucked away in my belly."
+hunt_vore.0007.desc.oral.2:0 "My hunger got the better of me. [prey.GetTitledName] is no longer with us, having become a meal for the predator inside me."
 
 # Anal
-hunt_vore.0007.desc.anal.1:0 "I consumed [scope:prey.GetTitledName] in a primal fashion. Now, [scope:prey.GetSheHe] is hidden within me, trapped in the depths."
-hunt_vore.0007.desc.anal.2:0 "A private indulgence. [scope:prey.GetTitledName] has been taken inside me, reduced to nothing more than squirming mass."
+hunt_vore.0007.desc.anal.1:0 "I consumed [prey.GetTitledName] in a primal fashion. Now, [prey.GetSheHe] is hidden within me, trapped in the depths."
+hunt_vore.0007.desc.anal.2:0 "A private indulgence. [prey.GetTitledName] has been taken inside me, reduced to nothing more than squirming mass."
 
 # Unbirth
-hunt_vore.0007.desc.unbirth.1:0 "I have claimed a new child. [scope:prey.GetTitledName] is now back where [scope:prey.GetSheHe] belongs, safe and warm inside my womb."
-hunt_vore.0007.desc.unbirth.2:0 "I pulled [scope:prey.GetTitledName] into my embrace. [scope:prey.GetSheHe] is now part of me, kept safe within my body."
+hunt_vore.0007.desc.unbirth.1:0 "I have claimed a new child. [prey.GetTitledName] is now back where [prey.GetSheHe] belongs, safe and warm inside my womb."
+hunt_vore.0007.desc.unbirth.2:0 "I pulled [prey.GetTitledName] into my embrace. [prey.GetSheHe] is now part of me, kept safe within my body."
 
 # Cock
-hunt_vore.0007.desc.cock.1:0 "I dominated [scope:prey.GetTitledName] completely. [scope:prey.GetSheHe] was sucked down into my member, lost to my lust."
-hunt_vore.0007.desc.cock.2:0 "My cock has claimed another prize. [scope:prey.GetTitledName] is now churning away inside me, becoming one with my fluids."
+hunt_vore.0007.desc.cock.1:0 "I dominated [prey.GetTitledName] completely. [prey.GetSheHe] was sucked down into my member, lost to my lust."
+hunt_vore.0007.desc.cock.2:0 "My cock has claimed another prize. [prey.GetTitledName] is now churning away inside me, becoming one with my fluids."
 
 # Options
 hunt_vore.0007.opt.continue:0 "Continue the Hunt"
@@ -549,7 +557,6 @@ hunt_vore_end_log:0 "[root.GetName] ended the hunt to rest after feeding on [pre
 # General
 trait_voracious:0 "Voracious"
 trait_voracious_desc:0 "This character has an insatiable hunger."
-voraphillic_hostility_doctrine_name:0 "Voraphillic Hostility"
 
 # Vore Background Events
 voreTitle.3001:0 "The Inner Workings"
@@ -560,11 +567,11 @@ vore.3001.opt.b:0 "Stop"
 # Lover Vore
 lover_vore_preyOpt.0007f:0 "Actually, never mind."
 
-# Courtier Vore
-courtier_voreTitle.0002:0 "A Courting Meal"
-courtier_voreDesc.0002:0 "[courtier.GetName] is looking delicious."
-courtier_voreOpt.0001a:0 "Invite them for dinner"
-courtier_voreOpt.0001b:0 "Ignore"
+# Courtier Vore - WIP event
+# courtier_voreTitle.0002:0 "A Courting Meal"
+# courtier_voreDesc.0002:0 "[courtier.GetName] is looking delicious."
+# courtier_voreOpt.0001a:0 "Invite them for dinner"
+# courtier_voreOpt.0001b:0 "Ignore"
 
 # Invitation
 invite_vore_predTitle.0003:0 "The Arrangement"
@@ -575,24 +582,6 @@ invite_vore_predOpt.0003b:0 "Eat them immediately"
 # Digestion
 voreDigestDesc.0002g:0 "...and [prey.GetName] is finally gone."
 
-# Concubine Devours Concubine
-courtier_voreTitle.0050:0 "Harem Hierarchy"
-courtier_vore.0050.desc.envy:0 "My concubine [predator.GetName] has grown envious of [prey.GetName]. Deciding that the harem is not big enough for the both of them, [predator.GetSheHe] has asserted dominance in the most permanent way possible."
-courtier_vore.0050.desc.gluttony:0 "[predator.GetName] grew hungry for more than just food. [prey.GetName] was dragged away and, well... the harem must be fed."
-courtier_vore.0050.desc.generic:0 "There has been a dispute in the harem. [predator.GetName] has decided to solve the issue by swallowing [prey.GetName] whole."
-
-# Options
-courtier_vore.0050.opt.punish:0 "Put an end to this madness!"
-courtier_vore.0050.flavor.punish:0 "I will not have my property eating my other property."
-courtier_vore.0050.opt.allow:0 "Let nature take its course."
-courtier_vore.0050.flavor.allow:0 "The strong should rule the weak."
-courtier_vore.0050.opt.storage:0 "Let [prey.GetName] stay inside."
-courtier_vore.0050.flavor.storage:0 "A living trophy for my living trophy."
-
-# Logs
-courtier_vore_punish_log:0 "[root.GetName] punished [predator.GetName] for attempting to devour [prey.GetName]."
-courtier_vore_feast_log:0 "[root.GetName] allowed [predator.GetName] to devour [prey.GetName]."
-courtier_vore_storage_log:0 "[root.GetName] watched as [predator.GetName] stored [prey.GetName] inside [predator.GetHerHim]self."
 
 # ==========================================
 # HUNT VORE MENU EVENTS
@@ -630,17 +619,17 @@ hunt.0006.opt.a:0 "Make the move"
 hunt_vore.0003.t:0 "The Feast"
 
 # Descriptions
-hunt_vore.0003.desc.oral.1:0 "I pounced on [scope:prey.GetTitledName] and forced them down my throat before they could scream."
-hunt_vore.0003.desc.oral.2:0 "[scope:prey.GetTitledName] struggled, but my belly was inevitable. They are now mine."
+hunt_vore.0003.desc.oral.1:0 "I pounced on [prey.GetTitledName] and forced them down my throat before they could scream."
+hunt_vore.0003.desc.oral.2:0 "[prey.GetTitledName] struggled, but my belly was inevitable. They are now mine."
 
-hunt_vore.0003.desc.anal.1:0 "I grabbed [scope:prey.GetTitledName] from behind, pulling [scope:prey.GetHerHim] up and into my depths."
-hunt_vore.0003.desc.anal.2:0 "There is no escape from me. [scope:prey.GetTitledName] has been absorbed into my rear."
+hunt_vore.0003.desc.anal.1:0 "I grabbed [prey.GetTitledName] from behind, pulling [prey.GetHerHim] up and into my depths."
+hunt_vore.0003.desc.anal.2:0 "There is no escape from me. [prey.GetTitledName] has been absorbed into my rear."
 
-hunt_vore.0003.desc.unbirth.1:0 "I pulled [scope:prey.GetTitledName] close, embracing [scope:prey.GetHerHim] completely, sucking [scope:prey.GetHerHim] into my womb."
+hunt_vore.0003.desc.unbirth.1:0 "I pulled [prey.GetTitledName] close, embracing [prey.GetHerHim] completely, sucking [prey.GetHerHim] into my womb."
 hunt_vore.0003.desc.unbirth.2:0 "Welcome home, little one. You are safe inside me forever now."
 
-hunt_vore.0003.desc.cock.1:0 "I overwhelmed [scope:prey.GetTitledName] with lust, dragging [scope:prey.GetHerHim] down into my cock."
-hunt_vore.0003.desc.cock.2:0 "[scope:prey.GetTitledName] is gone, melted down by my fluids and added to my essence."
+hunt_vore.0003.desc.cock.1:0 "I overwhelmed [prey.GetTitledName] with lust, dragging [prey.GetHerHim] down into my cock."
+hunt_vore.0003.desc.cock.2:0 "[prey.GetTitledName] is gone, melted down by my fluids and added to my essence."
 
 # Options
 hunt_vore.0003.opt.continue:0 "Continue the Hunt"
@@ -657,13 +646,13 @@ hunt_vore.0003.flavor.end:0 "I have what I came for. It is time to rest."
 hunt_vore.9000.t:0 "The Beast's Hunger"
 
 # Claws (Bear)
-hunt_vore.9000.desc.claws:0 "A massive beast burst from the undergrowth. It pinned [scope:prey.GetName] down with crushing paws and tore [scope:prey.GetHerHim] apart with terrible force."
+hunt_vore.9000.desc.claws:0 "A massive beast burst from the undergrowth. It pinned [prey.GetName] down with crushing paws and tore [prey.GetHerHim] apart with terrible force."
 
 # Fangs (Wolf/Hyena)
-hunt_vore.9000.desc.fangs:0 "The predator's teeth flashed in the light. It lunged at [scope:prey.GetName], tearing flesh and bone in a frenzy of blood."
+hunt_vore.9000.desc.fangs:0 "The predator's teeth flashed in the light. It lunged at [prey.GetName], tearing flesh and bone in a frenzy of blood."
 
 # Fallback
-hunt_vore.9000.desc.fallback:0 "The beast attacked [scope:prey.GetName] with savage intensity, leaving nothing behind but blood and scraps of clothing."
+hunt_vore.9000.desc.fallback:0 "The beast attacked [prey.GetName] with savage intensity, leaving nothing behind but blood and scraps of clothing."
 
 # Options
 hunt_vore.9000.opt.a:0 "Watch"
@@ -680,49 +669,272 @@ invite_vore_predOpt.0002b:0 "Actually, never mind."
 # ==========================================
 
 # Claws (Implies Bear/Heavy Beast - Swallowing whole)
-hunt_vore.0003.desc.claws:0 "I use my massive paws to secure [scope:prey.GetName] against me, feeling the weight of [scope:prey.GetHerHim] sink down my throat in one smooth motion."
+hunt_vore.0003.desc.claws:0 "I use my massive paws to secure [prey.GetName] against me, feeling the weight of [prey.GetHerHim] sink down my throat in one smooth motion."
 
 # Fangs (Implies Wolf/Cat - Quick snap)
-hunt_vore.0003.desc.fangs:0 "With a swift snap of my jaws, I engulf [scope:prey.GetName]. My muscles ripple as [scope:prey.GetSheHe] is pulled deep inside me."
+hunt_vore.0003.desc.fangs:0 "With a swift snap of my jaws, I engulf [prey.GetName]. My muscles ripple as [prey.GetSheHe] is pulled deep inside me."
 
 # Fallback (Generic)
-hunt_vore.0003.desc.fallback:0 "I consume [scope:prey.GetName] entirely, claiming [scope:prey.GetHerHim] as my own."
+hunt_vore.0003.desc.fallback:0 "I consume [prey.GetName] entirely, claiming [prey.GetHerHim] as my own."
 
 # ==========================================
 # EVENT 0004: ANAL (The Rear)
 # ==========================================
 
 # Claws (Implies Bear/Heavy Beast - Pinning power)
-hunt_vore.0004.desc.claws:0 "I pin [scope:prey.GetName] down with my powerful paws, dragging [scope:prey.GetHerHim] back to be absorbed into my depths."
+hunt_vore.0004.desc.claws:0 "I pin [prey.GetName] down with my powerful paws, dragging [prey.GetHerHim] back to be absorbed into my depths."
 
 # Fangs (Implies Wolf/Cat - Overpowering agility)
-hunt_vore.0004.desc.fangs:0 "I use my weight to force [scope:prey.GetName] into position, feeling [scope:prey.GetHerHim] slide up my rear passage as I take full control."
+hunt_vore.0004.desc.fangs:0 "I use my weight to force [prey.GetName] into position, feeling [prey.GetHerHim] slide up my rear passage as I take full control."
 
 # Fallback (Generic)
-hunt_vore.0004.desc.fallback:0 "I take [scope:prey.GetName] inside me, filling the void of my body with [scope:prey.GetHerHim] completely."
+hunt_vore.0004.desc.fallback:0 "I take [prey.GetName] inside me, filling the void of my body with [prey.GetHerHim] completely."
 
 # ==========================================
 # EVENT 0005: UNBIRTH (The Womb)
 # ==========================================
 
 # Claws (Implies Bear/Heavy Beast - Cradling)
-hunt_vore.0005.desc.claws:0 "I carefully cradle [scope:prey.GetName] in my claws, holding [scope:prey.GetHerHim] gently as I pull [scope:prey.GetHerHim] into my womb."
+hunt_vore.0005.desc.claws:0 "I carefully cradle [prey.GetName] in my claws, holding [prey.GetHerHim] gently as I pull [prey.GetHerHim] into my womb."
 
 # Fangs (Implies Wolf/Cat - Nuzzling/Calming)
-hunt_vore.0005.desc.fangs:0 "I nuzzle at [scope:prey.GetName], calming [scope:prey.GetHerHim] before enveloping [scope:prey.GetHerHim] completely, pulling [scope:prey.GetHerHim] back to where [scope:prey.GetSheHe] belongs."
+hunt_vore.0005.desc.fangs:0 "I nuzzle at [prey.GetName], calming [prey.GetHerHim] before enveloping [prey.GetHerHim] completely, pulling [prey.GetHerHim] back to where [prey.GetSheHe] belongs."
 
 # Fallback (Generic)
-hunt_vore.0005.desc.fallback:0 "I draw [scope:prey.GetName] into my body, enveloping [scope:prey.GetHerHim] in a warm, protective embrace."
+hunt_vore.0005.desc.fallback:0 "I draw [prey.GetName] into my body, enveloping [prey.GetHerHim] in a warm, protective embrace."
 
 # ==========================================
 # EVENT 0006: COCK (The Lust)
 # ==========================================
 
 # Claws (Implies Bear/Heavy Beast - Domination)
-hunt_vore.0006.desc.claws:0 "I press [scope:prey.GetName] into the ground with my heavy claws, positioning [scope:prey.GetHerHim] perfectly as I begin to absorb [scope:prey.GetHerHim] with my lust."
+hunt_vore.0006.desc.claws:0 "I press [prey.GetName] into the ground with my heavy claws, positioning [prey.GetHerHim] perfectly as I begin to absorb [prey.GetHerHim] with my lust."
 
 # Fangs (Implies Wolf/Cat - Predatory instinct)
-hunt_vore.0006.desc.fangs:0 "I growl softly as I force [scope:prey.GetName] down, my body claiming [scope:prey.GetHerHim] and dissolving [scope:prey.GetHerHim] into my essence."
+hunt_vore.0006.desc.fangs:0 "I growl softly as I force [prey.GetName] down, my body claiming [prey.GetHerHim] and dissolving [prey.GetHerHim] into my essence."
 
 # Fallback (Generic)
-hunt_vore.0006.desc.fallback:0 "I merge [scope:prey.GetName] with myself, consuming [scope:prey.GetHerHim] entirely into my being."
+hunt_vore.0006.desc.fallback:0 "I merge [prey.GetName] with myself, consuming [prey.GetHerHim] entirely into my being."
+
+
+# ==========================================
+# GUI STRINGS
+# ==========================================
+PREY_RELEASE_ALL:0 "Release All Prey"
+PREY_DIGEST_ALL:0 "Digest All Prey"
+
+# ==========================================
+# MEMORY NAMES & DESCS
+# ==========================================
+pred_non_fatal_memory:0 "Survived Non-Fatal Vore"
+prey_non_fatal_memory:0 "Survived Non-Fatal Vore"
+romantic_vore_encounter:0 "Romantic Vore Encounter"
+romantic_vore_encounter_pred_memory_desc:0 "You intimately consumed [This.GetNamePossessive] in a passionate embrace, keeping them safe within."
+romantic_vore_encounter_prey_memory_desc:0 "[This.GetPlayerCustomName] lovingly engulfed you, cradling you in warmth without harm."
+
+# ==========================================
+# COURTIER VORE DESCS (Trait Flavors)
+# ==========================================
+courtier_vore.0001.desc.sadistic:0 "The jester grins wickedly, stuffing the hapless courtier down [Predator.GetHerHis] gullet with malicious glee."
+courtier_vore.0001.desc.lustful:0 "The jester licks [predator.GetHerHis] lips slowly before engulfing the courtier, moaning as if this were the most intimate act imaginable."
+courtier_vore.0001.desc.compassionate:0 "The jester whispers comforts, gently guiding the courtier into a warm embrace."
+courtier_vore.0001.desc.craven:0 "The jester sneaks a quick gulp of the courtier, glancing nervously at the crowd to see their reaction."
+courtier_voreOpt.0001a:0 "Keep them as a pet, [predator.GetName]"
+courtier_voreOpt.0001b:0 "Digest the fool"
+
+courtier_vore.0010.desc.sadistic:0 "Your spouse smiles sweetly at you before turning to the hated rival with cruel delight, slowly forcing them down [predator.GetHerHis] throat while maintaining eye contact with you."
+courtier_vore.0010.desc.lustful:0 "Your beloved consort purrs with pleasure as [predator.GetSheHe] slide's the unfortunate courtier inside, clearly aroused by both the act and your approving gaze."
+courtier_vore.0010.desc.gregarious:0 "With a charming laugh, your spouse makes a grand show of devouring the nuisance, turning a grim act into lively entertainment."
+courtier_vore.0010.desc.compassionate:0 "Your spouse looks almost apologetic as [predator.GetSheHe] gently swallows the courtier, whispering that it's for the good of the household — and for you."
+courtier_vore.0010.desc.craven:0 "Trembling with nerves, your spouse hurriedly engulfs the rival, glancing around fearfully as though expecting retribution at any moment."
+courtier_voreOpt.0010a:0 "Thank you, my dear."
+courter_voreOpt.0010b:0 "We have no need for [prey.GetName]."
+
+
+# Event 0030 - The Vanishing Rival
+courtier_voreTitle.0030:0 "The Vanishing Rival"
+courtier_vore.0030.desc.sadistic:0 "You find your loyal retainer grinning with vicious pleasure as [predator.GetSheHe] forces your hated rival down their gullet, clearly relishing the opportunity to serve you this way."
+courtier_vore.0030.desc.lustful:0 "Your courtier's eyes gleam with dark desire as [predator.GetSheHe] consumes your rival, the act clearly stirring something primal within them."
+courtier_vore.0030.desc.gregarious:0 "Your concubines play a deadly game, one giggling as [predator.GetSheHe] swallows the other whole."
+courtier_vore.0030.desc.compassionate:0 "With visible reluctance, your retainer gently engulfs the rival, murmuring apologies even as [predator.GetSheHe] fulfills your unspoken wish."
+courtier_vore.0030.desc.craven:0 "Shaking with fear of failing you, your courtier hastily swallows the rival in one panicked motion, desperate to prove [predator.GetHerHis] loyalty."
+courtier_voreDesc.0030:0 "Your loyal courtier [predator.GetTitledFirstName] approaches with a wicked smile. 'My [ROOT.Char.GetLadyLord], I have a solution to your... problem with [prey.GetTitledFirstName].'"
+# courtier_voreDesc.0030.sadistic:0 "Your sadistic courtier [predator.GetTitledFirstName] grins cruelly. 'My [ROOT.Char.GetLadyLord], allow me to dispose of [prey.GetTitledFirstName]. Permanently. It would be my pleasure.'"
+# courtier_voreDesc.0030.lustful:0 "Your lustful courtier [predator.GetTitledFirstName] licks their lips hungrily. 'My [ROOT.Char.GetLadyLord], I've been eyeing [prey.GetTitledFirstName] for some time. Let me... handle them for you.'"
+# courtier_voreDesc.0030.compassionate:0 "Your compassionate courtier [predator.GetTitledFirstName] speaks reluctantly. 'My [ROOT.Char.GetLadyLord], I do not enjoy this, but [prey.GetTitledFirstName] threatens our stability. Perhaps... containment is necessary.'"
+# courtier_voreDesc.0030.craven:0 "Your nervous courtier [predator.GetTitledFirstName] whispers fearfully. 'My [ROOT.Char.GetLadyLord], before [prey.GetTitledFirstName] acts against us, perhaps we should act first? I could... secure them for you.'"
+
+courtier_voreOpt.0030a:0 "Dispose of the nuisance."
+courtier_voreOpt.0030b:0 "Teach them a lesson."
+courtier_voreOpt.0030c:0 "Stop this madness!"
+
+courtier_voreTitle.0050:0 "Harem Hierarchy"
+courtier_vore.0050.desc.sadistic:0 "Your concubine savors every terrified scream as [predator.GetSheHe] slowly forces [predator.GetHerHis] rival into [predator.GetHerHis] body, eyes locked on you with wicked delight."
+courtier_vore.0050.desc.lustful:0 "Moaning with pleasure, your consort devours [predator.GetHerHis] rival in a slow, sensual display clearly meant to arouse both herself and you."
+courtier_vore.0050.desc.compassionate:0 "Your consort hesitates, eyes soft with pity, before gently but firmly guiding [] rival inside — whispering that he/she'll be safe."
+courtier_vore.0050.desc.gregarious:0 "With theatrical flair and laughter, your concubine turns the devouring into a grand performance, narrating each swallow for the court's amusement."
+courtier_vore.0050.desc.craven:0 "Terrified of losing favor, your concubine frantically swallows her rival in one desperate gulp, glancing nervously at you for approval."
+courtier_vore.0050.desc.generic:0 "There has been a dispute in the harem. [predator.GetName] has decided to solve the issue by swallowing [prey.GetName] whole."
+courtier_vore.0050.opt.stop:0 "Put an end to this madness!"
+courtier_vore.0050.flavor.punish:0 "I will not have my property eating my other property."
+courtier_vore.0050.opt.lethal:0 "Let nature take its course."
+courtier_vore.0050.flavor.allow:0 "The strong should rule the weak."
+courtier_vore.0050.opt.safe:0 "Let [prey.GetFirstName] stay inside."
+courtier_vore.0050.flavor.storage:0 "A living trophy for my living trophy."
+
+# ==========================================
+# SEDUCE VORE
+# ==========================================
+
+#Seduce Object Vore
+seduce_vore.1010.t:0 "A Playful Disagreement"
+seduce_vore.1010.desc:0 "An argument with [target.GetTitledFirstName] about [swallowed_artifact.GetName] escalates. In a moment of mischief, you decide to end the discussion by swallowing the artifact whole..."
+seduce_vore.1010.a:0 "Down it goes!"
+seduce_vore.1010.a.tt:0 "You will swallow [swallowed_artifact.GetName] to end the argument"
+seduce_vore.1010.b:0 "That would be too much..."
+
+seduce_vore.1050.t:0 "A Possessive Display"
+seduce_vore.1050.desc:0 "You notice [rival.GetTitledFirstName] flirting shamelessly with [target.GetTitledFirstName]. A surge of jealousy overtakes you..."
+seduce_vore.1050.a:0 "Show them who [target.GetFirstName] belongs to!"
+seduce_vore.1050.b:0 "Control yourself..."
+
+seduce_vore.1051.opening:0 "The display had its effect."
+seduce_vore.1051.desc.object:0 "[target.GetTitledFirstName] watches with fascination as [rival.GetFirstNamePossessive] belongings bulge inside you..."
+seduce_vore.1051.desc.person:0 "[target.GetTitledFirstName] stares in shock as you release [rival.GetFirstName], who stumbles away humiliated..."
+seduce_vore.1051.a:0 "They're clearly impressed"
+seduce_vore.1051.b:0 "Apologize to [rival.GetFirstName]"
+
+seduce_vore.1052.opening:0 "That did not go as planned."
+seduce_vore.1052.desc.object:0 "[target.GetTitledFirstName] looks at you with disgust. 'That was cruel and unnecessary.'"
+seduce_vore.1052.desc.person:0 "[target.GetTitledFirstName] rushes to help [rival.GetFirstName]. 'How could you do such a thing?!'"
+seduce_vore.1052.a:0 "I... apologize for my behavior"
+seduce_vore.1052.b:0 "They needed to learn their place"
+
+seduce_vore.1080.t:0 "A Friendly Wager"
+seduce_vore.1080.desc:0 "An opportunity presents itself to make a playful bet with [target.GetTitledFirstName]..."
+seduce_vore.1080.a:0 "Propose the wager"
+seduce_vore.1080.a.tt:0 "If you win, [target.GetFirstName] spends the day inside you"
+seduce_vore.1080.b:0 "Don't risk it"
+
+seduce_vore.1081.opening:0 "[owner.GetTitledFirstName] proposes an unusual wager."
+seduce_vore.1081.desc.chess:0 "'A game of chess. If I win, you spend the day inside me. If you win, name your prize.'"
+seduce_vore.1081.desc.dice:0 "'A game of dice. If I win, you spend the day inside me. If you win, name your prize.'"
+seduce_vore.1081.desc.riddles:0 "'A battle of wits. If I win, you spend the day inside me. If you win, name your prize.'"
+seduce_vore.1081.a:0 "Accept the wager"
+seduce_vore.1081.b:0 "Decline politely"
+
+seduce_vore.1082.opening:0 "The game concludes."
+seduce_vore.1082.desc.chess:0 "The final pieces fall into place..."
+seduce_vore.1082.desc.dice:0 "The dice clatter to a stop..."
+seduce_vore.1082.desc.riddles:0 "The final riddle is answered..."
+seduce_vore.1082.a:0 "Victory! Time to collect"
+seduce_vore.1082.b:0 "Defeat. They won fairly"
+
+seduce_vore.1083.desc:0 "[target.GetTitledFirstName] shakes their head. 'I... cannot accept such a wager. Forgive me.'"
+seduce_vore.1083.a:0 "Perhaps another time"
+
+seduce_vore.1084.desc:0 "[target.GetTitledFirstName] takes a deep breath. 'A bet is a bet.' They step closer, nervous but determined..."
+seduce_vore.1084.a:0 "This is going perfectly"
+seduce_vore.1084.b:0 "Be gentle with them"
+
+seduce_vore.1085.desc:0 "[target.GetTitledFirstName] backs away. 'I... I can't do this. The bet was foolish!'"
+seduce_vore.1085.a:0 "Let them go"
+seduce_vore.1085.b:0 "A bet is a bet!"
+
+seduce_vore.1086.desc:0 "[owner.GetTitledFirstName] lost the wager. 'Now then, what shall I claim as my prize?'"
+seduce_vore.1086.a:0 "They want gold"
+seduce_vore.1086.b:0 "They want a favor"
+seduce_vore.1086.c:0 "They want turnabout!"
+seduce_vore.1086.c.tt:0 "You will spend time inside [target.GetFirstName] instead"
+
+# Event 1011 - Success follow-up for artifact swallowing
+seduce_vore.1011.t:0 "A Playful Exchange"
+seduce_vore.1011.desc:0 "[target.GetTitledFirstName] approaches with an amused smile. 'I believe you have something of mine?' [target.GetSheHe] says, gesturing toward your belly."
+seduce_vore.1011.a:0 "Return it with a wink"
+seduce_vore.1011.a.tt:0 "You return [swallowed_artifact.GetName] to [target.GetFirstName]"
+seduce_vore.1011.b:0 "Keep it a bit longer to tease"
+seduce_vore.1011.b.tt:0 "You playfully refuse to return [swallowed_artifact.GetName] just yet"
+
+# Event 1012 - Failure follow-up for artifact swallowing
+seduce_vore.1012.t:0 "A Miscalculation"
+seduce_vore.1012.desc:0 "[target.GetTitledFirstName] glares at you angrily. 'That was NOT amusing. Return my [swallowed_artifact.GetName] immediately!'"
+seduce_vore.1012.a:0 "Apologize and return it"
+seduce_vore.1012.a.tt:0 "You quickly return [swallowed_artifact.GetName] and apologize"
+seduce_vore.1012.b:0 "Double down on the tease"
+seduce_vore.1012.b.tt:0 "You refuse to back down, asserting dominance"
+
+# Event 1000 - A Tight Embrace (Milestone 2)
+seduce_vore.1000.a:0 "Accept the embrace"
+seduce_vore.1000.b:0 "This is too much..."
+
+# Event 1001 - Safe Resting (Milestone 2)
+seduce_vore.1001.a:0 "Offer them rest inside you"
+seduce_vore.1001.a.tt:0 "You will attempt to hold [target.GetFirstName] safely inside you"
+seduce_vore.1001.b:0 "Don't risk it"
+
+# Event 1002 - Success for Safe Resting
+seduce_vore.1002.desc:0 "[target.GetTitledFirstName] emerges from within you, looking peaceful and content. 'That was... surprisingly comforting,' [target.GetSheHe] admits with a soft smile."
+seduce_vore.1002.a:0 "I'm glad you felt safe"
+
+# Event 1003 - Failure for Safe Resting
+seduce_vore.1003.desc:0 "[target.GetTitledFirstName] pulls away quickly, looking uncomfortable. 'I... I cannot do this. Forgive me, but this is too strange.'"
+seduce_vore.1003.a:0 "Perhaps it was too soon"
+
+# Tooltips for other wager events
+seduce_vore.1081.a.tt:0 "Accept the wager and play the game"
+seduce_vore.1082.a.tt:0 "[target.GetFirstName] must honor the bet"
+seduce_vore.1082.b.tt:0 "You must let [target.GetFirstName] choose their prize"
+
+# Tooltips for possessive display
+seduce_vore.1050.a.tt:0 "Assert your dominance over [rival.GetFirstName]"
+
+
+# ==========================================
+# HUNT VORE
+# ==========================================
+hunt_vore.0002.t:0 "The Beast Strikes"
+hunt_vore.0002.desc:0 "A monstrous beast ambushes your party!"
+hunt_vore.0002.opt.a:0 "Flee"
+hunt_vore_success_log_title:0 "Hunt Successful"
+hunt_vore_continue_log_title:0 "Hunt Continues"
+hunt_vore_end_log_title:0 "Hunt Ends"
+
+# ==========================================
+# BATTLE VORE
+# ==========================================
+
+ # Event 0001 - Player as Predator
+ battle_vore.0001.t:0 "Spoils of War"
+ battle_vore.0001.desc:0 "The battle is won. [prey.GetTitledFirstName] lies defeated before you, exhausted and vulnerable. You could end this here and now... or show mercy."
+ battle_vore.0001.a:0 "Capture [prey.GetHerHim] alive"
+ battle_vore.0001.b:0 "End [prey.GetHerHis] life"
+ 
+ # Event 0002 - Player as Prey
+ battle_vore.0002.t:0 "Defeated"
+ battle_vore.0002.desc:0 "You fought valiantly, but it was not enough. [predator.GetTitledFirstName] stands over you, victorious. There is a hungry gleam in [predator.GetHerHis] eyes as [predator.GetSheHe] approaches..."
+ battle_vore.0002.a:0 "Accept your fate"
+ battle_vore.0002.a.tt:0 "You are at [predator.GetFirstNamePossessive] mercy"
+ battle_vore.0002.b:0 "Struggle against [predator.GetHerHim]!"
+ battle_vore.0002.b.tt:0 "It won't change the outcome, but you'll go down fighting"
+
+# ==========================================
+# PRISON/INVITE/BATTLE/SUPERNAT
+# ==========================================
+
+invite_vore_pred.0004.t:0 "Feast Begins"
+invite_vore_pred.0004.d:0 "Time to consume your guest."
+invite_vore_pred.0004.opt.a:0 "Swallow"
+
+# ==========================================
+# INTERACTIONS
+# ==========================================
+check_on_prey_interaction_desc:0 "Check on your prey"
+
+# ==========================================
+# SUPERNATURAL EVENTS
+# ==========================================
+
+# Supernatural Vore Event (Siren)
+supernat_vore.0001.t:0 "Song of the Depths"
+supernat_vore.0001.d:0 "As your ship passes through misty waters, an enchanting voice rises from the waves. A beautiful figure emerges, their eyes fixed on you with predatory intent..."
+supernat_vore.0001.opt.a:0 "Resist the siren's call"

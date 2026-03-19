@@ -55,9 +55,9 @@ random_orifice_safe_vore_effect = {
             }
         }
         0 = {
-            safe_vore_effect = {
+            safe_vore_effect = { 
                 prison_type = $prison_type$
-                type = oral
+                type = oral 
             }
         }
     }
@@ -108,8 +108,23 @@ safe_vore_effect = {
         limit = { NOT = { exists = scope:prey } }
         scope:recipient = { save_scope_as = prey }
     }
-
+    
+    if = {
+        limit = { scope:prey = { has_variable = vore_duration } }
+        if = {
+            limit =  { scope:prey.var:vore_duration = 3 }
+            scope:predator = { trigger_event = { id = vore.0001 days = 3 } }
+        }
+    }
+    
+    if = {
+        limit = { global_var:$type$_banned = yes}
+        #random_orifice_safe_vore_effect = { prison_type = $prison_type$}
+        debug_log = "Attempted safe vore type that was banned"
+    }
+    
     else = {
+        hidden_effect = { debug_log = "Safe Vore: [predator.GetName] vored [prey.GetName] ($type$)" }
         if = {
             limit = { scope:predator = { can_vore = yes } }
             
@@ -186,7 +201,6 @@ safe_vore_effect = {
                     target = scope:predator
                 }
                 if = {
-                    limit = { scope:predator = { is_ai = yes } }
                     create_story = vore_safe_story
                 }
                 # Initialize variable
@@ -196,13 +210,6 @@ safe_vore_effect = {
     }
     
     # DEBUG NOTIFICATION
-    hidden_effect = {
-        if = {
-            trigger_event = {
-                id = vore_debug.0001
-            }
-        }
-    }
 }
 
 lethal_vore_effect = {
@@ -213,16 +220,16 @@ lethal_vore_effect = {
     if = {
         limit = { NOT = { exists = scope:prey } }
         scope:recipient = { 
-           save_scope_as = prey
-           set_variable = { name = digestion_progress value = 0}
+            save_scope_as = prey
         }
     }
-
+    
     if = {
         limit = { global_var:$type$_banned = yes }
         random_orifice_lethal_vore_effect = yes
     } 
     else = {
+        hidden_effect = { debug_log = "Fatal Vore: [predator.GetName] vored [prey.GetName] ($type$)" }
 
         # 2. PREDATOR STATE
         scope:predator = {
@@ -232,9 +239,17 @@ lethal_vore_effect = {
             add_character_flag = vore_predator
             update_vore_portrait_effect = yes
             add_character_flag = $type$_current_prey
+            if = {
+                limit = { OR = {
+                    has_character_flag = unbirth_current_prey
+                    has_character_flag = cock_current_prey 
+                } }
+                add_character_modifier = { modifier = fertility_boost }
+            }
             create_story = vore_digestion_story
+            remove_character_flag = $type$_current_prey
         }
-
+        
         # 1. PRE-DATA SAVING (On Prey)
         scope:prey = {          
             death = { 
@@ -251,7 +266,7 @@ release_prey_location_check_effect = {
         limit = { NOT = { exists = scope:prey } }
         root = { save_scope_as = prey }
     }
-
+    
     if = {
         limit = { NOT = { exists = scope:predator } }
         random_relation = {
@@ -259,8 +274,15 @@ release_prey_location_check_effect = {
             save_scope_as = predator
         }
     }
-
+    
     scope:prey = {
+        if = {
+            limit = { owns_story_of_type = vore_safe_story }
+            random_owned_story = {
+                type = vore_safe_story
+                end_story = yes
+            }                 
+        }
         switch = {
             trigger = has_trait
             
@@ -271,7 +293,7 @@ release_prey_location_check_effect = {
                     }
                 }
             }
-        
+            
             anal_vored = {
                 scope:predator = {
                     release_prey_effect = { 
@@ -313,23 +335,30 @@ release_prey_location_check_effect = {
 # Used to properly release prey (REVISED LOGIC)
 release_prey_effect = {
     if = {
-        limit = { AND = { NOT = { exists = scope:prey } has_character_flag = vored} }
+        limit = { AND = { NOT = { exists = scope:prey } has_character_flag = vored } }
         save_scope_as = prey
     }
     if = {
-        limit = { AND = { NOT = { exists = scope:predator } has_character_flag = vore_predator } }
+        limit = { AND = { NOT = { exists = scope:predator } } }
         random_relation = {
             type = predator
             save_scope_as = predator
         }
-        scope:actor = { save_scope_as = predator }
     }
-
-    # Ensure prey still exists
+    
     if = {
         limit = { scope:prey = { is_alive = yes } }
+
+        hidden_effect = {
+            if = {
+                #limit = { global_var:debug_notifications = yes }
+                debug_log = "[predator.GetName] Released prey [prey.GetName]"
+            }
+        }
     
         scope:predator = {
+            if = { limit = { var:num_prey < 0} set_variable = { name = num_prey value = 0} }
+            if = { limit = { var:num_$type$_prey < 0 } set_variable = { name = num_$type$_prey value = 0 } }
             change_variable = { name = num_prey add = -1 }
             change_variable = { name = num_$type$_prey add = -1 }
             
@@ -342,7 +371,6 @@ release_prey_effect = {
 
             update_vore_portrait_effect = yes
 
-            # If empty, remove generic flag
             if = {
                 limit = { var:num_prey <= 0 }
                 remove_character_flag = vore_predator
@@ -374,15 +402,6 @@ release_prey_effect = {
             else_if = {
                 limit = { is_imprisoned = yes }
                 release_from_prison = yes
-            }
-        }
-    }
-    
-    hidden_effect = {
-        if = {
-            #limit = { global_var:debug_notifications = yes }
-            trigger_event = {
-                id = vore_debug.0002
             }
         }
     }
@@ -531,7 +550,7 @@ simulate_npc_vore_effect = {
         }
         # Anal
         25 = {
-            oral_vore_modifier = yes
+            anal_vore_modifier = yes
             trigger = { global_var:anal_banned = no }
             change_variable = { name = num_anal_prey add = 1 }
             add_trait = anal_predator

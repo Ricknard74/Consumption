@@ -1,17 +1,41 @@
 ﻿namespace = courtier_vore
 
-# 1. The Jester's New Trick (Fixed & Expanded)
+# 1. The Jester's New Trick
 courtier_vore.0001 = {
     type = character_event
     title = courtier_voreTitle.0001
     theme = court
-    desc = courtier_voreDesc.0001
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = sadistic } }
+                desc = courtier_vore.0001.desc.sadistic
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = lustful } }
+                desc = courtier_vore.0001.desc.lustful
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = compassionate } }
+                desc = courtier_vore.0001.desc.compassionate
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = craven } }
+                desc = courtier_vore.0001.desc.craven
+            }
+            # Fallback generic
+            desc = courtier_vore.0001.desc
+        }
+    }
+
+    cooldown = { years = 3 }
 
     trigger = {
         court_position:court_jester_court_position = {
             can_vore = yes
         }
         any_courtier_or_guest = {
+            count > 0
             can_be_prey = yes
         }
     }
@@ -39,54 +63,40 @@ courtier_vore.0001 = {
     # Showing the Player (Root) watching
     right_portrait = {
         character = root
-        animation = intrigue # Intrigue/Amusement looks better than laughing for the player
+        animation = intrigue
     }
 
+    # Safe
     option = {
-        name = courtier_voreOpt.0001a # "Keep them as a pet"
-        trigger_event = courtier_vore.0002 # Branch to outcome event
+        name = courtier_voreOpt.0001a
+        scope:predator = {
+            random_orifice_safe_vore_effect = {
+                prison_type = vore_dungeon
+            }
+            stress_impact = {
+                compassionate = minor_stress_impact_gain
+                sadistic = minor_stress_impact_loss
+            }
+        }      
+        ai_chance = {
+            safe_vore_modifier = { PREY = scope:prey }
+        }
     }
     
+    # Lethal
     option = {
-        name = courtier_voreOpt.0001b # "Digest the fool"
+        name = courtier_voreOpt.0001b
+        trigger = { global_var:digestion_banned = no }
         ai_chance = {
             lethal_vore_modifier = { PREY = scope:prey }
         }
-        trigger_event = courtier_vore.0003 # Branch to lethal outcome
-    }
-}
-
-# Outcome: Safe Vore
-courtier_vore.0002 = {
-    type = character_event
-    title = courtier_voreTitle.0002
-    theme = court
-    desc = courtier_voreDesc.0002 # A different description line for safety
-
-    hidden = yes
-
-    immediate = {
-        random_orifice_safe_vore_effect = {
-            prison_type = vore_dungeon
-        }
-    }
-}
-
-# Outcome: Lethal Vore
-courtier_vore.0003 = {
-    type = character_event
-    title = courtier_voreTitle.0001
-    theme = court
-    desc = courtier_voreDesc.0001_lethal
-
-    hidden = yes
-
-    immediate = {
         scope:predator = {
-            add_trait = gluttonous
-            add_character_modifier = { modifier = satisfied }
             random_orifice_lethal_vore_effect = yes
         }
+    }
+
+    after = {
+        clean_up_effect = yes
     }
 }
 
@@ -95,16 +105,48 @@ courtier_vore.0010 = {
     type = character_event
     title = courtier_voreTitle.0010
     theme = court
-    desc = courtier_voreDesc.0010
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = sadistic } }
+                desc = courtier_vore.0010.desc.sadistic
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = lustful } }
+                desc = courtier_vore.0010.desc.lustful
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = gregarious } }
+                desc = courtier_vore.0010.desc.gregarious
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = compassionate } }
+                desc = courtier_vore.0010.desc.compassionate
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = craven } }
+                desc = courtier_vore.0010.desc.craven
+            }
+            desc = courtier_voreDesc.0010
+        }
+    }
 
     trigger = {
         primary_spouse = {
+            is_alive = yes
             can_vore = yes
         }
         any_courtier_or_guest = {
             can_be_prey = yes
-            # Target someone with bad opinion or a rival
-            opinion = { target = court_owner value < -20 }
+            NOT = { this = root.primary_spouse }
+                opinion = {
+                    target = root.primary_spouse
+                    value < -20
+                }
+                opinion = {
+                    target = root
+                    value < -20
+                }
         }
     }
 
@@ -117,8 +159,8 @@ courtier_vore.0010 = {
             limit = {
                 can_be_prey = yes
                 NOT = { this = scope:predator }
-                opinion <= { target = scope:predator value <= -20 }
-                opinion <= { target = court_owner value <= -20} 
+                opinion = { target = scope:predator value < -20 }
+                opinion = { target = root value < -20 } 
             }
             save_scope_as = prey
         }
@@ -126,7 +168,7 @@ courtier_vore.0010 = {
 
     left_portrait = {
         character = scope:predator
-        animation = seduction # Spouse is being helpful/tempting
+        animation = seduction 
     }
 
     right_portrait = {
@@ -134,49 +176,137 @@ courtier_vore.0010 = {
         animation = happiness
     }
 
-    option = {
-        name = courtier_voreOpt.0010a # "Thank you, my dear."
-        ai_chance = {
-            base = 70
-        }
-        hidden_effect = {
-            # Spouse safely stores the annoying guest
-            safe_vore_effect = {
-                type = unbirth
-                prison_type = vore_dungeon
-            }
-        }
+    lower_right_portrait = {
+        character = scope:prey
+        animation = fear
     }
 
+    # Safe
     option = {
-        name = courtier_voreOpt.0010b # "We have no need for witnesses."
+        name = courtier_voreOpt.0010a
+        ai_chance = {
+            base = 0
+            safe_vore_modifier = { PREY = scope:prey }
+        }
+        scope:predator = {
+            if = {
+                limit = {
+                    is_female = yes
+                    global_var:unbirth_banned = no
+                }
+                safe_vore_effect = {
+                    type = unbirth
+                    prison_type = vore_dungeon
+                }
+            }
+            else = {
+                random_orifice_safe_vore_effect = {
+                    prison_type = vore_dungeon
+                }
+            }
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 15
+            }
+            stress_impact = {
+                compassionate = minor_stress_impact_loss
+            }
+        }                
+    }
+
+    # Lethal
+    option = {
+        name = courtier_voreOpt.0010b
         trigger = {
             global_var:digestion_banned = no
         }
-        hidden_effect = {
-            lethal_vore_effect = {
-                type = oral
+        ai_chance = {
+            base = 0
+            lethal_vore_modifier = { PREY = scope:prey }
+        }
+        scope:predator = {
+            if = {
+                limit = {
+                    global_var:oral_banned = no
+                }
+                lethal_vore_effect = {
+                    type = oral
+                }
+            }
+            else = {
+                random_orifice_lethal_vore_effect = yes
+            }
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 20
+            }
+            stress_impact = {
+                compassionate = medium_stress_impact_gain
+                sadistic = minor_stress_impact_loss
             }
         }
+        
+    }
+
+    after = {
+        clean_up_effect = yes
     }
 }
 
-# 4. The Vanishing Rival (Need to improve so prey is rival to both scopes or both scopes are friends)
+# Liked courtier devours rival
 courtier_vore.0030 = {
     type = character_event
     title = courtier_voreTitle.0030
     theme = intrigue
-    desc = courtier_voreDesc.0030
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = sadistic } }
+                desc = courtier_vore.0030.desc.sadistic
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = lustful } }
+                desc = courtier_vore.0030.desc.lustful
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = compassionate } }
+                desc = courtier_vore.0030.desc.compassionate
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = craven } }
+                desc = courtier_vore.0030.desc.craven
+            }
+            desc = courtier_voreDesc.0030
+        }
+    }
+    
+    cooldown = { years = 3 }
 
     trigger = {
         any_courtier_or_guest = {
             can_vore = yes
-            NOT = { this = root }
-            NOT = { has_relation_rival = root } # The predator isn't the rival
-            opinion = { target = court_owner value > 20 }
+            NOT = { 
+                OR = {
+                    has_relation_rival = root 
+                    has_relation_nemesis = root
+                }
+            }
+            opinion = {
+                target = root
+                value > 20
+            }
         }
         any_courtier_or_guest = {
-            has_relation_rival = root
+            OR = {
+                has_relation_rival = root
+                has_relation_nemesis = root
+                opinion = {
+                    target = root
+                    value < -60
+                }
+            }
             can_be_prey = yes
         }
     }
@@ -185,18 +315,35 @@ courtier_vore.0030 = {
         random_courtier_or_guest = {
             limit = {
                 can_vore = yes
-                NOT = { this = root }
-                NOT = { this = scope:prey }
-                opinion = { target = court_owner value > 20 } # Likes the player enough
+                NOT = { 
+                    OR = {
+                        has_relation_rival = root 
+                        has_relation_nemesis = root
+                    }
+                }
+                opinion = {
+                    target = root
+                    value > 20
+                }
             }
             save_scope_as = predator
         }
         random_courtier_or_guest = {
             limit = {
-                has_relation_rival = root
+                OR = {
+                    has_relation_rival = root
+                    has_relation_nemesis = root
+                    opinion = {
+                        target = root
+                        value < -60
+                    }
+                }
                 can_be_prey = yes
             }
             save_scope_as = prey
+        }
+        scope:predator = {
+            add_character_flag = portrait_belly
         }
     }
 
@@ -205,58 +352,136 @@ courtier_vore.0030 = {
         animation = smile
     }
     
-    # Empty portrait slot or black background could imply the rival is missing/gone
-    # But we show them here for the "About to happen" moment
     right_portrait = {
+        character = root
+        animation = schadenfreude
+    }
+    
+    lower_left_portrait = {
         character = scope:prey
-        animation = horror
     }
 
+    # Lethal - Dispose of rival
     option = {
+        name = courtier_voreOpt.0030a
+        
         trigger = {
             global_var:digestion_banned = no
         }
-        name = courtier_voreOpt.0030a # "Dispose of the nuisance."
-        hidden_effect = {
-            scope:predator = {
-                if = {
-                    limit = { global_var:anal_banned = no }
-                    lethal_vore_effect = {
-                        type = anal
-                    }
-                } 
-                else = {
-                    random_orifice_lethal_vore_effect = yes
-                }
-                root = {
-                    add_dread = 10
-                    # add_opinion = { target = scope:predator modifier = 35 }
+
+        ai_chance = {
+            base = 0
+            lethal_vore_modifier = { PREY = scope:prey}
+        }
+        
+        scope:predator = {
+            if = {
+                limit = { global_var:anal_banned = no }
+                lethal_vore_effect = {
+                    type = anal
                 }
             }
+            else = {
+                random_orifice_lethal_vore_effect = yes
+            }
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 25
+            }
         }
+        
+        add_dread = minor_dread_gain
+        
+        stress_impact = {
+            compassionate = major_stress_impact_gain
+            sadistic = minor_stress_impact_loss
+            vengeful = minor_stress_impact_loss
+        }
+        
     }
 
+    # Safe - Imprison rival
     option = {
         name = courtier_voreOpt.0030b
-        hidden_effect = {
-            scope:predator = {
+        
+        scope:predator = {
+            if = {
+                limit = {
+                    global_var:anal_banned = no
+                }
                 safe_vore_effect = {
                     prison_type = vore_dungeon
                     type = anal
                 }
             }
+            else = {
+                random_orifice_safe_vore_effect = {
+                    prison_type = vore_dungeon
+                }
+            }
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 15
+            }
+        }
+        
+        stress_impact = {
+            compassionate = minor_stress_impact_loss
+            vengeful = minor_stress_impact_gain
+        }
+        
+        ai_chance = {
+            base = 0
+            safe_vore_modifier = { PREY = scope:prey }
         }
     }
 
+    # Stop - Intervene
     option = {
-        name = courtier_voreOpt.0030b # "Stop this madness!"
-        hidden_effect = {
-            # Rival is released, but now hates you AND the predator
-            scope:prey = {
-                # add_opinion = { target = court_owner modifier = opinion_knew_about_murder_plot }
-                add_stress = 10
+        name = courtier_voreOpt.0030c
+        
+        # Predator releases prey and is upset
+        scope:predator = {
+            add_opinion = {
+                target = root
+                modifier = disappointed_opinion
+                opinion = -15
+            }
+            add_stress = medium_stress_gain
+        }
+        
+        # Prey was vored unwillingly; still resentful toward you for allowing it
+        scope:prey = {
+            add_opinion = {
+                target = root
+                modifier = vored_me_unwilling_opinion
+                opinion = -15
             }
         }
+        
+        stress_impact = {
+            just = minor_stress_impact_loss
+            compassionate = medium_stress_impact_loss
+            vengeful = minor_stress_impact_gain
+        }
+        
+        ai_chance = {
+            base = 20
+            modifier = {
+                add = 40
+                has_trait = just
+            }
+            modifier = {
+                add = 30
+                has_trait = compassionate
+            }
+        }
+    }
+    
+    after = {
+        clean_up_effect = yes
     }
 }
 
@@ -266,62 +491,83 @@ courtier_vore.0050 = {
     title = courtier_voreTitle.0050
     desc = {
         first_valid = {
-            # The Predator is eccentric
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = sadistic } }
+                desc = courtier_vore.0050.desc.sadistic
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = lustful } }
+                desc = courtier_vore.0050.desc.lustful
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = gregarious } }
+                desc = courtier_vore.0050.desc.gregarious
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = compassionate } }
+                desc = courtier_vore.0050.desc.compassionate
+            }
+            triggered_desc = {
+                trigger = { scope:predator = { has_trait = craven } }
+                desc = courtier_vore.0050.desc.craven
+            }
             triggered_desc = {
                 trigger = { scope:predator = { has_trait = eccentric } }
                 desc = courtier_vore.0050.desc.envy
             }
-            # The Predator is Gluttonous
             triggered_desc = {
                 trigger = { scope:predator = { has_trait = gluttonous } }
                 desc = courtier_vore.0050.desc.gluttony
             }
-            # Generic
             desc = courtier_vore.0050.desc.generic
         }
     }
     theme = intrigue
     
-    # Portraits
     left_portrait = {
         character = root
-        animation = idle_standing # Observer
+        animation = idle_standing
     }
     center_portrait = {
         character = scope:predator
-        animation = schadenfreude # The dominant one
+        animation = schadenfreude
     }
-    right_portrait = {
+    lower_right_portrait = {
         character = scope:prey
-        animation = fear # The victim
+        animation = fear
     }
 
     trigger = {      
-        # One must be capable of vore
-        any_concubine = { can_vore = yes }
+        any_concubine = { 
+            can_vore = yes 
+        }
         
-        # And one must be valid prey
-        any_concubine = { can_be_prey = yes }
+        any_concubine = { 
+            count >= 2
+            can_be_prey = yes 
+        }
     }
 
+    cooldown = { years = 3 }
+
     immediate = {
-        # 1. Find the Predator (One of the consorts)
         random_concubine = {
             limit = { can_vore = yes }
             save_scope_as = predator
         }
         
-        # 2. Find the Prey (A different consort)
-        random_concubine = {
+        ordered_concubine = {
             limit = { 
                 can_be_prey = yes
                 NOT = { this = scope:predator }
             }
+            order_by = {
+                value = "opinion(scope:predator)"
+                multiply = -1
+            }
             save_scope_as = prey
         }
         
-        # 3. The Action (Hidden from player initially, or just implied)
-        # We start the vore process but don't finish it until the player chooses.
         scope:predator = {
             add_character_flag = portrait_belly
         }
@@ -329,78 +575,112 @@ courtier_vore.0050 = {
 
     # Option 1: Punish the Predator (Stop the fight)
     option = {
-        name = courtier_vore.0050.opt.punish
-        flavor = courtier_vore.0050.flavor.punish
+        name = courtier_vore.0050.opt.stop
         
         hidden_effect = {
             scope:predator = {
-                # Release the prey
-                release_prey_location_check_effect = yes # Assume oral for the rescue
-                
-                # Predator gets stressed/angry
-                add_stress = 20
+                add_stress = medium_stress_gain
+                add_opinion = {
+                    target = root
+                    modifier = angry_opinion
+                    opinion = -20
+                }
+                remove_character_flag = portrait_belly
             }
+            
             scope:prey = {
-                # Prey is grateful
-                add_trait = disfigured # Slight trauma from the attempt
+                add_opinion = {
+                    target = root
+                    modifier = vored_me_unwilling_opinion
+                    opinion = -15
+                }
             }
-            # Update visuals (Remove the belly we added in immediate)
-            scope:predator = { remove_character_flag = portrait_belly }
+            
+            stress_impact = {
+                just = minor_stress_impact_loss
+                compassionate = minor_stress_impact_loss
+                callous = minor_stress_impact_gain
+            }
         }
     }
     
     # Option 2: Allow the Feast (Lethal)
     option = {
-        name = courtier_vore.0050.opt.allow
-        flavor = courtier_vore.0050.flavor.allow
+        name = courtier_vore.0050.opt.lethal
     
-        hidden_effect = {
-            scope:predator = {
-                # Execute the lethal vore
-                lethal_vore_effect = { type = oral } # You can randomize this if you want
-                
-                # Predator loves you for allowing it
-                add_character_modifier = { modifier = satisfied years = 1 }
+        trigger = { global_var:digestion_banned = no }
+        
+        scope:predator = {
+            if = {
+                limit = { global_var:oral_banned = no }
+                lethal_vore_effect = { type = oral }
+            } 
+            else = {
+                random_orifice_lethal_vore_effect = yes
             }
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 25
+            }
+        }
+        
+        stress_impact = {
+            compassionate = major_stress_impact_gain
+            sadistic = minor_stress_impact_loss
+            callous = minor_stress_impact_loss
+        }
+        
+        ai_chance = {
+            base = 0
+            lethal_vore_modifier = { PREY = scope:prey }
         }
     }
     
     # Option 3: Safe Storage (Non-Lethal)
     option = {
-        name = courtier_vore.0050.opt.storage
-        flavor = courtier_vore.0050.flavor.storage
+        name = courtier_vore.0050.opt.safe
         
-        # scope:activity = {
-        #     add_activity_log_entry = {
-        #         key = courtier_vore_storage_log
-        #         score = 25
-        #         tags = { random bad }
-        #         character = root
-        #         target = scope:prey
-        #         actor = scope:predator
-        #     }
-        # }
-        hidden_effect = {
-            scope:predator = {
-                if = {
-                    limit = { AND = { is_female = yes global_var:unbirth_banned = no } }
-                    safe_vore_effect = {
-                        type = unbirth
-                        prison_type = vore_dungeon
-                    }
+        scope:predator = {
+            if = {
+                limit = {
+                    is_female = yes
+                    global_var:unbirth_banned = no
                 }
-                else_if = {
-                    limit = { AND = { is_female = no global_var:cock_banned = no } }
-                    safe_vore_effect = {
-                        type = cock
-                        prison_type = vore_dungeon
-                    }
-                } 
-                else = {
-                    random_orifice_safe_vore_effect = { prison_type = vore_dungeon }
+                safe_vore_effect = {
+                    type = unbirth
+                    prison_type = vore_dungeon
                 }
-                add_character_modifier = { modifier = satisfied years = 1 }
             }
+            else_if = {
+                limit = {
+                    is_male = yes
+                    global_var:cock_banned = no
+                }
+                safe_vore_effect = {
+                    type = cock
+                    prison_type = vore_dungeon
+                }
+            }
+            else = {
+                random_orifice_safe_vore_effect = {
+                    prison_type = vore_dungeon
+                }
+            }
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 20
+            }
+        }
+        
+        stress_impact = {
+            compassionate = minor_stress_impact_loss
+        }
+        
+        ai_chance = {
+            base = 0
+            safe_vore_modifier = { PREY = scope:prey }
         }
     }
 }

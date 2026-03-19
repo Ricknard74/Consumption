@@ -40,3 +40,27 @@ prey_non_fatal_memory = {
 		pred
 	}
 }
+
+romantic_vore_encounter = {
+	categories = { minor positive }
+	icon = "activity_tournament.dds"
+	description = {
+		first_valid = {
+			desc = romantic_vore_encounter_pred_memory_desc
+		}
+	}
+
+	second_perspective_description = {
+		first_valid = {
+			desc = romantic_vore_encounter_prey_memory_desc
+		}
+	}
+
+	duration = {
+		years = memory_default_duration
+	}
+
+	participants = {
+		partner
+	}
+}

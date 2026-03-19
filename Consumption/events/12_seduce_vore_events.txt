@@ -2,14 +2,1060 @@
 
 # --- ONGOING EVENTS ---
 
-# Event: A Tight Embrace (Milestone 1/2)
+# Event: Playful Possession (Milestone 1/2)
+# The schemer swallows one of target's artifacts during a disagreement, turning it into flirtation
+seduce_vore.1010 = {
+    type = character_event
+    title = seduce_vore.1010.t
+    desc = seduce_vore.1010.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = schadenfreude
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = shock
+    }
+    
+    lower_left_portrait = root
+    
+    widget = {
+        gui = "event_window_widget_scheme"
+        container = "custom_widgets_container"
+    }
+    
+    cooldown = { years = 2 }
+    
+    trigger = {
+        NOT = { has_variable = scheme_event_active_flag }
+        can_vore = yes
+        scope:target = {
+            can_be_prey = yes
+            any_character_artifact = {
+                count >= 1
+                is_equipped = no
+                is_unique = no
+            }
+        }
+    }
+    
+    immediate = {
+        set_variable = scheme_event_active_flag
+        
+        scope:target = {
+            ordered_character_artifact = {
+                limit = {
+                    is_unique = no
+                }
+                order_by = {
+                    value = artifact_rarity
+                    multiply = -1
+                }
+                save_scope_as = swallowed_artifact
+            }
+        }
+        
+        add_character_flag = {
+            flag = portrait_belly
+            days = 3
+        }
+    }
+    
+    # Swallow the artifact playfully
+    option = {
+        name = seduce_vore.1010.a
+        
+        custom_tooltip = seduce_vore.1010.a.tt
+        
+        scope:swallowed_artifact = {
+            set_variable = {
+                name = temporarily_swallowed
+                value = yes
+                days = 3
+            }
+        }
+        
+        hidden_effect = {
+            random_list = {
+                70 = {
+                    modifier = {
+                        add = 20
+                        scope:target = { has_trait = lustful }
+                    }
+                    modifier = {
+                        add = 15
+                        scope:target = { has_trait = gregarious }
+                    }
+                    modifier = {
+                        add = -30
+                        scope:target = { has_trait = greedy }
+                    }
+                    modifier = {
+                        add = -25
+                        scope:target = { has_trait = wrathful }
+                    }
+                    modifier = {
+                        add = 10
+                        scope:target = { 
+                            has_relation_lover = root
+                        }
+                    }
+                    
+                    seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+                    
+                    scope:target = {
+                        add_opinion = {
+                            target = root
+                            modifier = respect_opinion
+                            opinion = 20
+                        }
+                    }
+                    
+                    root = {
+                        trigger_event = {
+                            id = seduce_vore.1011
+                            days = 2
+                        }
+                    }
+                }
+                30 = {
+                    scope:target = {
+                        add_opinion = {
+                            target = root
+                            modifier = disappointed_opinion
+                            opinion = -20
+                        }
+                    }
+                    
+                    root = {
+                        trigger_event = {
+                            id = seduce_vore.1012
+                            days = 2
+                        }
+                    }
+                }
+            }
+        }
+        
+        ai_chance = {
+            base = 100
+            modifier = {
+                add = -50
+                scope:target = { has_trait = greedy }
+            }
+        }
+    }
+    
+    # Don't swallow it (decline the event)
+    option = {
+        name = seduce_vore.1010.b
+        custom_tooltip = seduce_ongoing_decline_event.tt
+        
+        scope:scheme = {
+            set_variable = {
+                name = declined_seduce_milestone_1_event
+                value = yes
+            }
+        }
+        
+        ai_chance = {
+            base = 0
+            modifier = {
+                add = 100
+                scope:target = { has_trait = greedy }
+            }
+        }
+    }
+    
+    after = {
+        remove_variable = scheme_event_active_flag
+    }
+}
+
+# Follow-up: Success - They demand it back playfully
+# FIX: Title key corrected from seduce_vore.1010.t to own key
+seduce_vore.1011 = {
+    type = character_event
+    title = seduce_vore.1011.t
+    desc = seduce_vore.1011.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = flirtation
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = flirtation_left
+    }
+    
+    trigger = {
+        exists = scope:scheme
+        exists = scope:swallowed_artifact
+    }
+    
+    immediate = {
+        scope:swallowed_artifact = {
+            remove_variable = temporarily_swallowed
+        }
+        remove_character_flag = portrait_belly
+    }
+    
+    # Return it with a wink
+    option = {
+        name = seduce_vore.1011.a
+        
+        custom_tooltip = seduce_vore.1011.a.tt
+        
+        # FIX: intimate_opinion -> romance_opinion (vanilla)
+        scope:target = {
+            add_opinion = {
+                target = root
+                modifier = romance_opinion
+                opinion = 20
+            }
+        }
+        
+        stress_impact = {
+            gregarious = minor_stress_impact_loss
+            lustful = minor_stress_impact_loss
+        }
+    }
+    
+    # Keep it a bit longer to tease
+    option = {
+        name = seduce_vore.1011.b
+        
+        trigger = {
+            OR = {
+                has_trait = lustful
+                has_trait = brave
+            }
+        }
+        
+        custom_tooltip = seduce_vore.1011.b.tt
+        
+        scope:swallowed_artifact = {
+            set_variable = {
+                name = temporarily_swallowed
+                value = yes
+                days = 1
+            }
+        }
+        
+        # FIX: lustful_opinion -> romance_opinion (vanilla)
+        scope:target = {
+            add_opinion = {
+                target = root
+                modifier = romance_opinion
+                opinion = 20
+            }
+        }
+        
+        stress_impact = {
+            shy = minor_stress_impact_gain
+        }
+    }
+}
+
+# Follow-up: Failure - They're actually angry
+# FIX: Title key corrected from seduce_vore.1010.t to own key
+seduce_vore.1012 = {
+    type = character_event
+    title = seduce_vore.1012.t
+    desc = seduce_vore.1012.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = worry
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = anger
+    }
+    
+    trigger = {
+        exists = scope:scheme
+        exists = scope:swallowed_artifact
+    }
+    
+    immediate = {
+        scope:swallowed_artifact = {
+            remove_variable = temporarily_swallowed
+        }
+        remove_character_flag = portrait_belly
+    }
+    
+    # Apologize and return it
+    option = {
+        name = seduce_vore.1012.a
+        
+        custom_tooltip = seduce_vore.1012.a.tt
+        
+        # FIX: apologetic_opinion -> grateful_opinion (vanilla)
+        scope:target = {
+            add_opinion = {
+                target = root
+                modifier = apologized_opinion
+                opinion = 20
+            }
+        }
+        
+        stress_impact = {
+            arrogant = minor_stress_impact_gain
+            humble = minor_stress_impact_loss
+        }
+    }
+    
+    # Double down on the tease (risky)
+    option = {
+        name = seduce_vore.1012.b
+        
+        trigger = {
+            OR = {
+                has_trait = arrogant
+                has_trait = sadistic
+            }
+        }
+        
+        trait = arrogant
+        trait = sadistic
+        
+        custom_tooltip = seduce_vore.1012.b.tt
+        
+        scope:target = {
+            add_opinion = {
+                target = root
+                modifier = disappointed_opinion
+                opinion = -20
+            }
+        }
+        
+        random = {
+            chance = 10
+            modifier = {
+                add = 20
+                scope:target = { has_trait = craven }
+            }
+            
+            scope:target = {
+                remove_opinion = {
+                    target = root
+                    modifier = disappointed_opinion
+                }
+                add_opinion = {
+                    target = root
+                    modifier = romance_opinion
+                    opinion = 20
+                }
+            }
+        }
+    }
+}
+
+# Event: A Wager (Milestone 1/2)
+# You make a playful bet with your target - if you win, they spend time inside you.
+seduce_vore.1080 = {
+    type = character_event
+    title = seduce_vore.1080.t
+    desc = seduce_vore.1080.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = personality_rational
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = thinking
+    }
+    
+    widget = {
+        gui = "event_window_widget_scheme"
+        container = "custom_widgets_container"
+    }
+    
+    cooldown = { years = 2 }
+    
+    trigger = {
+        NOT = { has_variable = scheme_event_active_flag }
+        can_vore = yes
+        scope:target = {
+            can_be_prey = yes
+            # More likely at feasts or when playing games
+            OR = {
+                is_at_same_location = root
+                has_relation_friend = root
+            }
+        }
+    }
+    
+    immediate = {
+        set_variable = scheme_event_active_flag
+        
+        # Determine what game you're playing
+        random_list = {
+            33 = {
+                save_scope_value_as = {
+                    name = game_type
+                    value = flag:chess
+                }
+            }
+            33 = {
+                save_scope_value_as = {
+                    name = game_type
+                    value = flag:dice
+                }
+            }
+            34 = {
+                save_scope_value_as = {
+                    name = game_type
+                    value = flag:riddles
+                }
+            }
+        }
+    }
+    
+    # Propose the wager
+    option = {
+        name = seduce_vore.1080.a
+        
+        custom_tooltip = seduce_vore.1080.a.tt
+        
+        # They have to accept the bet first
+        scope:target = {
+            trigger_event = {
+                id = seduce_vore.1081
+                days = 1
+            }
+        }
+        
+        ai_chance = {
+            base = 100
+        }
+    }
+    
+    # Don't propose the bet (decline)
+    option = {
+        name = seduce_vore.1080.b
+        custom_tooltip = seduce_ongoing_decline_event.tt
+        
+        scope:scheme = {
+            set_variable = {
+                name = declined_seduce_milestone_1_event
+                value = yes
+            }
+        }
+        
+        ai_chance = {
+            base = 0
+        }
+    }
+    
+    after = {
+        remove_variable = scheme_event_active_flag
+    }
+}
+
+# Target's response - Do they accept the wager?
+seduce_vore.1081 = {
+    type = character_event
+    title = seduce_vore.1080.t
+    desc = {
+        desc = seduce_vore.1081.opening
+        triggered_desc = {
+            trigger = { scope:game_type = flag:chess }
+            desc = seduce_vore.1081.desc.chess
+        }
+        triggered_desc = {
+            trigger = { scope:game_type = flag:dice }
+            desc = seduce_vore.1081.desc.dice
+        }
+        triggered_desc = {
+            trigger = { scope:game_type = flag:riddles }
+            desc = seduce_vore.1081.desc.riddles
+        }
+    }
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = thinking
+    }
+    
+    right_portrait = {
+        character = scope:owner
+        animation = personality_bold
+    }
+    
+    trigger = {
+        exists = scope:scheme
+    }
+    
+    # Accept the wager
+    option = {
+        name = seduce_vore.1081.a
+        
+        custom_tooltip = seduce_vore.1081.a.tt
+        
+        # Now we play and see who wins
+        scope:owner = {
+            trigger_event = {
+                id = seduce_vore.1082
+                days = 1
+            }
+        }
+        
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 30
+                has_trait = brave
+            }
+            modifier = {
+                add = 25
+                has_trait = arrogant
+            }
+            modifier = {
+                add = 20
+                has_trait = lustful
+            }
+            modifier = {
+                add = -40
+                has_trait = shy
+            }
+            modifier = {
+                add = -30
+                has_trait = paranoid
+            }
+            modifier = {
+                add = 20
+                has_relation_friend = scope:owner
+            }
+        }
+    }
+    
+    # Decline the wager
+    option = {
+        name = seduce_vore.1081.b
+        
+        scope:owner = {
+            trigger_event = {
+                id = seduce_vore.1083
+                days = 1
+            }
+        }
+        
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 40
+                has_trait = shy
+            }
+            modifier = {
+                add = 30
+                has_trait = paranoid
+            }
+        }
+    }
+}
+
+# The Game - Owner's perspective (you win or lose)
+seduce_vore.1082 = {
+    type = character_event
+    title = seduce_vore.1080.t
+    desc = {
+        desc = seduce_vore.1082.opening
+        triggered_desc = {
+            trigger = { scope:game_type = flag:chess }
+            desc = seduce_vore.1082.desc.chess
+        }
+        triggered_desc = {
+            trigger = { scope:game_type = flag:dice }
+            desc = seduce_vore.1082.desc.dice
+        }
+        triggered_desc = {
+            trigger = { scope:game_type = flag:riddles }
+            desc = seduce_vore.1082.desc.riddles
+        }
+    }
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = personality_rational
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = thinking
+    }
+    
+    lower_left_portrait = root
+    
+    trigger = {
+        exists = scope:scheme
+    }
+    
+    immediate = {
+        # Calculate who wins based on skills
+        if = {
+            limit = { scope:game_type = flag:chess }
+            # Chess - learning skill
+            if = {
+                limit = {
+                    learning >= scope:target.learning
+                }
+                save_scope_value_as = {
+                    name = game_result
+                    value = flag:owner_wins
+                }
+            }
+            else = {
+                save_scope_value_as = {
+                    name = game_result
+                    value = flag:target_wins
+                }
+            }
+        }
+        else_if = {
+            limit = { scope:game_type = flag:dice }
+            # Dice - pure luck
+            random_list = {
+                50 = {
+                    save_scope_value_as = {
+                        name = game_result
+                        value = flag:owner_wins
+                    }
+                }
+                50 = {
+                    save_scope_value_as = {
+                        name = game_result
+                        value = flag:target_wins
+                    }
+                }
+            }
+        }
+        else_if = {
+            limit = { scope:game_type = flag:riddles }
+            # Riddles - intrigue skill
+            if = {
+                limit = {
+                    intrigue >= scope:target.intrigue
+                }
+                save_scope_value_as = {
+                    name = game_result
+                    value = flag:owner_wins
+                }
+            }
+            else = {
+                save_scope_value_as = {
+                    name = game_result
+                    value = flag:target_wins
+                }
+            }
+        }
+        
+        # Add belly portrait if you win
+        if = {
+            limit = { scope:game_result = flag:owner_wins }
+            add_character_flag = {
+                flag = portrait_belly
+                days = 3
+            }
+        }
+    }
+    
+    # You won! Claim your prize
+    option = {
+        name = seduce_vore.1082.a
+        
+        trigger = { scope:game_result = flag:owner_wins }
+        
+        custom_tooltip = seduce_vore.1082.a.tt
+        
+        hidden_effect = {
+            random_list = {
+                80 = {  # Most honor the bet
+                    modifier = {
+                        add = 15
+                        scope:target = { has_trait = honest }
+                    }
+                    modifier = {
+                        add = -30
+                        scope:target = { has_trait = deceitful }
+                    }
+                    
+                    # Success: They honor the bet
+                    seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+                    
+                    scope:target = {
+                        add_opinion = {
+                            target = scope:owner
+                            modifier = amused_opinion
+                            opinion = 15
+                        }
+                    }
+                    
+                    # Trigger success event
+                    scope:owner = {
+                        trigger_event = {
+                            id = seduce_vore.1084
+                            days = 1
+                        }
+                    }
+                }
+                20 = {  # They try to back out
+                    # They refuse to honor the bet
+                    scope:target = {
+                        add_opinion = {
+                            target = scope:owner
+                            modifier = refusal_opinion
+                            opinion = -10
+                        }
+                    }
+                    
+                    # Trigger refusal event
+                    scope:owner = {
+                        trigger_event = {
+                            id = seduce_vore.1085
+                            days = 1
+                        }
+                    }
+                }
+            }
+        }
+        
+        ai_chance = {
+            base = 100
+        }
+    }
+    
+    # You lost - they get to pick what you do
+    option = {
+        name = seduce_vore.1082.b
+        
+        trigger = { scope:game_result = flag:target_wins }
+        
+        custom_tooltip = seduce_vore.1082.b.tt
+        
+        # Small prestige hit for losing
+        add_prestige = minor_prestige_loss
+        
+        # They might ask for something in return
+        scope:target = {
+            trigger_event = {
+                id = seduce_vore.1086
+                days = 1
+            }
+        }
+        
+        ai_chance = {
+            base = 100
+        }
+    }
+}
+
+# Target declined the wager
+seduce_vore.1083 = {
+    type = character_event
+    title = seduce_vore.1080.t
+    desc = seduce_vore.1083.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = disappointed
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = dismissal
+    }
+    
+    trigger = {
+        exists = scope:scheme
+    }
+    
+    # Oh well, maybe next time
+    option = {
+        name = seduce_vore.1083.a
+        
+        # No progress, but no penalty either
+        
+        stress_impact = {
+            arrogant = minor_stress_impact_gain
+        }
+    }
+}
+
+# Success - They honor the bet
+seduce_vore.1084 = {
+    type = character_event
+    title = seduce_vore.1080.t
+    desc = seduce_vore.1084.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = happiness
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = personality_content
+    }
+    
+    trigger = {
+        exists = scope:scheme
+    }
+    
+    # Enjoy the moment
+    option = {
+        name = seduce_vore.1084.a
+        
+        scope:target = {
+            add_opinion = {
+                target = scope:owner
+                modifier = amused_opinion
+                opinion = 20
+            }
+        }
+        
+        stress_impact = {
+            lustful = medium_stress_impact_loss
+            gregarious = minor_stress_impact_loss
+        }
+    }
+    
+    # Be gentle and respectful
+    option = {
+        name = seduce_vore.1084.b
+        
+        trigger = {
+            has_trait = compassionate
+        }
+        
+        scope:target = {
+            add_opinion = {
+                target = scope:owner
+                modifier = trust_opinion
+                opinion = 25
+            }
+        }
+        
+        # Even better seduction result
+        scope:scheme = {
+            add_scheme_modifier = {
+                type = scheme_apa_positive_0181_modifier
+                years = 8
+            }
+        }
+    }
+}
+
+# They refuse to honor the bet
+seduce_vore.1085 = {
+    type = character_event
+    title = seduce_vore.1080.t
+    desc = seduce_vore.1085.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = anger
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = fear
+    }
+    
+    trigger = {
+        exists = scope:scheme
+    }
+    
+    # Let them off the hook
+    option = {
+        name = seduce_vore.1085.a
+        
+        scope:target = {
+            add_opinion = {
+                target = scope:owner
+                modifier = grateful_opinion
+                opinion = 15
+            }
+        }
+        
+        stress_impact = {
+            forgiving = minor_stress_impact_loss
+            vengeful = minor_stress_impact_gain
+        }
+    }
+    
+    # Insist they honor it
+    option = {
+        name = seduce_vore.1085.b
+        
+        trigger = {
+            OR = {
+                has_trait = stubborn
+                has_trait = arrogant
+            }
+        }
+        
+        # Force them - might work, might destroy relationship
+        random = {
+            chance = 30
+            
+            # They reluctantly comply (unwilling vore)
+            seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+            
+            scope:target = {
+                add_opinion = {
+                    target = scope:owner
+                    modifier = vored_me_unwilling_opinion
+                    opinion = -20
+                }
+            }
+        }
+    }
+}
+
+# You lost - Target picks their prize
+seduce_vore.1086 = {
+    type = character_event
+    title = seduce_vore.1080.t
+    desc = seduce_vore.1086.desc
+    theme = friendly
+    
+    left_portrait = {
+        character = root
+        animation = thinking
+    }
+    
+    right_portrait = {
+        character = scope:owner
+        animation = shame
+    }
+    
+    trigger = {
+        exists = scope:scheme
+    }
+    
+    immediate = {
+        # Determine what they ask for
+        random_list = {
+            40 = {
+                save_scope_value_as = {
+                    name = prize_type
+                    value = flag:gold
+                }
+            }
+            30 = {
+                save_scope_value_as = {
+                    name = prize_type
+                    value = flag:favor
+                }
+            }
+            30 = {
+                trigger = {
+                    scope:target = {
+                        can_vore = yes
+                    }
+                    scope:owner = {
+                        can_be_prey = yes
+                    }
+                }
+                save_scope_value_as = {
+                    name = prize_type
+                    value = flag:reverse
+                }
+                scope:target = {
+                    save_scope_as = predator
+                }
+                scope:owner = {
+                    save_scope_as = prey
+                }
+            }
+        }
+    }
+    
+    # They want gold
+    option = {
+        name = seduce_vore.1086.a
+        
+        trigger = { scope:prize_type = flag:gold }
+        
+        scope:owner = {
+            pay_short_term_gold = {
+                target = scope:target
+                gold = minor_gold_value
+            }
+        }
+    }
+    
+    # They want a favor
+    option = {
+        name = seduce_vore.1086.b
+        
+        trigger = { scope:prize_type = flag:favor }
+        
+        scope:owner = {
+            add_hook = {
+                target = scope:target
+                type = favor_hook
+            }
+        }
+    }
+    
+    # They want YOU inside THEM (turnabout!)
+    option = {
+        name = seduce_vore.1086.c
+        
+        trigger = { scope:prize_type = flag:reverse }
+        
+        custom_tooltip = seduce_vore.1086.c.tt
+        
+        set_variable = { name = vore_duration value = 3 }
+        
+        scope:prey.scheme = {
+            add_scheme_modifier = {
+                type = scheme_apa_positive_0181_modifier
+                years = 8
+            }
+        }
+        
+        scope:predator = {
+            add_opinion = {
+                target = scope:prey
+                modifier = amused_opinion
+                opinion = 20
+            }
+            safe_vore_effect = {
+                prison_type = vore_willing
+                type = oral
+            }
+        }
+    }
+}
+
+# Event: A Tight Embrace (Milestone 2/2)
 # The player offers a "massage" or "hug" that turns into being held inside the pred.
 seduce_vore.1000 = {
     type = character_event
     title = seduce_vore.1000.t
     desc = seduce_vore.1000.desc
     theme = seduce_scheme
-     
+    
+    # FIX: Swapped portraits - predator (scope:target) should be left, prey (root) lower_right
     left_portrait = {
         character = scope:target
         animation = personality_content
@@ -44,8 +1090,7 @@ seduce_vore.1000 = {
     option = {
         name = seduce_vore.1000.a
         
-        # Successful interaction
-        seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+        seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 2 OUTCOME = success }
         
         root = {
             add_character_modifier = {
@@ -54,10 +1099,12 @@ seduce_vore.1000 = {
             }
         }
         
+        # FIX: Removed invalid opinion = field, modifier value is defined in the modifier itself
         scope:target = {
             add_opinion = {
                 target = root
-                opinion = 10
+                modifier = romance_opinion
+                opinion = 20
             }
         }
     }
@@ -72,11 +1119,10 @@ seduce_vore.1000 = {
         
         scope:scheme = {
             set_variable = {
-                name = declined_seduce_milestone_1_event
+                name = declined_seduce_milestone_2_event
                 value = yes
             }
         }
-    
     }
     
     after = {
@@ -85,7 +1131,7 @@ seduce_vore.1000 = {
     }
 }
 
-# Event: Safe Resting (Milestone 1/2)
+# Event: Safe Resting (Milestone 2/2)
 # The player (as predator) offers to hold the target inside them for "protection" or "warmth".
 seduce_vore.1001 = {
     type = character_event
@@ -100,7 +1146,7 @@ seduce_vore.1001 = {
     
     lower_right_portrait = {
         character = scope:target
-        animation = hapiness
+        animation = happiness
     }
     
     widget = {
@@ -121,20 +1167,17 @@ seduce_vore.1001 = {
     immediate = {
         set_variable = scheme_event_active_flag
         add_character_flag = portrait_belly
-
     }
     
     # Offer the safe resting place
     option = {
         name = seduce_vore.1001.a
         
-        # Show tooltip of possible outcomes
         custom_tooltip = seduce_vore.1001.a.tt
         
         hidden_effect = {
-            # Determine if they accept based on their trust/traits
             random_list = {
-                60 = {  # Base 60% success chance
+                60 = {
                     modifier = {
                         add = -50
                         scope:target = { has_trait = shy }
@@ -152,32 +1195,33 @@ seduce_vore.1001 = {
                         scope:target = { has_trait = paranoid }
                     }
                     
+                    # FIX: Removed invalid opinion = field
                     scope:target = {
                         add_opinion = {
-                            target = scope:owner
-                            opinion = 15
+                            target = root
+                            modifier = romance_opinion
+                            opinion = 20
                         }
                     }
                     
-                    # Trigger follow-up flavor event
-                    scope:owner = {
+                    root = {
                         trigger_event = {
                             id = seduce_vore.1002
                             days = 1
                         }
                     }
                 }
-                40 = {  # 40% failure chance
-                    # Failure: They are weirded out
+                40 = {
+                    # FIX: Removed invalid opinion = field
                     scope:target = {
                         add_opinion = {
-                            target = scope:owner
-                            opinion = -10
+                            target = root
+                            modifier = disappointed_opinion
+                            opinion = -20
                         }
                     }
                     
-                    # Trigger failure event
-                    scope:owner = {
+                    root = {
                         trigger_event = {
                             id = seduce_vore.1003
                             days = 1
@@ -199,7 +1243,7 @@ seduce_vore.1001 = {
         
         scope:scheme = {
             set_variable = {
-                name = declined_seduce_milestone_1_event
+                name = declined_seduce_milestone_2_event
                 value = yes
             }
         }
@@ -209,9 +1253,10 @@ seduce_vore.1001 = {
         }
     }
     
+    # FIX: Added scheme_event_active_flag removal as fallback here in case follow-ups don't fire
     after = {
-        remove_variable = scheme_event_active_flag
         root = { remove_character_flag = portrait_belly }
+        remove_variable = scheme_event_active_flag
     }
 }
 
@@ -238,12 +1283,15 @@ seduce_vore.1002 = {
     
     option = {
         name = seduce_vore.1002.a
-        # Success: They accept the offer
-        seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+        seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 2 OUTCOME = success }
         stress_impact = {
             compassionate = minor_stress_impact_loss
             lustful = minor_stress_impact_loss
         }
+    }
+
+    after = {
+        remove_variable = scheme_event_active_flag
     }
 }
 
@@ -270,106 +1318,524 @@ seduce_vore.1003 = {
     
     option = {
         name = seduce_vore.1003.a
-        # No scheme progress penalty - failure is penalty enough
         stress_impact = {
             arrogant = minor_stress_impact_gain
         }
     }
+
+    after = {
+        remove_variable = scheme_event_active_flag
+    }
 }
 
-seduce_vore.1500 = {
+# Event: Possessive Display (Milestone 1/2)
+# A rival is flirting with your target. You demonstrate dominance by swallowing something of theirs.
+seduce_vore.1050 = {
     type = character_event
-    title = seduce_vore.1500.t
-    theme = seduction
-    desc = seduce_vore.1500.d
-
+    title = seduce_vore.1050.t
+    desc = seduce_vore.1050.desc
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = personality_bold
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = shock
+    }
+    
+    lower_right_portrait = {
+        character = scope:rival
+        animation = fear
+    } 
+    
+    widget = {
+        gui = "event_window_widget_scheme"
+        container = "custom_widgets_container"
+    }
+    
+    cooldown = { years = 2 }
+    
+    trigger = {
+        NOT = { has_variable = scheme_event_active_flag }
+        can_vore = yes
+        scope:target = {
+            can_be_prey = yes
+            any_targeting_scheme = {
+                scheme_type = seduce
+                NOT = { scheme_owner = root }
+            }
+        }
+    }
+    
+    immediate = {
+        set_variable = scheme_event_active_flag
+        
+        # Find the rival
+        scope:target = {
+            random_targeting_scheme = {
+                limit = {
+                    scheme_type = seduce
+                    NOT = { scheme_owner = root }
+                }
+                scheme_owner = { save_scope_as = rival }
+            }
+        }
+        
+        # Determine what you swallow
+        random_list = {
+            # Swallow the rival's goblet/belonging
+            70 = {
+                save_scope_value_as = {
+                    name = swallow_type
+                    value = flag:object
+                }
+            }
+            # Briefly swallow the rival themselves (bold!)
+            30 = {
+                trigger = {
+                    scope:rival = { can_be_prey = yes }
+                }
+                save_scope_value_as = {
+                    name = swallow_type
+                    value = flag:person
+                }
+                root = {
+                    add_character_flag = {
+                        flag = portrait_belly
+                        days = 1
+                    }
+                }
+            }
+        }
+    }
+    
+    # Swallow something to assert dominance
     option = {
-        name = seduce_vore.1500.
-        scope:predator = {
-            remove_character_flag = portrait_belly
+        name = seduce_vore.1050.a
+        
+        custom_tooltip = seduce_vore.1050.a.tt
+        
+        hidden_effect = {
+            random_list = {
+                60 = {  # Base 60% success
+                    modifier = {
+                        add = 20
+                        scope:target = { has_trait = lustful }
+                    }
+                    modifier = {
+                        add = 15
+                        scope:target = { has_trait = arrogant }
+                    }
+                    modifier = {
+                        add = -25
+                        scope:target = { has_trait = compassionate }
+                    }
+                    modifier = {
+                        add = -20
+                        scope:target = { has_trait = just }
+                    }
+                    modifier = {
+                        add = 25
+                        scope:swallow_type = flag:person
+                    }
+                    
+                    # Success: They're impressed by your boldness
+                    seduce_ongoing_add_scheme_modifier_effect = { MILESTONE = 1 OUTCOME = success }
+                    
+                    scope:target = {
+                        add_opinion = {
+                            target = scope:owner
+                            modifier = impressed_opinion
+                            opinion = 20
+                        }
+                    }
+                    
+                    # Rival is intimidated
+                    scope:rival = {
+                        add_opinion = {
+                            target = scope:owner
+                            modifier = scared_opinion
+                            opinion = -30
+                        }
+                    }
+                    
+                    # Trigger success follow-up
+                    scope:owner = {
+                        trigger_event = {
+                            id = seduce_vore.1051
+                            days = 1
+                        }
+                    }
+                }
+                40 = {  # 40% failure
+                    # Failure: They were vored unwillingly and resent you
+                    scope:target = {
+                        add_opinion = {
+                            target = scope:owner
+                            modifier = vored_me_unwilling_opinion
+                            opinion = -20
+                        }
+                    }
+                    
+                    # Rival becomes your enemy
+                    scope:rival = {
+                        add_opinion = {
+                            target = scope:owner
+                            modifier = hate_opinion
+                            opinion = -50
+                        }
+                    }
+                    
+                    # Trigger failure event
+                    scope:owner = {
+                        trigger_event = {
+                            id = seduce_vore.1052
+                            days = 1
+                        }
+                    }
+                }
+            }
+        }
+        
+        ai_chance = {
+            base = 100
+            modifier = {
+                add = 50
+                has_trait = arrogant
+            }
+            modifier = {
+                add = -75
+                has_trait = compassionate
+            }
+        }
+    }
+    
+    # Don't make a scene (decline)
+    option = {
+        name = seduce_vore.1050.b
+        custom_tooltip = seduce_ongoing_decline_event.tt
+        
+        scope:scheme = {
+            set_variable = {
+                name = declined_seduce_milestone_1_event
+                value = yes
+            }
+        }
+        
+        ai_chance = {
+            base = 0
+            modifier = {
+                add = 100
+                has_trait = compassionate
+            }
+        }
+    }
+    
+    after = {
+        remove_variable = scheme_event_active_flag
+    }
+}
+
+# Follow-up: Success - Target is intrigued by your possessiveness
+seduce_vore.1051 = {
+    type = character_event
+    title = seduce_vore.1050.t
+    desc = {
+        desc = seduce_vore.1051.opening
+        triggered_desc = {
+            trigger = { scope:swallow_type = flag:object }
+            desc = seduce_vore.1051.desc.object
+        }
+        triggered_desc = {
+            trigger = { scope:swallow_type = flag:person }
+            desc = seduce_vore.1051.desc.person
+        }
+    }
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = personality_bold
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = flirtation_left
+    }
+    
+    lower_right_portrait = {
+        character = scope:rival
+        animation = fear
+    }
+    
+    trigger = {
+        exists = scope:scheme
+        exists = scope:rival
+    }
+    
+    # Accept their attention
+    option = {
+        name = seduce_vore.1051.a
+        
+        scope:target = {
+            add_opinion = {
+                target = scope:owner
+                modifier = flattered_opinion
+                opinion = 15
+            }
+        }
+        
+        # Rival's scheme takes a hit
+        scope:rival.scheme = {
+            add_scheme_modifier = {
+                type = scheme_apa_negative_5161_modifier
+                years = 8
+            }
+        }
+        
+        stress_impact = {
+            arrogant = minor_stress_impact_loss
+            humble = minor_stress_impact_gain
+        }
+    }
+    
+    # Apologize to the rival (compassionate option)
+    option = {
+        name = seduce_vore.1051.b
+        
+        trigger = {
+            has_trait = compassionate
+        }
+        
+        scope:rival = {
+            add_opinion = {
+                target = scope:owner
+                modifier = apologized_opinion
+                opinion = 20
+            }
+        }
+        
+        # Target respects your compassion but less seduction progress
+        scope:target = {
+            add_opinion = {
+                target = scope:owner
+                modifier = piqued_opinion
+                opinion = 10
+            }
+        }
+    }
+
+    after = {
+        if = {
+            limit = { scope:swallow_type = flag:person }
+            clean_up_effect = yes
         }
     }
 }
 
-# --- SUCCESS EVENTS (Outcomes) --- WIP
+# Follow-up: Failure - Target is horrified
+seduce_vore.1052 = {
+    type = character_event
+    title = seduce_vore.1050.t
+    desc = {
+        desc = seduce_vore.1052.opening
+        triggered_desc = {
+            trigger = { scope:swallow_type = flag:object }
+            desc = seduce_vore.1052.desc.object
+        }
+        triggered_desc = {
+            trigger = { scope:swallow_type = flag:person }
+            desc = seduce_vore.1052.desc.person
+        }
+    }
+    theme = seduce_scheme
+    
+    left_portrait = {
+        character = root
+        animation = shame
+    }
+    
+    right_portrait = {
+        character = scope:target
+        animation = anger
+    }
+    
+    lower_right_portrait = {
+        character = scope:rival
+        animation = fear
+    }
+    
+    trigger = {
+        exists = scope:scheme
+        exists = scope:rival
+    }
+    
+    immediate = {
+        if = {
+            limit = { scope:swallow_type = flag:person }
+            root = {
+                remove_character_flag = portrait_belly
+            }
+        }
+    }
+    
+    # Apologize profusely
+    option = {
+        name = seduce_vore.1052.a
+        
+        # Slight opinion recovery
+        scope:target = {
+            add_opinion = {
+                target = scope:owner
+                modifier = apologized_opinion
+                opinion = 10
+            }
+        }
+        
+        scope:rival = {
+            add_opinion = {
+                target = scope:owner
+                modifier = apologized_opinion
+                opinion = 15
+            }
+        }
+        
+        stress_impact = {
+            arrogant = medium_stress_impact_gain
+            humble = minor_stress_impact_loss
+        }
+    }
+    
+    # Defend your actions (arrogant)
+    option = {
+        name = seduce_vore.1052.b
+        
+        trigger = {
+            OR = {
+                has_trait = arrogant
+                has_trait = wrathful
+            }
+        }
+        
+        # Double down - makes it worse (target was vored unwillingly)
+        scope:target = {
+            add_opinion = {
+                target = scope:owner
+                modifier = vored_me_unwilling_opinion
+                opinion = -15
+            }
+        }
+        
+        # But rival is even more intimidated
+        scope:rival = {
+            add_opinion = {
+                target = scope:owner
+                modifier = scared_opinion
+                opinion = -30
+            }
+        }
+        
+        stress_impact = {
+            content = medium_stress_impact_gain
+        }
+    }
+}
+
+# --- SUCCESS EVENTS (Outcomes) ---
 
 # Success: A Private Sanctuary
-# The seduction concludes with the target climbing inside the player for the night.
-# seduce_vore.2000 = {
-#     type = character_event
-#     title = seduce_vore.2000.t
-#     theme = romance
-#     desc = seduce_vore.2000.desc
+seduce_vore.2000 = {
+    type = character_event
+    title = seduce_vore.2000.t
+    theme = seduce_scheme
+    desc = seduce_vore.2000.desc
     
-#     trigger = {
-#         NOT = { has_variable = scheme_event_active_flag }
-#         can_vore = yes
-#     }
+    trigger = {
+        NOT = { has_variable = scheme_event_active_flag }
+        can_vore = yes
+        exists = scope:target
+    }
 
-#     immediate = {
-#         # The intimacy of being the container
-#         add_character_modifier = { modifier = vore_seduced_warmth days = 60 }
-#     }
+    left_portrait = {
+        character = root
+        animation = flirtation
+    }
 
-#     option = {
-#         name = seduce_vore.2000.opt.a
+    immediate = {
+        set_variable = scheme_event_active_flag
+        add_character_flag = portrait_belly
+    }
+
+    option = {
+        name = seduce_vore.2000.opt.a
         
-#         hidden_effect = {
-#             # We use a custom effect to "store" them temporarily without it being a prison sentence
-#             # Or we use a very short "House Arrest" type to simulate the act
-#             scope:target = {
-#                 add_character_modifier = { modifier = hidden_in_stomach_romantic days = 1 }
-#             }
-#             scope:scheme = {
-#                 end_scheme = yes
-#             }
-#             # Create a memory
-#             create_character_memory = {
-#                 type = romantic_vore_encounter
-#                 participants = { partner = scope:target }
-#             }
-#         }
-#     }
+        hidden_effect = {
+            # FIX: Modifier moved here from immediate so it only applies on confirmation
+            add_character_modifier = { modifier = vore_seduced_warmth days = 60 }
 
-#     after = {
-#         remove_variable = scheme_event_active_flag
-#     }
-# }
+            scope:target = {
+                add_character_modifier = { modifier = hidden_in_stomach_romantic days = 1 }
+            }
+            scope:scheme = {
+                end_scheme = yes
+            }
+            create_character_memory = {
+                type = romantic_vore_encounter
+                participants = { partner = scope:target }
+            }
+        }
+    }
 
-# # Success: Willing Prey
-# # The target *wants* to be inside the player.
-# seduce_vore.2001 = {
-#     type = character_event
-#     title = seduce_vore.2001.t
-#     theme = romance
-#     desc = seduce_vore.2001.desc
+    after = {
+        remove_variable = scheme_event_active_flag
+        clean_up_effect = yes
+    }
+}
+
+# Success: Willing Prey
+seduce_vore.2001 = {
+    type = character_event
+    title = seduce_vore.2001.t
+    # FIX: theme changed from romance (non-vanilla) to seduce_scheme
+    theme = seduce_scheme
+    desc = seduce_vore.2001.desc
     
-#     trigger = {
-#         NOT = { has_variable = scheme_event_active_flag }
-#         can_vore = yes
-#         # Target is eager
-#         scope:target = { has_trait = lustful }
-#     }
+    trigger = {
+        NOT = { has_variable = scheme_event_active_flag }
+        can_vore = yes
+        scope:target = { has_trait = lustful }
+    }
 
-#     option = {
-#         name = seduce_vore.2001.opt.a
+    immediate = {
+        set_variable = scheme_event_active_flag
+        save_scope_as = predator
+        add_character_flag = portrait_belly
+        scope:target = { save_scope_as = prey }
+    }
+
+    option = {
+        name = seduce_vore.2001.opt.a
         
-#         hidden_effect = {
-#             safe_vore_effect = {
-#                 type = oral
-#                 prison_type = vore_willing # Keeps them in your court/dungeon safely
-#             }
-            
-#             # Since this is seduction, we make the prison feel "romantic" via modifiers
-#             scope:target = {
-#                 add_character_modifier = { modifier = romantic_vore_captivity months = 2 }
-#             }
-            
-#             add_diplomacy = 2 # Intimacy boosts
-#         }
-#     }
+        hidden_effect = {
+            safe_vore_effect = {
+                type = oral
+                prison_type = vore_willing
+            }
+            scope:target = {
+                add_character_modifier = { modifier = romantic_vore_captivity months = 2 }
+            }
+            # FIX: Added missing end_scheme to match 2000
+            scope:scheme = {
+                end_scheme = yes
+            }
+        }
+    }
 
-#     after = {
-#         remove_variable = scheme_event_active_flag
-#     }
-# }
+    after = {
+        remove_variable = scheme_event_active_flag
+        clean_up_effect = yes
+    }
+}

@@ -74,9 +74,7 @@ cock_vore_chance = {
 		}
 }
 
-max_belly_capacity = {
-    value = 0
-    
+max_belly_capacity = {  
     # --- CAPACITY 10 ---
     # Predator 3 + Giant
     if = {
@@ -158,8 +156,15 @@ max_belly_capacity = {
         value = 2
     }
     
-    # Default fallback (shouldn't reach here if vore_capable)
-    else = {
+    else_if = {
+        limit = {
+            has_character_flag = vore_capable
+            has_trait = dwarf
+        }
         value = 1
+    }
+    # Default fallback
+    else = {
+        value = 0
     }
 }

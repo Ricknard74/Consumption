@@ -7,7 +7,6 @@ religious_vore.0001 = {
     theme = feast_activity
     desc = religious_voreDesc.0001
 
-    # FIX: Corrected faith syntax
     trigger = {
         has_faith = faith:savior
     }
@@ -21,6 +20,7 @@ religious_vore.0001 = {
             template = prey_character_template
             save_scope_as = prey
         }
+        hidden_effect = { debug_log = "[predator.GetName] Initiated vore feast" }
     }
 
     right_portrait = {
@@ -53,7 +53,6 @@ religious_vore.0001 = {
         }
         name = religious_voreOpt.0001b
         hidden_effect = {
-            # Kill current prey silently and reroll event
             scope:prey = { silent_disappearance_effect = yes }
             trigger_event = religious_vore.0001       
         }
@@ -187,7 +186,6 @@ religious_vore.0003 = {
         hidden_effect = {
             trigger_event = religious_vore.0008
         }
-        # CLEANUP: Since this branch ends here, we must clean up scopes immediately after 0008
     }
     after = { clean_up_effect = yes }
 }
@@ -222,10 +220,10 @@ religious_vore.0004 = {
             trigger_event = religious_vore.0008
             # Schedule Conversion (Runs later)
             random_list = {
-                100 = {
+                75 = {
                     trigger_event = { id = religious_vore.0009 days = 5 }
                 }
-                0 = {
+                25 = {
                     trigger_event = { id = religious_vore.0010 days = 10 }
                 }
             }       
@@ -281,28 +279,6 @@ religious_vore.0006 = {
         }
     }
 
-            #Rebirth/Transformation
-        # option = {
-        #         name = religious_voreOpt.0006a
-        #         trigger = {
-        #                 AND = {
-        #                         global_var:transformation_banned = no
-        #                         can_have_children = yes
-        #                 } 
-        #         }    
-        #         scope:predator = {
-        #                 add_trait = unbirth_predator
-        #                 make_pregnant = {
-        #                         father = scope:prey
-        #                         number_of_children = 1
-        #                 }
-        #         }
-        #         scope:prey = {
-        #                 add_trait = transforming
-        #                 add_character_modifier = { modifier = transforming_1 months = 9 }
-        #         }
-        #         trigger_event = { vore.0014 months = 9 }
-        # }
     option = {
         name = religious_voreOpt.0006b
         hidden_effect = {

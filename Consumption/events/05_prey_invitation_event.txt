@@ -8,9 +8,7 @@ invite_vore_pred.0001 = {
     desc = invite_vore_predDesc.0001
     theme = intrigue
     
-    # 1. Save our scopes
     immediate = {
-        # 'scope:recipient' is the Prey (from the interaction)
         scope:recipient = {
             save_scope_as = prey
         }
@@ -20,10 +18,7 @@ invite_vore_pred.0001 = {
     option = {
         name = invite_vore_predOpt.0001a # "Send the letter"
         
-        # Setup logic
         hidden_effect = {
-            # LINKING: Save the Predator (root) as a variable on the Prey.
-            # This allows Event 0002 to know who sent the letter.
             scope:prey = {
                 set_variable = { name = inviter value = root }
             }
@@ -97,18 +92,6 @@ invite_vore_pred.0003 = {
     theme = intrigue
     
     immediate = {
-        # The prey is at our court now (we can scope to them via location or just the one who triggered the chain)
-        # Since the prey traveled to us, we can find them at our court.
-        # Or simpler: the prey is still in memory as 'scope:prey' if we didn't clear it, 
-        # but 0002 ran on them. Let's find them at our location.
-        
-        random_courtier_or_guest = {
-            limit = { 
-                has_character_flag = potential_prey # Assuming we set this flag in the interaction
-                # Double check it's the right person if needed
-            }
-            save_scope_as = prey
-        }
     }
     
     option = {
@@ -124,4 +107,23 @@ invite_vore_pred.0003 = {
     option = {
         name = invite_vore_predOpt.0003b # "Wait for the feast"
     }
+}
+
+# Vore choices
+
+invite_vore_pred.0004 = {
+    type = character_event
+    title = invite_vore_pred.0004.t
+    theme = default
+    desc = invite_vore_pred.0004.d
+    
+    immediate = {
+        scope:recipient = { save_scope_as = prey }  
+        scope:actor = { save_scope_as = predator } 
+    } 
+    option = {
+        name = invite_vore_pred.0004.opt.a
+        random_orifice_vore_effect = { prison_type = vore_willing }  # Or choice menu
+    }
+    after = { clean_up_effect = yes }
 }

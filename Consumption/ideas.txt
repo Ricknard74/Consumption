@@ -1,12 +1,6 @@
-# Add vore belly model using decals to affect size
-
 Replace prison_type with character flag, than use prison_type for womb vs stomach vs bowels vs balls
 
-Investigate using story cycle for safe vore so prey are garunteed release at some random interval. Use random_relation_pred as the prey are still alive at this point
-
 Physician vore, either a treatment description or where you are made incapable for a month but have a higher chance of healing.
-
-Spouse vore events, like devouring a concubine or secondary spouse. Concubine on concubine vore?
 
 Stress break as prey event
 
@@ -15,8 +9,6 @@ Vore event for conversion of court members
 Vore Conversion flavor for convert county
 
 Vore themed priest council role
-
-Delay killing of prey so there is a chance to escape, connected to a global variable so it is optional? #Technically quite challenging to implement. Should honestly instantly initate a duel-like event upon unwilling vore
 
 Hunt activity with vore events like catching some of your guests voring each other, or being eaten by their target, fatally and non-fatally.
 
@@ -67,3 +59,9 @@ Investigate using activities for vore your lover/invite pred/prey events
 Investigate siphon treasury vore event where you swallow up the gold
 
 Add toggles for supernatural events, old preds, and feral preds.
+
+Supernatural vore disaster where a giant(ess) comes to a county and devours many people. Non-lethal can be where they eventually end going towards australia or the americas.
+
+Bandit vore travel event where a predator_2 or 3 devours your horses. Choose to pay for them, fight, or take a travel speed debuff
+
+Religious vore event for infertile or low fertility characters, where they are unbirthed to give them a fertility boost.

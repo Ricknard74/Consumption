@@ -51,7 +51,7 @@ religious_vore_feast_decision = {
 		}
 		# else_if = {
 		#   limit = { faith = faith_vore_traditionalist }
-		#   trigger_event = vore.020
+		#   trigger_event = religious_vore.1000
 		# }
 	}
 }

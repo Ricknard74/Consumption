@@ -17,3 +17,13 @@ death_execution_cock = {
 	public_knowledge = yes
 	icon = "death_murder.dds"
 }
+
+death_digested_by_wild_beast = {
+	public_knowledge = yes
+	icon = "death_murder.dds"
+}
+
+death_vored_by_wild_beast = {
+	public_knowledge = yes
+	icon = "death_murder.dds"
+}

@@ -14,7 +14,8 @@ invite_vore_prey.0001 = {
                 
                 scope:recipient = {
                         save_scope_as = potential_predator
-                }       
+                }   
+                debug_log = "[prey.GetName] invited predator [predator.GetName] over"    
         }
 
         left_portrait = {
