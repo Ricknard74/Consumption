@@ -125,7 +125,7 @@ release_prey_from_window = {
         # Get the predator from our list
         random_in_list = {
             variable = current_predator_view
-            save_temporary_scope_as = predator
+            save_scope_as = predator
         }
         
         scope:predator = {

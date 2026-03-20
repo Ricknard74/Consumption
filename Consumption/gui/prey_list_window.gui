@@ -232,27 +232,27 @@ types PreyListWindow
                         text = "[Character.GetAge]"
                     }
                 }
-                vbox = {
-                    spacing = 3
+            }
+            vbox = {
+                spacing = 3
+                
+                visible = "[Not(GetPlayer.MakeScope.Var('viewing_ai_prey').IsSet)]"
+
+                button_standard = {
+                    text = "PREY_RELEASE_ALL"
+                    size = { 90 30 }
                     
-                    visible = "[Not(GetPlayer.MakeScope.Var('viewing_ai_prey').IsSet)]"
-    
-                    button_standard = {
-                        text = "PREY_RELEASE_ALL"
-                        size = { 90 30 }
-                        
-                        onclick = "[GetScriptedGui('release_all_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
-                        tooltip = "PREY_RELEASE_TT"
-                    }
-    
-                    button_standard = {
-                        visible = "[GetVariableSystem.HasValue( 'digestion_banned', 'no' )]"
-                        text = "PREY_DIGEST_ALL"
-                        size = { 90 30 }
-                        
-                        onclick = "[GetScriptedGui('digest_all_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
-                        tooltip = "PREY_DIGEST_TT"
-                    }
+                    onclick = "[GetScriptedGui('release_all_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
+                    tooltip = "PREY_RELEASE_TT"
+                }
+
+                button_standard = {
+                    visible = "[GetVariableSystem.HasValue( 'digestion_banned', 'no' )]"
+                    text = "PREY_DIGEST_ALL"
+                    size = { 90 30 }
+                    
+                    onclick = "[GetScriptedGui('digest_all_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
+                    tooltip = "PREY_DIGEST_TT"
                 }
             }
 
@@ -330,7 +330,7 @@ types PreyListWindow
                                 text = "PREY_RELEASE"
                                 size = { 90 30 }
                                 
-                                onclick = "[GetScriptedGui('release_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                onclick = "[GetScriptedGui('release_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
                                 tooltip = "PREY_RELEASE_TT"
                             }
                 
@@ -339,7 +339,7 @@ types PreyListWindow
                                 text = "PREY_DIGEST"
                                 size = { 90 30 }
                                 
-                                onclick = "[GetScriptedGui('digest_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                onclick = "[GetScriptedGui('digest_prey_from_window').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('prey', Character.MakeScope).End)]"
                                 tooltip = "PREY_DIGEST_TT"
                             }
                         }
