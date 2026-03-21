@@ -50,9 +50,11 @@
 			effect = {
 				debug_log = "safe vore effect group 1"
 				change_variable = { name = imprisonment_duration add = 1 }
-				random_relation = {
-					type = predator
-					save_scope_as = predator
+				story_owner = {
+					random_relation = {
+						type = predator
+						save_scope_as = predator
+					}
 				}
 				if = {
 					limit = { 
@@ -63,7 +65,9 @@
 					}
 					if = {
 						limit = { scope:predator = { is_ai = yes } }
-						release_prey_location_check_effect = yes
+						story_owner = {
+							release_prey_location_check_effect = yes
+						}
 					}
 				}
 			}
@@ -185,16 +189,16 @@ vore_digestion_story = {
 		months = 1
 
 		triggered_effect = {
-			debug_log = "Digestion completed"
 			trigger = { var:digestion_progress >= 100 }
 			effect = {
+				debug_log = "Digestion completed"
 				end_story = yes
 			}
 		}
 		triggered_effect = {
-			debug_log = "Digestion progressing"
 			trigger = { has_variable = digestion_progress }
 			effect = {
+				debug_log = "Digestion progressing"
 				change_variable = { name = digestion_progress add = 25}
 				# Maybe lower escape chance		
 			}

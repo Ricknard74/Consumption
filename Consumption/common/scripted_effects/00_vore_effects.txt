@@ -350,10 +350,7 @@ release_prey_effect = {
         limit = { scope:prey = { is_alive = yes } }
 
         hidden_effect = {
-            if = {
-                #limit = { global_var:debug_notifications = yes }
-                debug_log = "[predator.GetName] Released prey [prey.GetName]"
-            }
+            debug_log = "[predator.GetName] Released prey [prey.GetName]"
         }
     
         scope:predator = {

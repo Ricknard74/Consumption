@@ -14,9 +14,8 @@ prison_vore.0001 = {
         scope:recipient = {
             save_scope_as = prey
         }       
-        debug_log = "[predator.GetName] has vored their prisoner [prey.GetName]"
     }
-
+    
     left_portrait = {
         character = scope:predator
         animation = flirtation
@@ -35,7 +34,7 @@ prison_vore.0001 = {
         }
         trigger_event = prison_vore.0002 
     }            
- 
+    
     # Anal
     option = {
         name = prison_voreOpt.0001b
@@ -59,7 +58,7 @@ prison_vore.0001 = {
         }
         trigger_event = prison_vore.0004 
     }
-
+    
     # Cock
     option = {
         name = prison_voreOpt.0001d
@@ -78,8 +77,9 @@ prison_vore.0001 = {
         }
         ai_chance = 100
         random_orifice_vore_effect = { prison_type = vore_dungeon }
+        debug_log = "[predator.GetName] has vored their prisoner [prey.GetName]"
     }
-
+    
     # Exit
     option = {
         name = prison_voreOpt.0001e

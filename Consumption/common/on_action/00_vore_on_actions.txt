@@ -443,29 +443,31 @@ random_vore_events = {
                 trigger_event = { id = courtier_vore.0010 }
             }
             25 = {
-                any_courtier_or_guest = {
-                    can_vore = yes
-                    NOT = { 
-                        OR = {
-                            has_relation_rival = root 
-                            has_relation_nemesis = root
+                trigger = {
+                    any_courtier_or_guest = {
+                        can_vore = yes
+                        NOT = { 
+                            OR = {
+                                has_relation_rival = root 
+                                has_relation_nemesis = root
+                            }
                         }
-                    }
-                    opinion = {
-                        target = root
-                        value > 20
-                    }
-                }
-                any_courtier_or_guest = {
-                    OR = {
-                        has_relation_rival = root
-                        has_relation_nemesis = root
                         opinion = {
                             target = root
-                            value < -60
+                            value > 20
                         }
                     }
-                    can_be_prey = yes
+                    any_courtier_or_guest = {
+                        OR = {
+                            has_relation_rival = root
+                            has_relation_nemesis = root
+                            opinion = {
+                                target = root
+                                value < -60
+                            }
+                        }
+                        can_be_prey = yes
+                    }
                 }
                 trigger_event = { id = courtier_vore.0030 }
             }
