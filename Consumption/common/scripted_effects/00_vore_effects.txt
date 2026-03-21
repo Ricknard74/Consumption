@@ -262,6 +262,7 @@ lethal_vore_effect = {
 
 # Check for all locations of vore for release
 release_prey_location_check_effect = {
+    
     if = {
         limit = { NOT = { exists = scope:prey } }
         root = { save_scope_as = prey }
@@ -332,7 +333,7 @@ release_prey_location_check_effect = {
     }
 }
 
-# Used to properly release prey (REVISED LOGIC)
+# Used to properly release prey
 release_prey_effect = {
     if = {
         limit = { AND = { NOT = { exists = scope:prey } has_character_flag = vored } }

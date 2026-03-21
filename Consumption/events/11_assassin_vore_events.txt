@@ -1,5 +1,21 @@
 ﻿namespace = vore_scheme
 
+scripted_effect grab_best_vore_agent_murderer_effect = {
+	scope:scheme = {
+		random_scheme_agent_slot = {
+			limit = {
+				is_agent_slot_type = agent_assassin
+				is_filled = yes
+				slot_character = { can_vore = yes }
+			}
+			alternative_limit = { is_filled = yes }
+			slot_character = { save_scope_as = assassin }
+		}
+		# Plus generate a back-up, in case we need it.
+		random_dummy_gender_assassin_effect = yes
+	}
+}
+
 # Owner POV — Success
 vore_scheme.0001 = {
     type = character_event
@@ -123,26 +139,9 @@ vore_scheme.0001 = {
     }
 
     immediate = {
-        scope:owner = { save_scope_as = assassin }
-        
-        if = {
-            limit = { global_var:digestion_banned = yes }
-            # NON-LETHAL: Perma-endo
-            scope:target = { 
-                death = { 
-                    death_reason = death_vanished 
-                    killer = scope:owner 
-                } 
-            }
-            scope:owner = { add_character_modifier = { modifier = satisfied years = 1 } }
-        }
-        else = {
-            scope:owner = {
-                scope:target = { save_scope_as = prey }
-                random_orifice_lethal_vore_effect = yes
-            }
-        }
-        debug_log = "[owner.GetName] voraciously eliminated [target.GetName]"
+        # Grab the best agent to fill our assassin portrait.
+        grab_best_vore_agent_murderer_effect = yes
+        # General owner success effects. Actual kill is applied in target POV (0002).
         scheme_owner_pov_murder_success_effect = { REASON = death_mysterious }
     }
 
@@ -212,6 +211,29 @@ vore_scheme.0002 = {
     }
     override_background = { reference = corridor_night }
 
+    immediate = {
+        # Apply the actual vore kill here, mirroring how the base game applies
+        # murder_success_kill_effect in the target POV event.
+        scope:owner = { save_scope_as = predator }
+        scope:target = { save_scope_as = prey }
+        if = {
+            limit = { global_var:digestion_banned = yes }
+            # NON-LETHAL: Perma-endo — target vanishes but isn't digested
+            scope:prey = {
+                death = {
+                    death_reason = death_vanished
+                    killer = scope:predator
+                }
+            }
+            scope:predator = { add_character_modifier = { modifier = satisfied years = 1 } }
+        }
+        else = {
+            scope:predator = {
+                random_orifice_lethal_vore_effect = yes
+            }
+        }
+    }
+
     option = { name = vore_scheme.0002.opt }
 }
 
@@ -227,19 +249,37 @@ vore_scheme.0003 = {
         }
         # Why did it fail?
         desc = vore_scheme.0003.reason
+        # Secrecy
+        first_valid = {
+            triggered_desc = {
+                trigger = { exists = scope:scheme_discovered }
+                desc = {
+                    random_valid = {
+                        desc = vore_scheme.0003.revealed.1
+                        desc = vore_scheme.0003.revealed.2
+                    }
+                }
+            }
+            desc = {
+                random_valid = {
+                    desc = vore_scheme.0003.secret.1
+                    desc = vore_scheme.0003.secret.2
+                }
+            }
+        }
     }
     theme = intrigue
     left_portrait = {
         character = scope:owner
-        animation = fear # Hunger denied
+        animation = fear
     }
     center_portrait = {
         character = scope:assassin
-        animation = sword_yield_start # Struggle
+        animation = sword_yield_start
     }
     right_portrait = {
         character = scope:target
-        animation = rage # They survived!
+        animation = rage
     }
     override_background = { reference = corridor_night }
 
@@ -250,15 +290,15 @@ vore_scheme.0003 = {
     }
 
     immediate = {
-        scope:owner = { save_scope_as = assassin }
-        
+        # Grab the best agent to fill our assassin portrait.
+        grab_best_vore_agent_murderer_effect = yes
         # Failure Effect: Stress for the hungry predator
         add_stress = 20
-        
-        # Vanilla failure logic
-        murder_failure_effect = yes
+        # Preview failure effects as tooltip — actual effects applied in target POV (0004).
+        show_as_tooltip = { murder_failure_effect = yes }
     }
 
+    # End the scheme
     option = {
         name = {
             text = {
@@ -273,8 +313,16 @@ vore_scheme.0003 = {
         }
         scope:scheme = { end_scheme = yes }
     }
+
+    # Restart the scheme (only if not discovered)
+    option = {
+        name = vore_scheme.0003.option.retry
+        trigger = {
+            NOT = { exists = scope:scheme_discovered }
+        }
+        restart_murder_scheme_effect = yes
+    }
     
-    # Restart option handled by vanilla logic usually, or added here if needed
     after = {
         scope:target = { trigger_event = vore_scheme.0004 }
     }
@@ -304,7 +352,7 @@ vore_scheme.0004 = {
     theme = intrigue
     left_portrait = {
         character = scope:target
-        animation = rage # I survived!
+        animation = rage
     }
     center_portrait = {
         character = scope:assassin
@@ -313,13 +361,14 @@ vore_scheme.0004 = {
     }
     right_portrait = {
         character = scope:owner_to_reveal
-        animation = fear # Failed to eat
+        animation = fear
     }
     override_background = { reference = corridor_night }
 
     immediate = {
-        
-        # Target survived, maybe they got Trauma?
+        # Apply actual failure effects here, matching base game pattern.
+        murder_failure_effect = yes
+        # Target survived — apply vore trauma
         add_character_modifier = { modifier = trauma_from_vore years = 5 }
     }
 

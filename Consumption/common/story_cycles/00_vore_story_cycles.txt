@@ -63,11 +63,9 @@
 							is_ai = yes
 						}
 					}
-					if = {
-						limit = { scope:predator = { is_ai = yes } }
-						story_owner = {
-							release_prey_location_check_effect = yes
-						}
+					story_owner = {
+						save_scope_as = prey
+						release_prey_location_check_effect = yes
 					}
 				}
 			}
